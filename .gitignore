@@ -1,7 +1,7 @@
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
+client/[Ll]ibrary/
+client/[Tt]emp/
+client/[Oo]bj/
+client/[Bb]uild/
 
 *.csproj
 *.unityproj
@@ -17,3 +17,5 @@
 
 # Ignore the generated crash reports file.
 client/sysinfo.txt
+
+*.gitignore~
