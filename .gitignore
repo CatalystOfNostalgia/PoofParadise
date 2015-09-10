@@ -19,3 +19,6 @@ client/[Bb]uild/
 client/sysinfo.txt
 
 *.gitignore~
+
+# Ignore backend python compiled stuff
+*.pyc
