@@ -1,4 +1,5 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+from urlparse import urlparse, parse_qs
 import re
 import os
 
@@ -10,19 +11,30 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 		
 		self.send_header('Content-type', 'text-html')
 		self.end_headers()
-		
 
+		if re.match('/login.*', self.path):
+			
+			loginInfo = parse_qs(urlparse(self.path).query)
+			print(loginInfo)
+			self.wfile.write('username: ' + loginInfo['user'][0] + '\n')
+			self.wfile.write('password: ' + loginInfo['pass'][0])
 
-		#if we are asking for a user
-		if re.match('.*/user/.*', self.path):
+		# if we are asking for a user
+		elif re.match('.*/users/.*', self.path):
 			self.wfile.write('user')
 
-		elif re.match('.*/user$', self.path):
+		# asking for a specific user
+		elif re.match('.*/users$', self.path):
 			self.wfile.write('user homepage')		
+		
+		# homepage
+		elif re.match('/$', self.path):
+			self.wfile.write('homepage')
 		else: 
-			self.wfile.write('hello')
+			self.send_response(404)
+			self.wfile.write('not a url')
 		return
-
+	
 print('http server is starting...')
 
 server_address = ('127.0.0.1', 8000)
