@@ -7,5 +7,7 @@ gravehub:
 	@sudo easy_install -q pip
 	@echo 'Installing SQLAlchemy...'
 	@sudo easy_install -q SQLAlchemy
+	@echo 'Installing mysql...'
+	@sudo apt-get -qq install mysql-server
 	@echo 'Initializing server...'
 	@python server.py
