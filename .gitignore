@@ -1,7 +1,7 @@
-client/[Ll]ibrary/
-client/[Tt]emp/
-client/[Oo]bj/
-client/[Bb]uild/
+client/poof_game/[Ll]ibrary/
+client/poof_game/[Tt]emp/
+client/poof_game/[Oo]bj/
+client/poof_game/[Bb]uild/
 
 *.csproj
 *.unityproj
