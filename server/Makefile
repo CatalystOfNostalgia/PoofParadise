@@ -18,11 +18,17 @@ install:
 	@sudo apt-get -qq install python
 	@echo 'Installing pip...'
 	@sudo easy_install -q pip
+	@echo 'Installing pymysql'
+	@echo pip install pymysql
 	@echo 'Installing SQLAlchemy...'
 	@sudo easy_install -q SQLAlchemy
 	@echo 'Installing mysql...'
 	@sudo apt-get -qq install mysql-server
+
+.PHONY: build_gravehub
+build_gravehub:
 	@echo 'Building database (gravehub)...'
 	@echo '\. $(TABLES)' | sudo mysql
+
 
 
