@@ -33,6 +33,3 @@ CREATE TABLE `building_info`(
     `resource_gather_rate` long  NULL,
     PRIMARY KEY (`id_building_info`)
 );
-
-select * from user;
-select * from user_building;

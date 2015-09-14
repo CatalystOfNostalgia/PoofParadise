@@ -38,7 +38,7 @@ print('http server is starting...')
 
 server_address = ('127.0.0.1', 8000)
 httpd = HTTPServer(server_address, GraveHubHTTPRequestHandler)
-print('http server is running...')
+print('http server is running on 127.0.0.1:8000')
 httpd.serve_forever()
 
 if __name__ == '__main__':
