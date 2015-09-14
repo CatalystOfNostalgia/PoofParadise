@@ -1,15 +1,16 @@
-CREATE SCHEMA IF NOT EXISTS gravehub
+DROP DATABASE IF EXISTS gravehub;
+CREATE SCHEMA IF NOT EXISTS gravehub;
 USE gravehub;
 
 CREATE TABLE user(
-    user_id long,
+    user_id int,
 	name varchar(100),
 	email varchar(100),
     username varchar(100),
     last_login date,
 	password varchar(100),
     level long,
-    PRIMARY KEY (userID)
+    PRIMARY KEY (user_id)
 );
 
 CREATE TABLE user_building(
@@ -23,7 +24,7 @@ CREATE TABLE user_building(
 );
 
 CREATE TABLE `building_info`(
-    `id_building_info` long NOT NULL AUTO_INCREMENT,
+    `id_building_info` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(100) NULL,
     `structure_type` INT NOT NULL,
     `resource_cost_fire` long NULL,
