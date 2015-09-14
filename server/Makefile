@@ -10,4 +10,5 @@ gravehub:
 	@echo 'Installing mysql...'
 	@sudo apt-get -qq install mysql-server
 	@echo 'Initializing server...'
+# Insert line for building tables here (mysql)
 	@python server.py
