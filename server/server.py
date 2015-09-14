@@ -44,8 +44,8 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 		return
 
 	def do_POST(self):
-        
-		self.send_response(200)
+
+    	self.send_response(200)
 		self.wfile.write('Content-type: gravehub/json\n')
 		self.wfile.write('Client: %s\n' % str(self.client_address))
 		self.wfile.write('User-agent: %s\n' % str(self.headers['user-agent']))
@@ -65,17 +65,17 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 				self.wfile.write('\n')
 				first_key=false
 		self.wfile.write('"%s":"%s"' % (field, form[field].value))
-		self.wfile.write('\n}') 
+		self.wfile.write('\n}')
 
 	def login(self, parameters):
-		
+
 		if 'user' in parameters and 'pass' in parameters:
 			self.wfile.write('username: ' + parameters['user'][0] + '\n')
 			self.wfile.write('password: ' + parameters['pass'][0])
 		else:
 			self.send_response(400)
 			self.wfile.write('Need a username and password')
-	
+
 	# returns the friends of a user in JSON
 	def getFriends(self, parameters):
 		self.send_header('Content-type', 'application/json')
