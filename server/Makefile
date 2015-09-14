@@ -20,6 +20,8 @@ install:
 	@sudo easy_install -q pip
 	@echo 'Installing pymysql'
 	@echo pip install pymysql
+	@echo 'Installing some other sql python stuff'
+	@echo pip install mysql-python
 	@echo 'Installing SQLAlchemy...'
 	@sudo easy_install -q SQLAlchemy
 	@echo 'Installing mysql...'

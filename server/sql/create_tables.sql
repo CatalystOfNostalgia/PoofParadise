@@ -36,7 +36,7 @@ CREATE TABLE `building_info`(
 );
 
 CREATE TABLE friends(
-	friend1_id int, 
+	friend1_id int,
 	friend2_id int,
 	PRIMARY KEY (friend1_id, friend2_id),
 	FOREIGN KEY (friend1_id) REFERENCES user(user_id),
