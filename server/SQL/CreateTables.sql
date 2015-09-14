@@ -1,35 +1,38 @@
 CREATE SCHEMA IF NOT EXISTS gravehub
 USE gravehub;
 
-CREATE TABLE Users (userID int, 
-					name varchar(20),
-					email varchar(20),
-                    username varchar(20),
-                    lastLogin date,
-					password varchar(20),
-                    level int, 
-                    PRIMARY KEY (userID));
-                    
-CREATE TABLE UserBuilding  (userID int,
-							buildingType ENUM  ('cave', 'windmill', 
-                                                'campfire', 'pond', 'townhall'),
-							level int,
-							points int,
-                            resourceProductionRate int,
-                            resourceType ENUM ('fire', 'earth', 'air', 'water'),
-                            capacity int);
+CREATE TABLE user(
+    user_id long,
+	name varchar(100),
+	email varchar(100),
+    username varchar(100),
+    last_login date,
+	password varchar(100),
+    level long,
+    PRIMARY KEY (userID)
+);
 
-CREATE TABLE IF NOT EXISTS `BuildingInfo` (
-  `idBuildingInfo` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  `structureType` INT NOT NULL,
-  `buildTime` DATE NULL,
-  `resourceCostFire` INT NULL,
-  `resourceCostWater` INT NULL,
-  `resourceCostEarth` INT NULL,
-  `resourceCostAir` INT NULL,
-  `resourceGatherRate` INT NULL,
-  PRIMARY KEY (`idBuildingInfo`));
-  
-select * from Users;
-select * from UserBuilding;
+CREATE TABLE user_building(
+    user_id long,
+    building_type ENUM  ('cave', 'windmill', 'campfire', 'pond', 'townhall'),
+	level long,
+	points long,
+    resource_production_rate long,
+    resource_type ENUM ('fire', 'earth', 'air', 'water'),
+    capacity long
+);
+
+CREATE TABLE `building_info`(
+    `id_building_info` long NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(100) NULL,
+    `structure_type` INT NOT NULL,
+    `resource_cost_fire` long NULL,
+    `resource_cost_water` long NULL,
+    `resource_cost_earth` long NULL,
+    `resource_cost_air` long NULL,
+    `resource_gather_rate` long  NULL,
+    PRIMARY KEY (`id_building_info`)
+);
+
+select * from user;
+select * from user_building;
