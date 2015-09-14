@@ -42,30 +42,30 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 		else:
 			self.send_response(404)
 		return
-    def do_POST(self):
-        
-        self.send_response(200)
-        self.wfile.write('Content-type: gravehub/json\n')
-        self.wfile.write('Client: %s\n' % str(self.client_address))
-        self.wfile.write('User-agent: %s\n' % str(self.headers['user-agent'])
-        self.wfile.write('Path: %s\n' % self.path)
-        self.end_headers()
-        #only post allowed is to save gamestate
-        
-        form = cgi.FieldStorage(fp=self.rfile, headers=self.headers, environ={'REQUEST_METHOD':'POST', 'CONTENT_TYPE':self.headers['CONTENT_TYPE'],})
-        self.wfile.write('{\n')
-        first_key = True
-        for field in form.keys():
-            if not first_key:
-                self.wfile.write(',\n')
-            else:
-                self.wfile.write('\n')
-                first_key=false
-            self.wfile.write('"%s":"%s"' % (field, form[field].value)
-        self.wfile.write('\n}')        
 
+	def do_POST(self):
+        
+		self.send_response(200)
+		self.wfile.write('Content-type: gravehub/json\n')
+		self.wfile.write('Client: %s\n' % str(self.client_address))
+		self.wfile.write('User-agent: %s\n' % str(self.headers['user-agent']))
+		self.wfile.write('Path: %s\n' % self.path)
+		self.end_headers()
+		#only post allowed is to save gamestate
 
-       
+		form = cgi.FieldStorage(fp=self.rfile, headers=self.headers, environ={'REQUEST_METHOD':'POST', 'CONTENT_TYPE':self.headers['CONTENT_TYPE'],})
+		self.wfile.write('{\n')
+		first_key = True
+
+		for field in form.keys():
+
+			if not first_key:
+				self.wfile.write(',\n')
+			else:
+				self.wfile.write('\n')
+				first_key=false
+		self.wfile.write('"%s":"%s"' % (field, form[field].value))
+		self.wfile.write('\n}') 
 
 	def login(self, parameters):
 		
