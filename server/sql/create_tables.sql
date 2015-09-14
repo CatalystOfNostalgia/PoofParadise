@@ -3,14 +3,14 @@ CREATE SCHEMA IF NOT EXISTS gravehub;
 USE gravehub;
 
 CREATE TABLE user(
-	 user_id int,
+	user_id int,
 	name varchar(100),
 	email varchar(100),
 	username varchar(100),
 	last_login date,
 	password varchar(100),
 	level long,
-	PRIMARY KEY (userID)
+	PRIMARY KEY (user_id)
 );
 
 CREATE TABLE user_building(
@@ -36,8 +36,8 @@ CREATE TABLE `building_info`(
 );
 
 CREATE TABLE friends(
-	friend1_id long, 
-	friend2_id long,
+	friend1_id int, 
+	friend2_id int,
 	PRIMARY KEY (friend1_id, friend2_id),
 	FOREIGN KEY (friend1_id) REFERENCES user(user_id),
 	FOREIGN kEY (friend2_id) REFERENCES user(user_id)

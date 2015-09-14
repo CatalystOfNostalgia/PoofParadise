@@ -1,5 +1,7 @@
 # The build script for the server
 
+TABLES = sql/create_tables.sql
+
 gravehub:
 	@echo 'Installing Python...'
 	@sudo apt-get -qq install python
@@ -11,4 +13,6 @@ gravehub:
 	@sudo apt-get -qq install mysql-server
 	@echo 'Initializing server...'
 # Insert line for building tables here (mysql)
+	@echo 'Building database (gravehub)...'
+	@echo '\. $(TABLES)' | sudo mysql
 	@python server.py
