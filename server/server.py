@@ -2,6 +2,7 @@ from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from urlparse import urlparse, parse_qs
 import re
 import os
+import json
 
 class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
@@ -15,22 +16,13 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 		parameters = parse_qs(urlparse(self.path).query)
 		# logging in
 		if re.match('/login.*', self.path):
-
-			if 'user' in parameters and 'pass' in parameters:
-				self.wfile.write('username: ' + parameters['user'][0] + '\n')
-				self.wfile.write('password: ' + parameters['pass'][0])
-			else:
-				self.send_response(400)
-				self.wfile.write('Need a username and password')
+			
+			self.login(parameters)
 
 		# looking for friends of a user
 		elif re.match('/friends.*', self.path):
 
-			if 'user' in parameters:
-				self.wfile.write('friends of ' + queries['user'][0] + ': \n')
-			else:
-				self.send_response(400)
-				self.wfile.write('Need a user ID')
+			self.getFriends(parameters)
 
 		# looking for a specific user
 		elif re.match('.*/users/.*', self.path):
@@ -74,6 +66,28 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 
        
+
+	def login(self, parameters):
+		
+		if 'user' in parameters and 'pass' in parameters:
+			self.wfile.write('username: ' + parameters['user'][0] + '\n')
+			self.wfile.write('password: ' + parameters['pass'][0])
+		else:
+			self.send_response(400)
+			self.wfile.write('Need a username and password')
+	
+	# returns the friends of a user in JSON
+	def getFriends(self, parameters):
+		self.send_header('Content-type', 'application/json')
+		self.end_headers()
+
+		if 'user' in parameters:
+			#self.wfile.write('friends of ' + queries['user'][0] + ': \n')
+			self.wfile.write(json.dumps({'user': parameters['user'][0], 'friends': [{'name': 'Eric'}]}, sort_keys=True))
+		else:
+			self.send_response(400)
+			#self.wfile.write('Need a user ID')
+
 
 print('http server is starting...')
 
