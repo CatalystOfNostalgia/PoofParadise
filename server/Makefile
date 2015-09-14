@@ -22,7 +22,11 @@ install:
 	@sudo easy_install -q SQLAlchemy
 	@echo 'Installing mysql...'
 	@sudo apt-get -qq install mysql-server
+
+.PHONY: build_gravehub
+build_gravehub:
 	@echo 'Building database (gravehub)...'
 	@echo '\. $(TABLES)' | sudo mysql
+
 
 
