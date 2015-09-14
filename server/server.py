@@ -18,6 +18,12 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			self.wfile.write('username: ' + loginInfo['user'][0] + '\n')
 			self.wfile.write('password: ' + loginInfo['pass'][0])
 
+		# if we are asking for a friend
+		elif re.match('/friend.*', self.path):
+			friendID = parse_qs(urlparse(self.path).query)
+			print(friendID)
+			self.wfile.write('friend: ' + friendID['user'][0] + '\n')
+
 		# if we are asking for a user
 		elif re.match('.*/users/.*', self.path):
 			self.wfile.write('user')
