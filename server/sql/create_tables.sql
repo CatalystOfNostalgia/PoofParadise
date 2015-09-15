@@ -25,7 +25,7 @@ CREATE TABLE user_building(
 );
 
 CREATE TABLE `building_info`(
-	`building_info_id` long NOT NULL AUTO_INCREMENT,
+	`building_info_id` int NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(100) NULL,
 	`structure_type` INT NOT NULL,
 	`resource_cost_fire` long NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `building_info`(
 	`resource_cost_earth` long NULL,
 	`resource_cost_air` long NULL,
 	`resource_gather_rate` long  NULL,
-	PRIMARY KEY (`id_building_info`)
+	PRIMARY KEY (`building_info_id`)
 );
 
 CREATE TABLE friends(
