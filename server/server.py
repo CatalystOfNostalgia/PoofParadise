@@ -51,20 +51,30 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 	def do_POST(self):
 
-		self.send_header('Content-type', 'application/json')
+		self.send_header('Content-type', 'text-html')
 		self.end_headers()
+		
+		if self.headers['Content-Type'] != 'application/json':
+			
+			self.send_response(400)
+			self.wfile.write('Need JSON in the body')
 
-		if re.match('/save', self.path):
-
-			length = int(self.headers['Content-length'])
-			self.send_response(200)
-			print(self.rfile.read(length))	
-			print('POST successful!')
-
-<<<<<<< HEAD
 		else:
-			self.send_response(404)
-			self.wfile.write("Not a url")
+
+			if re.match('/save', self.path):
+
+				length = int(self.headers['Content-length'])
+				self.send_response(200)
+				response_json = self.rfile.read(length)
+				print(response_json)
+				# parsed_json = json.loads(response_json)
+
+				self.wfile.write('Post Successful!')
+				print('POST successful!')
+
+			else:
+				self.send_response(404)
+				self.wfile.write("Not a url")
 
 	def login(self, parameters):
 
