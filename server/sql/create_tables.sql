@@ -15,6 +15,7 @@ CREATE TABLE user(
 
 CREATE TABLE user_building(
 	user_id long,
+	building_info_id long,
 	building_type ENUM  ('cave', 'windmill', 'campfire', 'pond', 'townhall'),
 	level long,
 	points long,
@@ -24,7 +25,7 @@ CREATE TABLE user_building(
 );
 
 CREATE TABLE `building_info`(
-	`id_building_info` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`building_info_id` long NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(100) NULL,
 	`structure_type` INT NOT NULL,
 	`resource_cost_fire` long NULL,
