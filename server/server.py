@@ -10,13 +10,10 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 		self.send_response(200)
 
-		self.send_header('Content-type', 'text-html')
-		self.end_headers()
-
 		parameters = parse_qs(urlparse(self.path).query)
 		# logging in
 		if re.match('/login.*', self.path):
-			
+
 			self.login(parameters)
 
 		# looking for friends of a user
@@ -27,16 +24,23 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 		# looking for a specific user
 		elif re.match('.*/users/.*', self.path):
 
+			self.send_header('Content-type', 'text-html')
+			self.end_headers()
 			userName = os.path.basename(urlparse(self.path).path)
 			self.wfile.write('user: ' + userName)
 
 		# asking for all users
 		elif re.match('.*/users$', self.path):
 
+			self.send_header('Content-type', 'text-html')
+			self.end_headers()
 			self.wfile.write('user homepage')
 
 		# homepage
 		elif re.match('/$', self.path):
+
+			self.send_header('Content-type', 'text-html')
+			self.end_headers()
 			self.wfile.write('homepage')
 
 		else:
@@ -45,7 +49,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 	def do_POST(self):
 
-    	self.send_response(200)
+		self.send_response(200)
 		self.wfile.write('Content-type: gravehub/json\n')
 		self.wfile.write('Client: %s\n' % str(self.client_address))
 		self.wfile.write('User-agent: %s\n' % str(self.headers['user-agent']))
@@ -69,6 +73,9 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 	def login(self, parameters):
 
+		self.send_header('Content-type', 'text-html')
+		self.end_headers()
+
 		if 'user' in parameters and 'pass' in parameters:
 			self.wfile.write('username: ' + parameters['user'][0] + '\n')
 			self.wfile.write('password: ' + parameters['pass'][0])
@@ -78,12 +85,13 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 	# returns the friends of a user in JSON
 	def getFriends(self, parameters):
+
 		self.send_header('Content-type', 'application/json')
 		self.end_headers()
 
 		if 'user' in parameters:
 			#self.wfile.write('friends of ' + queries['user'][0] + ': \n')
-			self.wfile.write(json.dumps({'user': parameters['user'][0], 'friends': [{'name': 'Eric'}]}, sort_keys=True))
+			self.wfile.write(json.dumps({'user': parameters['user'][0], 'friends': [{'name': 'Eric'}]}, sort_keys=False))
 		else:
 			self.send_response(400)
 			#self.wfile.write('Need a user ID')
