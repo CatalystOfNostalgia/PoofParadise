@@ -3,6 +3,7 @@ from urlparse import urlparse, parse_qs
 import re
 import os
 import json
+import cgi
 
 class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
@@ -49,27 +50,19 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 	def do_POST(self):
 
-		self.send_response(200)
-		self.wfile.write('Content-type: gravehub/json\n')
-		self.wfile.write('Client: %s\n' % str(self.client_address))
-		self.wfile.write('User-agent: %s\n' % str(self.headers['user-agent']))
-		self.wfile.write('Path: %s\n' % self.path)
+		self.send_header('Content-type', 'application/json')
 		self.end_headers()
-		#only post allowed is to save gamestate
 
-		form = cgi.FieldStorage(fp=self.rfile, headers=self.headers, environ={'REQUEST_METHOD':'POST', 'CONTENT_TYPE':self.headers['CONTENT_TYPE'],})
-		self.wfile.write('{\n')
-		first_key = True
+		if re.match('/save', self.path):
 
-		for field in form.keys():
+			length = int(self.headers['Content-length'])
+			self.send_response(200)
+			print(self.rfile.read(length))	
+			print('POST successful!')
 
-			if not first_key:
-				self.wfile.write(',\n')
-			else:
-				self.wfile.write('\n')
-				first_key=false
-		self.wfile.write('"%s":"%s"' % (field, form[field].value))
-		self.wfile.write('\n}')
+		else:
+			self.send_response(404)
+			self.wfile.write("Not a url")
 
 	def login(self, parameters):
 
