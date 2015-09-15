@@ -1,4 +1,5 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+import cgi
 from urlparse import urlparse, parse_qs
 import re
 import os
@@ -60,6 +61,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			print(self.rfile.read(length))	
 			print('POST successful!')
 
+<<<<<<< HEAD
 		else:
 			self.send_response(404)
 			self.wfile.write("Not a url")
