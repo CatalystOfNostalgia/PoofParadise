@@ -1,4 +1,5 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+import cgi
 from urlparse import urlparse, parse_qs
 import re
 import os
@@ -67,7 +68,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 				self.wfile.write(',\n')
 			else:
 				self.wfile.write('\n')
-				first_key=false
+				first_key=False
 		self.wfile.write('"%s":"%s"' % (field, form[field].value))
 		self.wfile.write('\n}')
 
