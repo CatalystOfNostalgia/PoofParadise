@@ -29,6 +29,3 @@ install:
 build_gravehub:
 	@echo 'Building database (gravehub)...'
 	@echo '\. $(TABLES)' | sudo mysql
-
-
-
