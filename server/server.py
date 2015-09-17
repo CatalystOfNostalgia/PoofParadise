@@ -66,10 +66,10 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 				length = int(self.headers['Content-length'])
 				self.send_response(200)
 				response_json = self.rfile.read(length)
-				print(response_json)
-				# parsed_json = json.loads(response_json)
+				parsed_json = json.loads(response_json)
 
 				self.wfile.write('Post Successful!')
+				print(parsed_json['user'])
 				print('POST successful!')
 
 			else:
