@@ -1,7 +1,7 @@
 from sqlalchemy import *
 from sqlalchemy.orm import sessionmaker
 
-db = create_engine('mysql+mysqldb://root:password@localhost:3306/gravehub')
+db = create_engine('mysql+mysqldb://root:@localhost:8000/gravehub')
 db.echo = False
 
 Session = sessionmaker(bind=db)
