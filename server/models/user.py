@@ -12,6 +12,5 @@ class User(Base):
     name = Column(String(100), nullable=False)
     email = Column(String(100), nullable=False)
     username = Column(String(100), nullable=False)
-    last_login = Column(Date, nullable=False)
     level = Column(Integer, default = 1)
 
