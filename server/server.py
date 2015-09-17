@@ -24,12 +24,23 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			self.getFriends(parameters)
 
 		# looking for a specific user
+
 		elif re.match('.*/users/.*', self.path):
 
 			self.send_header('Content-type', 'text-html')
 			self.end_headers()
-			userName = os.path.basename(urlparse(self.path).path)
-			self.wfile.write('user: ' + userName)
+
+			if re.match('.*/users/.*/building', self.path):
+				userName = os.path.dirname(urlparse(self.path).path)
+				userNames = userName.split('/')
+				self.wfile.write('user: ' + userNames[2])
+
+				#select user building save data from sqlalchemy
+				self.wfile.write('building: ' + 'windmill')
+
+			else:
+				userName = os.path.basename(urlparse(self.path).path)
+				self.wfile.write('user: ' + userName)
 
 		# asking for all users
 		elif re.match('.*/users$', self.path):
@@ -37,6 +48,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			self.send_header('Content-type', 'text-html')
 			self.end_headers()
 			self.wfile.write('user homepage')
+
 
 		# homepage
 		elif re.match('/$', self.path):
