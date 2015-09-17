@@ -16,6 +16,8 @@ test:
 install:
 	@echo 'Installing Python...'
 	@sudo apt-get -qq install python
+	@echo 'Installing mysql...'
+	@sudo apt-get -qq install mysql-server
 	@echo 'Installing pip...'
 	@sudo easy_install -q pip
 	@echo 'Installing pymysql'
@@ -24,8 +26,6 @@ install:
 	@sudo pip install mysql-python
 	@echo 'Installing SQLAlchemy...'
 	@sudo easy_install -q SQLAlchemy
-	@echo 'Installing mysql...'
-	@sudo apt-get -qq install mysql-server
 
 .PHONY: build_gravehub
 build_gravehub:
