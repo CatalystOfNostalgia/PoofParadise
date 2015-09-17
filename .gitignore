@@ -18,7 +18,7 @@ client/poof_game/[Bb]uild/
 # Ignore the generated crash reports file.
 client/sysinfo.txt
 
-*.gitignore~
+*.*~
 
 # Ignore backend python compiled stuff
 *.pyc

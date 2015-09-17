@@ -9,30 +9,30 @@ CREATE TABLE user(
 	username varchar(100),
 	last_login date,
 	password varchar(100),
-	level long,
+	level int,
 	PRIMARY KEY (user_id)
 );
 
 CREATE TABLE user_building(
-	user_id long,
-	building_info_id long,
+	user_id int,
+	building_info_id int,
 	building_type ENUM  ('cave', 'windmill', 'campfire', 'pond', 'townhall'),
-	level long,
-	points long,
-	resource_production_rate long,
+	level int,
+	points int,
+	resource_production_rate int,
 	resource_type ENUM ('fire', 'earth', 'air', 'water'),
-	capacity long
+	capacity int
 );
 
 CREATE TABLE `building_info`(
 	`building_info_id` int NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(100) NULL,
 	`structure_type` INT NOT NULL,
-	`resource_cost_fire` long NULL,
-	`resource_cost_water` long NULL,
-	`resource_cost_earth` long NULL,
-	`resource_cost_air` long NULL,
-	`resource_gather_rate` long  NULL,
+	`resource_cost_fire` int NULL,
+	`resource_cost_water` int NULL,
+	`resource_cost_earth` int NULL,
+	`resource_cost_air` int NULL,
+	`resource_gather_rate` int  NULL,
 	PRIMARY KEY (`building_info_id`)
 );
 
