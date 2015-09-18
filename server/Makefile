@@ -18,6 +18,8 @@ install:
 	@sudo apt-get -qq install python
 	@echo 'Installing mysql...'
 	@sudo apt-get -qq install mysql-server
+	@echo 'Installing libmysqlclient-dev'
+	@sudo apt-get -qq install libmysqlclient-dev
 	@echo 'Installing pip...'
 	@sudo easy_install -q pip
 	@echo 'Installing pymysql'
