@@ -1,4 +1,4 @@
-from models import user
+
 import models
 
 def sample_insert():
@@ -7,7 +7,7 @@ def sample_insert():
     models.session.commit()
 
 def sample_select():
-    ted = models.models.User.query.filter_by(username='abc').first()
+    ted = models.session.query(models.User).filter(models.User.username=='abc').first()
     print ted.email
 
 
