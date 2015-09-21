@@ -1,9 +1,11 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
-import cgi
 from urlparse import urlparse, parse_qs
 import re
 import os
 import json
+from sqlalchemy import select
+from models import User
+
 
 class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
@@ -23,12 +25,21 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			self.getFriends(parameters)
 
 		# looking for a specific user
+
 		elif re.match('.*/users/.*', self.path):
 
 			self.send_header('Content-type', 'text-html')
 			self.end_headers()
-			userName = os.path.basename(urlparse(self.path).path)
-			self.wfile.write('user: ' + userName)
+
+			if re.match('.*/users/.*/building', self.path):
+				userName = os.path.dirname(urlparse(self.path).path).split('/')[2]
+				self.wfile.write('userid: ' + userName)
+				u = User.query.filter_by(user_id=userName).first()
+				self.wfile('email: ' + u.email)
+
+			else:
+				userName = os.path.basename(urlparse(self.path).path)
+				self.wfile.write('user: ' + userName)
 
 		# asking for all users
 		elif re.match('.*/users$', self.path):
@@ -36,6 +47,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			self.send_header('Content-type', 'text-html')
 			self.end_headers()
 			self.wfile.write('user homepage')
+
 
 		# homepage
 		elif re.match('/$', self.path):
@@ -50,27 +62,30 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 	def do_POST(self):
 
-		self.send_response(200)
-		self.wfile.write('Content-type: gravehub/json\n')
-		self.wfile.write('Client: %s\n' % str(self.client_address))
-		self.wfile.write('User-agent: %s\n' % str(self.headers['user-agent']))
-		self.wfile.write('Path: %s\n' % self.path)
+		self.send_header('Content-type', 'text-html')
 		self.end_headers()
-		#only post allowed is to save gamestate
+		
+		if self.headers['Content-Type'] != 'application/json':
+			
+			self.send_response(400)
+			self.wfile.write('Need JSON in the body')
 
-		form = cgi.FieldStorage(fp=self.rfile, headers=self.headers, environ={'REQUEST_METHOD':'POST', 'CONTENT_TYPE':self.headers['CONTENT_TYPE'],})
-		self.wfile.write('{\n')
-		first_key = True
+		else:
 
-		for field in form.keys():
+			if re.match('/save', self.path):
 
-			if not first_key:
-				self.wfile.write(',\n')
+				length = int(self.headers['Content-length'])
+				self.send_response(200)
+				response_json = self.rfile.read(length)
+				print(response_json)
+				# parsed_json = json.loads(response_json)
+
+				self.wfile.write('Post Successful!')
+				print('POST successful!')
+
 			else:
-				self.wfile.write('\n')
-				first_key=False
-		self.wfile.write('"%s":"%s"' % (field, form[field].value))
-		self.wfile.write('\n}')
+				self.send_response(404)
+				self.wfile.write("Not a url")
 
 	def login(self, parameters):
 
