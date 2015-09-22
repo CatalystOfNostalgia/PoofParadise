@@ -9,31 +9,63 @@ CREATE TABLE user(
 	username varchar(100),
 	last_login date,
 	password varchar(100),
-	level int,
+	level int NOT NULL,
+    experience int NOT NULL,
+    headquarters_level not NULL,
 	PRIMARY KEY (user_id)
 );
 
-CREATE TABLE user_building(
-	user_id int,
-	building_info_id int,
-	building_type ENUM  ('cave', 'windmill', 'campfire', 'pond', 'townhall'),
-	level int,
-	points int,
-	resource_production_rate int,
-	resource_type ENUM ('fire', 'earth', 'air', 'water'),
-	capacity int
+CREATE TABLE headquarters_upgrade(
+    level int,
+    resource_cost_fire int NULL,
+    resource_cost_water int NULL,
+    resource_cost_earth int NULL,
+    resource_cost_air int NULL,
+    poof_cap int NOT NULL,
+    experience_gain int NULL,
+    PRIMARY KEY (level)
 );
 
-CREATE TABLE `building_info`(
+CREATE TABLE user_decorative_building(
+	id int NOT NULL,
+    user_id int NOT NULL,
+	building_info_id int NOT NULL,
+	level int NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE `decorative_building_info`(
 	`building_info_id` int NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(100) NULL,
+    `next_building_id` int NULL,
 	`structure_type` INT NOT NULL,
 	`resource_cost_fire` int NULL,
 	`resource_cost_water` int NULL,
 	`resource_cost_earth` int NULL,
 	`resource_cost_air` int NULL,
 	`resource_gather_rate` int  NULL,
+    poofs_generated int NULL,
 	PRIMARY KEY (`building_info_id`)
+);
+
+CREATE TABLE user_resource_building(
+    user_id int NOT NULL,
+    building_id int NOT NULL,
+    PRIMARY_KEY(user_id, building_id)
+);
+
+CREATE TABLE resource_building(
+    building_id int NOT NULL,
+    level int NOT NULL,
+    next_building_id int NULL,
+    production_rate int NOT NULL,
+    production_type varchar(100) NOT NULL,
+    resource_cost_fire int NULL,
+    resource_cost_water int NULL,
+    resource_cost_air int NULL,
+    resource_cost_earth int NULL,
+    experience_gain int NULL,
+    PRIMARY KEY (building_id)
 );
 
 CREATE TABLE friends(
