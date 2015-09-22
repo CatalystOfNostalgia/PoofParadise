@@ -3,7 +3,7 @@ CREATE SCHEMA IF NOT EXISTS gravehub;
 USE gravehub;
 
 CREATE TABLE user(
-	user_id int,
+	user_id int NOT NULL AUTO_INCREMENT,
 	name varchar(100),
 	email varchar(100),
 	username varchar(100),

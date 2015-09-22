@@ -3,9 +3,9 @@ from urlparse import urlparse, parse_qs
 import re
 import os
 import json
+import queries
 from sqlalchemy import select
-from models import User
-
+#from models import User
 
 class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
@@ -14,14 +14,13 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 		self.send_response(200)
 
 		parameters = parse_qs(urlparse(self.path).query)
+
 		# logging in
 		if re.match('/login.*', self.path):
-
 			self.login(parameters)
 
 		# looking for friends of a user
 		elif re.match('/friends.*', self.path):
-
 			self.getFriends(parameters)
 
 		# looking for a specific user
@@ -72,12 +71,18 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 		else:
 
-			if re.match('/save', self.path):
+			length = int(self.headers['Content-Length'])
+			response_json = self.rfile.read(length)
+			parsed_json = json.loads(response_json)
 
-				length = int(self.headers['Content-length'])
+			# creating an account
+			if re.match('/create', self.path):
 				self.send_response(200)
-				response_json = self.rfile.read(length)
-				parsed_json = json.loads(response_json)
+				self.createAccount(parsed_json)
+
+			# saving
+			elif re.match('/save', self.path):
+				self.send_response(200)
 
 				self.wfile.write('Post Successful!')
 				print(parsed_json['user'])
@@ -86,6 +91,21 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			else:
 				self.send_response(404)
 				self.wfile.write("Not a url")
+
+	def createAccount(self, json):
+		self.send_header('Content-Type', 'application/json')
+		self.end_headers()
+
+		if all (parameter in json for parameter in ('name', 'email', 'username')):
+			name = json['name']
+			email = json['email']
+			username = json['username']
+			queries.createAccount(name = name, username = username, email = email)
+			print("account created")
+			print("name: " + name + "\nusername: " + username + "\nemail: " + email)
+			
+		else:
+			self.send_response(400)
 
 	def login(self, parameters):
 
