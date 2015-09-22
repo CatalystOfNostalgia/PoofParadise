@@ -96,16 +96,22 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 		self.send_header('Content-Type', 'application/json')
 		self.end_headers()
 
-		if all (parameter in json for parameter in ('name', 'email', 'username')):
+		if all (parameter in json for parameter in ('name', 'email', 'username', 'password')):
 			name = json['name']
 			email = json['email']
 			username = json['username']
-			queries.createAccount(name = name, username = username, email = email)
+			password = json['password']
+
+			queries.createAccount(name = name, username = username, email = email, password = password)
+
 			print("account created")
-			print("name: " + name + "\nusername: " + username + "\nemail: " + email)
+			print("name: " + name + "\nusername: " + username + "\nemail: " + email + '\n')
 			
 		else:
 			self.send_response(400)
+			data = {}
+			data['error'] = 'missing parameter'
+			self.wfile.write(json.dumps(data))
 
 	def login(self, parameters):
 
@@ -113,12 +119,26 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 		self.end_headers()
 
 		if 'user' in parameters and 'pass' in parameters:
-			user_id = queries.logIn(parameters['user'][0])
+			username = parameters['user'][0]
+			password = parameters['pass'][0]
+			
+			user_id = queries.logIn(username = username, password = password)
+
 			data = {}
-			data['user_id'] = user_id
+
+			if user_id == -1:
+				self.send_response(400)
+				data['error'] = 'no username password combination exists'
+				print("user: " + username + " failed to log in")
+
+			else:
+				self.send_response(200)
+				data['user_id'] = user_id
+				print("user: " + username + " is logging in\n")
+
 			self.wfile.write(json.dumps(data))
 
-			print("user: " + str(user_id) + " is logging in")
+
 		else:
 			self.send_response(400)
 			self.wfile.write('Need a username and password')

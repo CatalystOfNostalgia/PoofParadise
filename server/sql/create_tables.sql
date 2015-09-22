@@ -4,11 +4,11 @@ USE gravehub;
 
 CREATE TABLE user(
 	user_id int NOT NULL AUTO_INCREMENT,
-	name varchar(100),
-	email varchar(100),
-	username varchar(100),
+	name varchar(100) NOT NULL,
+	email varchar(100) NOT NULL UNIQUE,
+	username varchar(100) NOT NULL UNIQUE,
 	last_login date,
-	password varchar(100),
+	password varchar(100) NOT NULL,
 	level int,
 	PRIMARY KEY (user_id)
 );
