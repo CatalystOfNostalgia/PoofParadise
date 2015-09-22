@@ -22,3 +22,6 @@ client/sysinfo.txt
 
 # Ignore backend python compiled stuff
 *.pyc
+
+# Ignore IDE stuff
+server/.idea
