@@ -109,12 +109,16 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 	def login(self, parameters):
 
-		self.send_header('Content-type', 'text-html')
+		self.send_header('Content-type', 'application/json')
 		self.end_headers()
 
 		if 'user' in parameters and 'pass' in parameters:
-			self.wfile.write('username: ' + parameters['user'][0] + '\n')
-			self.wfile.write('password: ' + parameters['pass'][0])
+			user_id = queries.logIn(parameters['user'][0])
+			data = {}
+			data['user_id'] = user_id
+			self.wfile.write(json.dumps(data))
+
+			print("user: " + str(user_id) + " is logging in")
 		else:
 			self.send_response(400)
 			self.wfile.write('Need a username and password')

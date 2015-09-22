@@ -5,9 +5,7 @@ def createAccount( name, email, username ):
 	models.session.add(new_user)
 	models.session.commit()
 
-def testCreate( name ):
-	print("selecting with name " + name)
-	user = models.session.query(models.User).filter(models.User.name == "Anthony").first()
-	print("The user was inputted with name " + user.name)
+def logIn( username ):
+	user = models.session.query(models.User).filter(models.User.username==username).first()
+	return user.user_id
 
-createAccount("Anthony", "abc@abc", "coolcat") 
