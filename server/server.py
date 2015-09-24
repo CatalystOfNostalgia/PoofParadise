@@ -1,11 +1,10 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from urlparse import urlparse, parse_qs
+from sqlalchemy import select
 import re
 import os
 import json
 import queries
-from sqlalchemy import select
-#from models import User
 
 class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
@@ -37,9 +36,11 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 				self.wfile('email: ' + u.email)
 
 			else:
-				userName = os.path.basename(urlparse(self.path).path)
-				self.wfile.write('user: ' + userName)
-
+				user_id = os.path.basename(urlparse(self.path).path)
+				decorative_buildings = queries.get_user_decorative_buildings(user_id)
+				resource_buildings = queries.get_user_resource_buildings(user_id)
+				
+				self.wfile.write('user id: ' + user_id)
 		# asking for all users
 		elif re.match('.*/users$', self.path):
 
@@ -102,7 +103,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			username = json['username']
 			password = json['password']
 
-			queries.createAccount(name = name, username = username, email = email, password = password)
+			queries.create_account(name = name, username = username, email = email, password = password)
 
 			print("account created")
 			print("name: " + name + "\nusername: " + username + "\nemail: " + email + '\n')
@@ -122,7 +123,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			username = parameters['user'][0]
 			password = parameters['pass'][0]
 			
-			user_id = queries.logIn(username = username, password = password)
+			user_id = queries.log_in(username = username, password = password)
 
 			data = {}
 
@@ -134,7 +135,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			else:
 				self.send_response(200)
 				data['user_id'] = user_id
-				print("user: " + username + " is logging in\n")
+				print("user: " + username + " is logging in with user id: " + str(user_id) + "\n")
 
 			self.wfile.write(json.dumps(data))
 

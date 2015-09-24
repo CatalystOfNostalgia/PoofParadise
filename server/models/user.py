@@ -13,6 +13,8 @@ class User(Base):
     user_id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(100), nullable=False)
     password = Column(String(100), nullable=False)
+    experience = Column(Integer, default = 0)
+    headquarters_level = Column(Integer, default = 1)
     level = Column(Integer, default = 1)
     headquarters_level = Column(Integer, default = 1)
     experience = Column(Integer, default = 0)
