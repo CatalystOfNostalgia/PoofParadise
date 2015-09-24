@@ -1190,7 +1190,7 @@ Transform:
   m_PrefabInternal: {fileID: 751604683}
   m_GameObject: {fileID: 747505207}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 6}
+  m_LocalPosition: {x: 0, y: 0, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 271911347}
@@ -1318,7 +1318,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 423708, guid: 60d9c0500d4081b45a3e859a779196cd, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 6
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 423708, guid: 60d9c0500d4081b45a3e859a779196cd, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2366,6 +2366,7 @@ GameObject:
   - 212: {fileID: 1167044861}
   - 114: {fileID: 1167044860}
   - 114: {fileID: 1167044863}
+  - 114: {fileID: 1167044864}
   m_Layer: 0
   m_Name: poof 1
   m_TagString: Poof
@@ -2387,7 +2388,7 @@ MonoBehaviour:
   type: 3
   grid: {fileID: 747505207}
   onTile: {fileID: 499459668}
-  goToTile: {fileID: 1249899918}
+  goToTile: {fileID: 300936419}
 --- !u!212 &1167044861
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2438,6 +2439,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: .0299999993
+--- !u!114 &1167044864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1167044859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abff9fffd88243d4fa7deb2317587da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mostRecent: 0
 --- !u!224 &1169154135 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22403976, guid: 016494a4ba07c9c4e993834141d10feb,
