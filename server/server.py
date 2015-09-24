@@ -102,7 +102,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			username = json['username']
 			password = json['password']
 
-			queries.createAccount(name = name, username = username, email = email, password = password)
+			queries.create_account(name = name, username = username, email = email, password = password)
 
 			print("account created")
 			print("name: " + name + "\nusername: " + username + "\nemail: " + email + '\n')
@@ -122,7 +122,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			username = parameters['user'][0]
 			password = parameters['pass'][0]
 			
-			user_id = queries.logIn(username = username, password = password)
+			user_id = queries.log_in(username = username, password = password)
 
 			data = {}
 
@@ -134,7 +134,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			else:
 				self.send_response(200)
 				data['user_id'] = user_id
-				print("user: " + username + " is logging in\n")
+				print("user: " + username + " is logging in with user id: " + str(user_id) + "\n")
 
 			self.wfile.write(json.dumps(data))
 

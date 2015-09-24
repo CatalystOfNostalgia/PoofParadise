@@ -10,8 +10,7 @@ CREATE TABLE user(
 	password varchar(100),
 	level int NOT NULL,
     experience int NOT NULL,
-    headquarters_level not NULL,
-	level int,
+    headquarters_level int not NULL,
 	PRIMARY KEY (user_id)
 );
 
