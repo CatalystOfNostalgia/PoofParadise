@@ -30,7 +30,6 @@ CREATE TABLE user_decorative_building(
 	id int NOT NULL,
     user_id int NOT NULL,
 	building_info_id int NOT NULL,
-	level int NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -38,20 +37,20 @@ CREATE TABLE `decorative_building_info`(
 	`building_info_id` int NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(100) NULL,
     `next_building_id` int NULL,
-	`structure_type` INT NOT NULL,
 	`resource_cost_fire` int NULL,
 	`resource_cost_water` int NULL,
 	`resource_cost_earth` int NULL,
 	`resource_cost_air` int NULL,
-	`resource_gather_rate` int  NULL,
     poofs_generated int NULL,
-	PRIMARY KEY (`building_info_id`)
+    experience_gain int NULL
+	PRIMARY KEY (`building_info_id`),
 );
 
 CREATE TABLE user_resource_building(
+    id int NOT NULL,
     user_id int NOT NULL,
     building_id int NOT NULL,
-    PRIMARY_KEY(user_id, building_id)
+    PRIMARY_KEY()
 );
 
 CREATE TABLE resource_building(
