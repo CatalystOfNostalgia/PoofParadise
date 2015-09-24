@@ -7,11 +7,11 @@ using System.Collections;
  * the player's input is immediately run */
 
 public class MovementScript : MonoBehaviour {
-	// THIS NONSENSE NEEDS TO CHANGE ITS POOFSCRIPTS ONTILE AND STUFF
 	
 	// Vectors containing the starting and ending position for movement
 	private Vector2 currentPos;
 	private Vector2 targetPos;
+	private GameObject targetObj;
 	
 	// Publicly defineable moveent speed; you can fiddle with it in the editor
 	public float movementSpeed;
@@ -30,6 +30,7 @@ public class MovementScript : MonoBehaviour {
 	
 	// Not utilized at all at the moment, because the passive mover script is incomplete
 	private PassiveMover ps;
+	private CharacterScript cs;
 	
 	void Start () {
 	
@@ -43,18 +44,8 @@ public class MovementScript : MonoBehaviour {
 		currentPos = new Vector2(transform.position.x, transform.position.y);
 		targetPos = new Vector2();
 		
+		cs = this.GetComponent<CharacterScript>();
 		
-		// In theory this block of code initializes the passivemover script simply as a script
-		//		not as a monobehaviour component, and the loop is for passing in all poofs of the
-		//		same tyoe as the current poof; which is for influencing its movement.
-		GameObject[] poofs = GameObject.FindGameObjectsWithTag("Poof");
-		ArrayList poofsOfSameType = new ArrayList();
-		foreach (GameObject p in poofs) {
-			if (p.GetComponent<PoofScript>().type == this.GetComponent<PoofScript>().type)
-				poofsOfSameType.Add(p);
-		}
-		
-		ps = new PassiveMover(poofsOfSameType);
 	}
 	
 	void Update () {
@@ -76,8 +67,11 @@ public class MovementScript : MonoBehaviour {
 	// Pops the first element out of the queue
 	private void getInputs() {
 		if (movementQueue.Count > 0) {
-			targetPos = (Vector2)movementQueue.Dequeue();
-			input = true;
+			targetObj = (GameObject)movementQueue.Dequeue();
+			if (targetObj != null) {
+				targetPos = parseObjToLoc(targetObj);
+				input = true;
+			}
 		}
 	}
 	
@@ -90,7 +84,7 @@ public class MovementScript : MonoBehaviour {
 		progressAccum = (currentDistance + movementSpeed) / totalDistance;
 		
 		if (progressAccum <= 1)
-			transform.position = Vector2.Lerp(currentPos, targetPos, progressAccum);
+			transform.position = Vector3.Lerp(new Vector3(currentPos.x, currentPos.y, currentPos.y), new Vector3(targetPos.x, targetPos.y, targetPos.y), progressAccum);
 		else {
 			stopMoving();
 			if (priorityInput)
@@ -107,8 +101,11 @@ public class MovementScript : MonoBehaviour {
 			input = false;
 			progressAccum = 0;
 			targetPos = new Vector2();
+			cs.setOnTile(targetObj);
+			targetObj = null;
 			movementQueue.Clear();
 		}
+		// special case for player input's that interrupt a passive movement
 		else if (priorityInput) {
 			currentPos = transform.position;
 			progressAccum = 0;
@@ -124,15 +121,15 @@ public class MovementScript : MonoBehaviour {
 	}
 	
 	// Method that Enqueues an input direction; should be utilized by the passive mover script
-	public void receivePassiveInputs(Vector2 direction) {
-		movementQueue.Enqueue(direction);
+	public void receivePassiveInputs(GameObject toTile) {
+		movementQueue.Enqueue(toTile);
 	}
 	
 	// Method that Enqueues player inputs and interrupts current passive inputs
-	public void receivePlayerInputs(Vector2 direction) {
+	public void receivePlayerInputs(GameObject toTile) {
 		priorityInput = true;
 		stopMoving();
-		movementQueue.Enqueue(direction);
+		movementQueue.Enqueue(toTile);
 	}
 	
 	// Getter method that returns the isMoving flag
@@ -144,5 +141,10 @@ public class MovementScript : MonoBehaviour {
 	//		currently not in use by anything, and probably shouldn't be in use
 	public void setCurrentPosition(Vector2 cp) {
 		currentPos = cp;
+	}
+	
+	// Method that parses a GameObject into a Vector2 which is the input GameObject's position
+	private Vector2 parseObjToLoc(GameObject toTile) {
+		return new Vector2(toTile.transform.position.x, toTile.transform.position.y);
 	}
 }

@@ -1,19 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/* PoofScript - contains all the information pertaining to the poofs
+/* CharacterScript - contains all the information pertaining to the character
  * such as where they are, their type, and information for how they
  * can move */
 
-public class PoofScript : MonoBehaviour {
+public class CharacterScript : MonoBehaviour {
 
 	public enum Element {Fire, Water, Wind, Earth};
 	
-	// Enumeration defining the type of each poof
+	// Enumeration defining the type of each character
 	public Element type;
 	
-	// References to the movement based scripts for the poof
-	//		currently PassiveMover is inoperable and is not doing anything
+	// References to the movement based scripts for the character
 	private MovementScript ms;
 	private PassiveMover ps;
 	
@@ -26,23 +25,30 @@ public class PoofScript : MonoBehaviour {
 	
 	void Start() {
 		ms = this.GetComponent<MovementScript>();
+		ps = this.GetComponent<PassiveMover>();
 	}
 	
 	void Update() {
-		// Testing purposes only // This really isn't how this should work because the MovementScript
-									// should be updating the onTile instead of this script
+		// Testing purposes only //
 		// Z is bound to an arbitrary passive movement
 		if (Input.GetKeyDown(KeyCode.Z) && !ms.getMoving()) {
-			GameObject[] adjacents = grid.GetComponent<TileScript>().getAdjacentTiles(onTile);
-			Vector2 input = adjacents[7].transform.position;
-			ms.receivePassiveInputs(input);
-			onTile = adjacents[7];
+			ms.receivePassiveInputs(ps.getNewTile());
 		}
 		// X is bound to an arbitrary player movement => goToTile
 		if (Input.GetKeyDown(KeyCode.X)) {
-			Vector2 input = goToTile.transform.position;
-			ms.receivePlayerInputs(input);
-			onTile = goToTile;
+			ms.receivePlayerInputs(goToTile);
 		}
+	}
+	
+	public void setOnTile (GameObject tile) {
+		onTile = tile;
+	}
+	
+	public GameObject getOnTile() {
+		return onTile;
+	}
+	
+	public GameObject getGrid() {
+		return grid;
 	}
 }
