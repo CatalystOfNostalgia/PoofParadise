@@ -3,15 +3,15 @@ CREATE SCHEMA IF NOT EXISTS gravehub;
 USE gravehub;
 
 CREATE TABLE user(
-	user_id int,
-	name varchar(100),
-	email varchar(100),
-	username varchar(100),
-	last_login date,
+	user_id int NOT NULL AUTO_INCREMENT,
+	name varchar(100) NOT NULL,
+	email varchar(100) NOT NULL UNIQUE,
+	username varchar(100) NOT NULL UNIQUE,
 	password varchar(100),
 	level int NOT NULL,
     experience int NOT NULL,
     headquarters_level not NULL,
+	level int,
 	PRIMARY KEY (user_id)
 );
 
