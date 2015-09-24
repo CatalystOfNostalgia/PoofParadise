@@ -14,4 +14,6 @@ class User(Base):
     username = Column(String(100), nullable=False)
     password = Column(String(100), nullable=False)
     level = Column(Integer, default = 1)
+    headquarters_level = Column(Integer, default = 1)
+    experience = Column(Integer, default = 0)
 
