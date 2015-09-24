@@ -93,20 +93,32 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 				self.send_response(404)
 				self.wfile.write("Not a url")
 
-	def createAccount(self, json):
+	def createAccount(self, body):
 		self.send_header('Content-Type', 'application/json')
 		self.end_headers()
 
-		if all (parameter in json for parameter in ('name', 'email', 'username', 'password')):
-			name = json['name']
-			email = json['email']
-			username = json['username']
-			password = json['password']
+		if all (parameter in body for parameter in ('name', 'email', 'username', 'password')):
+			name = body['name']
+			email = body['email']
+			username = body['username']
+			password = body['password']
 
-			queries.create_account(name = name, username = username, email = email, password = password)
+			data = {}
 
-			print("account created")
-			print("name: " + name + "\nusername: " + username + "\nemail: " + email + '\n')
+			try:
+				queries.create_account(name = name, username = username, email = email, password = password)
+				user_id = queries.log_in(username = username, password = password)
+				data['user_id'] = user_id
+				print("account created")
+				print("name: " + name + "\nusername: " + username + "\nemail: " + email + '\n')
+
+			except:
+				self.send_response(400)
+				data['error'] = 'duplicate entry'
+				print('Duplicate account entry attempted for\nname: ' + name + '\nusername' + username + '\nemail: ' + email + '\n')
+
+			self.wfile.write(json.dumps(data))
+
 			
 		else:
 			self.send_response(400)
