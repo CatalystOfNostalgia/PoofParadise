@@ -8,9 +8,8 @@ CREATE TABLE user(
 	email varchar(100) NOT NULL UNIQUE,
 	username varchar(100) NOT NULL UNIQUE,
 	password varchar(100),
-	level int NOT NULL,
     experience int NOT NULL,
-    headquarters_level not NULL,
+    headquarters_level int not NULL,
 	level int,
 	PRIMARY KEY (user_id)
 );
@@ -33,24 +32,24 @@ CREATE TABLE user_decorative_building(
     PRIMARY KEY (id)
 );
 
-CREATE TABLE `decorative_building_info`(
-	`building_info_id` int NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(100) NULL,
-    `next_building_id` int NULL,
-	`resource_cost_fire` int NULL,
-	`resource_cost_water` int NULL,
-	`resource_cost_earth` int NULL,
-	`resource_cost_air` int NULL,
+CREATE TABLE decorative_building_info(
+	building_info_id int NOT NULL AUTO_INCREMENT,
+	name VARCHAR(100) NULL,
+    next_building_id int NULL,
+	resource_cost_fire int NULL,
+	resource_cost_water int NULL,
+	resource_cost_earth int NULL,
+	resource_cost_air int NULL,
     poofs_generated int NULL,
-    experience_gain int NULL
-	PRIMARY KEY (`building_info_id`),
+    experience_gain int NULL,
+	PRIMARY KEY (building_info_id)
 );
 
 CREATE TABLE user_resource_building(
     id int NOT NULL,
     user_id int NOT NULL,
     building_id int NOT NULL,
-    PRIMARY_KEY()
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE resource_building(
