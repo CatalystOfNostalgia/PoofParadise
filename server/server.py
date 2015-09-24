@@ -1,11 +1,10 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from urlparse import urlparse, parse_qs
+from sqlalchemy import select
 import re
 import os
 import json
 import queries
-from sqlalchemy import select
-#from models import User
 
 class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
@@ -37,9 +36,11 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 				self.wfile('email: ' + u.email)
 
 			else:
-				userName = os.path.basename(urlparse(self.path).path)
-				self.wfile.write('user: ' + userName)
-
+				user_id = os.path.basename(urlparse(self.path).path)
+				decorative_buildings = queries.get_user_decorative_buildings(user_id)
+				resource_buildings = queries.get_user_resource_buildings(user_id)
+				
+				self.wfile.write('user id: ' + user_id)
 		# asking for all users
 		elif re.match('.*/users$', self.path):
 
