@@ -41,6 +41,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 				resource_buildings = queries.get_user_resource_buildings(user_id)
 				
 				self.wfile.write('user id: ' + user_id)
+
 		# asking for all users
 		elif re.match('.*/users$', self.path):
 
@@ -94,6 +95,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 				self.wfile.write("Not a url")
 
 	def createAccount(self, body):
+
 		self.send_header('Content-Type', 'application/json')
 		self.end_headers()
 
@@ -135,19 +137,24 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			username = parameters['user'][0]
 			password = parameters['pass'][0]
 			
-			user_id = queries.log_in(username = username, password = password)
+			user = queries.log_in(username = username, password = password)
 
 			data = {}
 
-			if user_id == -1:
+			if user is None: 
 				self.send_response(400)
 				data['error'] = 'no username password combination exists'
 				print("user: " + username + " failed to log in")
 
 			else:
 				self.send_response(200)
-				data['user_id'] = user_id
-				print("user: " + username + " is logging in with user id: " + str(user_id) + "\n")
+
+				data['user_id'] = user.user_id
+				data['experience'] = user.experience
+				data['headquarters_level'] = user.headquarters_level
+				data['level'] = user.level
+
+				print("user: " + username + " is logging in with user id: " + str(user.user_id) + "\n")
 
 			self.wfile.write(json.dumps(data))
 
@@ -162,13 +169,20 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 		self.send_header('Content-type', 'application/json')
 		self.end_headers()
 
+		data = {}
+
 		if 'user' in parameters:
-			#self.wfile.write('friends of ' + queries['user'][0] + ': \n')
-			self.wfile.write(json.dumps({'user': parameters['user'][0], 'friends': [{'name': 'Eric'}]}, sort_keys=False))
+			data['friends'] = 'no friends'
+			self.wfile.write(json.dumps(data))
 		else:
 			self.send_response(400)
-			#self.wfile.write('Need a user ID')
+			data['error'] = 'need a user ID'
+			self.wfile.write(json.dumps(data))
 
+	#turns a building into json
+	def convertToJSON(self, building):
+
+		data = {}
 
 print('http server is starting...')
 
@@ -179,4 +193,3 @@ httpd.serve_forever()
 
 if __name__ == '__main__':
 	run
-
