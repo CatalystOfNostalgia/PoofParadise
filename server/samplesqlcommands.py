@@ -1,8 +1,9 @@
 import models
+import random
 
 name_pool = ['Ted', 'Margaret', 'Eric', 'Anthony', 'Jeremy', 'Anjana', 'Robert', 'Alex', 'Austin', 'Brittany', 'William', 'Bryn', 'Zach', 'Alberto', 'Ian', 'Dan', 'Madison', 'Dylan', 'Lisa']
 
-def sample_insert():
+def sample_insert_users():
     for name in name_pool:
         user = models.user.User(name=name, email=name+'@gravehub.com', username = name+'1', password = 'password')
         models.session.add(user)
@@ -18,9 +19,13 @@ def sample_insert():
         models.session.add(user)
         models.session.commit()
         print  "eric is added"
-def sample_save_building():
-    for name in name_pool:
-        
+
+def sample_insert_building(user_id):
+    level = random.randrange(10)
+    build1 = models.user_building.UserDecorativeBuilding(user_id=user_id, building_info_id=0, level=1)
+    models.session.add(build1)
+    models.session.commit()
+
 def sample_select():
     ted = models.session.query(models.User).filter(models.User.username=='ted1').one()
     print ted.email
@@ -37,5 +42,5 @@ def exists(name):
     else:
         return True
 sample_remove()
-sample_insert()
+sample_insert_users()
 sample_select()
