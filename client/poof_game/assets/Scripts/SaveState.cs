@@ -13,39 +13,17 @@ public class SaveState : MonoBehaviour {
 	public static SaveState state;
 
 	// List game state variables here
-	int gold;
-	int silver;
-	int wood;
-	
-	public void SetGold(int gold) {
-		this.gold = gold;
-	}
-	public int GetGold() {
-		return this.gold;
-	}
-
-	public void SetSilver(int silver) {
-		this.silver = silver;
-	}
-	public int GetSilver() {
-		return this.silver;
-	}
-
-	public void SetWood(int wood) {
-		this.wood = wood;
-	}
-	public int GetWood() {
-		return this.wood;
-	}
+	// Format: public <Type> <Name> { get; set; }
+	public int gold { get; set; }
+	public int silver { get; set; }
+	public int wood { get; set; }
 
 	/**
 	 * A helper method for passing data from this
 	 * game state to the serializable object
 	 */
 	private void SetPlayerData(PlayerData pd) {
-		pd.SetGold (this.GetGold ());
-		pd.SetSilver (this.GetSilver ());
-		pd.SetWood (this.GetWood ());
+		pd.gold = this.gold;
 	}
 
 	/**
@@ -53,9 +31,6 @@ public class SaveState : MonoBehaviour {
 	 * the serializable object to this game state
 	 */
 	private void GetPlayerData(PlayerData pd) {
-		this.SetGold (pd.GetGold ());
-		this.SetSilver (pd.GetSilver ());
-		this.SetWood (pd.GetWood ());
 	}
 
 	/**
@@ -77,6 +52,9 @@ public class SaveState : MonoBehaviour {
 		PlayerData data = new PlayerData ();
 		SetPlayerData (data);
 		string clientJson = data.ToJSON ();
+		Debug.Log (this.gold);
+		Debug.Log (data.gold);
+		Debug.Log (clientJson);
 	}
 
 	/**
@@ -130,29 +108,8 @@ class PlayerData {
 	 * Place the variables you want to save in this section
 	 * Also be sure to write getter/setter methods
 	 */
-	int gold;
-	int silver;
-	int wood;
-
-	public void SetGold(int gold) {
-		this.gold = gold;
-	}
-	public int GetGold() {
-		return this.gold;
-	}
-	
-	public void SetSilver(int silver) {
-		this.silver = silver;
-	}
-	public int GetSilver() {
-		return this.silver;
-	}
-	
-	public void SetWood(int wood) {
-		this.wood = wood;
-	}
-	public int GetWood() {
-		return this.wood;
-	}
+	public int gold { get; set; }
+	public int silver { get; set; }
+	public int wood { get; set; }
 
 }
