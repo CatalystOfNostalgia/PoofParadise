@@ -5,6 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Web;
 
 public class SaveState : MonoBehaviour {
 
@@ -12,6 +13,50 @@ public class SaveState : MonoBehaviour {
 	public static SaveState state;
 
 	// List game state variables here
+	int gold;
+	int silver;
+	int wood;
+	
+	public void SetGold(int gold) {
+		this.gold = gold;
+	}
+	public int GetGold() {
+		return this.gold;
+	}
+
+	public void SetSilver(int silver) {
+		this.silver = silver;
+	}
+	public int GetSilver() {
+		return this.silver;
+	}
+
+	public void SetWood(int wood) {
+		this.wood = wood;
+	}
+	public int GetWood() {
+		return this.wood;
+	}
+
+	/**
+	 * A helper method for passing data from this
+	 * game state to the serializable object
+	 */
+	private void SetPlayerData(PlayerData pd) {
+		pd.SetGold (this.GetGold ());
+		pd.SetSilver (this.GetSilver ());
+		pd.SetWood (this.GetWood ());
+	}
+
+	/**
+	 * A helper method for pulling data from 
+	 * the serializable object to this game state
+	 */
+	private void GetPlayerData(PlayerData pd) {
+		this.SetGold (pd.GetGold ());
+		this.SetSilver (pd.GetSilver ());
+		this.SetWood (pd.GetWood ());
+	}
 
 	/**
 	 * Produces a singleton on awake
@@ -26,6 +71,24 @@ public class SaveState : MonoBehaviour {
 	}
 
 	/**
+	 * Pushes player data to server
+	 */
+	public void PushToServer() {
+		PlayerData data = new PlayerData ();
+		SetPlayerData (data);
+		string clientJson = data.ToJSON ();
+	}
+
+	/**
+	 * Pulls player data from server
+	 */
+	public void PullFromServer() {
+		string serverJson = "Test";
+
+		PlayerData data = JSON.Deserialize<PlayerData> (serverJson);
+	}
+
+	/**
 	 * Saves all relevant data to a local file
 	 * NOTE: This does not perform a write back but
 	 * rather creates a fresh file every time.
@@ -37,6 +100,7 @@ public class SaveState : MonoBehaviour {
 		PlayerData data = new PlayerData();
 		// Insert data from controller to data object
 		// ie: data.setExp(this.getExp());
+		SetPlayerData (data);
 		
 		bf.Serialize(file, data);
 		file.Close();
@@ -54,7 +118,7 @@ public class SaveState : MonoBehaviour {
 			
 			// Reassign all variables here
 			// ie: this.setHealth(data.getHealth());
-
+			GetPlayerData(data);
 		}
 	}
 }
@@ -66,6 +130,29 @@ class PlayerData {
 	 * Place the variables you want to save in this section
 	 * Also be sure to write getter/setter methods
 	 */
+	int gold;
+	int silver;
+	int wood;
+
+	public void SetGold(int gold) {
+		this.gold = gold;
+	}
+	public int GetGold() {
+		return this.gold;
+	}
 	
+	public void SetSilver(int silver) {
+		this.silver = silver;
+	}
+	public int GetSilver() {
+		return this.silver;
+	}
+	
+	public void SetWood(int wood) {
+		this.wood = wood;
+	}
+	public int GetWood() {
+		return this.wood;
+	}
 
 }
