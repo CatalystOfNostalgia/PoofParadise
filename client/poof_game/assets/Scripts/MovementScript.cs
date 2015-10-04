@@ -12,6 +12,7 @@ public class MovementScript : MonoBehaviour {
 	private Vector2 currentPos;
 	private Vector2 targetPos;
 	private GameObject targetObj;
+	private Animator animator;
 	
 	// Publicly defineable moveent speed; you can fiddle with it in the editor
 	public float movementSpeed;
@@ -45,6 +46,7 @@ public class MovementScript : MonoBehaviour {
 		targetPos = new Vector2();
 		
 		cs = this.GetComponent<CharacterScript>();
+		animator = this.GetComponent<Animator>();
 		
 	}
 	
@@ -86,9 +88,10 @@ public class MovementScript : MonoBehaviour {
 		if (progressAccum <= 1)
 			transform.position = Vector3.Lerp(new Vector3(currentPos.x, currentPos.y, currentPos.y), new Vector3(targetPos.x, targetPos.y, targetPos.y), progressAccum);
 		else {
-			stopMoving();
+
 			if (priorityInput)
 				priorityComplete = true;
+			stopMoving();
 		}
 	}
 	
@@ -118,6 +121,23 @@ public class MovementScript : MonoBehaviour {
 		isMoving = true;
 		if (priorityInput)
 			priorityComplete = false;
+
+		Debug.Log(currentPos);
+		Debug.Log(targetPos);
+		Debug.Log("!!!!!!!!!!!!!!!");
+
+		if (currentPos.x - targetPos.x > 0 && currentPos.y -targetPos.y > 0){
+			animator.SetInteger("Direction", 0);
+		}
+		if (currentPos.x - targetPos.x < 0 && currentPos.y -targetPos.y > 0){
+			animator.SetInteger("Direction", 1);
+		}
+		if (currentPos.x - targetPos.x < 0 && currentPos.y -targetPos.y <0){
+			animator.SetInteger("Direction", 2);
+		}
+		if (currentPos.x - targetPos.x > 0 && currentPos.y -targetPos.y <0){
+			animator.SetInteger("Direction", 3);
+		}
 	}
 	
 	// Method that Enqueues an input direction; should be utilized by the passive mover script
