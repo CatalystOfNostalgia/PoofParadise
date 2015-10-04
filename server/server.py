@@ -152,10 +152,14 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			else:
 				self.send_response(200)
 
+				resource_buildings = queries.get_user_resource_buildings(user.user_id)
+				decorative_buildings = queries.get_user_decorative_buildings(user.user_id)
 				data['user_id'] = user.user_id
 				data['experience'] = user.experience
 				data['headquarters_level'] = user.headquarters_level
 				data['level'] = user.level
+				data['resource_buildings'] = resource_buildings
+				data['decorative_buildings'] = decorative_buildings
 
 				print("user: " + username + " is logging in with user id: " + str(user.user_id) + "\n")
 
