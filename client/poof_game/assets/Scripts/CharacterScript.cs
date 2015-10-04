@@ -31,6 +31,7 @@ public class CharacterScript : MonoBehaviour {
 	void Update() {
 		// Testing purposes only //
 		// Z is bound to an arbitrary passive movement
+
 		if (Input.GetKeyDown(KeyCode.Z) && !ms.getMoving()) {
 			ms.receivePassiveInputs(ps.getNewTile());
 		}
