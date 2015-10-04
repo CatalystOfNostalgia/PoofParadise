@@ -4,6 +4,9 @@ from sqlalchemy import select
 import re
 import os
 import json
+import sys
+
+sys.path.insert(0, '/logic')
 import queries
 
 class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
