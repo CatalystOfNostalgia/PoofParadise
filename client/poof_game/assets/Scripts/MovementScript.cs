@@ -88,9 +88,10 @@ public class MovementScript : MonoBehaviour {
 		if (progressAccum <= 1)
 			transform.position = Vector3.Lerp(new Vector3(currentPos.x, currentPos.y, currentPos.y), new Vector3(targetPos.x, targetPos.y, targetPos.y), progressAccum);
 		else {
-			stopMoving();
+
 			if (priorityInput)
 				priorityComplete = true;
+			stopMoving();
 		}
 	}
 	
