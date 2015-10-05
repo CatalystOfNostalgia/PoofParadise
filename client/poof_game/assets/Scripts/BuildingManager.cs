@@ -17,6 +17,8 @@ public class BuildingManager : MonoBehaviour {
 	//the dictionary containing buildings on the grid
 	Dictionary <Tuple, Building> existingBuildingDict;
 	private static BuildingManager buildingManager;
+
+	public bool buildingMode;
 	
 	public static BuildingManager Instance(){
 		if (!buildingManager) {
@@ -33,8 +35,19 @@ public class BuildingManager : MonoBehaviour {
 	 * 3. decrement resource
 	 * 4. build
 	 */
-	public void makeNewBuilding (Vector3 mousePosition){
-		PlaceBuilding (tree.gameObject, mousePosition);
+	public void makeNewBuilding (){
+		buildingMode = true;
+		//Building building = null;
+//		int clickCount = 0;
+//		while (building == null) {
+//			//bandaid fix to building placed upon menu click
+//			if (Input.GetMouseButtonDown (0)) {
+//				clickCount++;
+//			}
+//			if (clickCount > 2) {
+//				building = PlaceBuilding (tree.gameObject);
+//			}
+//		}
 	}
 	void deleteBuilding(){
 	}
@@ -52,13 +65,16 @@ public class BuildingManager : MonoBehaviour {
 	 * 		a. instantiate the game object
 	 * 4. Allow user to cancel
 	 */
-	private void PlaceBuilding(GameObject target, Vector3 mousePosition) {
+	private Building PlaceBuilding(GameObject target) {
+		Vector3 mousePosition = getCurrentMousePosition ();
 		Transform tile = closestTile (mousePosition);
 		if (!isTileTaken (new Tuple (0, 0))) {
 			Building newBuilding = (Building)Instantiate (target, tile.position, Quaternion.identity);
 			newBuilding.transform.position = tile.position;
 			existingBuildingDict.Add (new Tuple (0, 0), newBuilding);//place holder tuple for now
+			return newBuilding;
 		}
+		return null;
 	}
 
 	private Transform closestTile (Vector3 mousePos){
@@ -89,6 +105,11 @@ public class BuildingManager : MonoBehaviour {
 	private float getDistance(float x1, float y1, float x2, float y2){
 		return (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2);
 	}
+		
+	//helper method to get mouse position
+	private Vector3 getCurrentMousePosition(){
+		return Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 10));
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -100,6 +121,11 @@ public class BuildingManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (buildingMode && Input.GetMouseButtonDown (0)) {
+			buildingMode = false;
+			PlaceBuilding(tree.gameObject);
+			Debug.Log ("building mode set to false");
+		}
 
 	}
 }
