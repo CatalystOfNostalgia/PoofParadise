@@ -27,7 +27,7 @@ public class ModalPanel : MonoBehaviour {
 		modalPanelObject.SetActive (true);
 
 		button1.onClick.RemoveAllListeners ();
-		button1.onClick.AddListener (button1Event);
+		button1.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(getCurrentMousePosition()));
 		button1.onClick.AddListener (ClosePanel);
 
 		button2.onClick.RemoveAllListeners ();
@@ -47,6 +47,12 @@ public class ModalPanel : MonoBehaviour {
 		button3.gameObject.SetActive (true);
 
 	}
+
+	//helper method to get mouse position
+	private Vector3 getCurrentMousePosition(){
+		return Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 10));
+	}
+	
 	void ClosePanel(){
 		modalPanelObject.SetActive(false);
 	}
