@@ -103,6 +103,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 					self.send_response(200)
 
 				except:
+					queries.rollback()
 					self.send_response(400)
 					data = {'error': 'already friends'}	
 					self.wfile.write(json.dumps(data))
@@ -132,6 +133,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 				print("name: " + name + "\nusername: " + username + "\nemail: " + email + '\n')
 
 			except:
+				queries.rollback()
 				self.send_response(400)
 				data['error'] = 'duplicate entry'
 				print('Duplicate account entry attempted for\nname: ' + name + '\nusername' + username + '\nemail: ' + email + '\n')

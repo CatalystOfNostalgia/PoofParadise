@@ -96,4 +96,7 @@ def dict_buildings( buildings ):
 			add_building['position_y'] = building.position_y
 			new_buildings.append(add_building)
 	return new_buildings
+
+def rollback():
+	models.session.rollback()
 	
