@@ -31,6 +31,7 @@ public class SaveState : MonoBehaviour {
 	 * the serializable object to this game state
 	 */
 	private void GetPlayerData(PlayerData pd) {
+		this.gold = pd.gold;
 	}
 
 	/**
@@ -52,18 +53,18 @@ public class SaveState : MonoBehaviour {
 		PlayerData data = new PlayerData ();
 		SetPlayerData (data);
 		string clientJson = data.ToJSON ();
-		Debug.Log (this.gold);
-		Debug.Log (data.gold);
 		Debug.Log (clientJson);
+		// TODO Send JSON to server
 	}
 
 	/**
 	 * Pulls player data from server
 	 */
 	public void PullFromServer() {
-		string serverJson = "Test";
-
+		// TODO Get JSON from server
+		string serverJson = "{\"gold\":100,\"silver\":0,\"wood\":0";
 		PlayerData data = JSON.Deserialize<PlayerData> (serverJson);
+		GetPlayerData (data);
 	}
 
 	/**
@@ -106,7 +107,7 @@ class PlayerData {
 	
 	/**
 	 * Place the variables you want to save in this section
-	 * Also be sure to write getter/setter methods
+	 * Format: public <Type> <Name> { get; set; }
 	 */
 	public int gold { get; set; }
 	public int silver { get; set; }
