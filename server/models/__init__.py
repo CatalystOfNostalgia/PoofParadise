@@ -11,3 +11,4 @@ session = Session()
 from user import *
 from user_building import *
 from building_info import *
+from friends import *

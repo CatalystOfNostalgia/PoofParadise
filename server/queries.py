@@ -14,8 +14,27 @@ def log_in( username, password ):
 	user = models.session.query(models.User).filter( \
 													models.User.username == username, \
 													models.User.password == password \
-												   ).first()
+												   ).one()
 	return user
+
+def find_user_from_username( username ):
+	user = models.session.query(models.User).filter(models.User.username == username).one()
+
+	return user
+
+def find_user_from_id( user_id ):
+	user = models.session.query(models.User).filter(models.User.user_id == user_id).one()
+
+	return user
+
+def add_friend( user_id, friend_id ):
+
+	friends = models.friends.Friends( \
+		friend1_id = user_id, \
+		friend2_id = friend_id )
+
+	models.session.add(friends)
+	models.session.commit()
 
 def get_user_resource_buildings( user_id ):
 	user_buildings = models.session.query(models.UserResourceBuilding).filter(models.UserResourceBuilding.user_id == user_id).all()
@@ -77,4 +96,4 @@ def dict_buildings( buildings ):
 			add_building['position_y'] = building.position_y
 			new_buildings.append(add_building)
 	return new_buildings
-		
+	

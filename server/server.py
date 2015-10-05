@@ -18,32 +18,25 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 		parameters = parse_qs(urlparse(self.path).query)
 
 		# logging in
-		if re.match('/login.*', self.path):
+		if re.match('/login', self.path):
 			self.login(parameters)
 
 		# looking for friends of a user
-		elif re.match('/friends.*', self.path):
+		elif re.match('/friends', self.path):
 			self.getFriends(parameters)
 
 		# looking for a specific user
 
-		elif re.match('.*/users/.*', self.path):
+		elif re.match('/users/.*', self.path):
 
 			self.send_header('Content-type', 'text-html')
 			self.end_headers()
 
-			if re.match('.*/users/.*/building', self.path):
-				userName = os.path.dirname(urlparse(self.path).path).split('/')[2]
-				self.wfile.write('userid: ' + userName)
-				u = User.query.filter_by(user_id=userName).first()
-				self.wfile('email: ' + u.email)
-
-			else:
-				user_id = os.path.basename(urlparse(self.path).path)
-				decorative_buildings = queries.get_user_decorative_buildings(user_id)
-				resource_buildings = queries.get_user_resource_buildings(user_id)
+			user_id = os.path.basename(urlparse(self.path).path)
+			decorative_buildings = queries.get_user_decorative_buildings(user_id)
+			resource_buildings = queries.get_user_resource_buildings(user_id)
 				
-				self.wfile.write('user id: ' + user_id)
+			self.wfile.write('user id: ' + user_id)
 
 		# asking for all users
 		elif re.match('.*/users$', self.path):
@@ -66,13 +59,15 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 	def do_POST(self):
 
-		self.send_header('Content-type', 'text-html')
+		self.send_header('Content-type', 'application/json')
 		self.end_headers()
 		
+		# If the body isn't JSON then reject
 		if self.headers['Content-Type'] != 'application/json':
 			
 			self.send_response(400)
-			self.wfile.write('Need JSON in the body')
+			data = {'message' : 'Need JSON in the body'}
+			self.wfile.write(json.dumps(data))
 
 		else:
 
@@ -89,9 +84,28 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			elif re.match('/save', self.path):
 				self.send_response(200)
 
-				self.wfile.write('Post Successful!')
+				data = {'message' : 'Can\'t actually save yet...'}
+				self.wfile.write(json.dumps(data))
 				print(parsed_json['user'])
-				print('POST successful!')
+				print('Can\'t save yet...')
+
+			elif re.match('/friends', self.path):
+				user_id = parsed_json['user_id']
+				friend_name = parsed_json['friend']
+
+				friend = queries.find_user_from_username(friend_name)
+				user =  queries.find_user_from_id(user_id)
+			
+				try:
+					queries.add_friend(user_id, friend.user_id)
+
+					print(user.username + ' and ' + friend.username + ' are now friends!')
+					self.send_response(200)
+
+				except:
+					self.send_response(400)
+					data = {'error': 'already friends'}	
+					self.wfile.write(json.dumps(data))
 
 			else:
 				self.send_response(404)
