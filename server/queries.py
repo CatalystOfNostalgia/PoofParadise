@@ -14,15 +14,46 @@ def get_user_resource_buildings( user_id ):
 
 	buildings = dict_buildings(user_buildings)
 
+	if buildings:
+			for building in buildings:
+					building_info = get_resource_building_info(building['building_info_id'])
+					building.update(building_info)
+
 	return buildings
 	
+
 def get_user_decorative_buildings( user_id ):
 	user_buildings = models.session.query(models.UserDecorativeBuilding).filter(models.UserDecorativeBuilding.user_id == user_id).all()
 
 	buildings = dict_buildings(user_buildings)
+	
+	if buildings:
+			for building in buildings:
+					building_info = get_decorative_building_info(building['building_info_id'])
+					building.update(building_info)
 
-	print(buildings)
 	return buildings
+
+def get_resource_building_info( building_info_id ):
+
+	building_info = models.session.query(models.ResourceBuildingInfo).filter(models.ResourceBuildingInfo.building_info_id == building_info_id).one()
+
+	building = {}
+	building['level'] = building_info.level
+	building['production_type'] = building_info.production_type
+	building['production_rate'] = building_info.production_rate
+	
+	return building
+
+def get_decorative_building_info( building_info_id ):
+
+	building_info = models.session.query(models.DecorativeBuildingInfo).filter(models.DecorativeBuildingInfo.building_info_id == building_info_id).one()
+
+	building = {}
+	building['name'] = building_info.name
+	building['poofs_generated'] = building_info.poofs_generated
+
+	return building
 
 
 def dict_buildings( buildings ):
