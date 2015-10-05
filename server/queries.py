@@ -1,12 +1,20 @@
 import models
 
 def create_account( name, email, username, password ):
-	new_user = models.user.User(name = name, email = email, username = username, password = password)
+	new_user = models.user.User( \
+		name = name, \
+		email = email, \
+		username = username, \
+		password = password)
+
 	models.session.add(new_user)
 	models.session.commit()
 
 def log_in( username, password ):
-	user = models.session.query(models.User).filter(models.User.username == username, models.User.password == password).first()
+	user = models.session.query(models.User).filter( \
+													models.User.username == username, \
+													models.User.password == password \
+												   ).first()
 	return user
 
 def get_user_resource_buildings( user_id ):
@@ -39,6 +47,8 @@ def get_resource_building_info( building_info_id ):
 	building_info = models.session.query(models.ResourceBuildingInfo).filter(models.ResourceBuildingInfo.building_info_id == building_info_id).one()
 
 	building = {}
+	building['size'] = building_info.size
+	building['name'] = building_info.name
 	building['level'] = building_info.level
 	building['production_type'] = building_info.production_type
 	building['production_rate'] = building_info.production_rate
@@ -50,6 +60,7 @@ def get_decorative_building_info( building_info_id ):
 	building_info = models.session.query(models.DecorativeBuildingInfo).filter(models.DecorativeBuildingInfo.building_info_id == building_info_id).one()
 
 	building = {}
+	building['size'] = building_info.size
 	building['name'] = building_info.name
 	building['poofs_generated'] = building_info.poofs_generated
 

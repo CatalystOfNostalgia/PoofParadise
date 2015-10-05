@@ -22,7 +22,8 @@ class DecorativeBuildingInfo(Base):
 
     building_info_id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(100), nullable=False)
-    next_building_id = Column(Integer)
+    size = Column(Integer, nullable = False)
+    next_building_id = Column(Integer, nullable = False)
     resource_cost_fire = Column(Integer, nullable=False)
     resource_cost_water = Column(Integer, nullable=False)
     resource_cost_air = Column(Integer, nullable=False)
@@ -37,6 +38,8 @@ class ResourceBuildingInfo(Base):
     experience_gain = Column(Integer, nullable=False)
     level = Column(Integer, nullable=False)
     next_building_id = Column(Integer)
+    name = Column(String(100), nullable = False)
+    size = Column(Integer, nullable = False)
     production_rate = Column(Integer, nullable=False)
     production_type = Column(Integer, nullable=False)
     resource_cost_fire = Column(Integer, nullable=False)

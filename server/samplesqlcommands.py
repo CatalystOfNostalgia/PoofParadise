@@ -41,13 +41,15 @@ def sample_insert_building(name):
 		position_y = 0)
 
     build1_info = models.building_info.DecorativeBuildingInfo( \
-		next_building_id = building_info_id + 1, \
-		resource_cost_fire = 100, \
-		resource_cost_water = 100, \
-		resource_cost_air = 100, \
-		resource_cost_earth = 100,\
-		poofs_generated = 10,\
-		experience_gain = 5)
+        name = 'Fire Tree', \
+        size = 2, \
+        next_building_id = building_info_id + 1, \
+        resource_cost_fire = 100, \
+        resource_cost_water = 100, \
+        resource_cost_air = 100, \
+        resource_cost_earth = 100,\
+        poofs_generated = 10,\
+        experience_gain = 5)
 
     models.session.add(build1)
     models.session.add(build1_info)
