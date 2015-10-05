@@ -195,7 +195,8 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 		data = {}
 
 		if 'user' in parameters:
-			data['friends'] = 'no friends'
+			friends = queries.get_friends(parameters['user'][0])
+			data['friends'] = friends
 			self.wfile.write(json.dumps(data))
 		else:
 			self.send_response(400)

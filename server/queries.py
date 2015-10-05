@@ -27,6 +27,30 @@ def find_user_from_id( user_id ):
 
 	return user
 
+def get_friends( user_id ):
+	
+	friendships = models.session.query(models.Friends).filter(models.Friends.friend1_id == user_id)
+	other_friendships = models.session.query(models.Friends).filter(models.Friends.friend2_id == user_id)
+
+	user_friends = []
+	for friendship in friendships:
+		new_friend = {}
+		friend_id = friendship.friend2_id
+		friend_username = find_user_from_id(friend_id).username
+		new_friend[str(friend_username)] = friend_id
+		user_friends.append(new_friend)
+
+	for friendship in other_friendships:
+		new_friends = {}
+		friend_id = friendship.friend1_id
+		friend_username = find_user_from_id(friend_id).username
+		new_friends[friend_username] = friend_id
+		user_friends.append(new_friend)
+
+	print(user_friends)
+
+	return user_friends
+
 def add_friend( user_id, friend_id ):
 
 	friends = models.friends.Friends( \
@@ -96,6 +120,12 @@ def dict_buildings( buildings ):
 			add_building['position_y'] = building.position_y
 			new_buildings.append(add_building)
 	return new_buildings
+
+def dict_friends( friendships, userdd ):
+	new_friendships = []
+	for friendship in friendships:
+		add_friends = {}
+		add_friends['friend1_id'] = friend1_id
 
 def rollback():
 	models.session.rollback()
