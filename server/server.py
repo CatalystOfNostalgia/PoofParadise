@@ -84,17 +84,13 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			elif re.match('/save', self.path):
 
 				required_items = ['name', 'level', 'email', 'user_id', \
-								  'username', 'password', 'experience', 'hq_level']
+								  'username', 'password', 'experience', \
+								  'hq_level', 'resource_buildings', 'decorative_buildings']
 
 				# update the data and send a success response
 				if all (item in parsed_json for item in (required_items)):
 
-					queries.save_user_info(parsed_json)
-
-					data = {'message' : 'Save successful!'} 
-					self.send_response(200)
-					self.wfile.write(json.dumps(data))
-					print(parsed_json['username'] + ' saved')
+					self.save(parsed_json)
 
 				# if the required elements are not present send an error message
 				else:
@@ -220,6 +216,21 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			self.send_response(400)
 			data['error'] = 'need a user ID'
 			self.wfile.write(json.dumps(data))
+
+	# saves the users info and building data
+	def save(self, parsed_json):
+		
+		resource_buildings = parsed_json['resource_buildings']
+ 		decorative_buildings = parsed_json['decorative_buildings']
+		user_id = parsed_json['user_id']
+
+		queries.save_user_info(parsed_json)
+		queries.save_building_info(resource_buildings, decorative_buildings, user_id)
+
+		data = {'message' : 'Save successful!'} 
+		self.send_response(200)
+		self.wfile.write(json.dumps(data))
+		print(parsed_json['username'] + ' saved')
 
 print('http server is starting...')
 
