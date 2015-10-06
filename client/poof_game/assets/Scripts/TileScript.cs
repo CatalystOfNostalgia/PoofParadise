@@ -62,7 +62,7 @@ public class TileScript : MonoBehaviour {
 	
 	// Method that when given an input tile, "hashes" the tile using its name, and returns a tuple
 	//		which corresponds to the (x,y) coordinate of the tile in the 2D array (as well as in game)
-	private Tuple hashTile(GameObject tile) {
+	public static Tuple hashTile(GameObject tile) {
 
 		if (tile.name.IndexOf("T") != 0) {
 			return new Tuple(-1, -1);
