@@ -9,6 +9,8 @@ public class BuildingManager : MonoBehaviour {
 	 * maybe we can just search them later?
 	 */
 	public Building tree;
+	public Building pond;
+	private Building target;
 	public TileScript grid;
 
 	ArrayList buildings;
@@ -35,8 +37,14 @@ public class BuildingManager : MonoBehaviour {
 	 * 3. decrement resource
 	 * 4. build
 	 */
-	public void makeNewBuilding (){
+	public void makeNewBuilding (int buttonNum){
 		buildingMode = true;
+		if (buttonNum == 1) {
+			target = tree;
+		}
+		if (buttonNum == 2) {
+			target = pond;
+		}
 		//Building building = null;
 //		int clickCount = 0;
 //		while (building == null) {
@@ -124,7 +132,7 @@ public class BuildingManager : MonoBehaviour {
 	void Update () {
 		if (buildingMode && Input.GetMouseButtonDown (0)) {
 			buildingMode = false;
-			PlaceBuilding(tree.gameObject);
+			PlaceBuilding(target.gameObject);
 			Debug.Log ("building mode set to false");
 		}
 

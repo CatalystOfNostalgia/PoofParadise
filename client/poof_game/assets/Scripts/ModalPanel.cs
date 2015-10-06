@@ -28,12 +28,12 @@ public class ModalPanel : MonoBehaviour {
 
 		button1.onClick.RemoveAllListeners ();
 		button1.onClick.AddListener (ClosePanel);
-		button1.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding());
+		button1.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(1));
 
 
 		button2.onClick.RemoveAllListeners ();
 		button2.onClick.AddListener (ClosePanel);
-		button2.onClick.AddListener (button2Event);
+		button2.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(2));
 
 		
 		button3.onClick.RemoveAllListeners ();
