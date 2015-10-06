@@ -15,11 +15,12 @@ public class TileScript : MonoBehaviour {
 	public int mapArea = 36;
 	public int mapLength = 6;
 	public int mapWidth = 6;
+    public GameObject prefab;
 	
 	void Start() {
-	
+	    
 		ArrayList namesOfTiles = new ArrayList();
-	
+
 		tileObjects = new ArrayList(GameObject.FindGameObjectsWithTag("Tile"));
 		tiles = new GameObject[mapLength,mapWidth];
 		
@@ -70,4 +71,24 @@ public class TileScript : MonoBehaviour {
 			return new Tuple(int.Parse(tile.name.Split(' ')[1].ToString()), int.Parse(tile.name.Split(' ')[2].ToString()));
 		}
 	}
+
+    /**
+     * A method used for building the game grid
+     */
+    public void Generate(GameObject tile, Vector3 orig, int width, int height)
+    {
+        for (int i = 0; i < mapLength; i++)
+        {
+            for (int j = 0; j < mapWidth; j++)
+            {
+                Vector3 location = orig + new Vector3(i, j, 0);
+                GameObject gameObject = Instantiate(tile, location, Quaternion.identity) as GameObject;
+                Tile t = gameObject.GetComponent<Tile>();
+                t.index = new Tuple(i, j);
+                tileObjects.Add(gameObject);
+            }
+        }
+    }
 }
+
+
