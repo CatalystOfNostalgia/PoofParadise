@@ -11,7 +11,7 @@ public class SaveState : MonoBehaviour {
 
 	// Allows the scene to access this object without searching for it
 	public static SaveState state;
-	public Dictionary <Tuple, Building> existingBuildingDict{ get; set;};
+	public Dictionary <Tuple, Building> existingBuildingDict{ get; set;}
 	// List game state variables here
 	// Format: public <Type> <Name> { get; set; }
 	public int gold { get; set; }
