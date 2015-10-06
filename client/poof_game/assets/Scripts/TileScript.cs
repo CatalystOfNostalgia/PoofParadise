@@ -46,9 +46,9 @@ public class TileScript : MonoBehaviour {
 		GameObject[] toReturn = new GameObject[9];
 		
 		int index = 0;
-		for (int j = inputTile.getY() - 1; j <= inputTile.getY() + 1; j++) {
-			for (int i = inputTile.getX() - 1; i <= inputTile.getX() + 1; i++) {
-				if (i < 0 || j < 0 || i > 5 || j > 5 || (i == inputTile.getX () && j == inputTile.getY())){
+		for (int j = inputTile.y - 1; j <= inputTile.y + 1; j++) {
+			for (int i = inputTile.x - 1; i <= inputTile.x + 1; i++) {
+				if (i < 0 || j < 0 || i > 5 || j > 5 || (i == inputTile.x && j == inputTile.x)){
 					index++;
 				}
 				else {
