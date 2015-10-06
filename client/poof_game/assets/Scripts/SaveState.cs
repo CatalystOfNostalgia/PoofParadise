@@ -63,8 +63,8 @@ public class SaveState : MonoBehaviour {
 	public void PullFromServer() {
 		// TODO Get JSON from server
 		string serverJson = "{\"gold\":100,\"silver\":0,\"wood\":0";
-		PlayerData data = JSON.Deserialize<PlayerData> (serverJson);
-		GetPlayerData (data);
+		//PlayerData data = JSON.Deserialize<PlayerData> (serverJson);
+		//GetPlayerData (data);
 	}
 
 	/**
