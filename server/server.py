@@ -82,12 +82,25 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 			# saving
 			elif re.match('/save', self.path):
-				self.send_response(200)
 
-				data = {'message' : 'Can\'t actually save yet...'}
-				self.wfile.write(json.dumps(data))
-				print(parsed_json['user'])
-				print('Can\'t save yet...')
+				required_items = ['name', 'level', 'email', 'user_id', \
+								  'username', 'password', 'experience', 'hq_level']
+
+				if all (item in parsed_json for item in (required_items)):
+
+					queries.save_user_info(parsed_json)
+
+					data = {'message' : 'Save successful!'} 
+					self.send_response(200)
+					self.wfile.write(json.dumps(data))
+					print(parsed_json['username'] + ' saved')
+
+				else:
+					
+					self.send_response(400)
+					data = {'error' : 'Missing json items'}
+					self.wfile.write(json.dumps(data))
+					print('failed saving')
 
 			elif re.match('/friends', self.path):
 				user_id = parsed_json['user_id']

@@ -17,6 +17,20 @@ def log_in( username, password ):
 												   ).one()
 	return user
 
+def save_user_info( user ):
+
+	updated_user = find_user_from_id(user['user_id'])
+
+	updated_user.name = user['name']
+	updated_user.level = user['level']
+	updated_user.email = user['email']
+	updated_user.username = user['username']
+	updated_user.password = user['password']
+	updated_user.experience = user['experience']
+	updated_user.headquarters_level = user['hq_level']
+
+	models.session.commit()
+
 def find_user_from_username( username ):
 	user = models.session.query(models.User).filter(models.User.username == username).one()
 
