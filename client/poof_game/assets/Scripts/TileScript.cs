@@ -15,14 +15,15 @@ public class TileScript : MonoBehaviour {
 	public int mapArea = 36;
 	public int mapLength = 6;
 	public int mapWidth = 6;
+    public GameObject prefab;
 	
 	void Start() {
-	
+    
 		ArrayList namesOfTiles = new ArrayList();
-	
+
 		tileObjects = new ArrayList(GameObject.FindGameObjectsWithTag("Tile"));
 		tiles = new GameObject[mapLength,mapWidth];
-		
+        
 		int aisleCount = 0;
 		
 		foreach (GameObject t in tileObjects) {
@@ -36,6 +37,9 @@ public class TileScript : MonoBehaviour {
 			}
 			aisleCount++;
 		}
+        
+        //tileObjects = new ArrayList();
+        //Generate(prefab, transform.position, mapWidth, mapLength);
 	}
 	
 	// Public method that when given a tile returns an array of the 8 surrounding tiles (including the input tile)
@@ -46,9 +50,9 @@ public class TileScript : MonoBehaviour {
 		GameObject[] toReturn = new GameObject[9];
 		
 		int index = 0;
-		for (int j = inputTile.getY() - 1; j <= inputTile.getY() + 1; j++) {
-			for (int i = inputTile.getX() - 1; i <= inputTile.getX() + 1; i++) {
-				if (i < 0 || j < 0 || i > 5 || j > 5 || (i == inputTile.getX () && j == inputTile.getY())){
+		for (int j = inputTile.y - 1; j <= inputTile.y + 1; j++) {
+			for (int i = inputTile.x - 1; i <= inputTile.x + 1; i++) {
+				if (i < 0 || j < 0 || i > 5 || j > 5 || (i == inputTile.x && j == inputTile.x)){
 					index++;
 				}
 				else {
@@ -62,7 +66,7 @@ public class TileScript : MonoBehaviour {
 	
 	// Method that when given an input tile, "hashes" the tile using its name, and returns a tuple
 	//		which corresponds to the (x,y) coordinate of the tile in the 2D array (as well as in game)
-	private Tuple hashTile(GameObject tile) {
+	public static Tuple hashTile(GameObject tile) {
 
 		if (tile.name.IndexOf("T") != 0) {
 			return new Tuple(-1, -1);
@@ -70,4 +74,24 @@ public class TileScript : MonoBehaviour {
 			return new Tuple(int.Parse(tile.name.Split(' ')[1].ToString()), int.Parse(tile.name.Split(' ')[2].ToString()));
 		}
 	}
+
+    /**
+     * A method used for building the game grid
+     */
+    public void Generate(GameObject tile, Vector3 orig, int width, int height)
+    {
+        for (int i = 0; i < mapLength; i++)
+        {
+            for (int j = 0; j < mapWidth; j++)
+            {
+                Vector3 location = orig + new Vector3(1.10f*(i + j - 5), .64f*(j - i), -2);
+                GameObject gameObject = Instantiate(tile, location, Quaternion.identity) as GameObject;
+                Tile t = gameObject.GetComponent<Tile>();
+                t.index = new Tuple(i, j);
+                tileObjects.Add(gameObject);
+            }
+        }
+    }
 }
+
+

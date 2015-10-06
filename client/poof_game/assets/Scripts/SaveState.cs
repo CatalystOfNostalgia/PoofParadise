@@ -1,29 +1,28 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using System.Web;
 
 public class SaveState : MonoBehaviour {
 
 	// Allows the scene to access this object without searching for it
 	public static SaveState state;
-
 	// List game state variables here
 	// Format: public <Type> <Name> { get; set; }
 	public int gold { get; set; }
 	public int silver { get; set; }
 	public int wood { get; set; }
+    public Dictionary<Tuple, Building> existingBuildingDict { get; set; }
 
-	/**
+    /**
 	 * A helper method for passing data from this
 	 * game state to the serializable object
 	 */
-	private void SetPlayerData(PlayerData pd) {
+    private void SetPlayerData(PlayerData pd) {
 		pd.gold = this.gold;
+        pd.existingBuildingDict = this.existingBuildingDict;
 	}
 
 	/**
@@ -53,6 +52,7 @@ public class SaveState : MonoBehaviour {
 		PlayerData data = new PlayerData ();
 		SetPlayerData (data);
 		string clientJson = data.ToJSON ();
+        Debug.Log(new Tuple(0,0).ToJSON());
 		Debug.Log (clientJson);
 		// TODO Send JSON to server
 	}
@@ -100,6 +100,27 @@ public class SaveState : MonoBehaviour {
 			GetPlayerData(data);
 		}
 	}
+
+    /**
+     * A testing function for observing
+     * JSON output
+     */
+    public void CheckJson()
+    {
+        Debug.Log(new Tuple(3, 5).ToJSON());
+        Building test;
+        bool b = existingBuildingDict.TryGetValue(new Tuple(0, 0), out test);
+        Debug.Log(existingBuildingDict.Values.Count);
+        Debug.Log(existingBuildingDict.Keys.ToJSON());
+        if (b)
+        {
+            Debug.Log(test.ToJSON());
+        }
+        else
+        {
+            Debug.Log("No building at 0,0");
+        }
+    }
 }
 
 [Serializable]
@@ -112,5 +133,6 @@ class PlayerData {
 	public int gold { get; set; }
 	public int silver { get; set; }
 	public int wood { get; set; }
+    public Dictionary<Tuple, Building> existingBuildingDict { get; set; }
 
 }

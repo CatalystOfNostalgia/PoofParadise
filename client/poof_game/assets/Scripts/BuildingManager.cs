@@ -9,13 +9,14 @@ public class BuildingManager : MonoBehaviour {
 	 * maybe we can just search them later?
 	 */
 	public Building tree;
+	public Building pond;
+	private Building target;
 	public TileScript grid;
 
 	ArrayList buildings;
 	//the dictionary containing all the different types of buildings that can be made
 	Dictionary <string, Building> buildingTypeDict;
 	//the dictionary containing buildings on the grid
-	Dictionary <Tuple, Building> existingBuildingDict;
 	private static BuildingManager buildingManager;
 
 	public bool buildingMode;
@@ -35,8 +36,14 @@ public class BuildingManager : MonoBehaviour {
 	 * 3. decrement resource
 	 * 4. build
 	 */
-	public void makeNewBuilding (){
+	public void makeNewBuilding (int buttonNum){
 		buildingMode = true;
+		if (buttonNum == 1) {
+			target = tree;
+		}
+		if (buttonNum == 2) {
+			target = pond;
+		}
 		//Building building = null;
 //		int clickCount = 0;
 //		while (building == null) {
@@ -71,7 +78,7 @@ public class BuildingManager : MonoBehaviour {
 		if (!isTileTaken (new Tuple (0, 0))) {
 			Building newBuilding = (Building)Instantiate (target, tile.position, Quaternion.identity);
 			newBuilding.transform.position = tile.position;
-			existingBuildingDict.Add (new Tuple (0, 0), newBuilding);//place holder tuple for now
+			SaveState.state.existingBuildingDict.Add (new Tuple (0, 0), newBuilding);//place holder tuple for now
 			return newBuilding;
 		}
 		return null;
@@ -116,14 +123,14 @@ public class BuildingManager : MonoBehaviour {
 		buildingTypeDict = new Dictionary<string, Building>();
 		buildingTypeDict.Add ("tree", tree);
 		buildings = new ArrayList ();
-		existingBuildingDict = new Dictionary<Tuple, Building> ();
+		SaveState.state.existingBuildingDict = new Dictionary<Tuple, Building>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (buildingMode && Input.GetMouseButtonDown (0)) {
 			buildingMode = false;
-			PlaceBuilding(tree.gameObject);
+			PlaceBuilding(target.gameObject);
 			Debug.Log ("building mode set to false");
 		}
 
