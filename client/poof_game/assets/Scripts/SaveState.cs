@@ -11,18 +11,18 @@ public class SaveState : MonoBehaviour {
 
 	// Allows the scene to access this object without searching for it
 	public static SaveState state;
-	public Dictionary <Tuple, Building> existingBuildingDict{ get; set;}
 	// List game state variables here
 	// Format: public <Type> <Name> { get; set; }
 	public int gold { get; set; }
 	public int silver { get; set; }
 	public int wood { get; set; }
+    public Dictionary<Tuple, Building> existingBuildingDict { get; set; }
 
-	/**
+    /**
 	 * A helper method for passing data from this
 	 * game state to the serializable object
 	 */
-	private void SetPlayerData(PlayerData pd) {
+    private void SetPlayerData(PlayerData pd) {
 		pd.gold = this.gold;
 	}
 
@@ -112,5 +112,6 @@ class PlayerData {
 	public int gold { get; set; }
 	public int silver { get; set; }
 	public int wood { get; set; }
+    public Dictionary<Tuple, Building> existingBuildingDict { get; set; }
 
 }
