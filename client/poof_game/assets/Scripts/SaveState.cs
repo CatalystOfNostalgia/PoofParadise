@@ -100,6 +100,15 @@ public class SaveState : MonoBehaviour {
 			GetPlayerData(data);
 		}
 	}
+
+    public void TestDictionary()
+    {
+        existingBuildingDict = new Dictionary<Tuple, Building>();
+
+        existingBuildingDict.Add(new Tuple(0, 0), new Building());
+
+        Debug.Log(existingBuildingDict.ToJSON());
+    }
 }
 
 [Serializable]

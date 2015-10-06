@@ -2,10 +2,11 @@
 using System.Collections;
 
 public class Building : MonoBehaviour {
-    bool selected;
-    bool placed;
-    int xCoord, yCoord; // Diagonal grid, measured from the far left corner. X is the \ (diagonal left) axis, Y is the / (diagonal right) axis
-    int size; // All buildings are square - this is determined by side size; e.g. a 3x3 building is size 3
+    public bool selected { get; set; }
+    public bool placed { get; set; }
+    public int xCoord { get; set;  } 
+    public int yCoord { get; set; }  // Diagonal grid, measured from the far left corner. X is the \ (diagonal left) axis, Y is the / (diagonal right) axis
+    public int size { get; set; } // All buildings are square - this is determined by side size; e.g. a 3x3 building is size 3
 
     // Use this for initialization
     void Start()
