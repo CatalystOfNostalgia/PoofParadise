@@ -116,7 +116,8 @@ public class BuildingManager : MonoBehaviour {
 		buildingTypeDict = new Dictionary<string, Building>();
 		buildingTypeDict.Add ("tree", tree);
 		buildings = new ArrayList ();
-		existingBuildingDict = new Dictionary<Tuple, Building> ();
+		SaveState.state.existingBuildingDict = new Dictionary<Tuple, Building>();
+		existingBuildingDict = SaveState.state.existingBuildingDict;
 	}
 	
 	// Update is called once per frame
