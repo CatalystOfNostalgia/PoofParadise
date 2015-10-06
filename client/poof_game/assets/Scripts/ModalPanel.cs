@@ -32,13 +32,13 @@ public class ModalPanel : MonoBehaviour {
 
 
 		button2.onClick.RemoveAllListeners ();
-		button2.onClick.AddListener (button2Event);
 		button2.onClick.AddListener (ClosePanel);
+		button2.onClick.AddListener (button2Event);
 
 		
 		button3.onClick.RemoveAllListeners ();
-		button3.onClick.AddListener (button3Event);
 		button3.onClick.AddListener (ClosePanel);
+		button3.onClick.AddListener (button3Event);
 
 		this.question.text = question; //sets question in dialogue box
 		this.iconImage.gameObject.SetActive (false);

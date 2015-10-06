@@ -2781,6 +2781,12 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 54a4ddcceae1ba043a7747551421b3c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &803497661 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11414452, guid: 016494a4ba07c9c4e993834141d10feb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1361379834}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &803874145
 GameObject:
   m_ObjectHideFlags: 0
@@ -4263,6 +4269,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 747505209}
   m_RootOrder: 1
+--- !u!114 &1296566568 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11414452, guid: 016494a4ba07c9c4e993834141d10feb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1649305550}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1301914657
 GameObject:
   m_ObjectHideFlags: 0
@@ -4827,6 +4839,7 @@ GameObject:
   - 114: {fileID: 1456759535}
   - 114: {fileID: 1456759534}
   - 114: {fileID: 1456759538}
+  - 114: {fileID: 1456759537}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -4861,9 +4874,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   question: {fileID: 0}
   iconImage: {fileID: 0}
-  button1: {fileID: 0}
-  button2: {fileID: 0}
-  button3: {fileID: 0}
+  button1: {fileID: 1296566568}
+  button2: {fileID: 803497661}
+  button3: {fileID: 1872859929}
   modalPanelObject: {fileID: 1490064717}
 --- !u!4 &1456759536
 Transform:
@@ -4877,6 +4890,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!114 &1456759537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1456759533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a07b713a8b6c3447ba6141a6d311fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tree: {fileID: 1511387168}
+  grid: {fileID: 747505210}
+  buildingMode: 0
 --- !u!114 &1456759538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6804,6 +6831,12 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 54a4ddcceae1ba043a7747551421b3c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &1872859929 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11414452, guid: 016494a4ba07c9c4e993834141d10feb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1697732566}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1880686874
 GameObject:
   m_ObjectHideFlags: 0
