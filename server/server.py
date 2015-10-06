@@ -86,6 +86,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 				required_items = ['name', 'level', 'email', 'user_id', \
 								  'username', 'password', 'experience', 'hq_level']
 
+				# update the data and send a success response
 				if all (item in parsed_json for item in (required_items)):
 
 					queries.save_user_info(parsed_json)
@@ -95,6 +96,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 					self.wfile.write(json.dumps(data))
 					print(parsed_json['username'] + ' saved')
 
+				# if the required elements are not present send an error message
 				else:
 					
 					self.send_response(400)
@@ -102,6 +104,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 					self.wfile.write(json.dumps(data))
 					print('failed saving')
 
+			# adding a friend connection
 			elif re.match('/friends', self.path):
 				user_id = parsed_json['user_id']
 				friend_name = parsed_json['friend']
@@ -125,6 +128,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 				self.send_response(404)
 				self.wfile.write("Not a url")
 
+	# creates an account in the database
 	def createAccount(self, body):
 
 		self.send_header('Content-Type', 'application/json')
@@ -160,6 +164,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			data['error'] = 'missing parameter'
 			self.wfile.write(json.dumps(data))
 
+	# logs into the database and returns user info
 	def login(self, parameters):
 
 		self.send_header('Content-type', 'application/json')
@@ -215,11 +220,6 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			self.send_response(400)
 			data['error'] = 'need a user ID'
 			self.wfile.write(json.dumps(data))
-
-	#turns a building into json
-	def convertToJSON(self, building):
-
-		data = {}
 
 print('http server is starting...')
 

@@ -1,5 +1,6 @@
 import models
 
+# creates a new entry in the user table of the database
 def create_account( name, email, username, password ):
 	new_user = models.user.User( \
 		name = name, \
@@ -10,6 +11,7 @@ def create_account( name, email, username, password ):
 	models.session.add(new_user)
 	models.session.commit()
 
+# returns the user given a username and password
 def log_in( username, password ):
 	user = models.session.query(models.User).filter( \
 													models.User.username == username, \
@@ -17,6 +19,7 @@ def log_in( username, password ):
 												   ).one()
 	return user
 
+# updates a user info given a user dictionary
 def save_user_info( user ):
 
 	updated_user = find_user_from_id(user['user_id'])
@@ -31,16 +34,19 @@ def save_user_info( user ):
 
 	models.session.commit()
 
+# returns the user given a username
 def find_user_from_username( username ):
 	user = models.session.query(models.User).filter(models.User.username == username).one()
 
 	return user
 
+# returns a user given a user id
 def find_user_from_id( user_id ):
 	user = models.session.query(models.User).filter(models.User.user_id == user_id).one()
 
 	return user
 
+# returns all the friends of a user given that user's id
 def get_friends( user_id ):
 	
 	friendships = models.session.query(models.Friends).filter(models.Friends.friend1_id == user_id)
@@ -65,6 +71,7 @@ def get_friends( user_id ):
 
 	return user_friends
 
+# adds a friend connection between users
 def add_friend( user_id, friend_id ):
 
 	friends = models.friends.Friends( \
@@ -74,11 +81,13 @@ def add_friend( user_id, friend_id ):
 	models.session.add(friends)
 	models.session.commit()
 
+# gets the resource buildings of a user
 def get_user_resource_buildings( user_id ):
 	user_buildings = models.session.query(models.UserResourceBuilding).filter(models.UserResourceBuilding.user_id == user_id).all()
 
 	buildings = dict_buildings(user_buildings)
 
+	# add on the building info data
 	if buildings:
 			for building in buildings:
 					building_info = get_resource_building_info(building['building_info_id'])
@@ -86,12 +95,13 @@ def get_user_resource_buildings( user_id ):
 
 	return buildings
 	
-
+# gets the decorative buildings of a user
 def get_user_decorative_buildings( user_id ):
 	user_buildings = models.session.query(models.UserDecorativeBuilding).filter(models.UserDecorativeBuilding.user_id == user_id).all()
 
 	buildings = dict_buildings(user_buildings)
 	
+	# add on the building info data	
 	if buildings:
 			for building in buildings:
 					building_info = get_decorative_building_info(building['building_info_id'])
@@ -99,6 +109,7 @@ def get_user_decorative_buildings( user_id ):
 
 	return buildings
 
+# gets the building info of a resource building
 def get_resource_building_info( building_info_id ):
 
 	building_info = models.session.query(models.ResourceBuildingInfo).filter(models.ResourceBuildingInfo.building_info_id == building_info_id).one()
@@ -112,6 +123,7 @@ def get_resource_building_info( building_info_id ):
 	
 	return building
 
+# gets the building info of a decorative building
 def get_decorative_building_info( building_info_id ):
 
 	building_info = models.session.query(models.DecorativeBuildingInfo).filter(models.DecorativeBuildingInfo.building_info_id == building_info_id).one()
@@ -123,7 +135,7 @@ def get_decorative_building_info( building_info_id ):
 
 	return building
 
-
+# turns a building into a dictionary
 def dict_buildings( buildings ):
 	new_buildings = []
 	for building in buildings:
@@ -135,12 +147,14 @@ def dict_buildings( buildings ):
 			new_buildings.append(add_building)
 	return new_buildings
 
+# turns a friendship into a dictionary
 def dict_friends( friendships, userdd ):
 	new_friendships = []
 	for friendship in friendships:
 		add_friends = {}
 		add_friends['friend1_id'] = friend1_id
 
+# rollsback the sqlalchemy session. Use if there is an exception
 def rollback():
 	models.session.rollback()
 	
