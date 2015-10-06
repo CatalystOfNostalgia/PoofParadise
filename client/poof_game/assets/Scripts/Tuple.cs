@@ -5,26 +5,11 @@ using System.Collections;
 
 public class Tuple {
 
-	private int x;
-	private int y;
+    public int x { get; set; }
+	public int y { get; set; }
 	
 	public Tuple (int x, int y) {
-		setX(x);
-		setY(y);
-	}
-	
-	
-	public void setX (int newX) {
-		x = newX;
-	}
-	public void setY (int newY) {
-		y = newY;
-	}
-	
-	public int getX () {
-		return x;
-	}
-	public int getY () {
-		return y;
+        this.x = x;
+        this.y = y;
 	}
 }
