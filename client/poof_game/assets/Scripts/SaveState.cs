@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using System.Web;
 
 public class SaveState : MonoBehaviour {
@@ -24,6 +22,7 @@ public class SaveState : MonoBehaviour {
 	 */
     private void SetPlayerData(PlayerData pd) {
 		pd.gold = this.gold;
+        pd.existingBuildingDict = this.existingBuildingDict;
 	}
 
 	/**
@@ -53,6 +52,7 @@ public class SaveState : MonoBehaviour {
 		PlayerData data = new PlayerData ();
 		SetPlayerData (data);
 		string clientJson = data.ToJSON ();
+        Debug.Log(new Tuple(0,0).ToJSON());
 		Debug.Log (clientJson);
 		// TODO Send JSON to server
 	}
@@ -63,8 +63,8 @@ public class SaveState : MonoBehaviour {
 	public void PullFromServer() {
 		// TODO Get JSON from server
 		string serverJson = "{\"gold\":100,\"silver\":0,\"wood\":0";
-		PlayerData data = JSON.Deserialize<PlayerData> (serverJson);
-		GetPlayerData (data);
+		//PlayerData data = JSON.Deserialize<PlayerData> (serverJson);
+		//GetPlayerData (data);
 	}
 
 	/**
@@ -100,6 +100,27 @@ public class SaveState : MonoBehaviour {
 			GetPlayerData(data);
 		}
 	}
+
+    /**
+     * A testing function for observing
+     * JSON output
+     */
+    public void CheckJson()
+    {
+        Debug.Log(new Tuple(3, 5).ToJSON());
+        Building test;
+        bool b = existingBuildingDict.TryGetValue(new Tuple(0, 0), out test);
+        Debug.Log(existingBuildingDict.Values.Count);
+        Debug.Log(existingBuildingDict.Keys.ToJSON());
+        if (b)
+        {
+            Debug.Log(test.ToJSON());
+        }
+        else
+        {
+            Debug.Log("No building at 0,0");
+        }
+    }
 }
 
 [Serializable]
