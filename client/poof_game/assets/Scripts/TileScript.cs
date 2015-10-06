@@ -18,12 +18,12 @@ public class TileScript : MonoBehaviour {
     public GameObject prefab;
 	
 	void Start() {
-	    
+        
 		ArrayList namesOfTiles = new ArrayList();
 
 		tileObjects = new ArrayList(GameObject.FindGameObjectsWithTag("Tile"));
 		tiles = new GameObject[mapLength,mapWidth];
-		
+        
 		int aisleCount = 0;
 		
 		foreach (GameObject t in tileObjects) {
@@ -37,6 +37,9 @@ public class TileScript : MonoBehaviour {
 			}
 			aisleCount++;
 		}
+
+        //tileObjects = new ArrayList();
+        //Generate(prefab, transform.position, mapWidth, mapLength);
 	}
 	
 	// Public method that when given a tile returns an array of the 8 surrounding tiles (including the input tile)
