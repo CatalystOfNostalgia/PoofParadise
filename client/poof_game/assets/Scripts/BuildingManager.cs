@@ -10,6 +10,9 @@ public class BuildingManager : MonoBehaviour {
 	 */
 	public Building tree;
 	public Building pond;
+	public Building fire;
+	public Building windmill;
+
 	private Building target;
 	public TileScript grid;
 
@@ -38,12 +41,24 @@ public class BuildingManager : MonoBehaviour {
 	 */
 	public void makeNewBuilding (int buttonNum){
 		buildingMode = true;
-		if (buttonNum == 1) {
+		switch (buttonNum) {
+		case 1:
 			target = tree;
-		}
-		if (buttonNum == 2) {
+			break;
+		case 2:
 			target = pond;
+			break;
+		case 3:
+			target = fire;
+			break;
+		case 4:
+			target = windmill;
+			break;
+		default:
+			target = tree;
+			break;
 		}
+
 		//Building building = null;
 //		int clickCount = 0;
 //		while (building == null) {

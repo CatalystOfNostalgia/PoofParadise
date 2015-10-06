@@ -37,7 +37,7 @@ public class TileScript : MonoBehaviour {
 			}
 			aisleCount++;
 		}
-
+        
         //tileObjects = new ArrayList();
         //Generate(prefab, transform.position, mapWidth, mapLength);
 	}
@@ -84,7 +84,7 @@ public class TileScript : MonoBehaviour {
         {
             for (int j = 0; j < mapWidth; j++)
             {
-                Vector3 location = orig + new Vector3(i, j, 0);
+                Vector3 location = orig + new Vector3(1.10f*(i + j - 5), .64f*(j - i), -2);
                 GameObject gameObject = Instantiate(tile, location, Quaternion.identity) as GameObject;
                 Tile t = gameObject.GetComponent<Tile>();
                 t.index = new Tuple(i, j);
