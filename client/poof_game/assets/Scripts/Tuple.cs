@@ -35,4 +35,9 @@ public class Tuple {
     {
         return x ^ y;
     }
+
+    public override string ToString()
+    {
+        return "" + x + " " + y;
+    }
 }

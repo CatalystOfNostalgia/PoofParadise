@@ -9,7 +9,7 @@ using System.Collections.Generic;
 public class TileScript : MonoBehaviour {
 
     // Fields that are used to contain and maintain all the tiles
-    private List<Tile> tiles;
+    public List<Tile> tiles { get; set; }
 	
 	// Constants defined for array operations
 	public int mapArea = 36;
@@ -18,25 +18,6 @@ public class TileScript : MonoBehaviour {
     public GameObject prefab;
 	
 	void Start() {
-    /*
-		ArrayList namesOfTiles = new ArrayList();
-
-		tileObjects = new ArrayList(GameObject.FindGameObjectsWithTag("Tile"));
-		tiles = new GameObject[mapLength,mapWidth];
-        
-		int aisleCount = 0;
-		
-		foreach (GameObject t in tileObjects) {
-			namesOfTiles.Add(t.name);
-		}
-		// I don't know why aisleCount is my other loop index, but it is
-		//	this loop adds all of the found tiles into the 2D array
-		while (aisleCount < mapWidth) {
-			for (int i = 0; i < mapLength; i++) {
-				tiles[i, aisleCount] = (GameObject)tileObjects[namesOfTiles.IndexOf("Tile " + i + " " + aisleCount)];
-			}
-			aisleCount++;
-		}*/
         
         tiles = new List<Tile>();
         Generate(prefab, transform.position, mapWidth, mapLength);
@@ -67,8 +48,7 @@ public class TileScript : MonoBehaviour {
     public List<Tile> GetAdjacentTiles(Tile tile)
     {
         List<Tile> listOfTiles = new List<Tile>();
-        Tile t = tile.GetComponent<Tile>();
-        Tuple refer = t.index;
+        Tuple refer = tile.index;
 
         foreach (Tile test in tiles)
         {
@@ -135,6 +115,26 @@ public static Tuple hashTile(GameObject tile) {
         return new Tuple(int.Parse(tile.name.Split(' ')[1].ToString()), int.Parse(tile.name.Split(' ')[2].ToString()));
     }
 }*/
+
+    /* ORIGINAL START CODE
+		ArrayList namesOfTiles = new ArrayList();
+
+		tileObjects = new ArrayList(GameObject.FindGameObjectsWithTag("Tile"));
+		tiles = new GameObject[mapLength,mapWidth];
+        
+		int aisleCount = 0;
+		
+		foreach (GameObject t in tileObjects) {
+			namesOfTiles.Add(t.name);
+		}
+		// I don't know why aisleCount is my other loop index, but it is
+		//	this loop adds all of the found tiles into the 2D array
+		while (aisleCount < mapWidth) {
+			for (int i = 0; i < mapLength; i++) {
+				tiles[i, aisleCount] = (GameObject)tileObjects[namesOfTiles.IndexOf("Tile " + i + " " + aisleCount)];
+			}
+			aisleCount++;
+		}*/
 }
 
 

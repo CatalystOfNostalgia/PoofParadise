@@ -26,6 +26,9 @@ public class CharacterScript : MonoBehaviour {
 	void Start() {
 		ms = this.GetComponent<MovementScript>();
 		ps = this.GetComponent<PassiveMover>();
+        TileScript ts = grid.GetComponent<TileScript>();
+        Tile[] arr = ts.tiles.ToArray();
+        onTile = arr[((int)Random.Range(0, 5))].gameObject;
 	}
 	
 	void Update() {
