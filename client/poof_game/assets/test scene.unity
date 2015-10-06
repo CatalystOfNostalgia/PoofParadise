@@ -1113,6 +1113,15 @@ Prefab:
       propertyPath: m_Name
       value: Button4
       objectReference: {fileID: 0}
+    - target: {fileID: 11457338, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 01fbb42246aaee546a09fe1326bc4cd3,
+        type: 3}
+    - target: {fileID: 11457338, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
   m_IsPrefabParent: 0
@@ -1240,6 +1249,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 390626611}
   - 212: {fileID: 390626610}
+  - 114: {fileID: 390626612}
   m_Layer: 0
   m_Name: Cave_Right
   m_TagString: Untagged
@@ -1286,6 +1296,17 @@ Transform:
   - {fileID: 1576840446}
   m_Father: {fileID: 0}
   m_RootOrder: 11
+--- !u!114 &390626612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 390626609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8bf816ce45688945a7889fe291f9111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &418446640
 GameObject:
   m_ObjectHideFlags: 0
@@ -2905,6 +2926,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 803874147}
   - 212: {fileID: 803874146}
+  - 114: {fileID: 803874148}
   m_Layer: 0
   m_Name: Windmill_Left
   m_TagString: Untagged
@@ -2950,6 +2972,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 14
+--- !u!114 &803874148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 803874145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8bf816ce45688945a7889fe291f9111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &831494258
 GameObject:
   m_ObjectHideFlags: 0
@@ -4594,6 +4627,15 @@ Prefab:
       propertyPath: m_Name
       value: Button2
       objectReference: {fileID: 0}
+    - target: {fileID: 11457338, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 75309004ca1183640b7eb131dd499a05,
+        type: 3}
+    - target: {fileID: 11457338, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
   m_IsPrefabParent: 0
@@ -4987,7 +5029,7 @@ MonoBehaviour:
   button1: {fileID: 1296566568}
   button2: {fileID: 803497661}
   button3: {fileID: 1872859929}
-  button4: {fileID: 1872859929}
+  button4: {fileID: 1744639925}
   modalPanelObject: {fileID: 1490064717}
 --- !u!4 &1456759536
 Transform:
@@ -5012,10 +5054,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a07b713a8b6c3447ba6141a6d311fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 1511387168}
+  tree: {fileID: 390626612}
   pond: {fileID: 1753504387}
-  fire: {fileID: 0}
-  windmill: {fileID: 0}
+  fire: {fileID: 1958750298}
+  windmill: {fileID: 803874148}
   grid: {fileID: 747505210}
   buildingMode: 0
 --- !u!114 &1456759538
@@ -6293,10 +6335,11 @@ Prefab:
     - target: {fileID: 11457338, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 21300000, guid: dfa7cea326674b449aecb9d7f7f6c476,
+        type: 3}
     - target: {fileID: 11457338, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
       propertyPath: m_Type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
@@ -6547,7 +6590,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11423156, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
       propertyPath: m_Text
-      value: Fire Button
+      value: Fire Tree Button
       objectReference: {fileID: 0}
     - target: {fileID: 11423156, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
       propertyPath: m_Color.r
@@ -6564,6 +6607,15 @@ Prefab:
     - target: {fileID: 156380, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
       propertyPath: m_Name
       value: Button3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457338, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 719ac6d83ef56d34fb1a218373420972,
+        type: 3}
+    - target: {fileID: 11457338, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
+      propertyPath: m_Type
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
@@ -6623,6 +6675,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 747505209}
   m_RootOrder: 38
+--- !u!114 &1744639925 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11414452, guid: 016494a4ba07c9c4e993834141d10feb,
+    type: 2}
+  m_PrefabInternal: {fileID: 346669270}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1753504384
 GameObject:
   m_ObjectHideFlags: 0
@@ -7256,6 +7314,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1958750297}
   - 212: {fileID: 1958750296}
+  - 114: {fileID: 1958750298}
   m_Layer: 0
   m_Name: FireTree
   m_TagString: Untagged
@@ -7302,6 +7361,17 @@ Transform:
   - {fileID: 1796426497}
   m_Father: {fileID: 0}
   m_RootOrder: 12
+--- !u!114 &1958750298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1958750295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8bf816ce45688945a7889fe291f9111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2008037691
 GameObject:
   m_ObjectHideFlags: 0
