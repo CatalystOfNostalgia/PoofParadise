@@ -18,7 +18,7 @@ public class TileScript : MonoBehaviour {
     public GameObject prefab;
 	
 	void Start() {
-        
+    
 		ArrayList namesOfTiles = new ArrayList();
 
 		tileObjects = new ArrayList(GameObject.FindGameObjectsWithTag("Tile"));
