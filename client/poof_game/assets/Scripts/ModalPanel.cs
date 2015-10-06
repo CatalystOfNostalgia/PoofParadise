@@ -27,8 +27,9 @@ public class ModalPanel : MonoBehaviour {
 		modalPanelObject.SetActive (true);
 
 		button1.onClick.RemoveAllListeners ();
-		button1.onClick.AddListener (button1Event);
 		button1.onClick.AddListener (ClosePanel);
+		button1.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding());
+
 
 		button2.onClick.RemoveAllListeners ();
 		button2.onClick.AddListener (button2Event);
@@ -47,6 +48,8 @@ public class ModalPanel : MonoBehaviour {
 		button3.gameObject.SetActive (true);
 
 	}
+
+	
 	void ClosePanel(){
 		modalPanelObject.SetActive(false);
 	}

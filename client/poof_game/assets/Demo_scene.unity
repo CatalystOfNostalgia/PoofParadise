@@ -4803,6 +4803,7 @@ GameObject:
   - 4: {fileID: 1456759536}
   - 114: {fileID: 1456759535}
   - 114: {fileID: 1456759534}
+  - 114: {fileID: 1456759537}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -4853,6 +4854,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!114 &1456759537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1456759533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a07b713a8b6c3447ba6141a6d311fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tree: {fileID: 1511387168}
+  grid: {fileID: 747505210}
+  buildingMode: 0
 --- !u!1 &1463332577
 GameObject:
   m_ObjectHideFlags: 0

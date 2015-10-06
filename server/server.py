@@ -4,6 +4,9 @@ from sqlalchemy import select
 import re
 import os
 import json
+import sys
+
+sys.path.insert(0, '/logic')
 import queries
 
 class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
@@ -15,32 +18,25 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 		parameters = parse_qs(urlparse(self.path).query)
 
 		# logging in
-		if re.match('/login.*', self.path):
+		if re.match('/login', self.path):
 			self.login(parameters)
 
 		# looking for friends of a user
-		elif re.match('/friends.*', self.path):
+		elif re.match('/friends', self.path):
 			self.getFriends(parameters)
 
 		# looking for a specific user
 
-		elif re.match('.*/users/.*', self.path):
+		elif re.match('/users/.*', self.path):
 
 			self.send_header('Content-type', 'text-html')
 			self.end_headers()
 
-			if re.match('.*/users/.*/building', self.path):
-				userName = os.path.dirname(urlparse(self.path).path).split('/')[2]
-				self.wfile.write('userid: ' + userName)
-				u = User.query.filter_by(user_id=userName).first()
-				self.wfile('email: ' + u.email)
-
-			else:
-				user_id = os.path.basename(urlparse(self.path).path)
-				decorative_buildings = queries.get_user_decorative_buildings(user_id)
-				resource_buildings = queries.get_user_resource_buildings(user_id)
+			user_id = os.path.basename(urlparse(self.path).path)
+			decorative_buildings = queries.get_user_decorative_buildings(user_id)
+			resource_buildings = queries.get_user_resource_buildings(user_id)
 				
-				self.wfile.write('user id: ' + user_id)
+			self.wfile.write('user id: ' + user_id)
 
 		# asking for all users
 		elif re.match('.*/users$', self.path):
@@ -63,13 +59,15 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 	def do_POST(self):
 
-		self.send_header('Content-type', 'text-html')
+		self.send_header('Content-type', 'application/json')
 		self.end_headers()
 		
+		# If the body isn't JSON then reject
 		if self.headers['Content-Type'] != 'application/json':
 			
 			self.send_response(400)
-			self.wfile.write('Need JSON in the body')
+			data = {'message' : 'Need JSON in the body'}
+			self.wfile.write(json.dumps(data))
 
 		else:
 
@@ -84,11 +82,44 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 			# saving
 			elif re.match('/save', self.path):
-				self.send_response(200)
 
-				self.wfile.write('Post Successful!')
-				print(parsed_json['user'])
-				print('POST successful!')
+				required_items = ['name', 'level', 'email', 'user_id', \
+								  'username', 'password', 'experience', 'hq_level']
+
+				if all (item in parsed_json for item in (required_items)):
+
+					queries.save_user_info(parsed_json)
+
+					data = {'message' : 'Save successful!'} 
+					self.send_response(200)
+					self.wfile.write(json.dumps(data))
+					print(parsed_json['username'] + ' saved')
+
+				else:
+					
+					self.send_response(400)
+					data = {'error' : 'Missing json items'}
+					self.wfile.write(json.dumps(data))
+					print('failed saving')
+
+			elif re.match('/friends', self.path):
+				user_id = parsed_json['user_id']
+				friend_name = parsed_json['friend']
+
+				friend = queries.find_user_from_username(friend_name)
+				user =  queries.find_user_from_id(user_id)
+			
+				try:
+					queries.add_friend(user_id, friend.user_id)
+
+					print(user.username + ' and ' + friend.username + ' are now friends!')
+					self.send_response(200)
+
+				except:
+					queries.rollback()
+					self.send_response(400)
+					data = {'error': 'already friends'}	
+					self.wfile.write(json.dumps(data))
 
 			else:
 				self.send_response(404)
@@ -115,6 +146,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 				print("name: " + name + "\nusername: " + username + "\nemail: " + email + '\n')
 
 			except:
+				queries.rollback()
 				self.send_response(400)
 				data['error'] = 'duplicate entry'
 				print('Duplicate account entry attempted for\nname: ' + name + '\nusername' + username + '\nemail: ' + email + '\n')
@@ -149,10 +181,14 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			else:
 				self.send_response(200)
 
+				resource_buildings = queries.get_user_resource_buildings(user.user_id)
+				decorative_buildings = queries.get_user_decorative_buildings(user.user_id)
 				data['user_id'] = user.user_id
 				data['experience'] = user.experience
 				data['headquarters_level'] = user.headquarters_level
 				data['level'] = user.level
+				data['resource_buildings'] = resource_buildings
+				data['decorative_buildings'] = decorative_buildings
 
 				print("user: " + username + " is logging in with user id: " + str(user.user_id) + "\n")
 
@@ -172,7 +208,8 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 		data = {}
 
 		if 'user' in parameters:
-			data['friends'] = 'no friends'
+			friends = queries.get_friends(parameters['user'][0])
+			data['friends'] = friends
 			self.wfile.write(json.dumps(data))
 		else:
 			self.send_response(400)

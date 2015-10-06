@@ -3,6 +3,8 @@ import random
 
 name_pool = ['Ted', 'Margaret', 'Eric', 'Anthony', 'Jeremy', 'Anjana', 'Robert', 'Alex', 'Austin', 'Brittany', 'William', 'Bryn', 'Zach', 'Alberto', 'Ian', 'Dan', 'Madison', 'Dylan', 'Lisa']
 
+building_info_id = 0
+
 def sample_insert_group():
     for name in name_pool:
         if not exists(name):
@@ -12,6 +14,7 @@ def sample_select_group():
     for name in name_pool:
         if exists(name):
             sample_select_email(name)
+
 def sample_insert_building_group():
     for name in name_pool:
         if (exists(name)):
@@ -26,9 +29,30 @@ def sample_select_buildings_group():
 def sample_insert_building(name):
     user_id = models.session.query(models.User).filter(models.User.name==name).one().user_id
     lv = random.randrange(10)
-    building_info_id = random.randrange(20)
-    build1 = models.user_building.UserDecorativeBuilding(user_id=user_id, building_info_id=building_info_id, level=lv, position_x=0, position_y=0)
+    global building_info_id 
+    building_info_id = building_info_id + 1
+
+
+    build1 = models.user_building.UserDecorativeBuilding( \
+		user_id = user_id, \
+		building_info_id = building_info_id, \
+		level = lv, \
+		position_x = 0, \
+		position_y = 0)
+
+    build1_info = models.building_info.DecorativeBuildingInfo( \
+        name = 'Fire Tree', \
+        size = 2, \
+        next_building_id = building_info_id + 1, \
+        resource_cost_fire = 100, \
+        resource_cost_water = 100, \
+        resource_cost_air = 100, \
+        resource_cost_earth = 100,\
+        poofs_generated = 10,\
+        experience_gain = 5)
+
     models.session.add(build1)
+    models.session.add(build1_info)
     models.session.commit()
     print (name + " added a building")
 

@@ -38,6 +38,7 @@ CREATE TABLE user_decorative_building(
 CREATE TABLE decorative_building_info(
 	building_info_id int NOT NULL AUTO_INCREMENT,
 	name VARCHAR(100) NULL,
+	size int NULL,
     next_building_id int NULL,
 	resource_cost_fire int NULL,
 	resource_cost_water int NULL,
@@ -49,18 +50,20 @@ CREATE TABLE decorative_building_info(
 );
 
 CREATE TABLE user_resource_building(
-    id int NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     user_id int NOT NULL,
-    building_id int NOT NULL,
+    building_info_id int NOT NULL,
     position_x int NOT NULL,
     position_y int NOT NULL,
     PRIMARY KEY(id)
 );
 
 CREATE TABLE resource_building(
-    building_id int NOT NULL,
+    building_info_id int NOT NULL AUTO_INCREMENT,
     level int NOT NULL,
     next_building_id int NULL,
+	name VARCHAR(100) NULL,
+	size int NULL,
     production_rate int NOT NULL,
     production_type varchar(100) NOT NULL,
     resource_cost_fire int NULL,
@@ -68,7 +71,7 @@ CREATE TABLE resource_building(
     resource_cost_air int NULL,
     resource_cost_earth int NULL,
     experience_gain int NULL,
-    PRIMARY KEY (building_id)
+    PRIMARY KEY (building_info_id)
 );
 
 CREATE TABLE friends(

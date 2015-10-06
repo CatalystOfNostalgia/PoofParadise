@@ -11,9 +11,10 @@ public class ButtonClick : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Instantiate(target, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)), Quaternion.identity);
-        }
+		//Why are we instantiating an object???
+        //if (Input.GetMouseButtonDown(0))
+      //  {
+        //    Instantiate(target, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)), Quaternion.identity);
+        //}
 	}
 }
