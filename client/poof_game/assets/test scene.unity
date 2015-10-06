@@ -4902,6 +4902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree: {fileID: 1511387168}
+  pond: {fileID: 1753504387}
   grid: {fileID: 747505210}
   buildingMode: 0
 --- !u!114 &1456759538
@@ -6510,6 +6511,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1753504386}
   - 212: {fileID: 1753504385}
+  - 114: {fileID: 1753504387}
   m_Layer: 0
   m_Name: Pond_Right
   m_TagString: Untagged
@@ -6555,6 +6557,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
+--- !u!114 &1753504387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1753504384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8bf816ce45688945a7889fe291f9111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1765078015
 GameObject:
   m_ObjectHideFlags: 0
