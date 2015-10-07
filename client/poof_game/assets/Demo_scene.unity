@@ -788,7 +788,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c05feffc9fbaa41a10c8971d976bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapArea: 81
   mapLength: 10
   mapWidth: 10
   prefab:

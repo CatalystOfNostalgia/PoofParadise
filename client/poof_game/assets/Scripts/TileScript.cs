@@ -11,14 +11,16 @@ public class TileScript : MonoBehaviour {
     // Fields that are used to contain and maintain all the tiles
     public List<Tile> tiles { get; set; }
 	
-	// Constants defined for array operations
-	public int mapArea = 36;
+	// Public fields
 	public int mapLength = 6;
 	public int mapWidth = 6;
-    public GameObject[] prefab;
+    public GameObject[] prefab; // List of tile prefabs
 	
+    /**
+     * Initializes the list of tiles
+     * Generates the game grid
+     */
 	void Start() {
-        
         tiles = new List<Tile>();
         Generate(prefab, transform.position, mapWidth, mapLength);
 	}
@@ -33,7 +35,7 @@ public class TileScript : MonoBehaviour {
             for (int j = 0; j < mapWidth; j++)
             {
                 Vector3 location = orig + new Vector3(1.10f*(i + j - 5), .64f*(j - i), -2);
-                GameObject gameObject = Instantiate(tile[(i + j) % 2], location, Quaternion.identity) as GameObject;
+                GameObject gameObject = Instantiate(tile[(i + j) % tile.Length], location, Quaternion.identity) as GameObject;
                 Tile t = gameObject.GetComponent<Tile>();
                 t.index = new Tuple(i, j);
                 tiles.Add(t);
