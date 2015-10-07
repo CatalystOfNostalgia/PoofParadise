@@ -36,6 +36,7 @@ public class TileScript : MonoBehaviour {
             {
                 Vector3 location = orig + new Vector3(1.10f*(i + j - 5), .64f*(j - i), -2);
                 GameObject gameObject = Instantiate(tile[(i + j) % tile.Length], location, Quaternion.identity) as GameObject;
+                gameObject.transform.parent = this.transform;
                 Tile t = gameObject.GetComponent<Tile>();
                 t.index = new Tuple(i, j);
                 tiles.Add(t);

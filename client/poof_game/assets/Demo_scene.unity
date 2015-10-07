@@ -788,7 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c05feffc9fbaa41a10c8971d976bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapLength: 10
+  mapLength: 15
   mapWidth: 10
   prefab:
   - {fileID: 173234, guid: b4bd629bec064ae43a94dda0335ce945, type: 2}
