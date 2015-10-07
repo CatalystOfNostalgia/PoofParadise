@@ -23,6 +23,9 @@ public class TileScript : MonoBehaviour {
 	void Start() {
         tiles = new List<Tile>();
         Generate(prefab, transform.position, mapWidth, mapLength);
+        // Load save from server
+        // SaveState.state.Load() -> Local save line for demo?
+        // Render scene with load data
 	}
 
     /**
