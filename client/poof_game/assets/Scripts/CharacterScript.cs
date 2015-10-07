@@ -28,7 +28,10 @@ public class CharacterScript : MonoBehaviour {
 		ps = this.GetComponent<PassiveMover>();
         TileScript ts = grid.GetComponent<TileScript>();
         Tile[] arr = ts.tiles.ToArray();
-        onTile = arr[((int)Random.Range(0, 5))].gameObject;
+        if (onTile == null)
+        {
+            onTile = arr[((int)Random.Range(0, arr.Length - 1))].gameObject;
+        }
 	}
 	
 	void Update() {
