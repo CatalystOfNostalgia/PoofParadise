@@ -6,13 +6,17 @@ public class Tile : MonoBehaviour {
     // Location
     public Tuple index { get; set; }
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    private Color startColor;
+
+    void OnMouseEnter()
+    {
+        startColor = GetComponent<Renderer>().material.color;
+        GetComponent<Renderer>().material.color = Color.red;
+        Debug.Log("THIS WORKS");
+    }
+
+    void OnMouseExit()
+    {
+        GetComponent<Renderer>().material.color = startColor;
+    }
 }
