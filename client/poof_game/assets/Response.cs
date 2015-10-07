@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Globalization;
 using Ionic.Zlib;
-using System.Web;
+//using System.Web;
 
 namespace HTTP
 {

@@ -68,6 +68,42 @@ public class TileScript : MonoBehaviour {
     }
 
     /**
+     * Given a tuple, this method will be able to produce
+     * a list of legal tuples within a distance 1 from the start tuple
+     *
+     * This method takes advantage of the fact that tiles are indexed
+     * by a tuple and treats that tuple as one of the corners of the tile
+     * rather than the center
+     */
+    public List<Tuple> GetPossiblePaths(Tuple start)
+    {
+        List<Tuple> possiblePaths = new List<Tuple>();
+
+        // Add the right path
+        if (start.x < mapWidth)
+        {
+            possiblePaths.Add(new Tuple(start.x + 1, start.y));
+        }
+        // Add the left path
+        if (start.x > 0)
+        {
+            possiblePaths.Add(new Tuple(start.x - 1, start.y));
+        }
+        // Add the top path
+        if (start.y < mapLength)
+        {
+            possiblePaths.Add(new Tuple(start.x, start.y + 1));
+        }
+        // Add the bottom path
+        if (start.y > 0)
+        {
+            possiblePaths.Add(new Tuple(start.x, start.y - 1));
+        }
+
+        return possiblePaths;
+    }
+
+    /**
      * A quick method for retrieving a tile based
      * on a Tuple 
      */

@@ -60,8 +60,12 @@ public class PassiveMover : MonoBehaviour {
 				nextDirection = (Direction)((int)Random.Range (0,4));
 			}
 
-            Tile[] arr = adjacents.ToArray();
-			nextTile = arr[((int)nextDirection * 2) + 1].gameObject;
+            //Tile[] arr = adjacents.ToArray();
+            //nextTile = arr[((int)nextDirection * 2) + 1].gameObject;
+            List<Tuple> tuples = ts.GetPossiblePaths(curr.index);
+            Tuple[] arr = tuples.ToArray();
+            Tuple next = arr[(int)Random.Range(0, arr.Length)];
+            nextTile = ts.GetTile(next).gameObject;
 			mostRecent = (Direction)(((int)nextDirection * 2) + 1);
 		}
 		else {
