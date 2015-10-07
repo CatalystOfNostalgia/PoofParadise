@@ -14,6 +14,10 @@ public class SaveState : MonoBehaviour {
 	public int gold { get; set; }
 	public int silver { get; set; }
 	public int wood { get; set; }
+    public int fireEle { get; set; }
+    public int waterEle { get; set; }
+    public int earthEle { get; set; }
+    public int airEle { get; set; }
     public Dictionary<Tuple, Building> existingBuildingDict { get; set; }
 
     /**
@@ -133,6 +137,10 @@ class PlayerData {
 	public int gold { get; set; }
 	public int silver { get; set; }
 	public int wood { get; set; }
+    public int fireEle { get; set; }
+    public int waterEle { get; set; }
+    public int earthEle { get; set; }
+    public int airEle { get; set; }
     public Dictionary<Tuple, Building> existingBuildingDict { get; set; }
 
 }
