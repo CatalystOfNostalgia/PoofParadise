@@ -10,6 +10,7 @@ public class ModalPanel : MonoBehaviour {
 	public Button button1;
 	public Button button2;
 	public Button button3;
+	public Button button4;
 	public GameObject modalPanelObject;
 
 	private static ModalPanel modalPanel;
@@ -28,20 +29,24 @@ public class ModalPanel : MonoBehaviour {
 
 		button1.onClick.RemoveAllListeners ();
 		button1.onClick.AddListener (ClosePanel);
-		button1.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding());
+		button1.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(1));
 
 
 		button2.onClick.RemoveAllListeners ();
 		button2.onClick.AddListener (ClosePanel);
-		button2.onClick.AddListener (button2Event);
+		button2.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(2));
 
 		
 		button3.onClick.RemoveAllListeners ();
 		button3.onClick.AddListener (ClosePanel);
-		button3.onClick.AddListener (button3Event);
+		button3.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(3));
+
+		button4.onClick.RemoveAllListeners ();
+		button4.onClick.AddListener (ClosePanel);
+		button4.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(4));
 
 		this.question.text = question; //sets question in dialogue box
-		this.iconImage.gameObject.SetActive (false);
+		//this.iconImage.gameObject.SetActive (false);
 
 		button1.gameObject.SetActive (true);
 		button2.gameObject.SetActive (true);

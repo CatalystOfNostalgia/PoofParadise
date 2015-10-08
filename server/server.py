@@ -84,17 +84,15 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			elif re.match('/save', self.path):
 
 				required_items = ['name', 'level', 'email', 'user_id', \
-								  'username', 'password', 'experience', 'hq_level']
+								  'username', 'password', 'experience', \
+								  'hq_level', 'resource_buildings', 'decorative_buildings']
 
+				# update the data and send a success response
 				if all (item in parsed_json for item in (required_items)):
 
-					queries.save_user_info(parsed_json)
+					self.save(parsed_json)
 
-					data = {'message' : 'Save successful!'} 
-					self.send_response(200)
-					self.wfile.write(json.dumps(data))
-					print(parsed_json['username'] + ' saved')
-
+				# if the required elements are not present send an error message
 				else:
 					
 					self.send_response(400)
@@ -102,6 +100,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 					self.wfile.write(json.dumps(data))
 					print('failed saving')
 
+			# adding a friend connection
 			elif re.match('/friends', self.path):
 				user_id = parsed_json['user_id']
 				friend_name = parsed_json['friend']
@@ -125,6 +124,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 				self.send_response(404)
 				self.wfile.write("Not a url")
 
+	# creates an account in the database
 	def createAccount(self, body):
 
 		self.send_header('Content-Type', 'application/json')
@@ -160,6 +160,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			data['error'] = 'missing parameter'
 			self.wfile.write(json.dumps(data))
 
+	# logs into the database and returns user info
 	def login(self, parameters):
 
 		self.send_header('Content-type', 'application/json')
@@ -216,10 +217,20 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 			data['error'] = 'need a user ID'
 			self.wfile.write(json.dumps(data))
 
-	#turns a building into json
-	def convertToJSON(self, building):
+	# saves the users info and building data
+	def save(self, parsed_json):
+		
+		resource_buildings = parsed_json['resource_buildings']
+ 		decorative_buildings = parsed_json['decorative_buildings']
+		user_id = parsed_json['user_id']
 
-		data = {}
+		queries.save_user_info(parsed_json)
+		queries.save_building_info(resource_buildings, decorative_buildings, user_id)
+
+		data = {'message' : 'Save successful!'} 
+		self.send_response(200)
+		self.wfile.write(json.dumps(data))
+		print(parsed_json['username'] + ' saved')
 
 print('http server is starting...')
 

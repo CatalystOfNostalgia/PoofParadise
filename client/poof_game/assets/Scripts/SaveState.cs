@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using System.Web;
 
 public class SaveState : MonoBehaviour {
@@ -14,9 +12,15 @@ public class SaveState : MonoBehaviour {
 	// List game state variables here
 	// Format: public <Type> <Name> { get; set; }
 	public int gold { get; set; }
+	public int maxGoldHeld { get; set; }
 	public int silver { get; set; }
 	public int wood { get; set; }
+    public int fireEle { get; set; }
+    public int waterEle { get; set; }
+    public int earthEle { get; set; }
+    public int airEle { get; set; }
     public Dictionary<Tuple, Building> existingBuildingDict { get; set; }
+
 
     /**
 	 * A helper method for passing data from this
@@ -24,6 +28,7 @@ public class SaveState : MonoBehaviour {
 	 */
     private void SetPlayerData(PlayerData pd) {
 		pd.gold = this.gold;
+        pd.existingBuildingDict = this.existingBuildingDict;
 	}
 
 	/**
@@ -37,13 +42,22 @@ public class SaveState : MonoBehaviour {
 	/**
 	 * Produces a singleton on awake
 	 */
-	private void Awake() {
+	public void Awake() {
+
 		if (state == null) {
 			DontDestroyOnLoad(gameObject);
 			state = this;
 		} else if (state != this) {
 			Destroy(gameObject);
 		}
+
+		// set the fields until we can load
+		state.gold = 0;
+		state.existingBuildingDict = new Dictionary<Tuple, Building>();
+		fireEle = 5;
+		waterEle = 5;
+		earthEle = 5;
+		airEle = 5;
 	}
 
 	/**
@@ -53,6 +67,7 @@ public class SaveState : MonoBehaviour {
 		PlayerData data = new PlayerData ();
 		SetPlayerData (data);
 		string clientJson = data.ToJSON ();
+        Debug.Log(new Tuple(0,0).ToJSON());
 		Debug.Log (clientJson);
 		// TODO Send JSON to server
 	}
@@ -63,8 +78,8 @@ public class SaveState : MonoBehaviour {
 	public void PullFromServer() {
 		// TODO Get JSON from server
 		string serverJson = "{\"gold\":100,\"silver\":0,\"wood\":0";
-		PlayerData data = JSON.Deserialize<PlayerData> (serverJson);
-		GetPlayerData (data);
+		//PlayerData data = JSON.Deserialize<PlayerData> (serverJson);
+		//GetPlayerData (data);
 	}
 
 	/**
@@ -100,6 +115,27 @@ public class SaveState : MonoBehaviour {
 			GetPlayerData(data);
 		}
 	}
+
+    /**
+     * A testing function for observing
+     * JSON output
+     */
+    public void CheckJson()
+    {
+        Debug.Log(new Tuple(3, 5).ToJSON());
+        Building test;
+        bool b = existingBuildingDict.TryGetValue(new Tuple(0, 0), out test);
+        Debug.Log(existingBuildingDict.Values.Count);
+        Debug.Log(existingBuildingDict.Keys.ToJSON());
+        if (b)
+        {
+            Debug.Log(test.ToJSON());
+        }
+        else
+        {
+            Debug.Log("No building at 0,0");
+        }
+    }
 }
 
 [Serializable]
@@ -112,6 +148,10 @@ class PlayerData {
 	public int gold { get; set; }
 	public int silver { get; set; }
 	public int wood { get; set; }
+    public int fireEle { get; set; }
+    public int waterEle { get; set; }
+    public int earthEle { get; set; }
+    public int airEle { get; set; }
     public Dictionary<Tuple, Building> existingBuildingDict { get; set; }
 
 }

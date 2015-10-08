@@ -1,30 +1,43 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 /* Helper class that is literally just a 2-tuple */
 
+[Serializable]
 public class Tuple {
 
-	private int x;
-	private int y;
+    public int x { get; set; }
+	public int y { get; set; }
 	
 	public Tuple (int x, int y) {
-		setX(x);
-		setY(y);
+        this.x = x;
+        this.y = y;
 	}
-	
-	
-	public void setX (int newX) {
-		x = newX;
-	}
-	public void setY (int newY) {
-		y = newY;
-	}
-	
-	public int getX () {
-		return x;
-	}
-	public int getY () {
-		return y;
-	}
+
+    public override bool Equals(System.Object o)
+    {
+        if (o == null)
+        {
+            return false;
+        }
+
+        Tuple test = o as Tuple;
+        if ((System.Object)o == null)
+        {
+            return false;
+        }
+
+        return test.x == x && test.y == y;
+    }
+
+    public override int GetHashCode()
+    {
+        return x ^ y;
+    }
+
+    public override string ToString()
+    {
+        return "" + x + " " + y;
+    }
 }

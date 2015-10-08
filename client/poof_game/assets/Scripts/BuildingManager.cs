@@ -8,14 +8,18 @@ public class BuildingManager : MonoBehaviour {
 	 * just dragging gameobjects to here for now
 	 * maybe we can just search them later?
 	 */
-	public Building tree;
+	public ResourceBuilding windmill;
+	public ResourceBuilding pond;
+	public ResourceBuilding fire;
+	public ResourceBuilding cave;
+
+	private ResourceBuilding target;
 	public TileScript grid;
 
 	ArrayList buildings;
 	//the dictionary containing all the different types of buildings that can be made
 	Dictionary <string, Building> buildingTypeDict;
 	//the dictionary containing buildings on the grid
-	Dictionary <Tuple, Building> existingBuildingDict;
 	private static BuildingManager buildingManager;
 
 	public bool buildingMode;
@@ -35,8 +39,27 @@ public class BuildingManager : MonoBehaviour {
 	 * 3. decrement resource
 	 * 4. build
 	 */
-	public void makeNewBuilding (){
+	public void makeNewBuilding (int buttonNum){
 		buildingMode = true;
+		switch (buttonNum) {
+		case 1:
+			target = fire;
+			Debug.Log ("target is fire");
+			break;
+		case 2:
+			target = pond;
+			break;
+		case 3:
+			target = cave;
+			break;
+		case 4:
+			target = windmill;
+			break;
+		default:
+			target = windmill;
+			break;
+		}
+
 		//Building building = null;
 //		int clickCount = 0;
 //		while (building == null) {
@@ -67,22 +90,23 @@ public class BuildingManager : MonoBehaviour {
 	 */
 	private Building PlaceBuilding(GameObject target) {
 		Vector3 mousePosition = getCurrentMousePosition ();
-		Transform tile = closestTile (mousePosition);
-		if (!isTileTaken (new Tuple (0, 0))) {
-			Building newBuilding = (Building)Instantiate (target, tile.position, Quaternion.identity);
-			newBuilding.transform.position = tile.position;
-			existingBuildingDict.Add (new Tuple (0, 0), newBuilding);//place holder tuple for now
+		Tile tile = closestTile (mousePosition);
+		Tuple tuple = new Tuple (tile.index.x, tile.index.y);
+		if (!isTileTaken (tuple)) {
+			ResourceBuilding newBuilding = (ResourceBuilding)Instantiate (target, tile.transform.position, Quaternion.identity);
+			newBuilding.transform.position = tile.transform.position;
+			SaveState.state.existingBuildingDict.Add (tuple, newBuilding);//place holder tuple for now
 			return newBuilding;
 		}
 		return null;
 	}
 
-	private Transform closestTile (Vector3 mousePos){
-		Transform closestTile = null;
+	private Tile closestTile (Vector3 mousePos){
+		Tile closestTile = null;
 		float closestDistance = 0;
 		//is there better algorithm for getting the tile that is closest to the cursor?
-		foreach(Transform t in grid.GetComponentsInChildren<Transform>()){
-			float distance = getDistance(mousePos.x, mousePos.y, t.position.x, t.position.y);
+		foreach(Tile t in grid.GetComponentsInChildren<Tile>()){
+			float distance = getDistance(mousePos.x, mousePos.y, t.transform.position.x, t.transform.position.y);
 			if (closestTile ==null){
 				closestTile = t;
 				closestDistance = distance;
@@ -114,17 +138,18 @@ public class BuildingManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		buildingTypeDict = new Dictionary<string, Building>();
-		buildingTypeDict.Add ("tree", tree);
+		buildingTypeDict.Add ("fire", fire);
 		buildings = new ArrayList ();
-		SaveState.state.existingBuildingDict = new Dictionary<Tuple, Building>();
-		existingBuildingDict = SaveState.state.existingBuildingDict;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (buildingMode && Input.GetMouseButtonDown (0)) {
 			buildingMode = false;
-			PlaceBuilding(tree.gameObject);
+			if (!target) {
+				Debug.Log ("no target");
+			}
+			PlaceBuilding(target.gameObject);
 			Debug.Log ("building mode set to false");
 		}
 

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 // This will be a passive component that calculates the next random movement for a character based on
 //		1. the character's nearest likeable object
 //		2. the most recent movement (to dissuade back and forth motions)
@@ -38,9 +40,18 @@ public class PassiveMover : MonoBehaviour {
 	
 	private void calculateNextTile() {
 		GameObject onTile = cs.getOnTile();
-		TileScript ts = cs.getGrid().GetComponent<TileScript>();
-		
-		GameObject[] adjacents = ts.getAdjacentTiles(onTile);
+
+        Tile curr = onTile.GetComponent<Tile>();
+
+        if (curr == null)
+        {
+            Tile[] arr = TileScript.grid.tiles.ToArray();
+
+			int randomIndex = (int)Random.Range(0, 5);
+
+            onTile = arr[randomIndex].gameObject;
+        }
+        List<Tile> adjacents = TileScript.grid.GetAdjacentTiles(curr);
 		
 		if (likes.Count == 0) {
 			// block for simply random movement
@@ -51,7 +62,12 @@ public class PassiveMover : MonoBehaviour {
 				nextDirection = (Direction)((int)Random.Range (0,4));
 			}
 
-			nextTile = adjacents[((int)nextDirection * 2) + 1];
+            //Tile[] arr = adjacents.ToArray();
+            //nextTile = arr[((int)nextDirection * 2) + 1].gameObject;
+            List<Tuple> tuples = TileScript.grid.GetPossiblePaths(curr.index);
+            Tuple[] arr = tuples.ToArray();
+            Tuple next = arr[(int)Random.Range(0, arr.Length)];
+            nextTile = TileScript.grid.GetTile(next).gameObject;
 			mostRecent = (Direction)(((int)nextDirection * 2) + 1);
 		}
 		else {

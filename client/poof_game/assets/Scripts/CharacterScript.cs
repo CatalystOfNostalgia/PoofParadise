@@ -16,8 +16,6 @@ public class CharacterScript : MonoBehaviour {
 	private MovementScript ms;
 	private PassiveMover ps;
 	
-	// The grid object that contains all the tiles
-	public GameObject grid;
 	// Tile that the poof is currently standing on
 	public GameObject onTile;
 	// Debugging tile 
@@ -26,6 +24,11 @@ public class CharacterScript : MonoBehaviour {
 	void Start() {
 		ms = this.GetComponent<MovementScript>();
 		ps = this.GetComponent<PassiveMover>();
+        Tile[] arr = TileScript.grid.tiles.ToArray();
+        if (onTile == null)
+        {
+            onTile = arr[((int)Random.Range(0, arr.Length - 1))].gameObject;
+        }
 	}
 	
 	void Update() {
@@ -50,7 +53,4 @@ public class CharacterScript : MonoBehaviour {
 		return onTile;
 	}
 	
-	public GameObject getGrid() {
-		return grid;
-	}
 }

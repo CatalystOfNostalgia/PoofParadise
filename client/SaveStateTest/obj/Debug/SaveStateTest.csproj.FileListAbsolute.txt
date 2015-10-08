@@ -1,0 +1,17 @@
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\bin\Debug\SaveStateTest.dll
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\bin\Debug\SaveStateTest.pdb
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\obj\Debug\SaveStateTest.dll
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\obj\Debug\SaveStateTest.pdb
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\obj\Debug\SaveStateTest.csprojResolveAssemblyReference.cache
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\bin\Debug\Assembly-CSharp.dll
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\bin\Debug\UnityEngine.dll
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\bin\Debug\UnityEngine.UI.dll
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\bin\Debug\UnityEditor.dll
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\bin\Debug\Mono.Cecil.dll
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\bin\Debug\Assembly-CSharp.pdb
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\bin\Debug\UnityEngine.xml
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\bin\Debug\UnityEngine.UI.xml
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\bin\Debug\UnityEditor.xml
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\bin\Debug\Mono.Cecil.xml
+C:\Users\Jeremy\Documents\GitHub\gravehub\client\SaveStateTest\bin\Debug\json-sharp_v1.4.dll
