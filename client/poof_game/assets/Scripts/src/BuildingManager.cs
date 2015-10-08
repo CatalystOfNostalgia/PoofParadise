@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using System.Web;
 
 public class BuildingManager : MonoBehaviour {
 
@@ -8,17 +9,17 @@ public class BuildingManager : MonoBehaviour {
 	 * just dragging gameobjects to here for now
 	 * maybe we can just search them later?
 	 */
-	public ResourceBuilding windmill;
-	public ResourceBuilding pond;
-	public ResourceBuilding fire;
-	public ResourceBuilding cave;
+	public Building windmill;
+	public Building pond;
+	public Building fire;
+	public Building cave;
 
-	private ResourceBuilding target;
+	private Building target;
 
 	ArrayList buildings;
 	//the dictionary containing all the different types of buildings that can be made
-	Dictionary <string, ResourceBuilding> buildingTypeDict;
-	Dictionary<Tuple, ResourceBuilding> existingBuildingDict;
+	Dictionary <string, Building> buildingTypeDict;
+	Dictionary<Tuple, Building> existingBuildingDict;
 	//the dictionary containing buildings on the grid
 	private static BuildingManager buildingManager;
 
@@ -88,14 +89,19 @@ public class BuildingManager : MonoBehaviour {
 	 * 		a. instantiate the game object
 	 * 4. Allow user to cancel
 	 */
-	private Building PlaceBuilding(GameObject target) {
+	private Building PlaceBuilding(Building prefab) {
 		Vector3 mousePosition = getCurrentMousePosition ();
 		Tile tile = closestTile (mousePosition);
 		Tuple tuple = new Tuple (tile.index.x, tile.index.y);
-		if (!isTileTaken (tuple)) {
-			ResourceBuilding newBuilding = Instantiate (target, tile.transform.position, Quaternion.identity) as ResourceBuilding;
-			newBuilding.transform.position = tile.transform.position;
-			SaveState.state.existingBuildingDict.Add(tuple, newBuilding);
+        if (!isTileTaken (tuple)) {
+            Debug.Log("You just created a building");
+            Building newBuilding = Instantiate (prefab, tile.transform.position, Quaternion.identity) as Building;
+            if (newBuilding == null)
+            {
+                Debug.Log("Failed to save instantiated object");
+            }
+            SaveState.state.existingBuildingDict.Add(tuple, newBuilding);
+            //Debug.Log(newBuilding.ToJSON());
 			return newBuilding;
 		}
 		return null;
@@ -136,9 +142,9 @@ public class BuildingManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		buildingTypeDict = new Dictionary<string, ResourceBuilding>();
+		buildingTypeDict = new Dictionary<string, Building>();
 		buildingTypeDict.Add ("fire", fire);
-		existingBuildingDict = new Dictionary<Tuple, ResourceBuilding>();
+		existingBuildingDict = new Dictionary<Tuple, Building>();
 
 	}
 	
@@ -149,7 +155,7 @@ public class BuildingManager : MonoBehaviour {
 			if (!target) {
 				Debug.Log ("no target");
 			}
-			PlaceBuilding(target.gameObject);
+			PlaceBuilding(target);
 			Debug.Log ("building mode set to false");
 		}
 

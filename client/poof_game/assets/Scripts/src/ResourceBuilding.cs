@@ -10,12 +10,6 @@ public class ResourceBuilding : Building {
 	private ResourceType type;
 	System.Timers.Timer resourceClock;
 
-	// place the building
-	public ResourceBuilding(int xCoord, int yCoord, int size, int collectionRate, ResourceType type) : base (xCoord, yCoord, size){
-		this.collectionRate = collectionRate;
-		this.type = type;
-	}
-
 	// Use this for initialization
 	void Start () {
 
@@ -24,7 +18,7 @@ public class ResourceBuilding : Building {
 		resourceClock = new System.Timers.Timer (1000);
 		resourceClock.Elapsed += 
 			(object sender, System.Timers.ElapsedEventArgs e) => {
-				ResourceIncrementer.incrementer.ResourceGain (collectionRate);
+				ResourceIncrementer.incrementer.ResourceGain (collectionRate, ResourceType.fire);
 			};
 			
 

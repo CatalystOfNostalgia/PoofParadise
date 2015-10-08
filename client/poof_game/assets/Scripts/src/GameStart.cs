@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Web;
 
 public class GameStart : MonoBehaviour {
 
@@ -51,5 +52,6 @@ public class GameStart : MonoBehaviour {
     public void TestJSON()
     {
         SaveState.state.PushToServer();
+        Debug.Log(SaveState.state.existingBuildingDict.ToJSON());
     }
 }
