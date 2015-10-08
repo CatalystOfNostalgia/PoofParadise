@@ -8,12 +8,12 @@ public class BuildingManager : MonoBehaviour {
 	 * just dragging gameobjects to here for now
 	 * maybe we can just search them later?
 	 */
-	public Building tree;
-	public Building pond;
-	public Building fire;
-	public Building windmill;
+	public ResourceBuilding windmill;
+	public ResourceBuilding pond;
+	public ResourceBuilding fire;
+	public ResourceBuilding cave;
 
-	private Building target;
+	private ResourceBuilding target;
 	public TileScript grid;
 
 	ArrayList buildings;
@@ -43,19 +43,20 @@ public class BuildingManager : MonoBehaviour {
 		buildingMode = true;
 		switch (buttonNum) {
 		case 1:
-			target = tree;
+			target = fire;
+			Debug.Log ("target is fire");
 			break;
 		case 2:
 			target = pond;
 			break;
 		case 3:
-			target = fire;
+			target = cave;
 			break;
 		case 4:
 			target = windmill;
 			break;
 		default:
-			target = tree;
+			target = windmill;
 			break;
 		}
 
@@ -91,7 +92,7 @@ public class BuildingManager : MonoBehaviour {
 		Vector3 mousePosition = getCurrentMousePosition ();
 		Transform tile = closestTile (mousePosition);
 		if (!isTileTaken (new Tuple (0, 0))) {
-			Building newBuilding = (Building)Instantiate (target, tile.position, Quaternion.identity);
+			ResourceBuilding newBuilding = (ResourceBuilding)Instantiate (target, tile.position, Quaternion.identity);
 			newBuilding.transform.position = tile.position;
 			SaveState.state.existingBuildingDict.Add (new Tuple (0, 0), newBuilding);//place holder tuple for now
 			return newBuilding;
@@ -136,15 +137,17 @@ public class BuildingManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		buildingTypeDict = new Dictionary<string, Building>();
-		buildingTypeDict.Add ("tree", tree);
+		buildingTypeDict.Add ("fire", fire);
 		buildings = new ArrayList ();
-		SaveState.state.existingBuildingDict = new Dictionary<Tuple, Building>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (buildingMode && Input.GetMouseButtonDown (0)) {
 			buildingMode = false;
+			if (!target) {
+				Debug.Log ("no target");
+			}
 			PlaceBuilding(target.gameObject);
 			Debug.Log ("building mode set to false");
 		}

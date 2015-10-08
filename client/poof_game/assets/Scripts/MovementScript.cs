@@ -122,9 +122,11 @@ public class MovementScript : MonoBehaviour {
 		if (priorityInput)
 			priorityComplete = false;
 
+		/*
 		Debug.Log(currentPos);
 		Debug.Log(targetPos);
 		Debug.Log("!!!!!!!!!!!!!!!");
+		*/
 
 		if (currentPos.x - targetPos.x > 0 && currentPos.y -targetPos.y > 0){
 			animator.SetInteger("Direction", 0);

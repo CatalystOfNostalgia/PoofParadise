@@ -50,6 +50,14 @@ public class SaveState : MonoBehaviour {
 		} else if (state != this) {
 			Destroy(gameObject);
 		}
+
+		// set the fields until we can load
+		state.gold = 0;
+		state.existingBuildingDict = new Dictionary<Tuple, Building>();
+		fireEle = 5;
+		waterEle = 5;
+		earthEle = 5;
+		airEle = 5;
 	}
 
 	/**

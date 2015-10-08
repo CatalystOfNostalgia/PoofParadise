@@ -11,10 +11,7 @@ public class TestModalPanel : MonoBehaviour {
 	private UnityAction myButton1Action;
 	private UnityAction myButton2Action;
 	private UnityAction myButton3Action;
-
-
-
-
+	
 
 	void Awake(){
 		modalPanel = ModalPanel.Instance ();

@@ -21,14 +21,6 @@ public class ResourceIncrementer : MonoBehaviour
 		} else if (incrementer != this) {
 			Destroy(gameObject);
 		}
-
-		// initialize the gold value until we can load
-		SaveState.state.gold = 0;
-		// set the slider to the current resources number
-		goldSlider.value = SaveState.state.gold;
-
-			
-			
 	}
 
 	public void ResourceGain (int amount) {
