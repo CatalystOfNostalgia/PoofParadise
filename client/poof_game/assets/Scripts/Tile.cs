@@ -12,7 +12,6 @@ public class Tile : MonoBehaviour {
     {
         startColor = GetComponent<Renderer>().material.color;
         GetComponent<Renderer>().material.color = Color.red;
-        Debug.Log("THIS WORKS");
     }
 
     void OnMouseExit()

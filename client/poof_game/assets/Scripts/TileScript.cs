@@ -8,6 +8,10 @@ using System.Collections.Generic;
 
 public class TileScript : MonoBehaviour {
 
+    // Singleton variable so that only one grid variable is active per scene
+    public static TileScript grid;
+
+
     // Fields that are used to contain and maintain all the tiles
     public List<Tile> tiles { get; set; }
 	
@@ -22,6 +26,17 @@ public class TileScript : MonoBehaviour {
      * Generates the game grid
      */
 	void Start() {
+
+        if (grid == null)
+        {
+            //DontDestroyOnLoad(gameObject);
+            grid = this;
+        }
+        else if (grid != this)
+        {
+            Destroy(gameObject);
+        }
+
         tiles = new List<Tile>();
         Generate(prefab, transform.position, mapWidth, mapLength);
         // Load save from server

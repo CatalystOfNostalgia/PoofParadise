@@ -4,9 +4,6 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
-    // Game grid
-    public GameObject grid;
-
     // Store all of the prefabs here
     public GameObject firePrefab;
     public GameObject waterPrefab;
@@ -31,47 +28,66 @@ public class GameManager : MonoBehaviour {
      * Spawns all of the poofs at one location
      * on game start
      */
-	public void SpawnPoofs(Vector3 position)
+    public void SpawnPoofs(Vector3 position)
     {
         int fire = SaveState.state.fireEle;
         int water = SaveState.state.waterEle;
         int earth = SaveState.state.earthEle;
         int air = SaveState.state.airEle;
-        int total = fire + water + earth + air;
 
-        if (fireActive.Count < fire)
+        // Fire loop
+        if (fireActive.Count < fire && fire > 0)
         {
-
-            for (int i = 0; i < total; i++)
+            for (int i = 0; i < fire; i++)
             {
-                if (fire > 0)
-                {
-                    GameObject go = Instantiate(firePrefab, position, Quaternion.identity) as GameObject;
-                    fireActive.Add(go);
-                    CharacterScript cs = go.GetComponent<CharacterScript>();
-                    cs.grid = this.grid;
-                    TileScript ts = grid.GetComponent<TileScript>();
-                    cs.onTile = ts.GetTile(new Tuple(0, 0)).gameObject;
-                    fire--;
-                }
-                else if (water > 0)
-                {
-                    GameObject go = Instantiate(waterPrefab, position, Quaternion.identity) as GameObject;
-                    waterActive.Add(go);
-                    water--;
-                }
-                else if (earth > 0)
-                {
-                    GameObject go = Instantiate(earthPrefab, position, Quaternion.identity) as GameObject;
-                    earthActive.Add(go);
-                    earth--;
-                }
-                else if (air > 0)
-                {
-                    GameObject go = Instantiate(airPrefab, position, Quaternion.identity) as GameObject;
-                    airActive.Add(go);
-                    air--;
-                }
+                GameObject go = Instantiate(firePrefab, position, Quaternion.identity) as GameObject;
+                fireActive.Add(go);
+                CharacterScript cs = go.GetComponent<CharacterScript>();
+                cs.grid = TileScript.grid.gameObject;
+                cs.onTile = TileScript.grid.GetTile(new Tuple(0, 0)).gameObject;
+                fire--;
+            }
+        }
+
+        // Water loop
+        if (waterActive.Count < water && water > 0)
+        {
+            for (int i = 0; i < water; i++)
+            {
+                GameObject go = Instantiate(waterPrefab, position, Quaternion.identity) as GameObject;
+                waterActive.Add(go);
+                CharacterScript cs = go.GetComponent<CharacterScript>();
+                cs.grid = TileScript.grid.gameObject;
+                cs.onTile = TileScript.grid.GetTile(new Tuple(0, 0)).gameObject;
+                water--;
+            }
+        }
+
+        // Earth loop
+        if (earthActive.Count < earth && earth > 0)
+        {
+            for (int i = 0; i < earth; i++)
+            {
+                GameObject go = Instantiate(earthPrefab, position, Quaternion.identity) as GameObject;
+                earthActive.Add(go);
+                CharacterScript cs = go.GetComponent<CharacterScript>();
+                cs.grid = TileScript.grid.gameObject;
+                cs.onTile = TileScript.grid.GetTile(new Tuple(0, 0)).gameObject;
+                earth--;
+            }
+        }
+
+        // Air loop
+        if (airActive.Count < air && air > 0)
+        {
+            for (int i = 0; i < air; i++)
+            {
+                GameObject go = Instantiate(airPrefab, position, Quaternion.identity) as GameObject;
+                airActive.Add(go);
+                CharacterScript cs = go.GetComponent<CharacterScript>();
+                cs.grid = TileScript.grid.gameObject;
+                cs.onTile = TileScript.grid.GetTile(new Tuple(0, 0)).gameObject;
+                air--;
             }
         }
     }
