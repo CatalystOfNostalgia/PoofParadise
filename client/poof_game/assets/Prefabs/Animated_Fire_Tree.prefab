@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 464962}
   - 212: {fileID: 21201936}
   - 95: {fileID: 9532844}
+  - 114: {fileID: 11498070}
   m_Layer: 0
   m_Name: Animated_Fire_Tree
   m_TagString: Untagged
@@ -46,6 +47,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11498070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e249cc4f0a274d0d99ee08ca64a5f7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21201936
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -78,7 +90,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 144274}
