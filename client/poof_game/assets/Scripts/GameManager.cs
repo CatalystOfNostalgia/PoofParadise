@@ -40,48 +40,53 @@ public class GameManager : MonoBehaviour {
      */
     public void SpawnPoofs()
     {
-        int fire = SaveState.state.fireEle;
-        int water = SaveState.state.waterEle;
-        int earth = SaveState.state.earthEle;
-        int air = SaveState.state.airEle;
+        int fireTotal = SaveState.state.fireEle;
+        int waterTotal = SaveState.state.waterEle;
+        int earthTotal = SaveState.state.earthEle;
+        int airTotal = SaveState.state.airEle;
+
+        int fireLeft = fireTotal;
+        int waterLeft = waterTotal;
+        int earthLeft = earthTotal;
+        int airLeft = airTotal;
 
         // Fire loop
-        if (fireActive.Count < fire && fire > 0)
+        if (fireActive.Count < fireTotal && fireLeft > 0)
         {
-            for (int i = 0; i < fire; i++)
+            for (int i = 0; i < fireTotal; i++)
             {
                 SpawnPoof(firePrefab, GetRandomSpawnPoint(), fireActive);
-                fire--;
+                fireLeft--;
             }
         }
 
         // Water loop
-        if (waterActive.Count < water && water > 0)
+        if (waterActive.Count < waterTotal && waterLeft > 0)
         {
-            for (int i = 0; i < water; i++)
+            for (int i = 0; i < waterTotal; i++)
             {
                 SpawnPoof(waterPrefab, GetRandomSpawnPoint(), waterActive);
-                water--;
+                waterLeft--;
             }
         }
 
         // Earth loop
-        if (earthActive.Count < earth && earth > 0)
+        if (earthActive.Count < earthTotal && earthLeft > 0)
         {
-            for (int i = 0; i < earth; i++)
+            for (int i = 0; i < earthTotal; i++)
             {
                 SpawnPoof(earthPrefab, GetRandomSpawnPoint(), earthActive);
-                earth--;
+                earthLeft--;
             }
         }
 
         // Air loop
-        if (airActive.Count < air && air > 0)
+        if (airActive.Count < airTotal && airLeft > 0)
         {
-            for (int i = 0; i < air; i++)
+            for (int i = 0; i < airTotal; i++)
             {
                 SpawnPoof(airPrefab, GetRandomSpawnPoint(), airActive);
-                air--;
+                airLeft--;
             }
         }
     }

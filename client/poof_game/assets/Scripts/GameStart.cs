@@ -15,6 +15,7 @@ public class GameStart : MonoBehaviour {
         Instantiate(gManager, new Vector3(0, 0, 0), Quaternion.identity);
         Instantiate(saveState, new Vector3(0, 1, 0), Quaternion.identity);
         StartCoroutine("RenderScene");
+
     }
 
     /**
@@ -25,10 +26,24 @@ public class GameStart : MonoBehaviour {
      */
     private IEnumerator RenderScene()
     {
-        while (GameManager.gameManager == null)
+        while (!SceneIsReady())
         {
             yield return null;
         }
+        Debug.Log("Scene is ready! Spawning poofs.");
         GameManager.gameManager.SpawnPoofs();
+    }
+
+    /**
+     * Returns true only if all essential game objects
+     * are built
+     */
+    private bool SceneIsReady()
+    {
+        if (GameManager.gameManager == null || SaveState.state == null || TileScript.grid == null)
+        {
+            return false;
+        }
+        return true;
     }
 }
