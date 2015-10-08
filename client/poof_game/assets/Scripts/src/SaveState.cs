@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Collections.Generic;
-using System.Web;
 
 public class SaveState : MonoBehaviour {
 
@@ -93,8 +91,8 @@ public class SaveState : MonoBehaviour {
 	public void PushToServer() {
 		PlayerData data = new PlayerData ();
 		SetPlayerData (data);
-		string clientJson = data.ToJSON ();
-		Debug.Log (clientJson);
+		//string clientJson = data.ToJSON ();
+		//Debug.Log (clientJson);
 		// TODO Send JSON to server
 	}
 
@@ -120,7 +118,7 @@ public class SaveState : MonoBehaviour {
 		SetPlayerData (data);
 
         // Dumps JSON to text file
-        System.IO.File.WriteAllText(Application.persistentDataPath + "/save_state.dat", data.ToJSON());
+        //System.IO.File.WriteAllText(Application.persistentDataPath + "/save_state.dat", data.ToJSON());
 	}
 
 	/**
@@ -143,14 +141,14 @@ public class SaveState : MonoBehaviour {
      */
     public void CheckJson()
     {
-        Debug.Log(new Tuple(3, 5).ToJSON());
+        //Debug.Log(new Tuple(3, 5).ToJSON());
         Building test;
         bool b = existingBuildingDict.TryGetValue(new Tuple(0, 0), out test);
         Debug.Log(existingBuildingDict.Values.Count);
-        Debug.Log(existingBuildingDict.Keys.ToJSON());
+        //Debug.Log(existingBuildingDict.Keys.ToJSON());
         if (b)
         {
-            Debug.Log(test.ToJSON());
+            //Debug.Log(test.ToJSON());
         }
         else
         {

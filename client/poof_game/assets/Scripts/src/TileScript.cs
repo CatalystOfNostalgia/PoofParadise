@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Web;
 
 /* TileScript - Script attached to the Grid object in game; contains fields for to contain the
  * tiles, currently tiles are initialized by searching for GameObjects tagged as "Tile". Tiles 
@@ -40,7 +39,7 @@ public class TileScript : MonoBehaviour {
 
         tiles = new List<Tile>();
         Generate(prefab, transform.position, mapWidth, mapLength);
-        Debug.Log(tiles.ToJSON());
+        //Debug.Log(tiles.ToJSON());
     }
 
     /**
