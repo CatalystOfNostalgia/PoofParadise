@@ -20,7 +20,8 @@ public class GameStart : MonoBehaviour {
     void Update () {
         if (!spawn)
         {
-            GameManager.gameManager.SpawnPoofs();
+            //GameManager.gameManager.SpawnPoofs();
+            spawn = true;
         }
     }
 }

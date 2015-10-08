@@ -42,7 +42,7 @@ public class TileScript : MonoBehaviour {
         // Load save from server
         // SaveState.state.Load() -> Local save line for demo?
         // Render scene with load data
-	}
+    }
 
     void Update()
     {
