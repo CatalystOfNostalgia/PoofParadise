@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Web;
 
 public class SaveState : MonoBehaviour {
 
@@ -91,8 +92,9 @@ public class SaveState : MonoBehaviour {
 	public void PushToServer() {
 		PlayerData data = new PlayerData ();
 		SetPlayerData (data);
-		//string clientJson = data.ToJSON ();
-		//Debug.Log (clientJson);
+        
+		string clientJson = data.ToJSON ();
+		Debug.Log (clientJson);
 		// TODO Send JSON to server
 	}
 
@@ -118,7 +120,7 @@ public class SaveState : MonoBehaviour {
 		SetPlayerData (data);
 
         // Dumps JSON to text file
-        //System.IO.File.WriteAllText(Application.persistentDataPath + "/save_state.dat", data.ToJSON());
+        System.IO.File.WriteAllText(Application.persistentDataPath + "/save_state.dat", data.ToJSON());
 	}
 
 	/**
