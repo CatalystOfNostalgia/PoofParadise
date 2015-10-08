@@ -31,8 +31,4 @@ public class GameStart : MonoBehaviour {
         }
         GameManager.gameManager.SpawnPoofs();
     }
-
-    // Update is called once per frame
-    void Update () {
-    }
 }
