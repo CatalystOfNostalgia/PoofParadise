@@ -17,7 +17,6 @@ public class TileScript : MonoBehaviour {
 	// Public fields
 	public int mapLength = 6;
 	public int mapWidth = 6;
-    public GameManager manager;
     public GameObject[] prefab; // List of tile prefabs
 	
     /**
@@ -43,7 +42,6 @@ public class TileScript : MonoBehaviour {
         // Load save from server
         // SaveState.state.Load() -> Local save line for demo?
         // Render scene with load data
-        //manager.SpawnPoofs();
 	}
 
     void Update()
