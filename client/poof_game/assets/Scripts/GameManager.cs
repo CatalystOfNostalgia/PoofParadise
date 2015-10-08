@@ -88,6 +88,9 @@ public class GameManager : MonoBehaviour {
         cs.onTile = TileScript.grid.GetTile(spawnPoint).gameObject;
     }
 
+    /**
+     * Generates a random tuple for spawning poofs
+     */
     public Tuple GetRandomSpawnPoint()
     {
         Tile[] allTiles = TileScript.grid.tiles.ToArray();
