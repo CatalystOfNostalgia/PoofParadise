@@ -18,7 +18,8 @@ public class BuildingManager : MonoBehaviour {
 
 	ArrayList buildings;
 	//the dictionary containing all the different types of buildings that can be made
-	Dictionary <string, Building> buildingTypeDict;
+	Dictionary <string, ResourceBuilding> buildingTypeDict;
+	Dictionary<Tuple, ResourceBuilding> existingBuildingDict;
 	//the dictionary containing buildings on the grid
 	private static BuildingManager buildingManager;
 
@@ -95,7 +96,7 @@ public class BuildingManager : MonoBehaviour {
 		if (!isTileTaken (tuple)) {
 			ResourceBuilding newBuilding = (ResourceBuilding)Instantiate (target, tile.transform.position, Quaternion.identity);
 			newBuilding.transform.position = tile.transform.position;
-			SaveState.state.existingBuildingDict.Add (tuple, newBuilding);//place holder tuple for now
+			SaveState.state.existingBuildingDict.Add(tuple, newBuilding);
 			return newBuilding;
 		}
 		return null;
@@ -120,8 +121,7 @@ public class BuildingManager : MonoBehaviour {
 	}
 
 	private bool isTileTaken(Tuple t){
-		return false;
-		//return existingBuildingDict.ContainsKey (t);
+		return existingBuildingDict.ContainsKey (t);
 
 	}
 
@@ -137,9 +137,10 @@ public class BuildingManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		buildingTypeDict = new Dictionary<string, Building>();
+		buildingTypeDict = new Dictionary<string, ResourceBuilding>();
 		buildingTypeDict.Add ("fire", fire);
-		buildings = new ArrayList ();
+		existingBuildingDict = new Dictionary<Tuple, ResourceBuilding>();
+
 	}
 	
 	// Update is called once per frame

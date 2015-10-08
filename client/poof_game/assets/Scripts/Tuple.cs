@@ -33,7 +33,7 @@ public class Tuple {
 
     public override int GetHashCode()
     {
-        return x ^ y;
+        return x.GetHashCode() ^ y.GetHashCode();
     }
 
     public override string ToString()
