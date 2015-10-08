@@ -90,22 +90,23 @@ public class BuildingManager : MonoBehaviour {
 	 */
 	private Building PlaceBuilding(GameObject target) {
 		Vector3 mousePosition = getCurrentMousePosition ();
-		Transform tile = closestTile (mousePosition);
-		if (!isTileTaken (new Tuple (0, 0))) {
-			ResourceBuilding newBuilding = (ResourceBuilding)Instantiate (target, tile.position, Quaternion.identity);
-			newBuilding.transform.position = tile.position;
-			SaveState.state.existingBuildingDict.Add (new Tuple (0, 0), newBuilding);//place holder tuple for now
+		Tile tile = closestTile (mousePosition);
+		Tuple tuple = new Tuple (tile.index.x, tile.index.y);
+		if (!isTileTaken (tuple)) {
+			ResourceBuilding newBuilding = (ResourceBuilding)Instantiate (target, tile.transform.position, Quaternion.identity);
+			newBuilding.transform.position = tile.transform.position;
+			SaveState.state.existingBuildingDict.Add (tuple, newBuilding);//place holder tuple for now
 			return newBuilding;
 		}
 		return null;
 	}
 
-	private Transform closestTile (Vector3 mousePos){
-		Transform closestTile = null;
+	private Tile closestTile (Vector3 mousePos){
+		Tile closestTile = null;
 		float closestDistance = 0;
 		//is there better algorithm for getting the tile that is closest to the cursor?
-		foreach(Transform t in grid.GetComponentsInChildren<Transform>()){
-			float distance = getDistance(mousePos.x, mousePos.y, t.position.x, t.position.y);
+		foreach(Tile t in grid.GetComponentsInChildren<Transform>()){
+			float distance = getDistance(mousePos.x, mousePos.y, t.transform.position.x, t.transform.position.y);
 			if (closestTile ==null){
 				closestTile = t;
 				closestDistance = distance;
