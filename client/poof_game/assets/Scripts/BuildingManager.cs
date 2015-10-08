@@ -93,7 +93,7 @@ public class BuildingManager : MonoBehaviour {
 		Tile tile = closestTile (mousePosition);
 		Tuple tuple = new Tuple (tile.index.x, tile.index.y);
 		if (!isTileTaken (tuple)) {
-			ResourceBuilding newBuilding = (ResourceBuilding)Instantiate (target, tile.transform.position, Quaternion.identity);
+			ResourceBuilding newBuilding = Instantiate (target, tile.transform.position, Quaternion.identity) as ResourceBuilding;
 			newBuilding.transform.position = tile.transform.position;
 			SaveState.state.existingBuildingDict.Add(tuple, newBuilding);
 			return newBuilding;
