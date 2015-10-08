@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
+    public static GameManager gameManager;
+
     // Store all of the prefabs here
     public GameObject firePrefab;
     public GameObject waterPrefab;
@@ -18,6 +20,14 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
+        if (gameManager == null)
+        {
+            gameManager = this;
+        }
+        else if (gameManager != this)
+        {
+            Destroy(gameObject);
+        }
         fireActive = new List<GameObject>();
         waterActive = new List<GameObject>();
         earthActive = new List<GameObject>();
