@@ -14,7 +14,6 @@ public class BuildingManager : MonoBehaviour {
 	public ResourceBuilding cave;
 
 	private ResourceBuilding target;
-	public TileScript grid;
 
 	ArrayList buildings;
 	//the dictionary containing all the different types of buildings that can be made
@@ -106,7 +105,7 @@ public class BuildingManager : MonoBehaviour {
 		Tile closestTile = null;
 		float closestDistance = 0;
 		//is there better algorithm for getting the tile that is closest to the cursor?
-		foreach(Tile t in grid.GetComponentsInChildren<Tile>()){
+		foreach(Tile t in TileScript.grid.GetComponentsInChildren<Tile>()){
 			float distance = getDistance(mousePos.x, mousePos.y, t.transform.position.x, t.transform.position.y);
 			if (closestTile ==null){
 				closestTile = t;
