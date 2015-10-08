@@ -23,25 +23,36 @@ public class ResourceIncrementer : MonoBehaviour
 		}
 	}
 
-	public void ResourceGain (int amount) {
+	public void ResourceGain (int amount, ResourceBuilding.ResourceType type) {
+
+		/*
+		using fire = ResourceBuilding.ResourceType.fire;
+
+		switch (type) {
+
+			case fire:
+
+		}
+
+*/
 
 		// if we haven't filled the slider
-		if (SaveState.state.gold <= 100) {
+		if (SaveState.state.fire <= 100) {
 
 			// increment the gold
-			SaveState.state.gold = SaveState.state.gold + amount;
+			SaveState.state.fire = SaveState.state.fire + amount;
 
 
-			Debug.Log ("incremented : " + SaveState.state.gold);
+			Debug.Log ("incremented : " + SaveState.state.fire);
 
 			// Set the health bar's value to the current health.
-			goldSlider.value = SaveState.state.gold;
+			goldSlider.value = SaveState.state.fire;
 
 			Debug.Log ("incremented : " + goldSlider.value);
 
 
 		} else {
-			SaveState.state.gold = 100;
+			SaveState.state.fire = 100;
 		}
 	} 
 }

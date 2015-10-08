@@ -3,13 +3,17 @@ using System.Collections;
 
 public class ResourceBuilding : Building {
 
-	// the rate at which gold is collected per second
+	public enum ResourceType { fire, water, air, earth };
+
+	// the resource collection rate and the type of resource
 	public int collectionRate { get; set;}
+	private ResourceType type;
 	System.Timers.Timer resourceClock;
 
 	// place the building
-	public ResourceBuilding(int xCoord, int yCoord, int size, int collectionRate) : base (xCoord, yCoord, size){
+	public ResourceBuilding(int xCoord, int yCoord, int size, int collectionRate, ResourceType type) : base (xCoord, yCoord, size){
 		this.collectionRate = collectionRate;
+		this.type = type;
 	}
 
 	// Use this for initialization
