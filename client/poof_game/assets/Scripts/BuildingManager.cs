@@ -105,7 +105,7 @@ public class BuildingManager : MonoBehaviour {
 		Tile closestTile = null;
 		float closestDistance = 0;
 		//is there better algorithm for getting the tile that is closest to the cursor?
-		foreach(Tile t in grid.GetComponentsInChildren<Transform>()){
+		foreach(Tile t in grid.GetComponentsInChildren<Tile>()){
 			float distance = getDistance(mousePos.x, mousePos.y, t.transform.position.x, t.transform.position.y);
 			if (closestTile ==null){
 				closestTile = t;
