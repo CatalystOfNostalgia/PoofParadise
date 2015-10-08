@@ -44,6 +44,14 @@ public class SaveState : MonoBehaviour {
 	 */
 	private void GetPlayerData(PlayerData pd) {
 		this.gold = pd.gold;
+        this.maxGoldHeld = pd.maxGoldHeld;
+        this.silver = pd.silver;
+        this.wood = pd.wood;
+        this.fireEle = pd.fireEle;
+        this.waterEle = pd.waterEle;
+        this.earthEle = pd.earthEle;
+        this.airEle = pd.airEle;
+        this.existingBuildingDict = pd.existingBuildingDict;
 	}
 
 	/**
@@ -94,16 +102,13 @@ public class SaveState : MonoBehaviour {
 	 * rather creates a fresh file every time.
 	 */
 	public void Save() {
-		BinaryFormatter bf = new BinaryFormatter();
-		FileStream file = File.Create(Application.persistentDataPath + "/save_state.dat");
-		
 		PlayerData data = new PlayerData();
 		// Insert data from controller to data object
 		// ie: data.setExp(this.getExp());
 		SetPlayerData (data);
-		
-		bf.Serialize(file, data);
-		file.Close();
+
+        // Dumps JSON to text file
+        System.IO.File.WriteAllText(Application.persistentDataPath + "/save_state.dat", data.ToJSON());
 	}
 
 	/**
@@ -111,14 +116,12 @@ public class SaveState : MonoBehaviour {
 	 */
 	public void Load() {
 		if (File.Exists (Application.persistentDataPath + "/save_state.dat")) {
-			BinaryFormatter bf = new BinaryFormatter();
-			FileStream file = File.Open(Application.persistentDataPath + "/save_state.dat", FileMode.Open);
-			PlayerData data = (PlayerData)bf.Deserialize(file);
-			file.Close ();
-			
+            string json = System.IO.File.ReadAllText(Application.persistentDataPath + "/save_state.dat");
+
+            //PlayerData data = JSON.Deserialize<PlayerData>(json);
 			// Reassign all variables here
 			// ie: this.setHealth(data.getHealth());
-			GetPlayerData(data);
+			//GetPlayerData(data);
 		}
 	}
 
