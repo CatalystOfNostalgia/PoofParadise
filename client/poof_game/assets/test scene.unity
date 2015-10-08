@@ -215,7 +215,7 @@ GameObject:
   - 224: {fileID: 143885848}
   - 114: {fileID: 143885849}
   m_Layer: 5
-  m_Name: Res Slider
+  m_Name: Gold Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1036561262}
   m_HandleRect: {fileID: 0}
@@ -1596,7 +1596,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  grid: {fileID: 747505207}
   onTile: {fileID: 1226150102}
   goToTile: {fileID: 470650599}
 --- !u!114 &517870164
@@ -2571,10 +2570,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c05feffc9fbaa41a10c8971d976bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapArea: 81
   mapLength: 9
   mapWidth: 9
-  prefab: {fileID: 0}
+  manager: {fileID: 0}
+  prefab:
+  - {fileID: 0}
 --- !u!1 &748090505
 GameObject:
   m_ObjectHideFlags: 0
@@ -4953,7 +4953,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  grid: {fileID: 747505207}
   onTile: {fileID: 1864678199}
   goToTile: {fileID: 2131807794}
 --- !u!114 &1455724687
@@ -5072,8 +5071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingNumRes: 0
-  currentNumRes: 0
-  resSlider: {fileID: 143885849}
+  goldSlider: {fileID: 0}
   gain: 0
 --- !u!1 &1463332577
 GameObject:
@@ -6032,7 +6030,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
-  grid: {fileID: 747505207}
   onTile: {fileID: 59970152}
   goToTile: {fileID: 499459668}
 --- !u!1 &1619950274
@@ -6104,7 +6101,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  grid: {fileID: 747505207}
   onTile: {fileID: 294263004}
   goToTile: {fileID: 1508022285}
 --- !u!114 &1619950278

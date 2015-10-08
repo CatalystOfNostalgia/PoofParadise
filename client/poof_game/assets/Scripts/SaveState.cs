@@ -12,6 +12,7 @@ public class SaveState : MonoBehaviour {
 	// List game state variables here
 	// Format: public <Type> <Name> { get; set; }
 	public int gold { get; set; }
+	public int maxGoldHeld { get; set; }
 	public int silver { get; set; }
 	public int wood { get; set; }
     public int fireEle { get; set; }
@@ -19,6 +20,7 @@ public class SaveState : MonoBehaviour {
     public int earthEle { get; set; }
     public int airEle { get; set; }
     public Dictionary<Tuple, Building> existingBuildingDict { get; set; }
+
 
     /**
 	 * A helper method for passing data from this
@@ -40,7 +42,8 @@ public class SaveState : MonoBehaviour {
 	/**
 	 * Produces a singleton on awake
 	 */
-	private void Awake() {
+	public void Awake() {
+
 		if (state == null) {
 			DontDestroyOnLoad(gameObject);
 			state = this;

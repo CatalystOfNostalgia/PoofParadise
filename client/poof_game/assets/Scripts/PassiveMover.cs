@@ -46,7 +46,10 @@ public class PassiveMover : MonoBehaviour {
         if (curr == null)
         {
             Tile[] arr = TileScript.grid.tiles.ToArray();
-            onTile = arr[((int)Random.Range(0, 5))].gameObject;
+
+			int randomIndex = (int)Random.Range(0, 5);
+
+            onTile = arr[randomIndex].gameObject;
         }
         List<Tile> adjacents = TileScript.grid.GetAdjacentTiles(curr);
 		

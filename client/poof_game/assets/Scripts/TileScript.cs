@@ -25,7 +25,7 @@ public class TileScript : MonoBehaviour {
      * Generates the game grid
      */
 	void Start() {
-
+		
         if (grid == null)
         {
             // If the grid persists between scenes, then
