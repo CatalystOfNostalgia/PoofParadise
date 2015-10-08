@@ -11,7 +11,6 @@ public class TileScript : MonoBehaviour {
     // Singleton variable so that only one grid variable is active per scene
     public static TileScript grid;
 
-
     // Fields that are used to contain and maintain all the tiles
     public List<Tile> tiles { get; set; }
 	
@@ -29,6 +28,8 @@ public class TileScript : MonoBehaviour {
 
         if (grid == null)
         {
+            // If the grid persists between scenes, then
+            // we can't have the player go to other scenes
             //DontDestroyOnLoad(gameObject);
             grid = this;
         }
@@ -42,12 +43,12 @@ public class TileScript : MonoBehaviour {
         // Load save from server
         // SaveState.state.Load() -> Local save line for demo?
         // Render scene with load data
-        manager.SpawnPoofs(GetTile(new Tuple(0,0)).transform.position);
+        manager.SpawnPoofs();
 	}
 
     void Update()
     {
-        manager.SpawnPoofs(GetTile(new Tuple(0, 0)).transform.position);
+        manager.SpawnPoofs();
     }
 
     /**

@@ -40,16 +40,15 @@ public class PassiveMover : MonoBehaviour {
 	
 	private void calculateNextTile() {
 		GameObject onTile = cs.getOnTile();
-		TileScript ts = cs.getGrid().GetComponent<TileScript>();
 
         Tile curr = onTile.GetComponent<Tile>();
 
         if (curr == null)
         {
-            Tile[] arr = ts.tiles.ToArray();
+            Tile[] arr = TileScript.grid.tiles.ToArray();
             onTile = arr[((int)Random.Range(0, 5))].gameObject;
         }
-        List<Tile> adjacents = ts.GetAdjacentTiles(curr);
+        List<Tile> adjacents = TileScript.grid.GetAdjacentTiles(curr);
 		
 		if (likes.Count == 0) {
 			// block for simply random movement
@@ -62,10 +61,10 @@ public class PassiveMover : MonoBehaviour {
 
             //Tile[] arr = adjacents.ToArray();
             //nextTile = arr[((int)nextDirection * 2) + 1].gameObject;
-            List<Tuple> tuples = ts.GetPossiblePaths(curr.index);
+            List<Tuple> tuples = TileScript.grid.GetPossiblePaths(curr.index);
             Tuple[] arr = tuples.ToArray();
             Tuple next = arr[(int)Random.Range(0, arr.Length)];
-            nextTile = ts.GetTile(next).gameObject;
+            nextTile = TileScript.grid.GetTile(next).gameObject;
 			mostRecent = (Direction)(((int)nextDirection * 2) + 1);
 		}
 		else {

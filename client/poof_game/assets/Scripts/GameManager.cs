@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
      * Spawns all of the poofs at one location
      * on game start
      */
-    public void SpawnPoofs(Vector3 position)
+    public void SpawnPoofs()
     {
         int fire = SaveState.state.fireEle;
         int water = SaveState.state.waterEle;
@@ -40,11 +40,7 @@ public class GameManager : MonoBehaviour {
         {
             for (int i = 0; i < fire; i++)
             {
-                GameObject go = Instantiate(firePrefab, position, Quaternion.identity) as GameObject;
-                fireActive.Add(go);
-                CharacterScript cs = go.GetComponent<CharacterScript>();
-                cs.grid = TileScript.grid.gameObject;
-                cs.onTile = TileScript.grid.GetTile(new Tuple(0, 0)).gameObject;
+                SpawnPoof(firePrefab, GetRandomSpawnPoint(), fireActive);
                 fire--;
             }
         }
@@ -54,11 +50,7 @@ public class GameManager : MonoBehaviour {
         {
             for (int i = 0; i < water; i++)
             {
-                GameObject go = Instantiate(waterPrefab, position, Quaternion.identity) as GameObject;
-                waterActive.Add(go);
-                CharacterScript cs = go.GetComponent<CharacterScript>();
-                cs.grid = TileScript.grid.gameObject;
-                cs.onTile = TileScript.grid.GetTile(new Tuple(0, 0)).gameObject;
+                SpawnPoof(waterPrefab, GetRandomSpawnPoint(), waterActive);
                 water--;
             }
         }
@@ -68,11 +60,7 @@ public class GameManager : MonoBehaviour {
         {
             for (int i = 0; i < earth; i++)
             {
-                GameObject go = Instantiate(earthPrefab, position, Quaternion.identity) as GameObject;
-                earthActive.Add(go);
-                CharacterScript cs = go.GetComponent<CharacterScript>();
-                cs.grid = TileScript.grid.gameObject;
-                cs.onTile = TileScript.grid.GetTile(new Tuple(0, 0)).gameObject;
+                SpawnPoof(earthPrefab, GetRandomSpawnPoint(), earthActive);
                 earth--;
             }
         }
@@ -82,13 +70,35 @@ public class GameManager : MonoBehaviour {
         {
             for (int i = 0; i < air; i++)
             {
-                GameObject go = Instantiate(airPrefab, position, Quaternion.identity) as GameObject;
-                airActive.Add(go);
-                CharacterScript cs = go.GetComponent<CharacterScript>();
-                cs.grid = TileScript.grid.gameObject;
-                cs.onTile = TileScript.grid.GetTile(new Tuple(0, 0)).gameObject;
+                SpawnPoof(airPrefab, GetRandomSpawnPoint(), airActive);
                 air--;
             }
         }
+    }
+
+    /**
+     * Allows the caller to spawn a poof
+     */
+    public void SpawnPoof(GameObject prefab, Tuple spawnPoint, List<GameObject> active)
+    {
+        Vector3 position = GetSpawnVector(spawnPoint);
+        GameObject go = Instantiate(prefab, position, Quaternion.identity) as GameObject;
+        active.Add(go);
+        CharacterScript cs = go.GetComponent<CharacterScript>();
+        cs.onTile = TileScript.grid.GetTile(spawnPoint).gameObject;
+    }
+
+    public Tuple GetRandomSpawnPoint()
+    {
+        Tile[] allTiles = TileScript.grid.tiles.ToArray();
+        return allTiles[(int)Random.Range(0, allTiles.Length - 1)].index;
+    }
+
+    /**
+     * Returns a Vector3 associated with this grid position
+     */
+    public Vector3 GetSpawnVector(Tuple spawnPoint)
+    {
+        return TileScript.grid.GetTile(spawnPoint).transform.position;
     }
 }
