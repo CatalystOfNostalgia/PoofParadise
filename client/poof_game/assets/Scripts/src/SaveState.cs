@@ -28,6 +28,13 @@ public class SaveState : MonoBehaviour {
 	 */
     private void SetPlayerData(PlayerData pd) {
 		pd.gold = this.gold;
+        pd.maxGoldHeld = this.maxGoldHeld;
+        pd.silver = this.silver;
+        pd.wood = this.wood;
+        pd.fireEle = this.fireEle;
+        pd.waterEle = this.fireEle;
+        pd.earthEle = this.earthEle;
+        pd.airEle = this.airEle;
         pd.existingBuildingDict = this.existingBuildingDict;
 	}
 
@@ -67,7 +74,6 @@ public class SaveState : MonoBehaviour {
 		PlayerData data = new PlayerData ();
 		SetPlayerData (data);
 		string clientJson = data.ToJSON ();
-        Debug.Log(new Tuple(0,0).ToJSON());
 		Debug.Log (clientJson);
 		// TODO Send JSON to server
 	}
@@ -146,7 +152,8 @@ class PlayerData {
 	 * Format: public <Type> <Name> { get; set; }
 	 */
 	public int gold { get; set; }
-	public int silver { get; set; }
+    public int maxGoldHeld { get; set; }
+    public int silver { get; set; }
 	public int wood { get; set; }
     public int fireEle { get; set; }
     public int waterEle { get; set; }

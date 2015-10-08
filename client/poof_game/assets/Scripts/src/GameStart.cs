@@ -47,4 +47,9 @@ public class GameStart : MonoBehaviour {
         }
         return true;
     }
+
+    public void TestJSON()
+    {
+        SaveState.state.PushToServer();
+    }
 }

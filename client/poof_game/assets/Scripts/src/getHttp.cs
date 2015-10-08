@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using HTTP;
 
-public class getHttp : MonoBehaviour {
+public class GetHTTP : MonoBehaviour {
 	
 	void Update () {
 	
