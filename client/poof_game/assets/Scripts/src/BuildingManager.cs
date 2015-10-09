@@ -44,7 +44,6 @@ public class BuildingManager : MonoBehaviour {
 		switch (buttonNum) {
 		case 1:
 			target = fire;
-			Debug.Log ("target is fire");
 			break;
 		case 2:
 			target = pond;
@@ -100,6 +99,7 @@ public class BuildingManager : MonoBehaviour {
                 Debug.Log("Failed to save instantiated object");
             }
             SaveState.state.existingBuildingDict.Add(tuple, newBuilding);
+			Debug.Log(SaveState.state.existingBuildingDict[tuple]);
             //Debug.Log(newBuilding.ToJSON());
 			return newBuilding;
 		}

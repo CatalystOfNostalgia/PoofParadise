@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Web;
+using System.Collections;
 
 public class SaveState : MonoBehaviour {
 
@@ -90,10 +91,14 @@ public class SaveState : MonoBehaviour {
 	 * Pushes player data to server
 	 */
 	public void PushToServer() {
+
 		PlayerData data = new PlayerData ();
 		SetPlayerData (data);
-        string clientJson = data.ToJSON ();
-        Debug.Log (clientJson);
+        
+		Debug.Log ("data.ToJSON");
+		string buildingJSON = data.jsonify();
+
+		Debug.Log (buildingJSON);
 		// TODO Send JSON to server
 	}
 
@@ -158,6 +163,7 @@ public class SaveState : MonoBehaviour {
     }
 }
 
+[Serializable]
 class PlayerData {
 	
 	/**
@@ -178,4 +184,40 @@ class PlayerData {
 	public int airEle { get; set; }
 	public Dictionary<Tuple, Building> existingBuildingDict { get; set; }
 
+	public String jsonify() {
+
+		String jsonPlayerData = "{ ";
+
+		jsonPlayerData += "\"fire\": \"" + fire + "\", ";
+		jsonPlayerData += "\"air\": \"" + air + "\", ";
+		jsonPlayerData += "\"water\": \"" + water + "\", ";
+		jsonPlayerData += "\"earth\": \"" + earth + "\", ";
+		jsonPlayerData += "\"maxFire\": \"" + maxFire + "\", ";
+		jsonPlayerData += "\"maxWater\": \"" + maxWater + "\", ";
+		jsonPlayerData += "\"maxAir\": \"" + maxAir + "\", ";
+		jsonPlayerData += "\"maxEarth\": \"" + maxEarth + "\", ";
+		jsonPlayerData += "\"fireElements\": \"" + fireEle + "\", ";
+		jsonPlayerData += "\"waterElements\": \"" + waterEle + "\", ";
+		jsonPlayerData += "\"earthElements\": \"" + earthEle + "\", ";
+		jsonPlayerData += "\"airElements\": \"" + airEle + "\", ";
+		jsonPlayerData += "\"resource_buildings\": [ ";
+
+		foreach ( Building building in existingBuildingDict.Values) {
+			jsonPlayerData += "{ ";
+			jsonPlayerData += "\"x_coordinate\": \"" + building.xCoord + "\", ";
+			jsonPlayerData += "\"y_coordinate\": \"" + building.yCoord + "\", ";
+			jsonPlayerData += "\"size\": \"" + building.size + "\" ";
+			jsonPlayerData += "},";
+		}
+
+		jsonPlayerData = jsonPlayerData.TrimEnd (',');
+
+		jsonPlayerData += "], ";
+		jsonPlayerData += "\"decorative_buildings\": []";
+		jsonPlayerData += "}";
+
+		return jsonPlayerData;
+
+	}
+	
 }
