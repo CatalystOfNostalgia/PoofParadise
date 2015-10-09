@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Tile : MonoBehaviour {
 
@@ -22,18 +22,31 @@ public class Tile : MonoBehaviour {
     public Tile downLeftTile { get; set; }
     public Tile downRightTile { get; set; }
 
+    // A private field for the color of this object
     private Color startColor;
 
+    /**
+     * Used for initialization of
+     * Unity game objects
+     */
     void Start()
     {
         isVacant = true;
     }
 
+    /**
+     * A method that works with
+     * the collider of this object
+     */
     void OnMouseDown()
     {
         Debug.Log(index.ToString());
     }
 
+    /**
+     * A method that works with
+     * the collider of this object
+     */
     void OnMouseEnter()
     {
         startColor = GetComponent<Renderer>().material.color;
@@ -47,8 +60,41 @@ public class Tile : MonoBehaviour {
         }
     }
 
-    void OnMouseExit()
+    /**
+     * A method that works with
+     * the collider of this object
+     */
+    private void OnMouseExit()
     {
         GetComponent<Renderer>().material.color = startColor;
+    }
+
+    /**
+     * Produces an array of all the tiles with 1 of this tile
+     */
+    public Tile[] GetAdjacentTiles()
+    {
+        List<Tile> nearbyTiles = new List<Tile>();
+        AddTileToList(nearbyTiles, upTile);
+        AddTileToList(nearbyTiles, downTile);
+        AddTileToList(nearbyTiles, leftTile);
+        AddTileToList(nearbyTiles, rightTile);
+        AddTileToList(nearbyTiles, upLeftTile);
+        AddTileToList(nearbyTiles, upRightTile);
+        AddTileToList(nearbyTiles, downLeftTile);
+        AddTileToList(nearbyTiles, downRightTile);
+        return nearbyTiles.ToArray();
+    }
+
+    /**
+     * A private helper method for adding a tile
+     * to a list if it exists
+     */
+    private void AddTileToList(List<Tile> list, Tile tile)
+    {
+        if (tile != null)
+        {
+            list.Add(tile);
+        }
     }
 }
