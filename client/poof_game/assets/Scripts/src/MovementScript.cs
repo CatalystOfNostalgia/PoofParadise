@@ -47,6 +47,7 @@ public class MovementScript : MonoBehaviour {
 		
 		cs = this.GetComponent<CharacterScript>();
 		animator = this.GetComponent<Animator>();
+
 		
 	}
 	
@@ -122,24 +123,34 @@ public class MovementScript : MonoBehaviour {
 		if (priorityInput)
 			priorityComplete = false;
 
-		/*
+        /*
 		Debug.Log(currentPos);
 		Debug.Log(targetPos);
 		Debug.Log("!!!!!!!!!!!!!!!");
 		*/
-
-		if (currentPos.x - targetPos.x > 0 && currentPos.y -targetPos.y > 0){
-			animator.SetInteger("Direction", 0);
-		}
-		if (currentPos.x - targetPos.x < 0 && currentPos.y -targetPos.y > 0){
-			animator.SetInteger("Direction", 1);
-		}
-		if (currentPos.x - targetPos.x < 0 && currentPos.y -targetPos.y <0){
-			animator.SetInteger("Direction", 2);
-		}
-		if (currentPos.x - targetPos.x > 0 && currentPos.y -targetPos.y <0){
-			animator.SetInteger("Direction", 3);
-		}
+        if (animator != null)
+        {
+            if (currentPos.x - targetPos.x > 0 && currentPos.y - targetPos.y > 0)
+            {
+                animator.SetInteger("Direction", 0);
+            }
+            if (currentPos.x - targetPos.x < 0 && currentPos.y - targetPos.y > 0)
+            {
+                animator.SetInteger("Direction", 1);
+            }
+            if (currentPos.x - targetPos.x < 0 && currentPos.y - targetPos.y < 0)
+            {
+                animator.SetInteger("Direction", 2);
+            }
+            if (currentPos.x - targetPos.x > 0 && currentPos.y - targetPos.y < 0)
+            {
+                animator.SetInteger("Direction", 3);
+            }
+        }
+        else
+        {
+            Debug.Log("Congratulations, this character doesn't have a animation");
+        }
 	}
 	
 	// Method that Enqueues an input direction; should be utilized by the passive mover script
