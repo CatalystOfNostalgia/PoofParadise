@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour {
         GameObject go = Instantiate(prefab, position, Quaternion.identity) as GameObject;
         active.Add(go);
         CharacterScript cs = go.GetComponent<CharacterScript>();
-        cs.onTile = TileScript.grid.GetTile(spawnPoint).gameObject;
+        cs.onTile = TileScript.grid.GetTile(spawnPoint);
     }
 
     /**

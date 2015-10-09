@@ -7,6 +7,7 @@ using System.Collections;
 
 public class CharacterScript : MonoBehaviour {
 
+    // Enum to identify type
 	public enum Element {Fire, Water, Wind, Earth};
 	
 	// Enumeration defining the type of each character
@@ -17,40 +18,24 @@ public class CharacterScript : MonoBehaviour {
 	private PassiveMover ps;
 	
 	// Tile that the poof is currently standing on
-	public GameObject onTile;
-	// Debugging tile 
-	public GameObject goToTile;
+	public Tile onTile { get; set;}
 	
+    /**
+     * Initializes this object
+     */
 	void Start() {
 		ms = this.GetComponent<MovementScript>();
 		ps = this.GetComponent<PassiveMover>();
         Tile[] arr = TileScript.grid.tiles.ToArray();
-        if (onTile == null)
-        {
-            onTile = arr[((int)Random.Range(0, arr.Length - 1))].gameObject;
-        }
+        onTile = arr[(int)Random.Range(0, arr.Length - 1)];
 	}
 	
+    /**
+     * Changes the game state after every frame
+     */
 	void Update() {
-		// Testing purposes only //
-		// Z is bound to an arbitrary passive movement
-
-		//if (Input.GetKeyDown(KeyCode.Z) && !ms.getMoving()) {
 		if (!ms.getMoving()) {
 			ms.receivePassiveInputs(ps.getNewTile());
 		}
-		// X is bound to an arbitrary player movement => goToTile
-		if (Input.GetKeyDown(KeyCode.X)) {
-			ms.receivePlayerInputs(goToTile);
-		}
 	}
-	
-	public void setOnTile (GameObject tile) {
-		onTile = tile;
-	}
-	
-	public GameObject getOnTile() {
-		return onTile;
-	}
-	
 }

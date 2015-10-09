@@ -7,8 +7,6 @@ public class GameStart : MonoBehaviour {
     public GameManager gManager;
     public SaveState saveState;
 
-    private bool spawn = false;
-
 	// Adds all essential game objects to scene
 	void Awake () {
         Instantiate(grid, new Vector3(0, 0, 15), Quaternion.identity);
@@ -51,6 +49,5 @@ public class GameStart : MonoBehaviour {
     public void TestJSON()
     {
         SaveState.state.PushToServer();
-       // Debug.Log(SaveState.state.existingBuildingDict.ToJSON());
     }
 }

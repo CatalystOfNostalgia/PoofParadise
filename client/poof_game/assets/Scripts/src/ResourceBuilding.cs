@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
+[Serializable]
 public class ResourceBuilding : Building {
 
 	public enum ResourceType { fire, water, air, earth };
@@ -11,8 +13,8 @@ public class ResourceBuilding : Building {
 	System.Timers.Timer resourceClock;
 
 	// Use this for initialization
-	void Start () {
-
+	protected override void Start () {
+        base.Start();
 		collectionRate = 5;
 		// set the timer to increment the gold every second
 		resourceClock = new System.Timers.Timer (1000);
@@ -23,10 +25,5 @@ public class ResourceBuilding : Building {
 			
 
 		resourceClock.Enabled = true;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }

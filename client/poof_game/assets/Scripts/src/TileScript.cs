@@ -15,8 +15,8 @@ public class TileScript : MonoBehaviour {
     public List<Tile> tiles { get; set; }
 	
 	// Public fields
-	public int mapLength = 6;
-	public int mapWidth = 6;
+	public int gridX;
+	public int gridY;
     public GameObject[] prefab; // List of tile prefabs
 	
     /**
@@ -38,8 +38,7 @@ public class TileScript : MonoBehaviour {
         }
 
         tiles = new List<Tile>();
-        Generate(prefab, transform.position, mapWidth, mapLength);
-        //Debug.Log(tiles.ToJSON());
+        Generate(prefab, transform.position, gridY, gridX);
     }
 
     /**
@@ -47,9 +46,9 @@ public class TileScript : MonoBehaviour {
      */
     public void Generate(GameObject[] tile, Vector3 orig, int width, int height)
     {
-        for (int i = 0; i < mapLength; i++)
+        for (int i = 0; i < gridX; i++)
         {
-            for (int j = 0; j < mapWidth; j++)
+            for (int j = 0; j < gridY; j++)
             {
                 Vector3 location = orig + new Vector3(1.10f*(i + j - 5), .64f*(j - i), -2);
                 GameObject gameObject = Instantiate(tile[(i + j) % tile.Length], location, Quaternion.identity) as GameObject;
@@ -97,7 +96,7 @@ public class TileScript : MonoBehaviour {
         List<Tuple> possiblePaths = new List<Tuple>();
 
         // Add the right path
-        if (start.x < mapWidth)
+        if (start.x < gridX - 1)
         {
             possiblePaths.Add(new Tuple(start.x + 1, start.y));
         }
@@ -107,7 +106,7 @@ public class TileScript : MonoBehaviour {
             possiblePaths.Add(new Tuple(start.x - 1, start.y));
         }
         // Add the top path
-        if (start.y < mapLength)
+        if (start.y < gridY - 1)
         {
             possiblePaths.Add(new Tuple(start.x, start.y + 1));
         }
