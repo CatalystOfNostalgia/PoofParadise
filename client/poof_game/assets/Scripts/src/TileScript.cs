@@ -27,9 +27,6 @@ public class TileScript : MonoBehaviour {
 		
         if (grid == null)
         {
-            // If the grid persists between scenes, then
-            // we can't have the player go to other scenes
-            //DontDestroyOnLoad(gameObject);
             grid = this;
         }
         else if (grid != this)

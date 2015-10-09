@@ -41,7 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridX: 10
   gridY: 15
-  prefab:
+  prefabs:
   - {fileID: 11470250, guid: b4bd629bec064ae43a94dda0335ce945, type: 2}
   - {fileID: 11455616, guid: 9bc629b379decbb4183f6d3c7b9c1ca4, type: 2}
 --- !u!1001 &100100000
@@ -51,6 +51,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: prefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: mapLength
       value: 10
@@ -74,6 +78,16 @@ Prefab:
         type: 2}
     - target: {fileID: 0}
       propertyPath: prefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 11455616, guid: 9bc629b379decbb4183f6d3c7b9c1ca4,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: prefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11470250, guid: b4bd629bec064ae43a94dda0335ce945,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: prefabs.Array.data[1]
       value: 
       objectReference: {fileID: 11455616, guid: 9bc629b379decbb4183f6d3c7b9c1ca4,
         type: 2}
