@@ -107,7 +107,7 @@ namespace HTTP
         {
             this.method = method;
             this.uri = new Uri( uri );
-            this.byteStream = new MemoryStream(Encoding.UTF8.GetBytes( JSON.JsonEncode( data ) ));
+            this.byteStream = new MemoryStream(Encoding.UTF8.GetBytes( JSON2.JsonEncode( data ) ));
             this.AddHeader( "Content-Type", "application/json" );
         }
         

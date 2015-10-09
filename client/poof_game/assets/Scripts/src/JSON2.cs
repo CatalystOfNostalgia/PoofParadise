@@ -14,7 +14,7 @@ using System.Text;
 /// JSON uses Arrays and Objects. These correspond here to the datatypes ArrayList and Hashtable.
 /// All numbers are parsed to floats, ints, or longs.
 /// </summary>
-public class JSON
+public class JSON2
 {
 	public const int TOKEN_NONE = 0;
 	public const int TOKEN_CURLY_OPEN = 1;
@@ -93,12 +93,12 @@ public class JSON
 		bool done = false;
 		while (!done) {
 			token = LookAhead (json, index);
-			if (token == JSON.TOKEN_NONE) {
+			if (token == JSON2.TOKEN_NONE) {
 				success = false;
 				return null;
-			} else if (token == JSON.TOKEN_COMMA) {
+			} else if (token == JSON2.TOKEN_COMMA) {
 				NextToken (json, ref index);
-			} else if (token == JSON.TOKEN_CURLY_CLOSE) {
+			} else if (token == JSON2.TOKEN_CURLY_CLOSE) {
 				NextToken (json, ref index);
 				return table;
 			} else {
@@ -112,7 +112,7 @@ public class JSON
 				
 				// :
 				token = NextToken (json, ref index);
-				if (token != JSON.TOKEN_COLON) {
+				if (token != JSON2.TOKEN_COLON) {
 					success = false;
 					return null;
 				}
@@ -141,12 +141,12 @@ public class JSON
 		bool done = false;
 		while (!done) {
 			int token = LookAhead (json, index);
-			if (token == JSON.TOKEN_NONE) {
+			if (token == JSON2.TOKEN_NONE) {
 				success = false;
 				return null;
-			} else if (token == JSON.TOKEN_COMMA) {
+			} else if (token == JSON2.TOKEN_COMMA) {
 				NextToken (json, ref index);
-			} else if (token == JSON.TOKEN_SQUARED_CLOSE) {
+			} else if (token == JSON2.TOKEN_SQUARED_CLOSE) {
 				NextToken (json, ref index);
 				break;
 			} else {
@@ -165,24 +165,24 @@ public class JSON
 	protected static object ParseValue (char[] json, ref int index, ref bool success)
 	{
 		switch (LookAhead (json, index)) {
-		case JSON.TOKEN_STRING:
+		case JSON2.TOKEN_STRING:
 			return ParseString (json, ref index, ref success);
-		case JSON.TOKEN_NUMBER:
+		case JSON2.TOKEN_NUMBER:
 			return ParseNumber (json, ref index, ref success);
-		case JSON.TOKEN_CURLY_OPEN:
+		case JSON2.TOKEN_CURLY_OPEN:
 			return ParseObject (json, ref index, ref success);
-		case JSON.TOKEN_SQUARED_OPEN:
+		case JSON2.TOKEN_SQUARED_OPEN:
 			return ParseArray (json, ref index, ref success);
-		case JSON.TOKEN_TRUE:
+		case JSON2.TOKEN_TRUE:
 			NextToken (json, ref index);
 			return true;
-		case JSON.TOKEN_FALSE:
+		case JSON2.TOKEN_FALSE:
 			NextToken (json, ref index);
 			return false;
-		case JSON.TOKEN_NULL:
+		case JSON2.TOKEN_NULL:
 			NextToken (json, ref index);
 			return null;
-		case JSON.TOKEN_NONE:
+		case JSON2.TOKEN_NONE:
 			break;
 		}
 		
@@ -325,24 +325,24 @@ public class JSON
 		EatWhitespace (json, ref index);
 		
 		if (index == json.Length) {
-			return JSON.TOKEN_NONE;
+			return JSON2.TOKEN_NONE;
 		}
 		
 		char c = json[index];
 		index++;
 		switch (c) {
 		case '{':
-			return JSON.TOKEN_CURLY_OPEN;
+			return JSON2.TOKEN_CURLY_OPEN;
 		case '}':
-			return JSON.TOKEN_CURLY_CLOSE;
+			return JSON2.TOKEN_CURLY_CLOSE;
 		case '[':
-			return JSON.TOKEN_SQUARED_OPEN;
+			return JSON2.TOKEN_SQUARED_OPEN;
 		case ']':
-			return JSON.TOKEN_SQUARED_CLOSE;
+			return JSON2.TOKEN_SQUARED_CLOSE;
 		case ',':
-			return JSON.TOKEN_COMMA;
+			return JSON2.TOKEN_COMMA;
 		case '"':
-			return JSON.TOKEN_STRING;
+			return JSON2.TOKEN_STRING;
 		case '0':
 		case '1':
 		case '2':
@@ -354,9 +354,9 @@ public class JSON
 		case '8':
 		case '9':
 		case '-':
-			return JSON.TOKEN_NUMBER;
+			return JSON2.TOKEN_NUMBER;
 		case ':':
-			return JSON.TOKEN_COLON;
+			return JSON2.TOKEN_COLON;
 		}
 		index--;
 		
@@ -366,7 +366,7 @@ public class JSON
 		if (remainingLength >= 5) {
 			if (json[index] == 'f' && json[index + 1] == 'a' && json[index + 2] == 'l' && json[index + 3] == 's' && json[index + 4] == 'e') {
 				index += 5;
-				return JSON.TOKEN_FALSE;
+				return JSON2.TOKEN_FALSE;
 			}
 		}
 		
@@ -374,7 +374,7 @@ public class JSON
 		if (remainingLength >= 4) {
 			if (json[index] == 't' && json[index + 1] == 'r' && json[index + 2] == 'u' && json[index + 3] == 'e') {
 				index += 4;
-				return JSON.TOKEN_TRUE;
+				return JSON2.TOKEN_TRUE;
 			}
 		}
 		
@@ -382,11 +382,11 @@ public class JSON
 		if (remainingLength >= 4) {
 			if (json[index] == 'n' && json[index + 1] == 'u' && json[index + 2] == 'l' && json[index + 3] == 'l') {
 				index += 4;
-				return JSON.TOKEN_NULL;
+				return JSON2.TOKEN_NULL;
 			}
 		}
 		
-		return JSON.TOKEN_NONE;
+		return JSON2.TOKEN_NONE;
 	}
 
 	protected static bool SerializeValue (object value, StringBuilder builder)

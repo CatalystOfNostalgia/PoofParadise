@@ -42,7 +42,7 @@ namespace HTTP
                 }
                 
                 bool result = false;
-                Hashtable obj = (Hashtable)JSON.JsonDecode( this.Text, ref result );
+                Hashtable obj = (Hashtable)JSON2.JsonDecode( this.Text, ref result );
                 if ( !result )
                 {
                     obj = null;
@@ -60,7 +60,7 @@ namespace HTTP
                 }
                 
                 bool result = false;
-                ArrayList array = (ArrayList)JSON.JsonDecode( this.Text, ref result );
+                ArrayList array = (ArrayList)JSON2.JsonDecode( this.Text, ref result );
                 if ( !result )
                 {
                     array = null;
