@@ -8,6 +8,11 @@ public class Tile : MonoBehaviour {
 
     private Color startColor;
 
+    void OnMouseDown()
+    {
+        Debug.Log(index.ToString());
+    }
+
     void OnMouseEnter()
     {
         startColor = GetComponent<Renderer>().material.color;

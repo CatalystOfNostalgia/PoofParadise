@@ -15,6 +15,7 @@ public class PassiveMover : MonoBehaviour {
 	// currently ms is not used, but might be in the future
 	private CharacterScript cs;
 	private MovementScript ms;
+
 	// Field containing the most recently calculated tile for the character to move to
 	private Tile nextTile { get; set; }
 	
@@ -43,14 +44,14 @@ public class PassiveMover : MonoBehaviour {
 			// block for simply random movement
 			Direction nextDirection = (Direction)((int)Random.Range (0, 4));
 			// additional dice roll if the first direction chosen was opposite of the previous
-			//		helps avoid repetitive back and forth motion
+			// helps avoid repetitive back and forth motion
 			if (((int)nextDirection * 2) - 5 == -((int)mostRecent - 4) / 2) {
 				nextDirection = (Direction)((int)Random.Range (0,4));
 			}
 
             List<Tuple> tuples = TileScript.grid.GetPossiblePaths(cs.onTile.index); 
             Tuple[] arr = tuples.ToArray();
-            Tuple next = arr[(int)Random.Range(0, arr.Length - 1)];
+            Tuple next = arr[(int)Random.Range(0, arr.Length)];
             Tile test = TileScript.grid.GetTile(next);
             nextTile = test;
             mostRecent = (Direction)(((int)nextDirection * 2) + 1);
