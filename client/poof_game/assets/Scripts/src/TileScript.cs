@@ -97,7 +97,7 @@ public class TileScript : MonoBehaviour {
         List<Tuple> possiblePaths = new List<Tuple>();
 
         // Add the right path
-        if (start.x < mapWidth)
+        if (start.x < mapWidth - 1)
         {
             possiblePaths.Add(new Tuple(start.x + 1, start.y));
         }
@@ -107,7 +107,7 @@ public class TileScript : MonoBehaviour {
             possiblePaths.Add(new Tuple(start.x - 1, start.y));
         }
         // Add the top path
-        if (start.y < mapLength)
+        if (start.y < mapLength - 1)
         {
             possiblePaths.Add(new Tuple(start.x, start.y + 1));
         }

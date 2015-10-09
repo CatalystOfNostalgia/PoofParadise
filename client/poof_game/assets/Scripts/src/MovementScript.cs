@@ -11,7 +11,7 @@ public class MovementScript : MonoBehaviour {
 	// Vectors containing the starting and ending position for movement
 	private Vector2 currentPos;
 	private Vector2 targetPos;
-	private GameObject targetObj;
+	private Tile targetObj;
 	private Animator animator;
 	
 	// Publicly defineable moveent speed; you can fiddle with it in the editor
@@ -70,7 +70,7 @@ public class MovementScript : MonoBehaviour {
 	// Pops the first element out of the queue
 	private void getInputs() {
 		if (movementQueue.Count > 0) {
-			targetObj = (GameObject)movementQueue.Dequeue();
+			targetObj = movementQueue.Dequeue() as Tile;
 			if (targetObj != null) {
 				targetPos = parseObjToLoc(targetObj);
 				input = true;
@@ -105,7 +105,7 @@ public class MovementScript : MonoBehaviour {
 			input = false;
 			progressAccum = 0;
 			targetPos = new Vector2();
-			cs.setOnTile(targetObj);
+			cs.onTile = targetObj;
 			targetObj = null;
 			movementQueue.Clear();
 		}
@@ -154,12 +154,12 @@ public class MovementScript : MonoBehaviour {
 	}
 	
 	// Method that Enqueues an input direction; should be utilized by the passive mover script
-	public void receivePassiveInputs(GameObject toTile) {
+	public void receivePassiveInputs(Tile toTile) {
 		movementQueue.Enqueue(toTile);
 	}
 	
 	// Method that Enqueues player inputs and interrupts current passive inputs
-	public void receivePlayerInputs(GameObject toTile) {
+	public void receivePlayerInputs(Tile toTile) {
 		priorityInput = true;
 		stopMoving();
 		movementQueue.Enqueue(toTile);
@@ -177,7 +177,7 @@ public class MovementScript : MonoBehaviour {
 	}
 	
 	// Method that parses a GameObject into a Vector2 which is the input GameObject's position
-	private Vector2 parseObjToLoc(GameObject toTile) {
+	private Vector2 parseObjToLoc(Tile toTile) {
 		return new Vector2(toTile.transform.position.x, toTile.transform.position.y);
 	}
 }
