@@ -92,9 +92,8 @@ public class SaveState : MonoBehaviour {
 	public void PushToServer() {
 		PlayerData data = new PlayerData ();
 		SetPlayerData (data);
-        
-		string clientJson = data.ToJSON ();
-		Debug.Log (clientJson);
+        string clientJson = data.ToJSON ();
+        Debug.Log (clientJson);
 		// TODO Send JSON to server
 	}
 
@@ -159,7 +158,6 @@ public class SaveState : MonoBehaviour {
     }
 }
 
-[Serializable]
 class PlayerData {
 	
 	/**
