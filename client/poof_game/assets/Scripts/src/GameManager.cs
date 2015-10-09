@@ -108,8 +108,7 @@ public class GameManager : MonoBehaviour {
      */
     public Tuple GetRandomSpawnPoint()
     {
-        Tile[] allTiles = TileScript.grid.tiles.ToArray();
-        return allTiles[(int)Random.Range(0, allTiles.Length - 1)].index;
+        return TileScript.grid.tiles[(int)Random.Range(0, TileScript.grid.tiles.Length - 1)].index;
     }
 
     /**

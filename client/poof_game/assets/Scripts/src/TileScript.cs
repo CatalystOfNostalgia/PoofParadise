@@ -12,12 +12,12 @@ public class TileScript : MonoBehaviour {
     public static TileScript grid;
 
     // Fields that are used to contain and maintain all the tiles
-    public List<Tile> tiles { get; set; }
+    public Tile[] tiles { get; set; }
 	
 	// Public fields
 	public int gridX;
 	public int gridY;
-    public GameObject[] prefab; // List of tile prefabs
+    public Tile[] prefabs;
 	
     /**
      * Initializes the list of tiles
@@ -36,26 +36,27 @@ public class TileScript : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-
-        tiles = new List<Tile>();
-        Generate(prefab, transform.position, gridY, gridX);
+        tiles = new Tile[gridX * gridY];
+        Generate(prefabs, transform.position, gridY, gridX);
     }
 
     /**
      * A method used for building the game grid
      */
-    public void Generate(GameObject[] tile, Vector3 orig, int width, int height)
+    public void Generate(Tile[] tile, Vector3 orig, int width, int height)
     {
+        int tilesGenerated = 0;
         for (int i = 0; i < gridX; i++)
         {
             for (int j = 0; j < gridY; j++)
             {
                 Vector3 location = orig + new Vector3(1.10f*(i + j - 5), .64f*(j - i), -2);
-                GameObject gameObject = Instantiate(tile[(i + j) % tile.Length], location, Quaternion.identity) as GameObject;
-                gameObject.transform.parent = this.transform;
-                Tile t = gameObject.GetComponent<Tile>();
-                t.index = new Tuple(i, j);
-                tiles.Add(t);
+                Tile myTile = Instantiate(tile[(i + j) % tile.Length], location, Quaternion.identity) as Tile;
+                myTile.transform.parent = this.transform; // Make tile a child of the grid
+                myTile.index = new Tuple(i, j);
+                myTile.id = tilesGenerated;
+                tiles[tilesGenerated] = myTile;
+                tilesGenerated++;
             }
         }
     }
