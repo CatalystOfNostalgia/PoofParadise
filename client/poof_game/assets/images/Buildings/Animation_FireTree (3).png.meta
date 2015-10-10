@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c8f4294794f638248ac1805bd34a26d7
-timeCreated: 1443986800
+timeCreated: 1444505347
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -90,8 +90,8 @@ TextureImporter:
         y: 1024
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_1
       rect:
@@ -100,8 +100,8 @@ TextureImporter:
         y: 1024
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_2
       rect:
@@ -110,8 +110,8 @@ TextureImporter:
         y: 1024
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_3
       rect:
@@ -120,8 +120,8 @@ TextureImporter:
         y: 1024
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_4
       rect:
@@ -130,8 +130,8 @@ TextureImporter:
         y: 1024
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_5
       rect:
@@ -140,8 +140,8 @@ TextureImporter:
         y: 1024
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_6
       rect:
@@ -150,8 +150,8 @@ TextureImporter:
         y: 1024
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_7
       rect:
@@ -160,8 +160,8 @@ TextureImporter:
         y: 1024
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_8
       rect:
@@ -170,8 +170,8 @@ TextureImporter:
         y: 1024
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_9
       rect:
@@ -180,8 +180,8 @@ TextureImporter:
         y: 1024
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_10
       rect:
@@ -190,8 +190,8 @@ TextureImporter:
         y: 1024
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_11
       rect:
@@ -200,8 +200,8 @@ TextureImporter:
         y: 1024
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_12
       rect:
@@ -210,8 +210,8 @@ TextureImporter:
         y: 512
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_13
       rect:
@@ -220,8 +220,8 @@ TextureImporter:
         y: 512
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_14
       rect:
@@ -230,8 +230,8 @@ TextureImporter:
         y: 512
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_15
       rect:
@@ -240,8 +240,8 @@ TextureImporter:
         y: 512
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_16
       rect:
@@ -250,8 +250,8 @@ TextureImporter:
         y: 512
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_17
       rect:
@@ -260,8 +260,8 @@ TextureImporter:
         y: 512
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_18
       rect:
@@ -270,8 +270,8 @@ TextureImporter:
         y: 512
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_19
       rect:
@@ -280,8 +280,8 @@ TextureImporter:
         y: 512
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_20
       rect:
@@ -290,8 +290,8 @@ TextureImporter:
         y: 512
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_21
       rect:
@@ -300,8 +300,8 @@ TextureImporter:
         y: 512
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_22
       rect:
@@ -310,8 +310,8 @@ TextureImporter:
         y: 512
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_23
       rect:
@@ -320,8 +320,8 @@ TextureImporter:
         y: 512
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_24
       rect:
@@ -330,8 +330,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_25
       rect:
@@ -340,8 +340,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_26
       rect:
@@ -350,8 +350,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_27
       rect:
@@ -360,8 +360,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_28
       rect:
@@ -370,8 +370,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_29
       rect:
@@ -380,8 +380,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_30
       rect:
@@ -390,8 +390,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_31
       rect:
@@ -400,8 +400,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_32
       rect:
@@ -410,8 +410,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_FireTree (3)_33
       rect:
@@ -420,8 +420,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .219999999}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

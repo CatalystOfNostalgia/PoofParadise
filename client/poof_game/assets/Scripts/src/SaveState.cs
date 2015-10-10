@@ -2,7 +2,6 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Web;
 
 public class SaveState : MonoBehaviour {
 
@@ -90,11 +89,14 @@ public class SaveState : MonoBehaviour {
 	 * Pushes player data to server
 	 */
 	public void PushToServer() {
+
 		PlayerData data = new PlayerData ();
 		SetPlayerData (data);
         
-		string clientJson = data.ToJSON ();
-		Debug.Log (clientJson);
+		Debug.Log ("data.ToJSON");
+		string buildingJSON = data.jsonify();
+
+		Debug.Log (buildingJSON);
 		// TODO Send JSON to server
 	}
 
@@ -103,9 +105,7 @@ public class SaveState : MonoBehaviour {
 	 */
 	public void PullFromServer() {
 		// TODO Get JSON from server
-		string serverJson = "{\"gold\":100,\"silver\":0,\"wood\":0";
-		//PlayerData data = JSON.Deserialize<PlayerData> (serverJson);
-		//GetPlayerData (data);
+		// GetPlayerData (data);
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class SaveState : MonoBehaviour {
 		SetPlayerData (data);
 
         // Dumps JSON to text file
-        System.IO.File.WriteAllText(Application.persistentDataPath + "/save_state.dat", data.ToJSON());
+        System.IO.File.WriteAllText(Application.persistentDataPath + "/save_state.dat", data.jsonify());
 	}
 
 	/**
@@ -136,27 +136,6 @@ public class SaveState : MonoBehaviour {
 			//GetPlayerData(data);
 		}
 	}
-
-    /**
-     * A testing function for observing
-     * JSON output
-     */
-    public void CheckJson()
-    {
-        //Debug.Log(new Tuple(3, 5).ToJSON());
-        Building test;
-        bool b = existingBuildingDict.TryGetValue(new Tuple(0, 0), out test);
-        Debug.Log(existingBuildingDict.Values.Count);
-        //Debug.Log(existingBuildingDict.Keys.ToJSON());
-        if (b)
-        {
-            //Debug.Log(test.ToJSON());
-        }
-        else
-        {
-            Debug.Log("No building at 0,0");
-        }
-    }
 }
 
 [Serializable]
@@ -180,4 +159,40 @@ class PlayerData {
 	public int airEle { get; set; }
 	public Dictionary<Tuple, Building> existingBuildingDict { get; set; }
 
+	public String jsonify() {
+
+		String jsonPlayerData = "{ ";
+
+		jsonPlayerData += "\"fire\": \"" + fire + "\", ";
+		jsonPlayerData += "\"air\": \"" + air + "\", ";
+		jsonPlayerData += "\"water\": \"" + water + "\", ";
+		jsonPlayerData += "\"earth\": \"" + earth + "\", ";
+		jsonPlayerData += "\"maxFire\": \"" + maxFire + "\", ";
+		jsonPlayerData += "\"maxWater\": \"" + maxWater + "\", ";
+		jsonPlayerData += "\"maxAir\": \"" + maxAir + "\", ";
+		jsonPlayerData += "\"maxEarth\": \"" + maxEarth + "\", ";
+		jsonPlayerData += "\"fireElements\": \"" + fireEle + "\", ";
+		jsonPlayerData += "\"waterElements\": \"" + waterEle + "\", ";
+		jsonPlayerData += "\"earthElements\": \"" + earthEle + "\", ";
+		jsonPlayerData += "\"airElements\": \"" + airEle + "\", ";
+		jsonPlayerData += "\"resource_buildings\": [ ";
+
+		foreach ( Building building in existingBuildingDict.Values) {
+			jsonPlayerData += "{ ";
+			jsonPlayerData += "\"x_coordinate\": \"" + building.xCoord + "\", ";
+			jsonPlayerData += "\"y_coordinate\": \"" + building.yCoord + "\", ";
+			jsonPlayerData += "\"size\": \"" + building.size + "\" ";
+			jsonPlayerData += "},";
+		}
+
+		jsonPlayerData = jsonPlayerData.TrimEnd (',');
+
+		jsonPlayerData += "], ";
+		jsonPlayerData += "\"decorative_buildings\": []";
+		jsonPlayerData += "}";
+
+		return jsonPlayerData;
+
+	}
+	
 }
