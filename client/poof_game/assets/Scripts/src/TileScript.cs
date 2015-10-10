@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
-/* TileScript - Script attached to the Grid object in game; contains fields for to contain the
- * tiles, currently tiles are initialized by searching for GameObjects tagged as "Tile". Tiles 
- * are essentially hashed into an array by name, mimicing the current naming process within the editor. */
+/**
+ * The TileScript is a static, one-of-a-kind singleton object that serves as the
+ * game grid from which all other game functions are derived
+ */
 
 public class TileScript : MonoBehaviour {
 
@@ -12,12 +12,12 @@ public class TileScript : MonoBehaviour {
     public static TileScript grid;
 
     // Fields that are used to contain and maintain all the tiles
-    public List<Tile> tiles { get; set; }
+    public Tile[] tiles { get; set; }
 	
 	// Public fields
 	public int gridX;
 	public int gridY;
-    public GameObject[] prefab; // List of tile prefabs
+    public Tile[] prefabs;
 	
     /**
      * Initializes the list of tiles
@@ -27,60 +27,111 @@ public class TileScript : MonoBehaviour {
 		
         if (grid == null)
         {
-            // If the grid persists between scenes, then
-            // we can't have the player go to other scenes
-            //DontDestroyOnLoad(gameObject);
             grid = this;
         }
         else if (grid != this)
         {
             Destroy(gameObject);
         }
+        tiles = new Tile[gridX * gridY];
+        BuildGameGrid();
+    }
 
-        tiles = new List<Tile>();
-        Generate(prefab, transform.position, gridY, gridX);
+    /**
+     * The main game grid building method
+     * All nested function calls are private
+     * to avoid users generating a half baked
+     * grid object
+     */
+    public void BuildGameGrid()
+    {
+        GenerateTiles(prefabs, transform.position, gridY, gridX);
+        GiveNeighbors();
     }
 
     /**
      * A method used for building the game grid
      */
-    public void Generate(GameObject[] tile, Vector3 orig, int width, int height)
+    private void GenerateTiles(Tile[] tile, Vector3 orig, int width, int height)
     {
+        int tilesGenerated = 0;
+        // Builds the tile grid
         for (int i = 0; i < gridX; i++)
         {
             for (int j = 0; j < gridY; j++)
             {
                 Vector3 location = orig + new Vector3(1.10f*(i + j - 5), .64f*(j - i), -2);
-                GameObject gameObject = Instantiate(tile[(i + j) % tile.Length], location, Quaternion.identity) as GameObject;
-                gameObject.transform.parent = this.transform;
-                Tile t = gameObject.GetComponent<Tile>();
-                t.index = new Tuple(i, j);
-                tiles.Add(t);
+                Tile myTile = Instantiate(tile[(i + j) % tile.Length], location, Quaternion.identity) as Tile;
+                myTile.transform.parent = this.transform; // Make tile a child of the grid
+                myTile.index = new Tuple(i, j);
+                myTile.id = tilesGenerated;
+                tiles[tilesGenerated] = myTile;
+                tilesGenerated++;
             }
         }
     }
-    
-    /**
-     * Generates a list of tiles adjacent to the
-     * input tile
-     */
-    public List<Tile> GetAdjacentTiles(Tile tile)
-    {
-        List<Tile> listOfTiles = new List<Tile>();
-        Tuple refer = tile.index;
 
-        foreach (Tile test in tiles)
+    /**
+     * Gives each tile references to their neighbors
+     */
+    public void GiveNeighbors()
+    {
+        foreach (Tile t in tiles)
         {
-            int x = refer.x - test.index.x;
-            int y = refer.y - test.index.y;
-            
-            if (x <= 1 && x >= -1 && y <= 1 && y >= -1)
+            // Assigns the upper tile
+            if (TileExistsAt(t.id - gridX))
             {
-                listOfTiles.Add(test);
+                t.upTile = tiles[t.id - gridX];
+            }
+            // Assigns the lower tile
+            if (TileExistsAt(t.id + gridX))
+            {
+                t.downTile = tiles[t.id + gridX];
+            }
+            // Assigns the left tile
+            if (TileExistsAt(t.id - 1))
+            {
+                t.leftTile = tiles[t.id - 1];
+            }
+            // Assigns the right tile
+            if (TileExistsAt(t.id + 1))
+            {
+                t.rightTile = tiles[t.id + 1];
+            }
+            // Assigns the upper left tile
+            if (TileExistsAt(t.id - gridX - 1))
+            {
+                t.upLeftTile = tiles[t.id - gridX - 1];
+            }
+            // Assigns the upper right tile
+            if (TileExistsAt(t.id - gridX + 1))
+            {
+                t.upRightTile = tiles[t.id - gridX + 1];
+            }
+            // Assigns the lower left tile
+            if (TileExistsAt(t.id + gridX - 1))
+            {
+                t.upRightTile = tiles[t.id + gridX - 1];
+            }
+            // Assigns the lower right tile
+            if (TileExistsAt(t.id + gridX + 1))
+            {
+                t.upRightTile = tiles[t.id + gridX + 1];
             }
         }
+    }
 
-        return listOfTiles;
+    /**
+     * A helper method for determining if
+     * a tile exists at the target id
+     */
+    private bool TileExistsAt(int targetID)
+    {
+        if (targetID > 0 && targetID < tiles.Length)
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
