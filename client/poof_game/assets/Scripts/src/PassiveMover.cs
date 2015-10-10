@@ -10,14 +10,14 @@ public class PassiveMover : MonoBehaviour {
 	
 	// Enumeration that makes debugging more interesting to look at
 	public enum Direction {Down_Left, Down, Down_Right, Left, Stay, Right, Up_Left, Up, Up_Right};
-	//public enum Direction {Down_Left, Down_Right,Up_Right, Up_Left, Stay  };
 	
 	// References to the attached character's scripts
-	//		currently ms is not used, but might be in the future
+	// currently ms is not used, but might be in the future
 	private CharacterScript cs;
 	private MovementScript ms;
+
 	// Field containing the most recently calculated tile for the character to move to
-	private GameObject nextTile;
+	private Tile nextTile { get; set; }
 	
 	// Public field used for debugging purposes in the editor, and also to mess with random movements
 	public Direction mostRecent;
@@ -31,7 +31,7 @@ public class PassiveMover : MonoBehaviour {
 	
 	void Start() {
 		cs = this.GetComponent<CharacterScript>();
-		//ms = this.GetComponent<MovementScript>();
+		ms = this.GetComponent<MovementScript>();
 		
 		mostRecent = Direction.Stay;
 		likes = new ArrayList();
@@ -39,36 +39,22 @@ public class PassiveMover : MonoBehaviour {
 	}
 	
 	private void calculateNextTile() {
-		GameObject onTile = cs.getOnTile();
-
-        Tile curr = onTile.GetComponent<Tile>();
-
-        if (curr == null)
-        {
-            Tile[] arr = TileScript.grid.tiles.ToArray();
-
-			int randomIndex = (int)Random.Range(0, 5);
-
-            onTile = arr[randomIndex].gameObject;
-        }
-        List<Tile> adjacents = TileScript.grid.GetAdjacentTiles(curr);
 		
 		if (likes.Count == 0) {
 			// block for simply random movement
 			Direction nextDirection = (Direction)((int)Random.Range (0, 4));
 			// additional dice roll if the first direction chosen was opposite of the previous
-			//		helps avoid repetitive back and forth motion
+			// helps avoid repetitive back and forth motion
 			if (((int)nextDirection * 2) - 5 == -((int)mostRecent - 4) / 2) {
 				nextDirection = (Direction)((int)Random.Range (0,4));
 			}
 
-            //Tile[] arr = adjacents.ToArray();
-            //nextTile = arr[((int)nextDirection * 2) + 1].gameObject;
-            List<Tuple> tuples = TileScript.grid.GetPossiblePaths(curr.index);
+            List<Tuple> tuples = TileScript.grid.GetPossiblePaths(cs.onTile.index); 
             Tuple[] arr = tuples.ToArray();
             Tuple next = arr[(int)Random.Range(0, arr.Length)];
-            nextTile = TileScript.grid.GetTile(next).gameObject;
-			mostRecent = (Direction)(((int)nextDirection * 2) + 1);
+            Tile test = TileScript.grid.GetTile(next);
+            nextTile = test;
+            mostRecent = (Direction)(((int)nextDirection * 2) + 1);
 		}
 		else {
 			int domain = likes.Count;
@@ -76,11 +62,7 @@ public class PassiveMover : MonoBehaviour {
 		}
 	}
 	
-	public GameObject getNextTile() {
-		return nextTile;
-	}
-	
-	public GameObject getNewTile() {
+	public Tile getNewTile() {
 		calculateNextTile();
 		return nextTile;
 	}

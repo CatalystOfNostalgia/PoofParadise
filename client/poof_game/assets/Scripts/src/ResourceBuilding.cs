@@ -1,34 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
+[Serializable]
 public class ResourceBuilding : Building {
 
-	// the rate at which gold is collected per second
+	public enum ResourceType { fire, water, air, earth };
+
+	// the resource collection rate and the type of resource
 	public int collectionRate { get; set;}
+	private ResourceType type;
 	System.Timers.Timer resourceClock;
 
-	// place the building
-	public ResourceBuilding(int xCoord, int yCoord, int size, int collectionRate) : base (xCoord, yCoord, size){
-		this.collectionRate = collectionRate;
-	}
-
 	// Use this for initialization
-	void Start () {
-
+	protected override void Start () {
+        base.Start();
 		collectionRate = 5;
 		// set the timer to increment the gold every second
 		resourceClock = new System.Timers.Timer (1000);
 		resourceClock.Elapsed += 
 			(object sender, System.Timers.ElapsedEventArgs e) => {
-				ResourceIncrementer.incrementer.ResourceGain (collectionRate);
+				ResourceIncrementer.incrementer.ResourceGain (collectionRate, ResourceType.fire);
 			};
 			
 
 		resourceClock.Enabled = true;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }

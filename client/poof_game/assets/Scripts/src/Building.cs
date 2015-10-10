@@ -1,22 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class Building : MonoBehaviour {
+
+public abstract class Building : MonoBehaviour {
     private bool selected { get; set; }
     private bool placed { get; set; }
     public int xCoord { get; set;  } 
     public int yCoord { get; set; }  // Diagonal grid, measured from the far left corner. X is the \ (diagonal left) axis, Y is the / (diagonal right) axis
     public int size { get; set; } // All buildings are square - this is determined by side size; e.g. a 3x3 building is size 3
 
-    public Building(int xCoord, int yCoord, int size)
-    {
-        this.xCoord = xCoord;
-        this.yCoord = yCoord;
-        this.size = size;
-    }
-
     // Use this for initialization
-    void Start()
+    protected virtual void Start()
     {
         selected = true;
         placed = false;

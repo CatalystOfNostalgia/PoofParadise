@@ -8,17 +8,17 @@ public class BuildingManager : MonoBehaviour {
 	 * just dragging gameobjects to here for now
 	 * maybe we can just search them later?
 	 */
-	public ResourceBuilding windmill;
-	public ResourceBuilding pond;
-	public ResourceBuilding fire;
-	public ResourceBuilding cave;
+	public Building windmill;
+	public Building pond;
+	public Building fire;
+	public Building cave;
 
-	private ResourceBuilding target;
-	public TileScript grid;
+	private Building target;
 
 	ArrayList buildings;
 	//the dictionary containing all the different types of buildings that can be made
 	Dictionary <string, Building> buildingTypeDict;
+	Dictionary<Tuple, Building> existingBuildingDict;
 	//the dictionary containing buildings on the grid
 	private static BuildingManager buildingManager;
 
@@ -44,7 +44,6 @@ public class BuildingManager : MonoBehaviour {
 		switch (buttonNum) {
 		case 1:
 			target = fire;
-			Debug.Log ("target is fire");
 			break;
 		case 2:
 			target = pond;
@@ -88,14 +87,20 @@ public class BuildingManager : MonoBehaviour {
 	 * 		a. instantiate the game object
 	 * 4. Allow user to cancel
 	 */
-	private Building PlaceBuilding(GameObject target) {
+	private Building PlaceBuilding(Building prefab) {
 		Vector3 mousePosition = getCurrentMousePosition ();
 		Tile tile = closestTile (mousePosition);
 		Tuple tuple = new Tuple (tile.index.x, tile.index.y);
-		if (!isTileTaken (tuple)) {
-			ResourceBuilding newBuilding = (ResourceBuilding)Instantiate (target, tile.transform.position, Quaternion.identity);
-			newBuilding.transform.position = tile.transform.position;
-			SaveState.state.existingBuildingDict.Add (tuple, newBuilding);//place holder tuple for now
+        if (!isTileTaken (tuple)) {
+            Debug.Log("You just created a building");
+            Building newBuilding = Instantiate (prefab, tile.transform.position, Quaternion.identity) as Building;
+            if (newBuilding == null)
+            {
+                Debug.Log("Failed to save instantiated object");
+            }
+            SaveState.state.existingBuildingDict.Add(tuple, newBuilding);
+			Debug.Log(SaveState.state.existingBuildingDict[tuple]);
+            //Debug.Log(newBuilding.ToJSON());
 			return newBuilding;
 		}
 		return null;
@@ -105,7 +110,7 @@ public class BuildingManager : MonoBehaviour {
 		Tile closestTile = null;
 		float closestDistance = 0;
 		//is there better algorithm for getting the tile that is closest to the cursor?
-		foreach(Tile t in grid.GetComponentsInChildren<Tile>()){
+		foreach(Tile t in TileScript.grid.GetComponentsInChildren<Tile>()){
 			float distance = getDistance(mousePos.x, mousePos.y, t.transform.position.x, t.transform.position.y);
 			if (closestTile ==null){
 				closestTile = t;
@@ -120,8 +125,7 @@ public class BuildingManager : MonoBehaviour {
 	}
 
 	private bool isTileTaken(Tuple t){
-		return false;
-		//return existingBuildingDict.ContainsKey (t);
+		return existingBuildingDict.ContainsKey (t);
 
 	}
 
@@ -139,7 +143,8 @@ public class BuildingManager : MonoBehaviour {
 	void Start () {
 		buildingTypeDict = new Dictionary<string, Building>();
 		buildingTypeDict.Add ("fire", fire);
-		buildings = new ArrayList ();
+		existingBuildingDict = new Dictionary<Tuple, Building>();
+
 	}
 	
 	// Update is called once per frame
@@ -149,7 +154,7 @@ public class BuildingManager : MonoBehaviour {
 			if (!target) {
 				Debug.Log ("no target");
 			}
-			PlaceBuilding(target.gameObject);
+			PlaceBuilding(target);
 			Debug.Log ("building mode set to false");
 		}
 

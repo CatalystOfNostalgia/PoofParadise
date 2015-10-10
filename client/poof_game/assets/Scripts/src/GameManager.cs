@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
+    public static GameManager gameManager;
+
     // Store all of the prefabs here
     public GameObject firePrefab;
     public GameObject waterPrefab;
@@ -18,6 +20,14 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
+        if (gameManager == null)
+        {
+            gameManager = this;
+        }
+        else if (gameManager != this)
+        {
+            Destroy(gameObject);
+        }
         fireActive = new List<GameObject>();
         waterActive = new List<GameObject>();
         earthActive = new List<GameObject>();
@@ -30,48 +40,53 @@ public class GameManager : MonoBehaviour {
      */
     public void SpawnPoofs()
     {
-        int fire = SaveState.state.fireEle;
-        int water = SaveState.state.waterEle;
-        int earth = SaveState.state.earthEle;
-        int air = SaveState.state.airEle;
+        int fireTotal = SaveState.state.fireEle;
+        int waterTotal = SaveState.state.waterEle;
+        int earthTotal = SaveState.state.earthEle;
+        int airTotal = SaveState.state.airEle;
+
+        int fireLeft = fireTotal;
+        int waterLeft = waterTotal;
+        int earthLeft = earthTotal;
+        int airLeft = airTotal;
 
         // Fire loop
-        if (fireActive.Count < fire && fire > 0)
+        if (fireActive.Count < fireTotal && fireLeft > 0)
         {
-            for (int i = 0; i < fire; i++)
+            for (int i = 0; i < fireTotal; i++)
             {
                 SpawnPoof(firePrefab, GetRandomSpawnPoint(), fireActive);
-                fire--;
+                fireLeft--;
             }
         }
 
         // Water loop
-        if (waterActive.Count < water && water > 0)
+        if (waterActive.Count < waterTotal && waterLeft > 0)
         {
-            for (int i = 0; i < water; i++)
+            for (int i = 0; i < waterTotal; i++)
             {
                 SpawnPoof(waterPrefab, GetRandomSpawnPoint(), waterActive);
-                water--;
+                waterLeft--;
             }
         }
 
         // Earth loop
-        if (earthActive.Count < earth && earth > 0)
+        if (earthActive.Count < earthTotal && earthLeft > 0)
         {
-            for (int i = 0; i < earth; i++)
+            for (int i = 0; i < earthTotal; i++)
             {
                 SpawnPoof(earthPrefab, GetRandomSpawnPoint(), earthActive);
-                earth--;
+                earthLeft--;
             }
         }
 
         // Air loop
-        if (airActive.Count < air && air > 0)
+        if (airActive.Count < airTotal && airLeft > 0)
         {
-            for (int i = 0; i < air; i++)
+            for (int i = 0; i < airTotal; i++)
             {
                 SpawnPoof(airPrefab, GetRandomSpawnPoint(), airActive);
-                air--;
+                airLeft--;
             }
         }
     }
@@ -85,7 +100,7 @@ public class GameManager : MonoBehaviour {
         GameObject go = Instantiate(prefab, position, Quaternion.identity) as GameObject;
         active.Add(go);
         CharacterScript cs = go.GetComponent<CharacterScript>();
-        cs.onTile = TileScript.grid.GetTile(spawnPoint).gameObject;
+        cs.onTile = TileScript.grid.GetTile(spawnPoint);
     }
 
     /**
@@ -93,8 +108,7 @@ public class GameManager : MonoBehaviour {
      */
     public Tuple GetRandomSpawnPoint()
     {
-        Tile[] allTiles = TileScript.grid.tiles.ToArray();
-        return allTiles[(int)Random.Range(0, allTiles.Length - 1)].index;
+        return TileScript.grid.tiles[(int)Random.Range(0, TileScript.grid.tiles.Length - 1)].index;
     }
 
     /**
