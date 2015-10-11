@@ -149,7 +149,7 @@ public class MovementScript : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Congratulations, this character doesn't have a animation");
+            //Debug.Log("Congratulations, this character doesn't have a animation");
         }
 	}
 	
