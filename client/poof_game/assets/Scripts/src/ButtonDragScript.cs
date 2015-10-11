@@ -10,7 +10,6 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	private GameObject draggingIcon;
 	private RectTransform draggingPlane;
 	GameObject modalPanel;
-	bool hideModal;
 	public void OnBeginDrag (PointerEventData eventData){
 		//Canvas canvas = GetComponent<Canvas>();
 		Canvas canvas = FindInParents<Canvas> (gameObject);
@@ -47,11 +46,8 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		//find the modal panel
 		modalPanel = FindInParents<BringToFront> (gameObject).gameObject;//searching for BringToFront because that's what modal panel has
 		//hide the modal panel renderer
-		hideModal = true;
 		foreach (CanvasRenderer renderer in modalPanel.GetComponentsInChildren<CanvasRenderer>()) {
 			renderer.Clear();
-			//Debug.Log("i wish disabled renderer");
-			//renderer. = false;
 		}
 	}
 
