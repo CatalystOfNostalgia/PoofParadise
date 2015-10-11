@@ -16,14 +16,20 @@ public class ResourceBuilding : Building {
 	protected override void Start () {
         base.Start();
 		collectionRate = 5;
-		// set the timer to increment the gold every second
-		resourceClock = new System.Timers.Timer (1000);
-		resourceClock.Elapsed += 
-			(object sender, System.Timers.ElapsedEventArgs e) => {
-				ResourceIncrementer.incrementer.ResourceGain (collectionRate, ResourceType.fire);
-			};
-			
-
-		resourceClock.Enabled = true;
+		InvokeRepeating ("tickResource", .01f, 1.0f);
 	}
+	void tickResource (){
+		ResourceIncrementer.incrementer.ResourceGain (collectionRate, ResourceType.fire);
+//		
+//		// set the timer to increment the gold every second
+//		resourceClock = new System.Timers.Timer (1000);
+//		resourceClock.Elapsed += 
+//		(object sender, System.Timers.ElapsedEventArgs e) => {
+//			ResourceIncrementer.incrementer.ResourceGain (collectionRate, ResourceType.fire);
+//		};
+//		
+//		
+//		resourceClock.Enabled = true;
+	}
+
 }
