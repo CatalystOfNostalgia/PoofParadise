@@ -6,9 +6,11 @@ using System.Collections;
 public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
 	public bool dragOnSurfaces = true;
+	public int buildingInstance;
 	private GameObject draggingIcon;
 	private RectTransform draggingPlane;
-
+	GameObject modalPanel;
+	bool hideModal;
 	public void OnBeginDrag (PointerEventData eventData){
 		//Canvas canvas = GetComponent<Canvas>();
 		Canvas canvas = FindInParents<Canvas> (gameObject);
@@ -28,12 +30,12 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		// The icon will be under the cursor.
 		// We want it to be ignored by the event system.
 		//draggingIcon.AddComponent<IgnoreRaycast>();
-		
+
 		image.sprite = GetComponent<Image>().sprite;
 
 		RectTransform rekt = GetComponent<RectTransform> ();
-		image.SetNativeSize ();
-		//image.rectTransform.sizeDelta = rekt.sizeDelta;
+		//image.SetNativeSize ();
+		image.rectTransform.sizeDelta = rekt.sizeDelta;
 		
 		if (dragOnSurfaces)
 			draggingPlane = transform as RectTransform;
@@ -41,6 +43,15 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 			draggingPlane = canvas.transform as RectTransform;
 		
 		setDraggedPosition(eventData);
+
+		//find the modal panel
+		modalPanel = FindInParents<BringToFront> (gameObject).gameObject;//searching for BringToFront because that's what modal panel has
+		//hide the modal panel renderer
+		hideModal = true;
+		foreach (CanvasRenderer renderer in modalPanel.GetComponentsInChildren<CanvasRenderer>()) {
+			//Debug.Log("i wish disabled renderer");
+			//renderer. = false;
+		}
 	}
 
 	public void OnDrag (PointerEventData eventData){
@@ -55,6 +66,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		
 		var rt = draggingIcon.GetComponent<RectTransform>();
 		rt.position = Input.mousePosition;
+
 //		Vector3 globalMousePos;
 //		if (RectTransformUtility.PointInRectangleGlobalSpace(draggingPlane, out globalMousePos, eventData.position, eventData.pressEventCamera))
 //		{
@@ -64,9 +76,11 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	}
 
 	public void OnEndDrag (PointerEventData eventData){
+		BuildingManager.Instance().makeNewBuilding(buildingInstance);
 		if (draggingIcon != null) {
 			Destroy(draggingIcon);
 		}
+
 	}
 
 	static public T FindInParents<T>(GameObject go) where T : Component
@@ -87,6 +101,5 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	}
 	// Update is called once per frame
 	void Update () {
-	
 	}
 }

@@ -33,6 +33,27 @@ public class BuildingManager : MonoBehaviour {
 		return buildingManager;
 	}
 
+	//this overload does nothing right now
+	public void dragNewBuilding (int buildingNum, Vector3 cursor){
+		buildingMode = true;
+		switch (buildingNum) {
+		case 1:
+			target = fire;
+			break;
+		case 2:
+			target = pond;
+			break;
+		case 3:
+			target = cave;
+			break;
+		case 4:
+			target = windmill;
+			break;
+		default:
+			target = windmill;
+			break;
+		}
+	}
 	/**
 	 * 1. check building cost
 	 * 2. see if user has enough resource to cover the cost
@@ -149,7 +170,8 @@ public class BuildingManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (buildingMode && Input.GetMouseButtonDown (0)) {
+		//if (buildingMode && Input.GetMouseButtonDown (0)) {
+		if (buildingMode) {
 			buildingMode = false;
 			if (!target) {
 				Debug.Log ("no target");
