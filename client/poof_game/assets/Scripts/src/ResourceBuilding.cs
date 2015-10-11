@@ -9,27 +9,43 @@ public class ResourceBuilding : Building {
 
 	// the resource collection rate and the type of resource
 	public int collectionRate { get; set;}
-	private ResourceType type;
-	System.Timers.Timer resourceClock;
+	public ResourceType type;
 
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
 		collectionRate = 5;
-		InvokeRepeating ("tickResource", .01f, 1.0f);
+		switch (type){
+		case ResourceType.air:
+			InvokeRepeating ("tickAir", .01f, 1.0f);
+			break;
+		case ResourceType.earth:
+			InvokeRepeating ("tickEarth", .01f, 1.0f);
+			break;
+		case ResourceType.fire:
+			InvokeRepeating ("tickFire", .01f, 1.0f);
+			break;
+		case ResourceType.water:
+			InvokeRepeating ("tickWater", .01f, 1.0f);
+			break;
+		default:
+			Debug.Log("ResourceBuilding: Illegal resource type");
+			break;
+		}
 	}
-	void tickResource (){
+
+	//copypasta code because InvokeRepeating can't take in param.
+	void tickFire (){
 		ResourceIncrementer.incrementer.ResourceGain (collectionRate, ResourceType.fire);
-//		
-//		// set the timer to increment the gold every second
-//		resourceClock = new System.Timers.Timer (1000);
-//		resourceClock.Elapsed += 
-//		(object sender, System.Timers.ElapsedEventArgs e) => {
-//			ResourceIncrementer.incrementer.ResourceGain (collectionRate, ResourceType.fire);
-//		};
-//		
-//		
-//		resourceClock.Enabled = true;
+	}
+	void tickWater (){
+		ResourceIncrementer.incrementer.ResourceGain (collectionRate, ResourceType.water);
+	}
+	void tickAir (){
+		ResourceIncrementer.incrementer.ResourceGain (collectionRate, ResourceType.air);
+	}
+	void tickEarth (){
+		ResourceIncrementer.incrementer.ResourceGain (collectionRate, ResourceType.earth);
 	}
 
 }
