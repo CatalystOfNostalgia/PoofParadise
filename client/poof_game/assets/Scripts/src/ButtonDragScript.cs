@@ -49,6 +49,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		//hide the modal panel renderer
 		hideModal = true;
 		foreach (CanvasRenderer renderer in modalPanel.GetComponentsInChildren<CanvasRenderer>()) {
+
 			//Debug.Log("i wish disabled renderer");
 			//renderer. = false;
 		}
