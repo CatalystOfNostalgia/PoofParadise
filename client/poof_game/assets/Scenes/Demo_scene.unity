@@ -2441,10 +2441,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66837838c5bc2ad4a94e795fa57ee50a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireSlider: {fileID: 0}
-  waterSlider: {fileID: 0}
-  airSlider: {fileID: 0}
-  earthSlider: {fileID: 0}
+  fireSlider: {fileID: 1102172318}
+  waterSlider: {fileID: 762944447}
+  airSlider: {fileID: 522712489}
+  earthSlider: {fileID: 1486293849}
 --- !u!1 &1479826157
 GameObject:
   m_ObjectHideFlags: 0
