@@ -100,6 +100,13 @@ public class BuildingManager : MonoBehaviour {
 		Vector3 mousePosition = getCurrentMousePosition ();
 		Tile tile = closestTile (mousePosition);
 		Tuple tuple = new Tuple (tile.index.x, tile.index.y);
+		
+		// Hard codin some shit that should be in a method by itself
+		//		makes sure you can't over lap buildings
+		Tuple l = new Tuple (tile.leftTile.index.x, tile.leftTile.index.y);
+		Tuple d = new Tuple (tile.downTile.index.x, tile.downTile.index.y);
+		Tuple dl = new Tuple (tile.downLeftTile.index.x, tile.downLeftTile.index.y);
+		
         if (!isTileTaken (tuple)) {
             Debug.Log("You just created a building");
             Building newBuilding = Instantiate (prefab, new Vector3(tile.transform.position.x, tile.transform.position.y - .65f, tile.transform.position.y - .65f), Quaternion.identity) as Building;
@@ -108,15 +115,17 @@ public class BuildingManager : MonoBehaviour {
                 Debug.Log("Failed to save instantiated object");
             }
             SaveState.state.existingBuildingDict.Add(tuple, newBuilding);
+            
+			SaveState.state.existingBuildingDict.Add(d, newBuilding);
+			SaveState.state.existingBuildingDict.Add(l, newBuilding);
+			SaveState.state.existingBuildingDict.Add(dl, newBuilding);
+			
 			Debug.Log(SaveState.state.existingBuildingDict[tuple]);
 			
 			tile.isVacant = false; // Paints placed tile red
-			
-			// Temporary attempt to paint 3 adjacent tiles under building footprint red
-			//		however GetAdjacentTiles() is a wee bit fucked
-			/*tile.GetAdjacentTiles()[1].isVacant = false;
-			tile.GetAdjacentTiles()[3].isVacant = false;
-			tile.GetAdjacentTiles()[7].isVacant = false;*/
+			tile.leftTile.isVacant = false; // and nearby 3 tiles
+			tile.downTile.isVacant = false;
+			tile.downLeftTile.isVacant = false;
 			
             //Debug.Log(newBuilding.ToJSON());
 			return newBuilding;
