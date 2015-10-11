@@ -41,13 +41,16 @@ public class Tile : MonoBehaviour {
     void OnMouseDown()
     {
         Debug.Log(index.ToString());
+        foreach (Tile t in GetAdjacentTiles()) {
+            Debug.Log(t.id);
+        }
     }
 
-    /**
-     * A method that works with
-     * the collider of this object
-     */
-    void OnMouseEnter()
+        /**
+         * A method that works with
+         * the collider of this object
+         */
+        void OnMouseEnter()
     {
         startColor = GetComponent<Renderer>().material.color;
         if (isVacant)
