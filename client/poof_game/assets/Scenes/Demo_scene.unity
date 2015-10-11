@@ -519,6 +519,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 795852942}
+--- !u!1 &805719443 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 156380, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
+  m_PrefabInternal: {fileID: 1697732566}
+--- !u!114 &805719444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 805719443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd13b72085466f940b81cc679a1db544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragOnSurfaces: 1
+  buildingInstance: 3
 --- !u!1 &854595203
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,6 +602,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 854595203}
+--- !u!1 &868518367 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 156380, guid: 016494a4ba07c9c4e993834141d10feb, type: 2}
+  m_PrefabInternal: {fileID: 1361379834}
+--- !u!114 &868518368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 868518367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd13b72085466f940b81cc679a1db544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragOnSurfaces: 1
+  buildingInstance: 2
 --- !u!1 &875088678
 GameObject:
   m_ObjectHideFlags: 0
@@ -2159,6 +2193,7 @@ GameObject:
   - 222: {fileID: 1888163924}
   - 114: {fileID: 1888163923}
   - 114: {fileID: 1888163922}
+  - 114: {fileID: 1888163925}
   m_Layer: 5
   m_Name: Windmill Button
   m_TagString: Untagged
@@ -2252,6 +2287,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1888163920}
+--- !u!114 &1888163925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1888163920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd13b72085466f940b81cc679a1db544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragOnSurfaces: 1
+  buildingInstance: 4
 --- !u!1 &2114179485
 GameObject:
   m_ObjectHideFlags: 0

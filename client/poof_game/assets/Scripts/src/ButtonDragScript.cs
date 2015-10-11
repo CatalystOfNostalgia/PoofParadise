@@ -49,7 +49,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		//hide the modal panel renderer
 		hideModal = true;
 		foreach (CanvasRenderer renderer in modalPanel.GetComponentsInChildren<CanvasRenderer>()) {
-
+			renderer.Clear();
 			//Debug.Log("i wish disabled renderer");
 			//renderer. = false;
 		}
@@ -81,7 +81,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		if (draggingIcon != null) {
 			Destroy(draggingIcon);
 		}
-
+		modalPanel.SetActive (false);
 	}
 
 	static public T FindInParents<T>(GameObject go) where T : Component
