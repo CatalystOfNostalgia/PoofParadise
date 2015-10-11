@@ -79,18 +79,6 @@ public class BuildingManager : MonoBehaviour {
 			target = windmill;
 			break;
 		}
-
-		//Building building = null;
-//		int clickCount = 0;
-//		while (building == null) {
-//			//bandaid fix to building placed upon menu click
-//			if (Input.GetMouseButtonDown (0)) {
-//				clickCount++;
-//			}
-//			if (clickCount > 2) {
-//				building = PlaceBuilding (tree.gameObject);
-//			}
-//		}
 	}
 	void deleteBuilding(){
 	}
