@@ -114,13 +114,22 @@ public class BuildingManager : MonoBehaviour {
 		Tuple tuple = new Tuple (tile.index.x, tile.index.y);
         if (!isTileTaken (tuple)) {
             Debug.Log("You just created a building");
-            Building newBuilding = Instantiate (prefab, tile.transform.position, Quaternion.identity) as Building;
+            Building newBuilding = Instantiate (prefab, new Vector3(tile.transform.position.x, tile.transform.position.y - .65f, tile.transform.position.y - .65f), Quaternion.identity) as Building;
             if (newBuilding == null)
             {
                 Debug.Log("Failed to save instantiated object");
             }
             SaveState.state.existingBuildingDict.Add(tuple, newBuilding);
 			Debug.Log(SaveState.state.existingBuildingDict[tuple]);
+			
+			tile.isVacant = false; // Paints placed tile red
+			
+			// Temporary attempt to paint 3 adjacent tiles under building footprint red
+			//		however GetAdjacentTiles() is a wee bit fucked
+			/*tile.GetAdjacentTiles()[1].isVacant = false;
+			tile.GetAdjacentTiles()[3].isVacant = false;
+			tile.GetAdjacentTiles()[7].isVacant = false;*/
+			
             //Debug.Log(newBuilding.ToJSON());
 			return newBuilding;
 		}
@@ -146,7 +155,7 @@ public class BuildingManager : MonoBehaviour {
 	}
 
 	private bool isTileTaken(Tuple t){
-		return existingBuildingDict.ContainsKey (t);
+		return SaveState.state.existingBuildingDict.ContainsKey (t);
 
 	}
 
