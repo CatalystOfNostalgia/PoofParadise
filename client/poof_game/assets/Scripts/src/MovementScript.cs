@@ -87,7 +87,7 @@ public class MovementScript : MonoBehaviour {
 		progressAccum = (currentDistance + movementSpeed) / totalDistance;
 		
 		if (progressAccum <= 1)
-			transform.position = Vector3.Lerp(new Vector3(currentPos.x, currentPos.y, currentPos.y), new Vector3(targetPos.x, targetPos.y, targetPos.y), progressAccum);
+			transform.position = Vector3.Lerp(new Vector3(currentPos.x, currentPos.y, currentPos.y - .3f), new Vector3(targetPos.x, targetPos.y, targetPos.y), progressAccum);
 		else {
 
 			if (priorityInput)

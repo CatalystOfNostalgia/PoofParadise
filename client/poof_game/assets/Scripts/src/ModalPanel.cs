@@ -29,21 +29,21 @@ public class ModalPanel : MonoBehaviour {
 
 		button1.onClick.RemoveAllListeners ();
 		button1.onClick.AddListener (ClosePanel);
-		button1.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(1));
+		//button1.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(1));
 
 
 		button2.onClick.RemoveAllListeners ();
 		button2.onClick.AddListener (ClosePanel);
-		button2.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(2));
+		//button2.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(2));
 
 		
 		button3.onClick.RemoveAllListeners ();
 		button3.onClick.AddListener (ClosePanel);
-		button3.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(3));
+		//button3.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(3));
 
 		button4.onClick.RemoveAllListeners ();
 		button4.onClick.AddListener (ClosePanel);
-		button4.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(4));
+		//button4.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(4));
 
 		this.question.text = question; //sets question in dialogue box
 		//this.iconImage.gameObject.SetActive (false);
