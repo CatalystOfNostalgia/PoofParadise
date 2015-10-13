@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using SimpleJSON;
 
 public class SaveState : MonoBehaviour {
 
@@ -97,6 +98,12 @@ public class SaveState : MonoBehaviour {
 		string buildingJSON = data.jsonify();
 
 		Debug.Log (buildingJSON);
+
+		data = new PlayerData (buildingJSON);
+
+		Debug.Log (data.air);
+
+		
 		// TODO Send JSON to server
 	}
 
@@ -159,6 +166,36 @@ class PlayerData {
 	public int airEle { get; set; }
 	public Dictionary<Tuple, Building> existingBuildingDict { get; set; }
 
+	// constructs save data from a JSON string
+	public PlayerData(String jsonData) {
+
+		JSONNode data = JSON.Parse (jsonData);
+		
+		this.fire = data ["fire"].AsInt;
+		this.air = data ["air"].AsInt;
+		this.water = data ["water"].AsInt;
+		this.earth = data ["earth"].AsInt;
+		this.maxFire = data ["maxFire"].AsInt;
+		this.maxAir = data ["maxAir"].AsInt;
+		this.maxEarth = data ["maxEarth"].AsInt;
+		this.maxWater = data ["maxWater"].AsInt;
+		this.fireEle = data ["fireEle"].AsInt;
+		this.airEle = data ["airEle"].AsInt;
+		this.earthEle = data ["earthEle"].AsInt;
+		this.waterEle = data ["waterEle"].AsInt;
+
+		// need to figure out typecast
+		// this.existingBuildingDict = data ["resourceBuildings"].AsArray.;
+
+	}
+
+	// an empty constructor to appease the compiler, should be removed and all calls
+	// should go through the json constructor.
+	public PlayerData(){
+
+	}
+
+	// turns the save data into a JSON String
 	public String jsonify() {
 
 		String jsonPlayerData = "{ ";
@@ -177,11 +214,11 @@ class PlayerData {
 		jsonPlayerData += "\"airElements\": \"" + airEle + "\", ";
 		jsonPlayerData += "\"resource_buildings\": [ ";
 
-		foreach ( Building building in existingBuildingDict.Values) {
+		foreach ( KeyValuePair<Tuple, Building> entry in existingBuildingDict) {
 			jsonPlayerData += "{ ";
-			jsonPlayerData += "\"x_coordinate\": \"" + building.xCoord + "\", ";
-			jsonPlayerData += "\"y_coordinate\": \"" + building.yCoord + "\", ";
-			jsonPlayerData += "\"size\": \"" + building.size + "\" ";
+			jsonPlayerData += "\"x_coordinate\": \"" + entry.Key.x + "\", ";
+			jsonPlayerData += "\"y_coordinate\": \"" + entry.Key.y + "\", ";
+			jsonPlayerData += "\"size\": \"" + entry.Value.size + "\" ";
 			jsonPlayerData += "},";
 		}
 
@@ -190,6 +227,7 @@ class PlayerData {
 		jsonPlayerData += "], ";
 		jsonPlayerData += "\"decorative_buildings\": []";
 		jsonPlayerData += "}";
+	
 
 		return jsonPlayerData;
 

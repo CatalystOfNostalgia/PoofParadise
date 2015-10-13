@@ -46,13 +46,16 @@ public class Tile : MonoBehaviour {
         }
     }
 
-        /**
-         * A method that works with
-         * the collider of this object
-         */
-        void OnMouseEnter()
+    /**
+     * A method that works with
+     * the collider of this object
+     */
+    void OnMouseEnter()
     {
         startColor = GetComponent<Renderer>().material.color;
+
+		BuildingManager.manager.selectedTile = this;
+
         if (isVacant)
         {
             GetComponent<Renderer>().material.color = Color.cyan;

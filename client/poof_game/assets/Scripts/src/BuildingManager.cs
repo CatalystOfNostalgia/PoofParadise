@@ -15,22 +15,25 @@ public class BuildingManager : MonoBehaviour {
 
 	private Building target;
 
+	// the tile the mouse is currently one
+	public Tile selectedTile { get; set; }
+
 	ArrayList buildings;
 	//the dictionary containing all the different types of buildings that can be made
 	Dictionary <string, Building> buildingTypeDict;
 	Dictionary<Tuple, Building> existingBuildingDict;
 	//the dictionary containing buildings on the grid
-	private static BuildingManager buildingManager;
+	public static BuildingManager manager;
 
 	public bool buildingMode;
 	
 	public static BuildingManager Instance(){
-		if (!buildingManager) {
-			buildingManager = FindObjectOfType(typeof (BuildingManager)) as BuildingManager;
-			if(!buildingManager)
+		if (!manager) {
+			manager = FindObjectOfType(typeof (BuildingManager)) as BuildingManager;
+			if(!manager)
 				Debug.LogError ("There needs to be one active BuildingManager script on a GameObject in your scene.");
 		}
-		return buildingManager;
+		return manager;
 	}
 
 	//this overload does nothing right now
@@ -98,8 +101,10 @@ public class BuildingManager : MonoBehaviour {
 	 */
 	private Building PlaceBuilding(Building prefab) {
 		Vector3 mousePosition = getCurrentMousePosition ();
-		Tile tile = closestTile (mousePosition);
-		Tuple tuple = new Tuple (tile.index.x, tile.index.y);
+
+		Tile tile = selectedTile;
+		//Tile tile = closestTile (mousePosition);
+		Tuple tuple = tile.index;
 		
 		// Hard codin some shit that should be in a method by itself
 		//		makes sure you can't over lap buildings
@@ -114,11 +119,18 @@ public class BuildingManager : MonoBehaviour {
             {
                 Debug.Log("Failed to save instantiated object");
             }
+
+			SaveState.state.existingBuildingDict.Add(tile.index, newBuilding);
+
+			// commenting this out so it only saves a building once.
+			/*
             SaveState.state.existingBuildingDict.Add(tuple, newBuilding);
             
 			SaveState.state.existingBuildingDict.Add(d, newBuilding);
 			SaveState.state.existingBuildingDict.Add(l, newBuilding);
 			SaveState.state.existingBuildingDict.Add(dl, newBuilding);
+
+			*/
 			
 			Debug.Log(SaveState.state.existingBuildingDict[tuple]);
 			
@@ -168,6 +180,8 @@ public class BuildingManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		Instance ();
 		buildingTypeDict = new Dictionary<string, Building>();
 		buildingTypeDict.Add ("fire", fire);
 		existingBuildingDict = new Dictionary<Tuple, Building>();
