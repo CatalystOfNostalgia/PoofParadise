@@ -56,9 +56,9 @@ public class TileScript : MonoBehaviour {
     {
         int tilesGenerated = 0;
         // Builds the tile grid
-        for (int i = 0; i < gridX; i++)
+        for (int i = 0; i < gridY; i++)
         {
-            for (int j = 0; j < gridY; j++)
+            for (int j = 0; j < gridX; j++)
             {
                 Vector3 location = orig + new Vector3(1.10f*(i + j - 5), .64f*(j - i), -2);
                 Tile myTile = Instantiate(tile[(i + j) % tile.Length], location, Quaternion.identity) as Tile;
@@ -89,34 +89,34 @@ public class TileScript : MonoBehaviour {
                 t.downTile = tiles[t.id + gridX];
             }
             // Assigns the left tile
-            if (TileExistsAt(t.id - 1))
+            if (TileExistsAt(t.id - 1) && (t.id % gridX != 0))
             {
                 t.leftTile = tiles[t.id - 1];
             }
             // Assigns the right tile
-            if (TileExistsAt(t.id + 1))
+            if (TileExistsAt(t.id + 1) && ((t.id + 1) % gridX != 0))
             {
                 t.rightTile = tiles[t.id + 1];
             }
             // Assigns the upper left tile
-            if (TileExistsAt(t.id - gridX - 1))
+            if (TileExistsAt(t.id - gridX - 1) && (t.id % gridX != 0))
             {
                 t.upLeftTile = tiles[t.id - gridX - 1];
             }
             // Assigns the upper right tile
-            if (TileExistsAt(t.id - gridX + 1))
+            if (TileExistsAt(t.id - gridX + 1) && ((t.id + 1) % gridX != 0))
             {
                 t.upRightTile = tiles[t.id - gridX + 1];
             }
             // Assigns the lower left tile
-            if (TileExistsAt(t.id + gridX - 1))
+            if (TileExistsAt(t.id + gridX - 1) && (t.id % gridX != 0))
             {
-                t.upRightTile = tiles[t.id + gridX - 1];
+                t.downLeftTile = tiles[t.id + gridX - 1];
             }
             // Assigns the lower right tile
-            if (TileExistsAt(t.id + gridX + 1))
+            if (TileExistsAt(t.id + gridX + 1) && ((t.id + 1) % gridX != 0))
             {
-                t.upRightTile = tiles[t.id + gridX + 1];
+                t.downRightTile = tiles[t.id + gridX + 1];
             }
         }
     }
@@ -127,7 +127,7 @@ public class TileScript : MonoBehaviour {
      */
     private bool TileExistsAt(int targetID)
     {
-        if (targetID > 0 && targetID < tiles.Length)
+        if (targetID >= 0 && targetID < tiles.Length)
         {
             return true;
         }
