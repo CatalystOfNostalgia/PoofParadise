@@ -11,6 +11,7 @@ public class TestModalPanel : MonoBehaviour {
 	private UnityAction myButton1Action;
 	private UnityAction myButton2Action;
 	private UnityAction myButton3Action;
+	private UnityAction myCancelButtonAction;
 	
 
 	void Awake(){
@@ -21,7 +22,7 @@ public class TestModalPanel : MonoBehaviour {
 		myButton3Action = new UnityAction (TestButton3Function); 
 	}
 	public void Test123(){
-		modalPanel.Choice ("Choose a Button and brace yourself", myButton1Action, myButton2Action, myButton3Action);
+		modalPanel.Choice ("Choose a Button and brace yourself", myButton1Action, myButton2Action, myButton3Action, myCancelButtonAction);
 	}
 
 	void TestButton1Function(){

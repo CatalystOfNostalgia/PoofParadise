@@ -11,6 +11,7 @@ public class ModalPanel : MonoBehaviour {
 	public Button button2;
 	public Button button3;
 	public Button button4;
+	public Button exit;
 	public GameObject modalPanelObject;
 
 	private static ModalPanel modalPanel;
@@ -23,7 +24,7 @@ public class ModalPanel : MonoBehaviour {
 		}
 		return modalPanel;
 	}
-	public void Choice(string question, UnityAction button1Event, UnityAction button2Event, UnityAction button3Event){
+	public void Choice(string question, UnityAction button1Event, UnityAction button2Event, UnityAction button3Event, UnityAction button4Event){
 		//modal panel should be visible on screen
 		modalPanelObject.SetActive (true);
 
@@ -45,6 +46,9 @@ public class ModalPanel : MonoBehaviour {
 		button4.onClick.AddListener (ClosePanel);
 		//button4.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(4));
 
+		exit.onClick.RemoveAllListeners ();
+		exit.onClick.AddListener (ClosePanel);
+
 		this.question.text = question; //sets question in dialogue box
 		//this.iconImage.gameObject.SetActive (false);
 
@@ -53,7 +57,6 @@ public class ModalPanel : MonoBehaviour {
 		button3.gameObject.SetActive (true);
 
 	}
-
 	
 	void ClosePanel(){
 		modalPanelObject.SetActive(false);
