@@ -6,6 +6,7 @@ public class GameStart : MonoBehaviour {
     public TileScript grid;
     public GameManager gManager;
     public SaveState saveState;
+	public GetHTTP getHTTP;
 
 	// Adds all essential game objects to scene
 	void Awake () {

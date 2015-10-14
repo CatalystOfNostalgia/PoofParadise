@@ -145,6 +145,8 @@ public class BuildingManager : MonoBehaviour {
 		return null;
 	}
 
+	// TODO this might not be needed anymore with the new way of getting the closest tile.
+
 	private Tile closestTile (Vector3 mousePos){
 		Tile closestTile = null;
 		float closestDistance = 0;
