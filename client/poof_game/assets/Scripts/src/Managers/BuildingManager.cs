@@ -120,7 +120,7 @@ public class BuildingManager : MonoBehaviour {
                 Debug.Log("Failed to save instantiated object");
             }
 
-			SaveState.state.existingBuildingDict.Add(tile.index, newBuilding);
+			SaveState.state.resourceBuildings.Add(tile.index, newBuilding);
 
 			// commenting this out so it only saves a building once.
 			/*
@@ -132,7 +132,7 @@ public class BuildingManager : MonoBehaviour {
 
 			*/
 			
-			Debug.Log(SaveState.state.existingBuildingDict[tuple]);
+			Debug.Log(SaveState.state.resourceBuildings[tuple]);
 			
 			tile.isVacant = false; // Paints placed tile red
 			tile.leftTile.isVacant = false; // and nearby 3 tiles
@@ -166,7 +166,7 @@ public class BuildingManager : MonoBehaviour {
 	}
 
 	private bool isTileTaken(Tuple t){
-		return SaveState.state.existingBuildingDict.ContainsKey (t);
+		return SaveState.state.resourceBuildings.ContainsKey (t);
 
 	}
 

@@ -6,13 +6,14 @@ public class GameStart : MonoBehaviour {
     public TileScript grid;
     public GameManager gManager;
     public SaveState saveState;
-	public GetHTTP getHTTP;
+	public BuildingManager bManager;
 
 	// Adds all essential game objects to scene
 	void Awake () {
         Instantiate(grid, new Vector3(0, 0, 15), Quaternion.identity);
         Instantiate(gManager, new Vector3(0, 0, 0), Quaternion.identity);
-        Instantiate(saveState, new Vector3(0, 1, 0), Quaternion.identity);
+		Instantiate (bManager, new Vector3 (0, 1, 0), Quaternion.identity);
+        Instantiate(saveState, new Vector3(0, 2, 0), Quaternion.identity);
         StartCoroutine("RenderScene");
         // Be careful! Anything after this coroutine will run 
         // before coroutine finishes
@@ -40,7 +41,7 @@ public class GameStart : MonoBehaviour {
      */
     private bool SceneIsReady()
     {
-        if (GameManager.gameManager == null || SaveState.state == null || TileScript.grid == null)
+        if (GameManager.gameManager == null || SaveState.state == null || TileScript.grid == null || bManager == null)
         {
             return false;
         }
@@ -49,6 +50,6 @@ public class GameStart : MonoBehaviour {
 
     public void TestJSON()
     {
-        SaveState.state.PushToServer();
+		SaveState.state.PullFromServer ();
     }
 }
