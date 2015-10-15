@@ -15,9 +15,10 @@ public class SaveState : MonoBehaviour {
 	public int userLevel { get; set; }
 	public int userExperience { get; set; }
 	public int hqLevel { get; set; }
-
+	public int poofCount { get; set; }
 	// List game state variables here
-	// Format: public <Type> <Name> { get; set; }
+
+	// resources
 	public int fire { get; set; }
 	public int air { get; set; }
 	public int water { get; set; }
@@ -26,11 +27,15 @@ public class SaveState : MonoBehaviour {
 	public int maxAir { get; set; }
 	public int maxWater { get; set; }
 	public int maxEarth { get; set; }
-    public int fireEle { get; set; }
-    public int waterEle { get; set; }
-    public int earthEle { get; set; }
-    public int airEle { get; set; }
-    public Dictionary<Tuple, Building> resourceBuildings { get; set; }
+
+	// elemari
+	public int fireEle { get; set; }
+	public int waterEle { get; set; }
+	public int earthEle { get; set; }
+	public int airEle { get; set; }
+
+	// buildings
+	public Dictionary<Tuple, Building> resourceBuildings { get; set; }
 	public Dictionary<Tuple, Building> decorativeBuildings { get; set; }
 	
 	/**
@@ -166,6 +171,22 @@ public class SaveState : MonoBehaviour {
 		userLevel = data ["level"].AsInt;
 		userExperience = data ["experience"].AsInt;
 		hqLevel = data ["headquarters_level"].AsInt;
+		fire = data ["fire"].AsInt;
+		water = data ["water"].AsInt;
+		earth = data ["earth"].AsInt;
+		air = data ["air"].AsInt;
+		maxFire = data ["max_fire"].AsInt;
+		maxWater = data ["max_water"].AsInt;
+		maxEarth = data ["max_earth"].AsInt;
+		maxAir = data ["max_air"].AsInt;
+		fireEle = data ["fire_ele"].AsInt;
+		waterEle = data ["water_ele"].AsInt;
+		earthEle = data ["earth_ele"].AsInt;
+		airEle = data ["air_ele"].AsInt;
+		poofCount = data ["poof_count"].AsInt;
+
+
+		// load the buildings
 		loadedResourceBuildings = data ["resource_buildings"].AsArray;
 		loadedDecorativeBuildings = data ["decorative_buildings"].AsArray;
 
