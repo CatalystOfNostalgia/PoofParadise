@@ -166,6 +166,21 @@ public class SaveState : MonoBehaviour {
 		userLevel = data ["level"].AsInt;
 		userExperience = data ["experience"].AsInt;
 		hqLevel = data ["headquarters_level"].AsInt;
+		fire = data ["fire"].AsInt;
+		water = data ["water"].AsInt;
+		earth = data ["earth"].AsInt;
+		air = data ["air"].AsInt;
+		maxFire = data ["max_fire"].AsInt;
+		maxWater = data ["max_water"].AsInt;
+		maxEarth = data ["max_earth"].AsInt;
+		maxAir = data ["max_air"].AsInt;
+		fireEle = data ["fire_ele"].AsInt;
+		waterEle = data ["water_ele"].AsInt;
+		earthEle = data ["earth_ele"].AsInt;
+		airEle = data ["air_ele"].AsInt;
+
+
+		// load the buildings
 		loadedResourceBuildings = data ["resource_buildings"].AsArray;
 		loadedDecorativeBuildings = data ["decorative_buildings"].AsArray;
 

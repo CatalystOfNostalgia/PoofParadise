@@ -215,14 +215,14 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
                 data['water'] = user.water
                 data['air'] = user.air
                 data['earth'] = user.earth
-                data['maxFire'] = user.maxFire
-                data['maxWater'] = user.maxWater
-                data['maxEarth'] = user.maxEarth
-                data['maxAir'] = user.maxAir
-                data['fireEle'] = user.fireEle
-                data['waterEle'] = user.waterEle
-                data['earthEle'] = user.earthEle
-                data['airEle'] = user.airEle
+                data['max_fire'] = user.maxFire
+                data['max_water'] = user.maxWater
+                data['max_earth'] = user.maxEarth
+                data['max_air'] = user.maxAir
+                data['fire_ele'] = user.fireEle
+                data['water_ele'] = user.waterEle
+                data['earth_ele'] = user.earthEle
+                data['air_ele'] = user.airEle
 
                 print("user: " + username + \
                       " is logging in with user id: " + \
