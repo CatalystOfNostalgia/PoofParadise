@@ -29,13 +29,13 @@ public class SaveState : MonoBehaviour {
 	public int maxEarth { get; set; }
 
 	// elemari
-    public int fireEle { get; set; }
-    public int waterEle { get; set; }
-    public int earthEle { get; set; }
-    public int airEle { get; set; }
+	public int fireEle { get; set; }
+	public int waterEle { get; set; }
+	public int earthEle { get; set; }
+	public int airEle { get; set; }
 
 	// buildings
-    public Dictionary<Tuple, Building> resourceBuildings { get; set; }
+	public Dictionary<Tuple, Building> resourceBuildings { get; set; }
 	public Dictionary<Tuple, Building> decorativeBuildings { get; set; }
 	
 	/**
