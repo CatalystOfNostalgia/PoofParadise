@@ -31,8 +31,11 @@ install:
 	@echo 'Installing SQLAlchemy...'
 	@sudo easy_install -q SQLAlchemy
 
-.PHONY: build_gravehub
-build_gravehub:
+# builds and populates the database
+.PHONY: build_poof
+build_poof:
 	@echo 'Building database (gravehub)...'
 	@echo '\. $(TABLES)' | sudo mysql
 	@echo 'Database (gravehub) built'
+	@echo 'Populating Database'
+	@python populate.py

@@ -3570,6 +3570,7 @@ MonoBehaviour:
   grid: {fileID: 11435338, guid: dc1e7a9f5c964aa48af39756e65e6f63, type: 2}
   gManager: {fileID: 11461726, guid: 1889181c5a164d2488edbd5052553d27, type: 2}
   saveState: {fileID: 11476110, guid: 8532815ec50e9874cb9e6026acfd3c2c, type: 2}
+  bManager: {fileID: 11470152, guid: 58df5e9405bf84e2f90f7ea40129f394, type: 2}
 --- !u!1 &1749074895
 GameObject:
   m_ObjectHideFlags: 0
