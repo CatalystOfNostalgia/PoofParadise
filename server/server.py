@@ -11,227 +11,255 @@ import queries
 
 class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
-	def do_GET(self):
+    def do_GET(self):
 
-		self.send_response(200)
+        self.send_response(200)
 
-		parameters = parse_qs(urlparse(self.path).query)
+        parameters = parse_qs(urlparse(self.path).query)
 
-		# logging in
-		if re.match('/login', self.path):
-			self.login(parameters)
+        # logging in
+        if re.match('/login', self.path):
+            self.login(parameters)
 
-		# looking for friends of a user
-		elif re.match('/friends', self.path):
-			self.getFriends(parameters)
+        # looking for friends of a user
+        elif re.match('/friends', self.path):
+            self.getFriends(parameters)
 
-		# looking for a specific user
+        # looking for a specific user
 
-		elif re.match('/users/.*', self.path):
+        elif re.match('/users/.*', self.path):
 
-			self.send_header('Content-type', 'text-html')
-			self.end_headers()
+            self.send_header('Content-type', 'text-html')
+            self.end_headers()
 
-			user_id = os.path.basename(urlparse(self.path).path)
-			decorative_buildings = queries.get_user_decorative_buildings(user_id)
-			resource_buildings = queries.get_user_resource_buildings(user_id)
-				
-			self.wfile.write('user id: ' + user_id)
+            user_id = os.path.basename(urlparse(self.path).path)
+            decorative_buildings = queries.get_user_decorative_buildings(user_id)
+            resource_buildings = queries.get_user_resource_buildings(user_id)
+                
+            self.wfile.write('user id: ' + user_id)
 
-		# asking for all users
-		elif re.match('.*/users$', self.path):
+        # asking for all users
+        elif re.match('.*/users$', self.path):
 
-			self.send_header('Content-type', 'text-html')
-			self.end_headers()
-			self.wfile.write('user homepage')
-
-
-		# homepage
-		elif re.match('/$', self.path):
-
-			self.send_header('Content-type', 'text-html')
-			self.end_headers()
-			self.wfile.write('homepage')
-
-		else:
-			self.send_response(404)
-		return
-
-	def do_POST(self):
-
-		self.send_header('Content-type', 'application/json')
-		self.end_headers()
-		
-		# If the body isn't JSON then reject
-		if self.headers['Content-Type'] != 'application/json':
-			
-			self.send_response(400)
-			data = {'message' : 'Need JSON in the body'}
-			self.wfile.write(json.dumps(data))
-
-		else:
-
-			length = int(self.headers['Content-Length'])
-			response_json = self.rfile.read(length)
-			parsed_json = json.loads(response_json)
-
-			# creating an account
-			if re.match('/create', self.path):
-				self.send_response(200)
-				self.createAccount(parsed_json)
-
-			# saving
-			elif re.match('/save', self.path):
-
-				required_items = ['name', 'level', 'email', 'user_id', \
-								  'username', 'password', 'experience', \
-								  'hq_level', 'resource_buildings', 'decorative_buildings']
-
-				# update the data and send a success response
-				if all (item in parsed_json for item in (required_items)):
-
-					self.save(parsed_json)
-
-				# if the required elements are not present send an error message
-				else:
-					
-					self.send_response(400)
-					data = {'error' : 'Missing json items'}
-					self.wfile.write(json.dumps(data))
-					print('failed saving')
-
-			# adding a friend connection
-			elif re.match('/friends', self.path):
-				user_id = parsed_json['user_id']
-				friend_name = parsed_json['friend']
-
-				friend = queries.find_user_from_username(friend_name)
-				user =  queries.find_user_from_id(user_id)
-			
-				try:
-					queries.add_friend(user_id, friend.user_id)
-
-					print(user.username + ' and ' + friend.username + ' are now friends!')
-					self.send_response(200)
-
-				except:
-					queries.rollback()
-					self.send_response(400)
-					data = {'error': 'already friends'}	
-					self.wfile.write(json.dumps(data))
-
-			else:
-				self.send_response(404)
-				self.wfile.write("Not a url")
-
-	# creates an account in the database
-	def createAccount(self, body):
-
-		self.send_header('Content-Type', 'application/json')
-		self.end_headers()
-
-		if all (parameter in body for parameter in ('name', 'email', 'username', 'password')):
-			name = body['name']
-			email = body['email']
-			username = body['username']
-			password = body['password']
-
-			data = {}
-
-			try:
-				queries.create_account(name = name, username = username, email = email, password = password)
-				user_id = queries.log_in(username = username, password = password)
-				data['user_id'] = user_id
-				print("account created")
-				print("name: " + name + "\nusername: " + username + "\nemail: " + email + '\n')
-
-			except:
-				queries.rollback()
-				self.send_response(400)
-				data['error'] = 'duplicate entry'
-				print('Duplicate account entry attempted for\nname: ' + name + '\nusername' + username + '\nemail: ' + email + '\n')
-
-			self.wfile.write(json.dumps(data))
-
-			
-		else:
-			self.send_response(400)
-			data = {}
-			data['error'] = 'missing parameter'
-			self.wfile.write(json.dumps(data))
-
-	# logs into the database and returns user info
-	def login(self, parameters):
-
-		self.send_header('Content-type', 'application/json')
-		self.end_headers()
-
-		if 'user' in parameters and 'pass' in parameters:
-			username = parameters['user'][0]
-			password = parameters['pass'][0]
-			
-			user = queries.log_in(username = username, password = password)
-
-			data = {}
-
-			if user is None: 
-				self.send_response(400)
-				data['error'] = 'no username password combination exists'
-				print("user: " + username + " failed to log in")
-
-			else:
-				self.send_response(200)
-
-				resource_buildings = queries.get_user_resource_buildings(user.user_id)
-				decorative_buildings = queries.get_user_decorative_buildings(user.user_id)
-				data['user_id'] = user.user_id
-				data['experience'] = user.experience
-				data['headquarters_level'] = user.headquarters_level
-				data['level'] = user.level
-				data['resource_buildings'] = resource_buildings
-				data['decorative_buildings'] = decorative_buildings
-
-				print("user: " + username + " is logging in with user id: " + str(user.user_id) + "\n")
-
-			self.wfile.write(json.dumps(data))
+            self.send_header('Content-type', 'text-html')
+            self.end_headers()
+            self.wfile.write('user homepage')
 
 
-		else:
-			self.send_response(400)
-			self.wfile.write('Need a username and password')
+        # homepage
+        elif re.match('/$', self.path):
 
-	# returns the friends of a user in JSON
-	def getFriends(self, parameters):
+            self.send_header('Content-type', 'text-html')
+            self.end_headers()
+            self.wfile.write('homepage')
 
-		self.send_header('Content-type', 'application/json')
-		self.end_headers()
+        else:
+            self.send_response(404)
+        return
 
-		data = {}
+    def do_POST(self):
 
-		if 'user' in parameters:
-			friends = queries.get_friends(parameters['user'][0])
-			data['friends'] = friends
-			self.wfile.write(json.dumps(data))
-		else:
-			self.send_response(400)
-			data['error'] = 'need a user ID'
-			self.wfile.write(json.dumps(data))
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+        
+        # If the body isn't JSON then reject
+        if self.headers['Content-Type'] != 'application/json':
+            
+            self.send_response(400)
+            data = {'message' : 'Need JSON in the body'}
+            self.wfile.write(json.dumps(data))
 
-	# saves the users info and building data
-	def save(self, parsed_json):
-		
-		resource_buildings = parsed_json['resource_buildings']
- 		decorative_buildings = parsed_json['decorative_buildings']
-		user_id = parsed_json['user_id']
+        else:
 
-		queries.save_user_info(parsed_json)
-		queries.save_building_info(resource_buildings, decorative_buildings, user_id)
+            length = int(self.headers['Content-Length'])
+            response_json = self.rfile.read(length)
+            parsed_json = json.loads(response_json)
 
-		data = {'message' : 'Save successful!'} 
-		self.send_response(200)
-		self.wfile.write(json.dumps(data))
-		print(parsed_json['username'] + ' saved')
+            # creating an account
+            if re.match('/create', self.path):
+                self.send_response(200)
+                self.createAccount(parsed_json)
 
+            # saving
+            elif re.match('/save', self.path):
+
+                required_items = ['name', 'level', 'email', 'user_id', \
+                                  'username', 'password', 'experience', \
+                                  'hq_level', 'resource_buildings', \
+                                  'decorative_buildings'\
+                                 ]
+
+                # update the data and send a success response
+                if all (item in parsed_json for item in (required_items)):
+
+                    self.save(parsed_json)
+
+                # if the required elements are not present send an error message
+                else:
+                    
+                    self.send_response(400)
+                    data = {'error' : 'Missing json items'}
+                    self.wfile.write(json.dumps(data))
+                    print('failed saving')
+
+            # adding a friend connection
+            elif re.match('/friends', self.path):
+                user_id = parsed_json['user_id']
+                friend_name = parsed_json['friend']
+
+                friend = queries.find_user_from_username(friend_name)
+                user =  queries.find_user_from_id(user_id)
+            
+                try:
+                    queries.add_friend(user_id, friend.user_id)
+
+                    print(user.username + ' and ' + \
+                          friend.username + ' are now friends!')
+
+                    self.send_response(200)
+
+                except:
+                    queries.rollback()
+                    self.send_response(400)
+                    data = {'error': 'already friends'} 
+                    self.wfile.write(json.dumps(data))
+
+            else:
+                self.send_response(404)
+                self.wfile.write("Not a url")
+
+    # creates an account in the database
+    def createAccount(self, body):
+
+        self.send_header('Content-Type', 'application/json')
+        self.end_headers()
+
+        required_parameters = ['name', 'email', 'username', 'password'] 
+
+        if all (parameter in body for parameter in required_parameters):
+            name = body['name']
+            email = body['email']
+            username = body['username']
+            password = body['password']
+
+            data = {}
+
+            try:
+                queries.create_account(name = name, \
+                                       username = username, \
+                                       email = email, \
+                                       password = password \
+                                      )
+
+                user = queries.log_in(username = username, \
+                                         password = password \
+                                        )
+                
+                data['user_id'] = user.user_id
+
+                print("account created")
+                print("name: " + name + \
+                      "\nusername: " + username + \
+                      "\nemail: " + email + '\n' \
+                      )
+
+            except:
+                queries.rollback()
+                self.send_response(400)
+                data['error'] = 'duplicate entry'
+                print('Duplicate account entry attempted for\nname: ' + name + \
+                      '\nusername' + username + 
+                      '\nemail: ' + email + '\n' \
+                     )
+            print(data)
+            self.wfile.write(json.dumps(data))
+
+            
+        else:
+            self.send_response(400)
+            data = {}
+            data['error'] = 'missing parameter'
+            self.wfile.write(json.dumps(data))
+
+    # logs into the database and returns user info
+    def login(self, parameters):
+
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+
+        if 'user' in parameters and 'pass' in parameters:
+            username = parameters['user'][0]
+            password = parameters['pass'][0]
+            
+            user = queries.log_in(username = username, password = password)
+
+            data = {}
+
+            if user is None: 
+                self.send_response(400)
+                data['error'] = 'no username password combination exists'
+                print("user: " + username + " failed to log in")
+
+            else:
+                self.send_response(200)
+
+                resource_buildings = queries.get_user_resource_buildings(user.user_id)
+                decorative_buildings = queries.get_user_decorative_buildings(user.user_id)
+                data['user_id'] = user.user_id
+                data['experience'] = user.experience
+                data['headquarters_level'] = user.headquarters_level
+                data['level'] = user.level
+                data['resource_buildings'] = resource_buildings
+                data['decorative_buildings'] = decorative_buildings
+
+                print("user: " + username + \
+                      " is logging in with user id: " + \
+                      str(user.user_id) + "\n")
+
+            self.wfile.write(json.dumps(data))
+
+
+        else:
+            self.send_response(400)
+            self.wfile.write('Need a username and password')
+
+    # returns the friends of a user in JSON
+    def getFriends(self, parameters):
+
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+
+        data = {}
+
+        if 'user' in parameters:
+            friends = queries.get_friends(parameters['user'][0])
+            data['friends'] = friends
+            self.wfile.write(json.dumps(data))
+        else:
+            self.send_response(400)
+            data['error'] = 'need a user ID'
+            self.wfile.write(json.dumps(data))
+
+    # saves the users info and building data
+    def save(self, parsed_json):
+        
+        resource_buildings = parsed_json['resource_buildings']
+        decorative_buildings = parsed_json['decorative_buildings']
+        user_id = parsed_json['user_id']
+
+        queries.save_user_info(parsed_json)
+        queries.save_building_info(resource_buildings, \
+                                   decorative_buildings, \
+                                   user_id\
+                                  )
+
+        data = {'message' : 'Save successful!'} 
+        self.send_response(200)
+        self.wfile.write(json.dumps(data))
+        print(parsed_json['username'] + ' saved')
+
+
+# starting the server
 print('http server is starting...')
 
 server_address = ('127.0.0.1', 8000)
@@ -240,4 +268,4 @@ print('http server is running on 127.0.0.1:8000')
 httpd.serve_forever()
 
 if __name__ == '__main__':
-	run
+    run
