@@ -211,6 +211,18 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
                 data['level'] = user.level
                 data['resource_buildings'] = resource_buildings
                 data['decorative_buildings'] = decorative_buildings
+                data['fire'] = user.fire
+                data['water'] = user.water
+                data['air'] = user.air
+                data['earth'] = user.earth
+                data['maxFire'] = user.maxFire
+                data['maxWater'] = user.maxWater
+                data['maxEarth'] = user.maxEarth
+                data['maxAir'] = user.maxAir
+                data['fireEle'] = user.fireEle
+                data['waterEle'] = user.waterEle
+                data['earthEle'] = user.earthEle
+                data['airEle'] = user.airEle
 
                 print("user: " + username + \
                       " is logging in with user id: " + \
