@@ -102,8 +102,8 @@ public class BuildingManager : MonoBehaviour {
 		Building newBuilding = tile.PlaceBuilding (prefab);
 
 		// TODO this feels pretty iffy
-		if (SaveState.state.resourceBuildings.ContainsKey (tile.index)) {
-			//SaveState.state.resourceBuildings.Add (tile.index, newBuilding);
+		if (!SaveState.state.resourceBuildings.ContainsKey (tile.index)) {
+			SaveState.state.resourceBuildings.Add (tile.index, newBuilding);
 		}
 	}
 	private bool isTileTaken(Tuple t){

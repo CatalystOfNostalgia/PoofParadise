@@ -43,8 +43,6 @@ public class SaveState : MonoBehaviour {
 	 */
 	public void Awake() {
 		
-		Debug.Log ("waking");
-		
 		if (state == null) {
 			DontDestroyOnLoad(gameObject);
 			state = this;
@@ -107,8 +105,6 @@ public class SaveState : MonoBehaviour {
 		
 		// get the JSON from the server
 		String userInfo = GetHTTP.login("ted1", "password");
-		
-		Debug.Log (userInfo);
 
 		loadJSON (userInfo);
 		

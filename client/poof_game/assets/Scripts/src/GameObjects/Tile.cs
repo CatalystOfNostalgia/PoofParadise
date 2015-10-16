@@ -32,7 +32,6 @@ public class Tile : MonoBehaviour {
 	{
 		if (isVacant) {
 
-			Debug.Log ("instantiating building");
 			building = Instantiate (newbuilding, 
 			            			new Vector3(this.transform.position.x, 
 			            			 			this.transform.position.y - .65f, 
