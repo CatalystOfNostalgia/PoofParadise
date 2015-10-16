@@ -99,7 +99,21 @@ public class BuildingManager : MonoBehaviour {
 	 * 		a. instantiate the game object
 	 * 4. Allow user to cancel
 	 */
-	private Building PlaceBuilding(Building prefab) {
+	private void PlaceBuilding(Building prefab) {
+
+		Debug.Log ("adding building to tile");
+
+		if (prefab == null) {
+			Debug.Log ("null prefab");
+		}
+
+		Building newBuilding = selectedTile.PlaceBuilding (prefab);
+
+
+		Debug.Log ("adding building to saveState");
+		SaveState.state.resourceBuildings.Add(selectedTile.index, newBuilding);
+
+		/* 
 		Vector3 mousePosition = getCurrentMousePosition ();
 
 		Tile tile = selectedTile;
@@ -121,16 +135,6 @@ public class BuildingManager : MonoBehaviour {
             }
 
 			SaveState.state.resourceBuildings.Add(tile.index, newBuilding);
-
-			// commenting this out so it only saves a building once.
-			/*
-            SaveState.state.existingBuildingDict.Add(tuple, newBuilding);
-            
-			SaveState.state.existingBuildingDict.Add(d, newBuilding);
-			SaveState.state.existingBuildingDict.Add(l, newBuilding);
-			SaveState.state.existingBuildingDict.Add(dl, newBuilding);
-
-			*/
 			
 			Debug.Log(SaveState.state.resourceBuildings[tuple]);
 			
@@ -143,26 +147,8 @@ public class BuildingManager : MonoBehaviour {
 			return newBuilding;
 		}
 		return null;
-	}
 
-	// TODO this might not be needed anymore with the new way of getting the closest tile.
-
-	private Tile closestTile (Vector3 mousePos){
-		Tile closestTile = null;
-		float closestDistance = 0;
-		//is there better algorithm for getting the tile that is closest to the cursor?
-		foreach(Tile t in TileScript.grid.GetComponentsInChildren<Tile>()){
-			float distance = getDistance(mousePos.x, mousePos.y, t.transform.position.x, t.transform.position.y);
-			if (closestTile ==null){
-				closestTile = t;
-				closestDistance = distance;
-			}
-			else if ( distance < closestDistance){
-				closestTile = t;
-				closestDistance = distance;
-			}
-		}
-		return closestTile;
+		*/
 	}
 
 	private bool isTileTaken(Tuple t){

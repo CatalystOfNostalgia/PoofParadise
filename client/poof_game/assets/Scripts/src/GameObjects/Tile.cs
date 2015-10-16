@@ -9,6 +9,9 @@ public class Tile : MonoBehaviour {
     // A boolean to determine if this tile is vacant
     public bool isVacant { get; set; }
 
+	// the building occupying this tile
+	public Building building { get; set; }
+
     // Tile ID value
     public int id { get; set; }
 
@@ -33,6 +36,34 @@ public class Tile : MonoBehaviour {
     {
         isVacant = true;
     }
+
+	public Building PlaceBuilding(Building newbuilding) 
+	{
+
+		if (newbuilding == null) {
+			Debug.Log("null newbuilding");
+		}
+
+		if (isVacant) {
+			building = Instantiate (newbuilding, 
+			            			new Vector3(this.transform.position.x, 
+			            			 			this.transform.position.y - .65f, 
+			            						this.transform.position.y - .65f
+			            			), 
+			             			Quaternion.identity
+			             			) as Building;
+
+			// set tiles to filled
+			isVacant = false;
+			leftTile.isVacant = false; 
+			downTile.isVacant = false;
+			downLeftTile.isVacant = false;
+
+			return building;
+		}
+
+		return null;
+	}
 
     /**
      * A method that works with
