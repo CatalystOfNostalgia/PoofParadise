@@ -37,8 +37,8 @@ def sample_insert_building(name):
     build1 = models.user_building.UserResourceBuilding( \
 		user_id = user_id, \
 		building_info_id = building_info_id, \
-		position_x = random.randrange(10), \
-		position_y = random.randrange(15)
+		position_x = random.randrange(25), \
+		position_y = random.randrange(25)
         )
 
     build1_info = models.building_info.ResourceBuildingInfo( \

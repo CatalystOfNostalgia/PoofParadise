@@ -7,7 +7,7 @@ public class Tile : MonoBehaviour {
     public Tuple index { get; set; }
 
     // A boolean to determine if this tile is vacant
-    public bool isVacant { get; set; }
+	public bool isVacant { get; set; }
 
 	// the building occupying this tile
 	public Building building { get; set; }
@@ -28,23 +28,11 @@ public class Tile : MonoBehaviour {
     // A private field for the color of this object
     private Color startColor;
 
-    /**
-     * Used for initialization of
-     * Unity game objects
-     */
-    void Start()
-    {
-        isVacant = true;
-    }
-
 	public Building PlaceBuilding(Building newbuilding) 
 	{
-
-		if (newbuilding == null) {
-			Debug.Log("null newbuilding");
-		}
-
 		if (isVacant) {
+
+			Debug.Log ("instantiating building");
 			building = Instantiate (newbuilding, 
 			            			new Vector3(this.transform.position.x, 
 			            			 			this.transform.position.y - .65f, 
@@ -71,10 +59,7 @@ public class Tile : MonoBehaviour {
      */
     void OnMouseDown()
     {
-        Debug.Log(index.ToString());
-        foreach (Tile t in GetAdjacentTiles()) {
-            Debug.Log(t.id);
-        }
+
     }
 
     /**

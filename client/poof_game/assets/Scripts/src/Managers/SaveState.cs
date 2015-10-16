@@ -109,15 +109,8 @@ public class SaveState : MonoBehaviour {
 		String userInfo = GetHTTP.login("ted1", "password");
 		
 		Debug.Log (userInfo);
-		
-		// TODO parse the JSON into data
-		loadJSON (userInfo);
 
-		foreach (KeyValuePair<Tuple, Building> entry in resourceBuildings) {
-			Debug.Log ("building at position " + entry.Key.x + ", " + entry.Key.y);
-		}
-		
-		// TODO build the grid from the data
+		loadJSON (userInfo);
 		
 	}
 
@@ -160,7 +153,7 @@ public class SaveState : MonoBehaviour {
 	}
 
 	// This method populates the save data with data from a json string
-	public void loadJSON(String json){
+	private void loadJSON(String json){
 
 		JSONArray loadedResourceBuildings;
 		JSONArray loadedDecorativeBuildings;
@@ -214,8 +207,6 @@ public class SaveState : MonoBehaviour {
 					newBuilding = null;
 					break;
 			}
-
-			Debug.Log ("adding building at " + x + ", " + y);
 
 			resourceBuildings.Add(new Tuple(x, y), newBuilding);
 		}

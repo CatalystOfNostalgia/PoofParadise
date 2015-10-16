@@ -89,68 +89,23 @@ public class BuildingManager : MonoBehaviour {
 	public bool isOccupied (){
 		return false;
 	}
-	/**
-	 * 1. get the closest tile at cursor location
-	 * 		a. if too far away, noop
-	 * 2. Check to see if there is already a building at the tile
-	 * 		a. if true, noop
-	 * 		b. if there aren't any building, claim the tile(s)
-	 * 3. Place building at the tile
-	 * 		a. instantiate the game object
-	 * 4. Allow user to cancel
-	 */
-	private void PlaceBuilding(Building prefab) {
 
-		Debug.Log ("adding building to tile");
+	// places a building on the currently selected tile
+	public void PlaceBuilding(Building prefab) {
 
-		if (prefab == null) {
-			Debug.Log ("null prefab");
-		}
-
-		Building newBuilding = selectedTile.PlaceBuilding (prefab);
-
-
-		Debug.Log ("adding building to saveState");
-		SaveState.state.resourceBuildings.Add(selectedTile.index, newBuilding);
-
-		/* 
-		Vector3 mousePosition = getCurrentMousePosition ();
-
-		Tile tile = selectedTile;
-		//Tile tile = closestTile (mousePosition);
-		Tuple tuple = tile.index;
-		
-		// Hard codin some shit that should be in a method by itself
-		//		makes sure you can't over lap buildings
-		Tuple l = new Tuple (tile.leftTile.index.x, tile.leftTile.index.y);
-		Tuple d = new Tuple (tile.downTile.index.x, tile.downTile.index.y);
-		Tuple dl = new Tuple (tile.downLeftTile.index.x, tile.downLeftTile.index.y);
-		
-        if (!isTileTaken (tuple)) {
-            Debug.Log("You just created a building");
-            Building newBuilding = Instantiate (prefab, new Vector3(tile.transform.position.x, tile.transform.position.y - .65f, tile.transform.position.y - .65f), Quaternion.identity) as Building;
-            if (newBuilding == null)
-            {
-                Debug.Log("Failed to save instantiated object");
-            }
-
-			SaveState.state.resourceBuildings.Add(tile.index, newBuilding);
-			
-			Debug.Log(SaveState.state.resourceBuildings[tuple]);
-			
-			tile.isVacant = false; // Paints placed tile red
-			tile.leftTile.isVacant = false; // and nearby 3 tiles
-			tile.downTile.isVacant = false;
-			tile.downLeftTile.isVacant = false;
-			
-            //Debug.Log(newBuilding.ToJSON());
-			return newBuilding;
-		}
-		return null;
-
-		*/
+		PlaceBuilding (prefab, selectedTile);
 	}
+	
+	// places a building on the given tile
+	public void PlaceBuilding (Building prefab, Tile tile) {
 
+		Building newBuilding = tile.PlaceBuilding (prefab);
+
+		// TODO this feels pretty iffy
+		if (SaveState.state.resourceBuildings.ContainsKey (tile.index)) {
+			//SaveState.state.resourceBuildings.Add (tile.index, newBuilding);
+		}
+	}
 	private bool isTileTaken(Tuple t){
 		return SaveState.state.resourceBuildings.ContainsKey (t);
 
