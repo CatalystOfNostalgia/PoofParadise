@@ -5,8 +5,6 @@ name_pool = ['Ted', 'Margaret', 'Eric', 'Anthony', 'Jeremy', 'Anjana', \
              'Robert', 'Alex', 'Austin', 'Brittany', 'William', 'Bryn', 'Zach',\
              'Alberto', 'Ian', 'Dan', 'Madison', 'Dylan', 'Lisa']
 
-building_info_id = 0
-
 def sample_insert_group():
     for name in name_pool:
         if not exists(name):
@@ -40,22 +38,7 @@ def sample_insert_building(name):
         position_x = random.randrange(25), \
         position_y = random.randrange(25)
         )
-    
-#    build1_info = models.building_info.ResourceBuildingInfo( \
-#        name = 'Fire Tree', \
-#        size = 2, \
-#        level = 1, \
-#        next_building_id = building_info_id + 1, \
-#        resource_cost_fire = 100, \
-#        resource_cost_water = 100, \
-#        resource_cost_air = 100, \
-#        resource_cost_earth = 100,\
-#        production_rate = 10,\
-#        production_type = 0, \
-#        experience_gain = 5)
-
     models.session.add(build1)
-    #models.session.add(build1_info)
     models.session.commit()
     print (name + " added a building")
 
