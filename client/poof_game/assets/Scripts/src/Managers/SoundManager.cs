@@ -8,7 +8,9 @@ public class SoundManager : MonoBehaviour {
 	public AudioSource currentSong { get; set;}
 	bool currentSongPlayed;
 	bool isPlayingSpecialRequestSong;
-	public float musicVolume { get; set; }
+	//this volume field gets changed by a slider in the scene
+	//should we create an explicit script to do so or is it fine to let generic unity slider to change it?
+	public float musicVolume { get; set; } 
 
 	int index;
 
@@ -68,6 +70,7 @@ public class SoundManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		currentSong.volume = musicVolume;
 		if (!currentSong.isPlaying && isPlayingSpecialRequestSong) {
 			if (!currentSongPlayed){
 				return;
