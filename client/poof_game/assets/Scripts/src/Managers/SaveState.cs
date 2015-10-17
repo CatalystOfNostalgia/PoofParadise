@@ -185,19 +185,31 @@ public class SaveState : MonoBehaviour {
 
 			Building newBuilding;
 
-			switch (building["production_type"].AsInt) {
+			switch (building["building_info_id"].AsInt) {
 
-				case 0:
-					newBuilding = BuildingManager.manager.fire;
-					break;
 				case 1:
-					newBuilding = BuildingManager.manager.pond;
+					newBuilding = BuildingManager.manager.fireTreeLevel1;
 					break;
 				case 2:
-					newBuilding = BuildingManager.manager.cave;
+					newBuilding = BuildingManager.manager.fireTreeLevel2;
 					break;
 				case 3:
-					newBuilding = BuildingManager.manager.windmill;
+					newBuilding = BuildingManager.manager.pondLevel1;
+					break;
+				case 4:
+					newBuilding = BuildingManager.manager.pondLevel2;
+					break;
+				case 5:
+					newBuilding = BuildingManager.manager.windmillLevel1;
+					break;
+				case 6:
+					newBuilding = BuildingManager.manager.windmillLevel2;
+					break;
+				case 7:
+					newBuilding = BuildingManager.manager.caveLevel1;
+					break;
+				case 8:
+					newBuilding = BuildingManager.manager.caveLevel2;
 					break;
 				default:
 					newBuilding = null;

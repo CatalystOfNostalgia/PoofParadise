@@ -8,10 +8,14 @@ public class BuildingManager : MonoBehaviour {
 	 * just dragging gameobjects to here for now
 	 * maybe we can just search them later?
 	 */
-	public Building windmill;
-	public Building pond;
-	public Building fire;
-	public Building cave;
+	public Building windmillLevel1;
+	public Building windmillLevel2;
+	public Building pondLevel1;
+	public Building pondLevel2;
+	public Building fireTreeLevel1;
+	public Building fireTreeLevel2;
+	public Building caveLevel1;
+	public Building caveLevel2;
 
 	private Building target;
 
@@ -41,19 +45,19 @@ public class BuildingManager : MonoBehaviour {
 		buildingMode = true;
 		switch (buildingNum) {
 		case 1:
-			target = fire;
+			target = fireTreeLevel1;
 			break;
 		case 2:
-			target = pond;
+			target = pondLevel1;
 			break;
 		case 3:
-			target = cave;
+			target = caveLevel1;
 			break;
 		case 4:
-			target = windmill;
+			target = windmillLevel1;
 			break;
 		default:
-			target = windmill;
+			target = windmillLevel1;
 			break;
 		}
 	}
@@ -67,19 +71,19 @@ public class BuildingManager : MonoBehaviour {
 		buildingMode = true;
 		switch (buttonNum) {
 		case 1:
-			target = fire;
+			target = fireTreeLevel1;
 			break;
 		case 2:
-			target = pond;
+			target = pondLevel1;
 			break;
 		case 3:
-			target = cave;
+			target = caveLevel1;
 			break;
 		case 4:
-			target = windmill;
+			target = windmillLevel1;
 			break;
 		default:
-			target = windmill;
+			target = windmillLevel1;
 			break;
 		}
 	}
@@ -126,7 +130,7 @@ public class BuildingManager : MonoBehaviour {
 
 		Instance ();
 		buildingTypeDict = new Dictionary<string, Building>();
-		buildingTypeDict.Add ("fire", fire);
+		buildingTypeDict.Add ("fire", fireTreeLevel1);
 		existingBuildingDict = new Dictionary<Tuple, Building>();
 
 	}
