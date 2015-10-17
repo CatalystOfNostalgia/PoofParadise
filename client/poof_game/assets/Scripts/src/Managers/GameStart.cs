@@ -38,6 +38,8 @@ public class GameStart : MonoBehaviour {
 		TileScript.grid.BuildGameGrid ();
 		TileScript.grid.PopulateGameGrid ();
         GameManager.gameManager.SpawnPoofs();
+        GameManager.gameManager.SpawnBuildings(SaveState.state.resourceBuildings);
+        GameManager.gameManager.SpawnBuildings(SaveState.state.decorativeBuildings);
     }
 
     /**

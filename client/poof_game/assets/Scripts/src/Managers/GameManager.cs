@@ -118,4 +118,13 @@ public class GameManager : MonoBehaviour {
     {
         return TileScript.grid.GetTile(spawnPoint).transform.position;
     }
+
+    public void SpawnBuildings(Dictionary<Tuple, Building> buildings)
+    {
+        foreach (KeyValuePair<Tuple, Building> pair in buildings)
+        {
+            Vector3 spawnVector = GetSpawnVector(pair.Key);
+            Instantiate(pair.Value, spawnVector, Quaternion.identity);
+        }
+    }
 }
