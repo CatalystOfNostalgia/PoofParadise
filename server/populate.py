@@ -31,31 +31,31 @@ def sample_select_buildings_group():
 def sample_insert_building(name):
     user_id = models.session.query(models.User).filter(models.User.name==name).one().user_id
     lv = random.randrange(10)
-    global building_info_id 
+    building_info_id = random.randrange(8)
     building_info_id = building_info_id + 1
 
     build1 = models.user_building.UserResourceBuilding( \
-		user_id = user_id, \
-		building_info_id = building_info_id, \
-		position_x = random.randrange(25), \
-		position_y = random.randrange(25)
+        user_id = user_id, \
+        building_info_id = building_info_id, \
+        position_x = random.randrange(25), \
+        position_y = random.randrange(25)
         )
-
-    build1_info = models.building_info.ResourceBuildingInfo( \
-        name = 'Fire Tree', \
-        size = 2, \
-        level = 1, \
-        next_building_id = building_info_id + 1, \
-        resource_cost_fire = 100, \
-        resource_cost_water = 100, \
-        resource_cost_air = 100, \
-        resource_cost_earth = 100,\
-        production_rate = 10,\
-        production_type = 0, \
-        experience_gain = 5)
+    
+#    build1_info = models.building_info.ResourceBuildingInfo( \
+#        name = 'Fire Tree', \
+#        size = 2, \
+#        level = 1, \
+#        next_building_id = building_info_id + 1, \
+#        resource_cost_fire = 100, \
+#        resource_cost_water = 100, \
+#        resource_cost_air = 100, \
+#        resource_cost_earth = 100,\
+#        production_rate = 10,\
+#        production_type = 0, \
+#        experience_gain = 5)
 
     models.session.add(build1)
-    models.session.add(build1_info)
+    #models.session.add(build1_info)
     models.session.commit()
     print (name + " added a building")
 

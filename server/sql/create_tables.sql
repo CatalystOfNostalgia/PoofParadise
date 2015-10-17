@@ -1,3 +1,5 @@
+-- Create statements for the database tables
+
 DROP DATABASE IF EXISTS gravehub;
 CREATE SCHEMA IF NOT EXISTS gravehub;
 USE gravehub;
