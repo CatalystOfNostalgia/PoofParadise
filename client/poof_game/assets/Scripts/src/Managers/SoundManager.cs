@@ -3,10 +3,10 @@ using System.Collections;
 
 public class SoundManager : MonoBehaviour {
 	
-	AudioSource[] playlist { get; set;}
-	AudioSource currentSong {get;}
+	public AudioSource[] playlist { get; set;}
+	public AudioSource currentSong {get;}
 	bool currentSongPlayed;
-	float musicVolume { get; set; }
+	public float musicVolume { get; set; }
 
 	int index;
 	private static SoundManager soundManager;
@@ -25,7 +25,21 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	public void stopSong(){
+		currentSong.Stop ();
+	}
 
+	public void nextSong(){
+		stopSong (); //might be redundant
+		currentSongPlayed = false;
+		index++;
+		currentSong = playlist[index % playlist.Length];
+	}
+
+	public void previousSong(){
+		stopSong (); //might be redundant
+		currentSongPlayed = false;
+		index--;
+		currentSong = playlist[index % playlist.Length];
 	}
 
 	// Use this for initialization
@@ -49,9 +63,7 @@ public class SoundManager : MonoBehaviour {
 				currentSongPlayed = true;
 			}
 			else {//finished the song
-				currentSongPlayed = false;
-				index++;
-				currentSong = playlist[index % playlist.Length];
+				nextSong();
 			}
 		}
 	}
