@@ -41,7 +41,7 @@ public class GameStart : MonoBehaviour {
      */
     private bool SceneIsReady()
     {
-        if (GameManager.gameManager == null || SaveState.state == null || TileScript.grid == null || bManager == null)
+        if (GameManager.gameManager == null || SaveState.state == null || TileScript.grid == null || BuildingManager.manager == null)
         {
             return false;
         }
