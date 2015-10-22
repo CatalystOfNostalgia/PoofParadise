@@ -9,7 +9,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	public int buildingInstance;
 	private GameObject draggingIcon;
 	private RectTransform draggingPlane;
-	GameObject modalPanel;
+	GameObject buildingModalPanel;
 	public void OnBeginDrag (PointerEventData eventData){
 		//Canvas canvas = GetComponent<Canvas>();
 		Canvas canvas = FindInParents<Canvas> (gameObject);
@@ -44,9 +44,9 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		setDraggedPosition(eventData);
 
 		//find the modal panel
-		modalPanel = FindInParents<BringToFront> (gameObject).gameObject;//searching for BringToFront because that's what modal panel has
+		buildingModalPanel = FindInParents<BringToFront> (gameObject).gameObject;//searching for BringToFront because that's what modal panel has
 		//hide the modal panel renderer
-		foreach (CanvasRenderer renderer in modalPanel.GetComponentsInChildren<CanvasRenderer>()) {
+		foreach (CanvasRenderer renderer in buildingModalPanel.GetComponentsInChildren<CanvasRenderer>()) {
 			renderer.Clear();
 		}
 	}
@@ -77,7 +77,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		if (draggingIcon != null) {
 			Destroy(draggingIcon);
 		}
-		modalPanel.SetActive (false);
+		buildingModalPanel.SetActive (false);
 	}
 
 	static public T FindInParents<T>(GameObject go) where T : Component
