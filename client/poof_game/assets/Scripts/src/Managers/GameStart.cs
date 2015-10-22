@@ -34,12 +34,9 @@ public class GameStart : MonoBehaviour {
 
 		// build and populate the game grid
 
-		SaveState.state.PullFromServer ();
 		TileScript.grid.BuildGameGrid ();
-		TileScript.grid.PopulateGameGrid ();
         GameManager.gameManager.SpawnPoofs();
-        GameManager.gameManager.SpawnBuildings(SaveState.state.resourceBuildings);
-        GameManager.gameManager.SpawnBuildings(SaveState.state.decorativeBuildings);
+       
     }
 
     /**
@@ -58,5 +55,6 @@ public class GameStart : MonoBehaviour {
     public void TestJSON()
     {
 		SaveState.state.PullFromServer ();
+		TileScript.grid.PopulateGameGrid ();
     }
 }
