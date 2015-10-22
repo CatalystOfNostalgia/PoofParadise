@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour {
         foreach (KeyValuePair<Tuple, Building> pair in SaveState.state.resourceBuildings)
         {
             Vector3 target = GetSpawnVector(pair.Key);
+            target.z = target.z - 1;
             Instantiate(pair.Value, target, Quaternion.identity);
         }
     }
