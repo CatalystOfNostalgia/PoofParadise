@@ -31,7 +31,9 @@ public class GameStart : MonoBehaviour {
         {
             yield return null;
         }
-        Debug.Log("Scene is ready! Spawning poofs.");
+        Debug.Log("Scene is ready to load all data!");
+        SaveState.state.PullFromServer();
+        GameManager.gameManager.SpawnBuildings();
         GameManager.gameManager.SpawnPoofs();
     }
 
