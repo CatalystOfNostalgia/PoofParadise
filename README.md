@@ -1,5 +1,4 @@
 # Poof Paradise 
-of Paradise 
 
 ## Background
 Because of environment degradation Poofs have left the forest for greener 
@@ -14,7 +13,7 @@ return to bring joy back into the Elemari's lives.
 ## Characters
 
 ### Poofs
-Periofaba oofarvumsus, or Poofs are a furry species that bring joy and happiness
+Periofaba Oofarvumsus, or Poofs are a furry species that bring joy and happiness
 wherever they go.
 
 ![Periofaba oofarvumsus](https://raw.githubusercontent.com/CatalystOfNostalgia/gravehub/Alex_%234_Art_Updates/client/poof_game/assets/images/Characters/Poof%20front.png)
