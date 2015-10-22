@@ -114,7 +114,6 @@ def get_user_decorative_buildings( user_id ):
 # gets the building info of a resource building
 def get_resource_building_info( building_info_id ):
 
-	print('looking for info id ' + str(building_info_id))
 	building_info = models.session.query(models.ResourceBuildingInfo).filter(models.ResourceBuildingInfo.building_info_id == building_info_id).one()
 
 	building = {}
