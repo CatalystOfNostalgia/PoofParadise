@@ -33,12 +33,12 @@ public class Tile : MonoBehaviour {
 		if (isVacant) {
 
 			building = Instantiate (newbuilding, 
-			            			new Vector3(this.transform.position.x, 
-			            			 			this.transform.position.y - .65f, 
-			            						this.transform.position.y - .65f
-			            			), 
-			             			Quaternion.identity
-			             			) as Building;
+									new Vector3(this.transform.position.x, 
+												this.transform.position.y - .65f, 
+												this.transform.position.y - .65f
+												), 
+									Quaternion.identity
+									) as Building;
 
 			// set tiles to filled
 			isVacant = false;
