@@ -9,6 +9,9 @@ public class Tile : MonoBehaviour {
     // A boolean to determine if this tile is vacant
     public bool isVacant { get; set; }
 
+    // the building occupying this tile
+    public Building building { get; set; }
+
     // Tile ID value
     public int id { get; set; }
 
@@ -25,13 +28,28 @@ public class Tile : MonoBehaviour {
     // A private field for the color of this object
     private Color startColor;
 
-    /**
-     * Used for initialization of
-     * Unity game objects
-     */
-    void Start()
+    public Building PlaceBuilding(Building newbuilding) 
     {
-        isVacant = true;
+        if (isVacant) {
+
+            building = Instantiate (newbuilding, 
+                                    new Vector3(this.transform.position.x, 
+                                    this.transform.position.y - .65f, 
+                                    this.transform.position.y - .65f
+                                               ), 
+                                    Quaternion.identity
+                                    ) as Building;
+
+            // set tiles to filled
+            isVacant = false;
+            leftTile.isVacant = false; 
+            downTile.isVacant = false;
+            downLeftTile.isVacant = false;
+
+            return building;
+        }
+
+        return null;
     }
 
     /**
@@ -54,7 +72,7 @@ public class Tile : MonoBehaviour {
     {
         startColor = GetComponent<Renderer>().material.color;
 
-		BuildingManager.manager.selectedTile = this;
+        BuildingManager.manager.selectedTile = this;
 
         if (isVacant)
         {

@@ -39,8 +39,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c05feffc9fbaa41a10c8971d976bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridX: 20
-  gridY: 30
+  gridX: 25
+  gridY: 25
   prefabs:
   - {fileID: 11470250, guid: b4bd629bec064ae43a94dda0335ce945, type: 2}
   - {fileID: 11455616, guid: 9bc629b379decbb4183f6d3c7b9c1ca4, type: 2}
@@ -65,11 +65,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: gridX
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: gridY
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: prefab.Array.data[0]
