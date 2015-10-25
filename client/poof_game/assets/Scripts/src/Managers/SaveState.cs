@@ -15,9 +15,10 @@ public class SaveState : MonoBehaviour {
 	public int userLevel { get; set; }
 	public int userExperience { get; set; }
 	public int hqLevel { get; set; }
-
+	public int poofCount { get; set; }
 	// List game state variables here
-	// Format: public <Type> <Name> { get; set; }
+
+	// resources
 	public int fire { get; set; }
 	public int air { get; set; }
 	public int water { get; set; }
@@ -26,19 +27,21 @@ public class SaveState : MonoBehaviour {
 	public int maxAir { get; set; }
 	public int maxWater { get; set; }
 	public int maxEarth { get; set; }
-    public int fireEle { get; set; }
-    public int waterEle { get; set; }
-    public int earthEle { get; set; }
-    public int airEle { get; set; }
-    public Dictionary<Tuple, Building> resourceBuildings { get; set; }
+
+	// elemari
+	public int fireEle { get; set; }
+	public int waterEle { get; set; }
+	public int earthEle { get; set; }
+	public int airEle { get; set; }
+
+	// buildings
+	public Dictionary<Tuple, Building> resourceBuildings { get; set; }
 	public Dictionary<Tuple, Building> decorativeBuildings { get; set; }
 	
 	/**
 	 * Produces a singleton on awake
 	 */
 	public void Awake() {
-		
-		Debug.Log ("waking");
 		
 		if (state == null) {
 			DontDestroyOnLoad(gameObject);
@@ -102,17 +105,8 @@ public class SaveState : MonoBehaviour {
 		
 		// get the JSON from the server
 		String userInfo = GetHTTP.login("ted1", "password");
-		
-		Debug.Log (userInfo);
-		
-		// TODO parse the JSON into data
-		loadJSON (userInfo);
 
-		foreach (KeyValuePair<Tuple, Building> entry in resourceBuildings) {
-			Debug.Log ("building at position " + entry.Key.x + ", " + entry.Key.y);
-		}
-		
-		// TODO build the grid from the data
+		loadJSON (userInfo);
 		
 	}
 
@@ -155,7 +149,7 @@ public class SaveState : MonoBehaviour {
 	}
 
 	// This method populates the save data with data from a json string
-	public void loadJSON(String json){
+	private void loadJSON(String json){
 
 		JSONArray loadedResourceBuildings;
 		JSONArray loadedDecorativeBuildings;
@@ -166,6 +160,22 @@ public class SaveState : MonoBehaviour {
 		userLevel = data ["level"].AsInt;
 		userExperience = data ["experience"].AsInt;
 		hqLevel = data ["headquarters_level"].AsInt;
+		fire = data ["fire"].AsInt;
+		water = data ["water"].AsInt;
+		earth = data ["earth"].AsInt;
+		air = data ["air"].AsInt;
+		maxFire = data ["max_fire"].AsInt;
+		maxWater = data ["max_water"].AsInt;
+		maxEarth = data ["max_earth"].AsInt;
+		maxAir = data ["max_air"].AsInt;
+		fireEle = data ["fire_ele"].AsInt;
+		waterEle = data ["water_ele"].AsInt;
+		earthEle = data ["earth_ele"].AsInt;
+		airEle = data ["air_ele"].AsInt;
+		poofCount = data ["poof_count"].AsInt;
+
+
+		// load the buildings
 		loadedResourceBuildings = data ["resource_buildings"].AsArray;
 		loadedDecorativeBuildings = data ["decorative_buildings"].AsArray;
 
@@ -175,26 +185,36 @@ public class SaveState : MonoBehaviour {
 
 			Building newBuilding;
 
-			switch (building["production_type"].AsInt) {
+			switch (building["building_info_id"].AsInt) {
 
-				case 0:
-					newBuilding = BuildingManager.manager.fire;
-					break;
 				case 1:
-					newBuilding = BuildingManager.manager.pond;
+					newBuilding = BuildingManager.manager.fireTreeLevel1;
 					break;
 				case 2:
-					newBuilding = BuildingManager.manager.cave;
+					newBuilding = BuildingManager.manager.fireTreeLevel2;
 					break;
 				case 3:
-					newBuilding = BuildingManager.manager.windmill;
+					newBuilding = BuildingManager.manager.pondLevel1;
+					break;
+				case 4:
+					newBuilding = BuildingManager.manager.pondLevel2;
+					break;
+				case 5:
+					newBuilding = BuildingManager.manager.windmillLevel1;
+					break;
+				case 6:
+					newBuilding = BuildingManager.manager.windmillLevel2;
+					break;
+				case 7:
+					newBuilding = BuildingManager.manager.caveLevel1;
+					break;
+				case 8:
+					newBuilding = BuildingManager.manager.caveLevel2;
 					break;
 				default:
 					newBuilding = null;
 					break;
 			}
-
-			Debug.Log ("adding building at " + x + ", " + y);
 
 			resourceBuildings.Add(new Tuple(x, y), newBuilding);
 		}
