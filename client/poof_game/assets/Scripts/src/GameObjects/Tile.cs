@@ -40,10 +40,10 @@ public class Tile : MonoBehaviour {
      */
     void OnMouseDown()
     {
-        Debug.Log(index.ToString());
-        foreach (Tile t in GetAdjacentTiles()) {
+        //Debug.Log(index.ToString());
+        //foreach (Tile t in GetAdjacentTiles()) {
             //Debug.Log(t.id);
-        }
+        //}
     }
 
     /**
