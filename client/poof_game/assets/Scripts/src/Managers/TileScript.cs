@@ -34,7 +34,6 @@ public class TileScript : MonoBehaviour {
             Destroy(gameObject);
         }
         tiles = new Tile[gridX * gridY];
-        BuildGameGrid();
     }
 
     /**
@@ -48,6 +47,17 @@ public class TileScript : MonoBehaviour {
         GenerateTiles(prefabs, transform.position, gridY, gridX);
         GiveNeighbors();
     }
+
+	/**
+	 * This will add all of the users buildings to the grid
+	 */
+	public void PopulateGameGrid()
+	{
+		foreach (KeyValuePair<Tuple, Building> entry in SaveState.state.resourceBuildings) 
+		{
+			BuildingManager.manager.PlaceBuilding(entry.Value, GetTile (entry.Key));
+		}
+	}
 
     /**
      * A method used for building the game grid
@@ -65,6 +75,7 @@ public class TileScript : MonoBehaviour {
                 myTile.transform.parent = this.transform; // Make tile a child of the grid
                 myTile.index = new Tuple(i, j);
                 myTile.id = tilesGenerated;
+				myTile.isVacant = true;
                 tiles[tilesGenerated] = myTile;
                 tilesGenerated++;
             }
