@@ -12,7 +12,7 @@ GameObject:
   - 95: {fileID: 9530756}
   - 212: {fileID: 21216174}
   m_Layer: 0
-  m_Name: 'Windmill Lvl 2 '
+  m_Name: Windmill Lvl 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -34,8 +34,8 @@ public class Tile : MonoBehaviour {
 
             building = Instantiate (newbuilding, 
                                     new Vector3(this.transform.position.x, 
-                                    this.transform.position.y - .65f, 
-                                    this.transform.position.y - .65f
+                                    this.transform.position.y - .325f, 
+                                    this.transform.position.y - .325f
                                                ), 
                                     Quaternion.identity
                                     ) as Building;
