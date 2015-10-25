@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1259b60642e837943ab1c39df48f5388
-timeCreated: 1444599110
+timeCreated: 1445803240
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -90,8 +90,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_2
       rect:
@@ -100,8 +100,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_3
       rect:
@@ -110,8 +110,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_4
       rect:
@@ -120,8 +120,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_5
       rect:
@@ -130,8 +130,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_6
       rect:
@@ -140,8 +140,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_7
       rect:
@@ -150,8 +150,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_8
       rect:
@@ -160,8 +160,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_9
       rect:
@@ -170,8 +170,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_10
       rect:
@@ -180,8 +180,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_11
       rect:
@@ -190,8 +190,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_12
       rect:
@@ -200,8 +200,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_13
       rect:
@@ -210,8 +210,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_14
       rect:
@@ -220,8 +220,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_15
       rect:
@@ -230,8 +230,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_16
       rect:
@@ -240,8 +240,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_17
       rect:
@@ -250,8 +250,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_18
       rect:
@@ -260,8 +260,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_19
       rect:
@@ -270,8 +270,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_20
       rect:
@@ -280,8 +280,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_21
       rect:
@@ -290,8 +290,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_22
       rect:
@@ -300,8 +300,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Pond_Right_256x256sprite_23
       rect:
@@ -310,8 +310,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .50999999, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

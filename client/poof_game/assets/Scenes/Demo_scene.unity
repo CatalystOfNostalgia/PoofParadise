@@ -4770,14 +4770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c531e2bf9263fd841869b4d9ad8991dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  question: {fileID: 0}
-  iconImage: {fileID: 0}
-  button1: {fileID: 0}
-  button2: {fileID: 0}
-  button3: {fileID: 0}
-  button4: {fileID: 0}
-  exit: {fileID: 2105069065}
-  modalPanelObject: {fileID: 0}
 --- !u!1 &1460830226
 GameObject:
   m_ObjectHideFlags: 0
@@ -6130,7 +6122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: .200000003
   sensitivity: 30
-  xEdge: 10
+  xEdge: 15
   yEdge: 10
 --- !u!1 &1663381066
 GameObject:

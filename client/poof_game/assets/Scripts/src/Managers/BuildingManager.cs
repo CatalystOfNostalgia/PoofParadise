@@ -114,7 +114,7 @@ public class BuildingManager : MonoBehaviour {
 		
         if (!isTileTaken (tuple)) {
             Debug.Log("You just created a building");
-            Building newBuilding = Instantiate (prefab, new Vector3(tile.transform.position.x, tile.transform.position.y - .65f, tile.transform.position.y - .65f), Quaternion.identity) as Building;
+            Building newBuilding = Instantiate (prefab, new Vector3(tile.transform.position.x, tile.transform.position.y - .325f, tile.transform.position.y - .325f), Quaternion.identity) as Building;
             if (newBuilding == null)
             {
                 Debug.Log("Failed to save instantiated object");
