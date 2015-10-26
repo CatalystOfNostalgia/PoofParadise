@@ -39,10 +39,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a07b713a8b6c3447ba6141a6d311fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windmill: {fileID: 11472614, guid: 60641830e9d1f2047b25c559da4c0028, type: 2}
-  pond: {fileID: 11446534, guid: c232a927cf5121c43b19c3c6bc02bf81, type: 2}
-  fire: {fileID: 11498070, guid: c435b2d2f78f5ae459e636d9f38d37c8, type: 2}
-  cave: {fileID: 11486078, guid: 5ead376afbc113040a2595f82becbb51, type: 2}
+  windmillLevel1: {fileID: 11437698, guid: 5a34cf04bb9144ff595c82f381cf3b70, type: 2}
+  windmillLevel2: {fileID: 11472288, guid: 85b25dd89062542ee82de86e3b873499, type: 2}
+  pondLevel1: {fileID: 11451576, guid: 353720d56df2d4f9fbad4ee65de584b3, type: 2}
+  pondLevel2: {fileID: 11460966, guid: 3023d26c8e54040fe85995f9a3e97ba6, type: 2}
+  fireTreeLevel1: {fileID: 11401248, guid: 4d181cc8513824ef78ab60c88c1571d2, type: 2}
+  fireTreeLevel2: {fileID: 11417386, guid: aabbc3d87a4a94ac6b06114f77963911, type: 2}
+  caveLevel1: {fileID: 11450436, guid: 8c859afa300bf4d93b04385c7bcd0b54, type: 2}
+  caveLevel2: {fileID: 11418770, guid: becae3fc92454477a9cd208245efd170, type: 2}
   buildingMode: 0
 --- !u!1001 &100100000
 Prefab:
@@ -50,7 +54,47 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: caveLevel1
+      value: 
+      objectReference: {fileID: 11450436, guid: 8c859afa300bf4d93b04385c7bcd0b54,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: caveLevel2
+      value: 
+      objectReference: {fileID: 11418770, guid: becae3fc92454477a9cd208245efd170,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: fireTreeLevel1
+      value: 
+      objectReference: {fileID: 11401248, guid: 4d181cc8513824ef78ab60c88c1571d2,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: fireTreeLevel2
+      value: 
+      objectReference: {fileID: 11417386, guid: aabbc3d87a4a94ac6b06114f77963911,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: pondLevel1
+      value: 
+      objectReference: {fileID: 11451576, guid: 353720d56df2d4f9fbad4ee65de584b3,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: pondLevel2
+      value: 
+      objectReference: {fileID: 11460966, guid: 3023d26c8e54040fe85995f9a3e97ba6,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: windmillLevel1
+      value: 
+      objectReference: {fileID: 11437698, guid: 5a34cf04bb9144ff595c82f381cf3b70,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: windmillLevel2
+      value: 
+      objectReference: {fileID: 11472288, guid: 85b25dd89062542ee82de86e3b873499,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 143556}
