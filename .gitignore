@@ -25,3 +25,4 @@ client/sysinfo.txt
 
 # Ignore IDE stuff
 server/.idea
+client/poof_game/assets/Buttons for UI.meta
