@@ -39,7 +39,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb83522a571b084991b1ddd7851fe74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 0}
   firePrefab: {fileID: 186158, guid: 9395e506fc68b334293441f7ccd37f48, type: 2}
   waterPrefab: {fileID: 124744, guid: 527cf3f7100408e4e991c75904bc7251, type: 2}
   airPrefab: {fileID: 100902, guid: 3776ec6194f591344881b572fcdd8229, type: 2}
@@ -50,7 +49,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: airPrefab
+      value: 
+      objectReference: {fileID: 100902, guid: 3776ec6194f591344881b572fcdd8229, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 135086}
