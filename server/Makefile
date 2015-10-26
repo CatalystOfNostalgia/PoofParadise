@@ -1,7 +1,7 @@
 # The build script for the server
 
 TABLES = sql/create_tables.sql
-
+INSERTS = sql/insert_building_info.sql
 # Runs the server
 gravehub:
 	@echo 'Initializing server...'
@@ -36,6 +36,8 @@ install:
 build_poof:
 	@echo 'Building database (gravehub)...'
 	@echo '\. $(TABLES)' | sudo mysql
-	@echo 'Database (gravehub) built'
-	@echo 'Populating Database'
+	@echo 'Tables built...'
+	@echo '\. $(INSERTS)' | sudo mysql
+	@echo 'Static data inserted...'
 	@python populate.py
+	@echo 'Database populated with sample data'

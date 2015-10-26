@@ -6,13 +6,13 @@ public class GameStart : MonoBehaviour {
     public TileScript grid;
     public GameManager gManager;
     public SaveState saveState;
-	public BuildingManager bManager;
+    public BuildingManager bManager;
 
-	// Adds all essential game objects to scene
-	void Awake () {
+    // Adds all essential game objects to scene
+    void Awake () {
         Instantiate(grid, new Vector3(0, 0, 15), Quaternion.identity);
         Instantiate(gManager, new Vector3(0, 0, 0), Quaternion.identity);
-		Instantiate (bManager, new Vector3 (0, 1, 0), Quaternion.identity);
+        Instantiate(bManager, new Vector3 (0, 1, 0), Quaternion.identity);
         Instantiate(saveState, new Vector3(0, 2, 0), Quaternion.identity);
         StartCoroutine("RenderScene");
         // Be careful! Anything after this coroutine will run 
@@ -31,8 +31,12 @@ public class GameStart : MonoBehaviour {
         {
             yield return null;
         }
-        Debug.Log("Scene is ready! Spawning poofs.");
+
+        // build and populate the game grid
+
+        TileScript.grid.BuildGameGrid ();
         GameManager.gameManager.SpawnPoofs();
+       
     }
 
     /**
@@ -50,6 +54,7 @@ public class GameStart : MonoBehaviour {
 
     public void TestJSON()
     {
-		SaveState.state.PullFromServer ();
+        SaveState.state.PullFromServer ();
+        TileScript.grid.PopulateGameGrid ();
     }
 }
