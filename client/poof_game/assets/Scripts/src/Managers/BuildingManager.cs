@@ -93,7 +93,6 @@ public class BuildingManager : MonoBehaviour {
 	public bool isOccupied (){
 		return false;
 	}
-
 	// places a building on the currently selected tile
 	public void PlaceBuilding(Building prefab) {
 

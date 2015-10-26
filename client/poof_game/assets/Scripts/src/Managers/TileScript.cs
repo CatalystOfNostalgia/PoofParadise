@@ -70,7 +70,7 @@ public class TileScript : MonoBehaviour {
         {
             for (int j = 0; j < gridX; j++)
             {
-                Vector3 location = orig + new Vector3(1.10f*(i + j - 5), .64f*(j - i), -2);
+                Vector3 location = orig + new Vector3(0.55f*(i + j - 5), .32f*(j - i), -2);
                 Tile myTile = Instantiate(tile[(i + j) % tile.Length], location, Quaternion.identity) as Tile;
                 myTile.transform.parent = this.transform; // Make tile a child of the grid
                 myTile.index = new Tuple(i, j);
