@@ -10,6 +10,9 @@ public class SoundManager : MonoBehaviour {
 	bool currentSongPlayed;
 	bool isPlayingSpecialRequestSong;
 	bool allSongsDisabled;
+
+	//boolean to block new songs while song is changing
+	bool changingSong; 
 	//this volume field gets changed by a slider in the scene
 	//should we create an explicit script to do so or is it fine to let generic unity slider to change it?
 
@@ -26,12 +29,14 @@ public class SoundManager : MonoBehaviour {
 	public void playSong(string songName){
 		isPlayingSpecialRequestSong = true;
 		AudioSource song;
-		if (playDict.TryGetValue (songName, out song)) {
+		if (playDict.TryGetValue (songName, out song) && !changingSong) {
 			Debug.Log("SoundManager: now playing " + songName);
+			changingSong = true;
 			stopSong ();
 			currentSong = song;
 			currentSong.Play ();
 			currentSongPlayed = true;
+			changingSong = false;
 		} else {
 			Debug.Log ("SoundManager: The key " + songName + " was not found in the dictionary");
 		}
