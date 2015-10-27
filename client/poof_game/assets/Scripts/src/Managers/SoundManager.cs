@@ -115,9 +115,9 @@ public class SoundManager : MonoBehaviour {
 			playDict.Add(music.name, music);
 			Debug.Log("SoundManager: Added " + music.name + " to the dictionary");
 		}
-		masterVolume = 100f;
-		musicVolume = 100f;
-		soundVolume = 100f;
+		masterVolume = 1f;
+		musicVolume = 1f;
+		soundVolume = 1f;
 
 		currentSong = playlist [index];
 		currentSongPlayed = false;
@@ -134,7 +134,7 @@ public class SoundManager : MonoBehaviour {
 		if (currentSong == null) {
 			return;
 		}
-		currentSong.volume = musicVolume;
+		currentSong.volume = masterVolume * musicVolume;
 		if (!currentSong.isPlaying) {
 			//didn't start the song yet
 			if (!currentSongPlayed){
