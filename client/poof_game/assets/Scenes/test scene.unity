@@ -158,7 +158,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
 --- !u!1 &59970152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,7 +1328,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
 --- !u!1 &389951168
 GameObject:
   m_ObjectHideFlags: 0
@@ -2138,7 +2138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9a2707e4fc36149b4ddb2225e79f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1511387167}
 --- !u!212 &611230997
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5173,6 +5172,7 @@ MonoBehaviour:
   button2: {fileID: 803497661}
   button3: {fileID: 1872859929}
   button4: {fileID: 1744639925}
+  exit: {fileID: 0}
   modalPanelObject: {fileID: 1490064717}
 --- !u!4 &1456759536
 Transform:
@@ -5197,10 +5197,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a07b713a8b6c3447ba6141a6d311fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windmill: {fileID: 0}
-  pond: {fileID: 0}
-  fire: {fileID: 0}
-  cave: {fileID: 0}
+  windmillLevel1: {fileID: 0}
+  windmillLevel2: {fileID: 0}
+  pondLevel1: {fileID: 0}
+  pondLevel2: {fileID: 0}
+  fireTreeLevel1: {fileID: 0}
+  fireTreeLevel2: {fileID: 0}
+  caveLevel1: {fileID: 0}
+  caveLevel2: {fileID: 0}
   buildingMode: 0
 --- !u!114 &1456759538
 MonoBehaviour:
@@ -5213,7 +5217,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66837838c5bc2ad4a94e795fa57ee50a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldSlider: {fileID: 0}
+  fireSlider: {fileID: 0}
+  waterSlider: {fileID: 0}
+  airSlider: {fileID: 0}
+  earthSlider: {fileID: 0}
 --- !u!114 &1456759539
 MonoBehaviour:
   m_ObjectHideFlags: 0
