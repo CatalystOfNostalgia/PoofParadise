@@ -12,7 +12,10 @@ public class SoundManager : MonoBehaviour {
 	bool allSongsDisabled;
 	//this volume field gets changed by a slider in the scene
 	//should we create an explicit script to do so or is it fine to let generic unity slider to change it?
+
+	public float masterVolume {get; set; }
 	public float musicVolume { get; set; } 
+	public float soundVolume { get; set; }
 
 	int index;
 
@@ -107,7 +110,9 @@ public class SoundManager : MonoBehaviour {
 			playDict.Add(music.name, music);
 			Debug.Log("SoundManager: Added " + music.name + " to the dictionary");
 		}
+		masterVolume = 100f;
 		musicVolume = 100f;
+		soundVolume = 100f;
 
 		currentSong = playlist [index];
 		currentSongPlayed = false;
