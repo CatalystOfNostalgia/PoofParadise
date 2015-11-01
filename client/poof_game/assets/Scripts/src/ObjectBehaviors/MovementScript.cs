@@ -101,7 +101,7 @@ public class MovementScript : MonoBehaviour {
 	// Resets all variables and halts movement progress from passive inputs
 	private void stopMoving() {
 		animator.SetInteger("Direction", 4);
-		Invoke("animatorChange", 2.5f);
+		Invoke("animatorChange", 1.917f);
 		if (isMoving && priorityComplete) {
 			currentPos = targetPos;
 			isMoving = false;
@@ -123,16 +123,16 @@ public class MovementScript : MonoBehaviour {
 	
 	// Only sets the isMoving flag to true, and also determines if the movement is a priority input
 	private void startMoving() {
-		Invoke("animatorChange", 2.5f);
+		Invoke("animatorChange", 1.917f);
 		isMoving = true;
 		if (priorityInput)
 			priorityComplete = false;
 
-        /*
-		Debug.Log(currentPos);
-		Debug.Log(targetPos);
+        
+		//Debug.Log(currentPos);
+		//Debug.Log(targetPos);
 		Debug.Log("!!!!!!!!!!!!!!!");
-		*/
+		
         if (animator != null)
         {
             if (currentPos.x - targetPos.x > 0 && currentPos.y - targetPos.y > 0)
