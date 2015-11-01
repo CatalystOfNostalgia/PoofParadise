@@ -11,12 +11,14 @@ public class GameManager : MonoBehaviour {
     public GameObject waterPrefab;
     public GameObject airPrefab;
     public GameObject earthPrefab;
+    public GameObject poofPrefab;
 
     // Store private list of Game Objects
     private List<GameObject> fireActive;
     private List<GameObject> waterActive;
     private List<GameObject> earthActive;
     private List<GameObject> airActive;
+    private List<GameObject> poofActive;
 
     void Start()
     {
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour {
         waterActive = new List<GameObject>();
         earthActive = new List<GameObject>();
         airActive = new List<GameObject>();
+        poofActive = new List<GameObject>();
     }
 
     /**
@@ -44,11 +47,13 @@ public class GameManager : MonoBehaviour {
         int waterTotal = SaveState.state.waterEle;
         int earthTotal = SaveState.state.earthEle;
         int airTotal = SaveState.state.airEle;
+        int poofTotal = SaveState.state.poofCount;
 
         int fireLeft = fireTotal;
         int waterLeft = waterTotal;
         int earthLeft = earthTotal;
         int airLeft = airTotal;
+        int poofLeft = poofTotal;
 
         // Fire loop
         if (fireActive.Count < fireTotal && fireLeft > 0)
@@ -88,6 +93,16 @@ public class GameManager : MonoBehaviour {
                 SpawnPoof(airPrefab, GetRandomSpawnPoint(), airActive);
                 airLeft--;
             }
+        }
+        
+        // Poof loop
+        if (poofActive.Count < poofTotal && poofLeft > 0) 
+        {
+        	for (int i = 0; i < poofTotal; i++)
+        	{
+        		SpawnPoof(poofPrefab, GetRandomSpawnPoint(), poofActive);
+        		poofLeft--;
+        	}
         }
     }
 

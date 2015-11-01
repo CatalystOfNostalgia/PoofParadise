@@ -43,6 +43,7 @@ MonoBehaviour:
   waterPrefab: {fileID: 124744, guid: 527cf3f7100408e4e991c75904bc7251, type: 2}
   airPrefab: {fileID: 100902, guid: 3776ec6194f591344881b572fcdd8229, type: 2}
   earthPrefab: {fileID: 199760, guid: 54cae649993b4954b8caa8beb6ae4506, type: 2}
+  poofPrefab: {fileID: 128394, guid: 8d8ae364ba01e14448e129a195262345, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -54,6 +55,10 @@ Prefab:
       propertyPath: airPrefab
       value: 
       objectReference: {fileID: 100902, guid: 3776ec6194f591344881b572fcdd8229, type: 2}
+    - target: {fileID: 0}
+      propertyPath: poofPrefab
+      value: 
+      objectReference: {fileID: 128394, guid: 8d8ae364ba01e14448e129a195262345, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 135086}

@@ -15,7 +15,7 @@ public class CharacterScript : MonoBehaviour {
 	
 	// References to the movement based scripts for the character
 	private MovementScript ms;
-	private PassiveMover ps;
+	private PassiveMoverPoofs ps;
 	
 	// Tile that the poof is currently standing on
 	public Tile onTile { get; set;}
@@ -25,7 +25,7 @@ public class CharacterScript : MonoBehaviour {
      */
 	void Start() {
 		ms = this.GetComponent<MovementScript>();
-		ps = this.GetComponent<PassiveMover>();
+		ps = this.GetComponent<PassiveMoverPoofs>();
         onTile = TileScript.grid.tiles[(int)Random.Range(0, TileScript.grid.tiles.Length - 1)];
 	}
 	
@@ -34,7 +34,13 @@ public class CharacterScript : MonoBehaviour {
      */
 	void Update() {
 		if (!ms.getMoving()) {
-			ms.receivePassiveInputs(ps.getNewTile());
+			if (!IsInvoking()) {
+				Invoke("startMovement", 3f);
+			}
 		}
+	}
+	
+	void startMovement() {
+		ms.receivePassiveInputs(ps.getNewTile());
 	}
 }
