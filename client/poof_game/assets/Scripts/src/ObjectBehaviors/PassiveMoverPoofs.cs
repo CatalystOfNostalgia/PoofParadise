@@ -42,7 +42,7 @@ public class PassiveMoverPoofs : MonoBehaviour {
 		
 		if (likes.Count == 0) {
 			if (Random.Range (0,2) > 0) {
-           		List<Tuple> tuples = TileScript.grid.GetPossiblePaths(cs.onTile.index); 
+				List<Tuple> tuples = TileScript.grid.GetPossiblePaths(cs.onTile.index); 
            		Tuple[] arr = tuples.ToArray();
            		Tuple next = arr[(int)Random.Range(0, arr.Length)];
             	Tile test = TileScript.grid.GetTile(next);

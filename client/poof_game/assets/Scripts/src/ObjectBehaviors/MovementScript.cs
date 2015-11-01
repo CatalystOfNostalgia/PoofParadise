@@ -130,7 +130,8 @@ public class MovementScript : MonoBehaviour {
 	}
 	
 	// Only sets the isMoving flag to true, and also determines if the movement is a priority input
-	private void startMoving() {        
+	private void startMoving() 
+	{        
 		//Debug.Log(currentPos);
 		//Debug.Log(targetPos);
 		//Debug.Log("Starting to move");
@@ -157,7 +158,7 @@ public class MovementScript : MonoBehaviour {
         }
         else
         {
-            //Debug.Log("Congratulations, this character doesn't have a animation");
+			//Debug.Log("Congratulations, this character doesn't have a animation");
         }
 
 		isMoving = true;
