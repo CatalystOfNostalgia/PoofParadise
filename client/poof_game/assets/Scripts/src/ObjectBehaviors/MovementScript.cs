@@ -30,7 +30,7 @@ public class MovementScript : MonoBehaviour {
 	private Queue movementQueue;
 	
 	// Not utilized at all at the moment, because the passive mover script is incomplete
-	private PassiveMover ps;
+	private PassiveMoverPoofs ps;
 	private CharacterScript cs;
 	
 	void Start () {
@@ -52,18 +52,20 @@ public class MovementScript : MonoBehaviour {
 	}
 	
 	void Update () {
-	
-		if (priorityInput) {
-			getInputs();
-		}
-		
-		if (isMoving)
-			continueMoving();
-		else {
-			if (!input)
+		// Check to determine if animation changes are happening
+		if (!IsInvoking()) {
+			if (priorityInput) {
 				getInputs();
-			else
-				startMoving();
+			}
+		
+			if (isMoving)
+				continueMoving();
+			else {
+				if (!input)
+					getInputs();
+				else
+					startMoving();
+			}
 		}
 	}
 	
@@ -98,6 +100,8 @@ public class MovementScript : MonoBehaviour {
 	
 	// Resets all variables and halts movement progress from passive inputs
 	private void stopMoving() {
+		animator.SetInteger("Direction", 4);
+		Invoke("animatorChange", 2.5f);
 		if (isMoving && priorityComplete) {
 			currentPos = targetPos;
 			isMoving = false;
@@ -119,6 +123,7 @@ public class MovementScript : MonoBehaviour {
 	
 	// Only sets the isMoving flag to true, and also determines if the movement is a priority input
 	private void startMoving() {
+		Invoke("animatorChange", 2.5f);
 		isMoving = true;
 		if (priorityInput)
 			priorityComplete = false;
@@ -151,6 +156,10 @@ public class MovementScript : MonoBehaviour {
         {
             //Debug.Log("Congratulations, this character doesn't have a animation");
         }
+	}
+	
+	public void animatorChange() {
+		animator.SetInteger("Direction", 4);
 	}
 	
 	// Method that Enqueues an input direction; should be utilized by the passive mover script
