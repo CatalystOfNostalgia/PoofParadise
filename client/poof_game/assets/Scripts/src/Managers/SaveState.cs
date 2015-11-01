@@ -53,11 +53,11 @@ public class SaveState : MonoBehaviour {
 		// set the fields until we can load
 		state.fire = 0;
 		state.resourceBuildings = new Dictionary<Tuple, Building>();
-		fireEle = 0;
-		earthEle = 0;
-		waterEle = 0;
+		fireEle = 1;
+		earthEle = 1;
+		waterEle = 1;
 		airEle = 1;
-		poofCount = 0;
+		poofCount = 3;
 		
 	}
 

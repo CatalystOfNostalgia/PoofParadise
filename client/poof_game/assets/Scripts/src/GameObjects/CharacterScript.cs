@@ -35,7 +35,7 @@ public class CharacterScript : MonoBehaviour {
 	void Update() {
 		if (!ms.getMoving()) {
 			if (!IsInvoking()) {
-				Invoke("startMovement", .5f);
+				Invoke("startMovement", 3f);
 			}
 		}
 	}

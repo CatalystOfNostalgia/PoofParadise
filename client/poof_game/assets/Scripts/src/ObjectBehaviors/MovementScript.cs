@@ -32,6 +32,8 @@ public class MovementScript : MonoBehaviour {
 	// Not utilized at all at the moment, because the passive mover script is incomplete
 	private PassiveMoverPoofs ps;
 	private CharacterScript cs;
+
+	private float transitionTiming = 0f;
 	
 	void Start () {
 	
@@ -47,6 +49,10 @@ public class MovementScript : MonoBehaviour {
 		
 		cs = this.GetComponent<CharacterScript>();
 		animator = this.GetComponent<Animator>();
+
+		if(cs.type == CharacterScript.Element.Wind){
+			transitionTiming = 1.917f;
+		}
 
 		
 	}
@@ -100,8 +106,10 @@ public class MovementScript : MonoBehaviour {
 	
 	// Resets all variables and halts movement progress from passive inputs
 	private void stopMoving() {
-		animator.SetInteger("Direction", 4);
-		Invoke("animatorChange", 1.917f);
+		if (animator != null) {
+			animator.SetInteger("Direction", 4);
+			Invoke("animatorChange", transitionTiming);
+		}
 		if (isMoving && priorityComplete) {
 			currentPos = targetPos;
 			isMoving = false;
@@ -122,19 +130,14 @@ public class MovementScript : MonoBehaviour {
 	}
 	
 	// Only sets the isMoving flag to true, and also determines if the movement is a priority input
-	private void startMoving() {
-		Invoke("animatorChange", 1.917f);
-		isMoving = true;
-		if (priorityInput)
-			priorityComplete = false;
-
-        
+	private void startMoving() {        
 		//Debug.Log(currentPos);
 		//Debug.Log(targetPos);
-		Debug.Log("!!!!!!!!!!!!!!!");
+		//Debug.Log("Starting to move");
 		
         if (animator != null)
         {
+			Invoke("animatorChange", transitionTiming);
             if (currentPos.x - targetPos.x > 0 && currentPos.y - targetPos.y > 0)
             {
                 animator.SetInteger("Direction", 0);
@@ -156,6 +159,10 @@ public class MovementScript : MonoBehaviour {
         {
             //Debug.Log("Congratulations, this character doesn't have a animation");
         }
+
+		isMoving = true;
+		if (priorityInput)
+			priorityComplete = false;
 	}
 	
 	public void animatorChange() {
