@@ -261,16 +261,20 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
         user_id = parsed_json['user_id']
 
         queries.save_user_info(parsed_json)
-        queries.save_building_info(resource_buildings, \
-                                   decorative_buildings, \
-                                   user_id\
-                                  )
-
-        data = {'message' : 'Save successful!'} 
-        self.send_response(200)
-        self.wfile.write(json.dumps(data))
-        print(parsed_json['username'] + ' saved')
-
+        error_building = queries.save_building_info(resource_buildings, \
+                                           decorative_buildings, \
+                                           user_id\
+                                          )
+        if error_building == None:
+            data = {'message' : 'Save successful!'} 
+            self.send_response(200)
+            self.wfile.write(json.dumps(data))
+            print(parsed_json['username'] + ' saved')
+        else:
+            print(error_building)
+            data = {"error" : 'cannot find building:' + \
+                              error_building['id']}
+            print('cannot find building' + error_building['id'])
 
 # starting the server
 print('http server is starting...')

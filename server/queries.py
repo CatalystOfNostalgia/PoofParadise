@@ -149,44 +149,69 @@ def get_decorative_building_info( building_info_id ):
 
 	return building
 
-# saves the users buildings
+# saves the users buildings returns the building if a building cannot be found
 def save_building_info ( resource_buildings, decorative_buildings, user_id ):
-	
+    
+    # resource buildings
 	for building in resource_buildings:
 		if building['new'] == 'true':
 			create_resource_building(building, user_id)
 		else:
-			update_resource_building(building)
+			success = update_resource_building(building)
+        if not success:
+            print(building['id'])
+            return building
 
-	
+    # decorative buildings	
 	for building in decorative_buildings:
 		if building['new'] == 'true':
 			create_decorative_building(building, user_id)
 		else:
-			update_decorative_building(building)
+			success = update_decorative_building(building)
+        if not success:
+            print(building['id'])
+            return building
 
-# updates an existing building in the database
+# updates an existing building in the database if the building cannot be found
+# returns False
 def update_resource_building ( building ):
-	
-	updated_building = models.session.query(models.UserResourceBuilding).filter( \
-                       models.UserResourceBuilding.id == building['id']).one()
 
-	updated_building.position_x = building['position_x']
-	updated_building.position_y = building['position_y']
+    try:
+        updated_building = models.session.query(models.UserResourceBuilding).filter( \
+                           models.UserResourceBuilding.id == building['id']).one()
 
-	models.session.commit()
-		
-# updates an existing building in the database
+        updated_building.position_x = building['position_x']
+        updated_building.position_y = building['position_y']
+
+        models.session.commit()
+        print('no exception')
+        return True
+
+    except:
+        rollback()
+        print('exception')
+        return False
+
+# updates an existing building in the database if the building cannot be found
+# returns False
 def update_decorative_building ( building ):
-	
-	updated_building = models.session.query(models.UserDecorativeBuilding).filter( \
-                       models.UserDecorativeBuilding.id == building['id']).one()
 
-	updated_building.level = building['level']
-	updated_building.position_x = building['position_x']
-	updated_building.position_y = building['position_y']
+    try:
+        updated_building = models.session.query(models.UserDecorativeBuilding).filter( \
+                           models.UserDecorativeBuilding.id == building['id']).one()
 
-	models.session.commit()
+        updated_building.level = building['level']
+        updated_building.position_x = building['position_x']
+        updated_building.position_y = building['position_y']
+
+        models.session.commit()
+        print('no exception')
+        return True
+
+    except:
+        print('exception')
+        rollback()
+        return False
 
 # creates a decorative building in the database
 def create_decorative_building ( building, user_id ):
