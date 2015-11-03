@@ -37,21 +37,25 @@ def save_user_info( user ):
 
 # returns the user given a username
 def find_user_from_username( username ):
-	user = models.session.query(models.User).filter(models.User.username == username).one()
+	user = models.session.query(models.User).filter(models.User.username == \
+                                                                username).one()
 
 	return user
 
 # returns a user given a user id
 def find_user_from_id( user_id ):
-	user = models.session.query(models.User).filter(models.User.user_id == user_id).one()
+	user = models.session.query(models.User).filter(models.User.user_id == \
+                                                                user_id).one()
 
 	return user
 
 # returns all the friends of a user given that user's id
 def get_friends( user_id ):
 	
-	friendships = models.session.query(models.Friends).filter(models.Friends.friend1_id == user_id)
-	other_friendships = models.session.query(models.Friends).filter(models.Friends.friend2_id == user_id)
+	friendships = models.session.query(models.Friends).filter( \
+                  models.Friends.friend1_id == user_id)
+	other_friendships = models.session.query(models.Friends).filter( \
+                        models.Friends.friend2_id == user_id)
 
 	user_friends = []
 	for friendship in friendships:
@@ -85,28 +89,32 @@ def add_friend( user_id, friend_id ):
 # gets the resource buildings of a user
 def get_user_resource_buildings( user_id ):
 
-	user_buildings = models.session.query(models.UserResourceBuilding).filter(models.UserResourceBuilding.user_id == user_id).all()
+	user_buildings = models.session.query(models.UserResourceBuilding).filter( \
+                     models.UserResourceBuilding.user_id == user_id).all()
 
 	buildings = dict_buildings(user_buildings)
 
 	# add on the building info data
 	if buildings:
 			for building in buildings:
-					building_info = get_resource_building_info(building['building_info_id'])
+					building_info = get_resource_building_info( \
+                                        building['building_info_id'])
 					building.update(building_info)
 
 	return buildings
 	
 # gets the decorative buildings of a user
 def get_user_decorative_buildings( user_id ):
-	user_buildings = models.session.query(models.UserDecorativeBuilding).filter(models.UserDecorativeBuilding.user_id == user_id).all()
+	user_buildings = models.session.query(models.UserDecorativeBuilding).filter( \
+                     models.UserDecorativeBuilding.user_id == user_id).all()
 
 	buildings = dict_buildings(user_buildings)
 	
 	# add on the building info data	
 	if buildings:
 			for building in buildings:
-					building_info = get_decorative_building_info(building['building_info_id'])
+					building_info = get_decorative_building_info( \
+                                        building['building_info_id'])
 					building.update(building_info)
 
 	return buildings
@@ -114,7 +122,9 @@ def get_user_decorative_buildings( user_id ):
 # gets the building info of a resource building
 def get_resource_building_info( building_info_id ):
 
-	building_info = models.session.query(models.ResourceBuildingInfo).filter(models.ResourceBuildingInfo.building_info_id == building_info_id).one()
+	building_info = models.session.query(models.ResourceBuildingInfo).filter( \
+                    models.ResourceBuildingInfo.building_info_id == \
+                                                building_info_id).one()
 
 	building = {}
 	building['size'] = building_info.size
@@ -128,7 +138,9 @@ def get_resource_building_info( building_info_id ):
 # gets the building info of a decorative building
 def get_decorative_building_info( building_info_id ):
 
-	building_info = models.session.query(models.DecorativeBuildingInfo).filter(models.DecorativeBuildingInfo.building_info_id == building_info_id).one()
+	building_info = models.session.query(models.DecorativeBuildingInfo).filter( \
+                    models.DecorativeBuildingInfo.building_info_id == \
+                                                  building_info_id).one()
 
 	building = {}
 	building['size'] = building_info.size
@@ -156,7 +168,8 @@ def save_building_info ( resource_buildings, decorative_buildings, user_id ):
 # updates an existing building in the database
 def update_resource_building ( building ):
 	
-	updated_building = models.session.query(models.UserResourceBuilding).filter(models.UserResourceBuilding.id == building['id']).one()
+	updated_building = models.session.query(models.UserResourceBuilding).filter( \
+                       models.UserResourceBuilding.id == building['id']).one()
 
 	updated_building.position_x = building['position_x']
 	updated_building.position_y = building['position_y']
@@ -166,7 +179,8 @@ def update_resource_building ( building ):
 # updates an existing building in the database
 def update_decorative_building ( building ):
 	
-	updated_building = models.session.query(models.UserDecorativeBuilding).filter(models.UserDecorativeBuilding.id == building['id']).one()
+	updated_building = models.session.query(models.UserDecorativeBuilding).filter( \
+                       models.UserDecorativeBuilding.id == building['id']).one()
 
 	updated_building.level = building['level']
 	updated_building.position_x = building['position_x']
