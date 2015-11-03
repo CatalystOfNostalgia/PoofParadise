@@ -103,6 +103,7 @@ public class BuildingManager : MonoBehaviour {
 	public void PlaceBuilding (Building prefab, Tile tile) {
 
 		Building newBuilding = tile.PlaceBuilding (prefab);
+        newBuilding.created = true;
 
 		// TODO this feels pretty iffy
 		if (!SaveState.state.resourceBuildings.ContainsKey (tile.index)) {

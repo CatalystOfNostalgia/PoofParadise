@@ -151,6 +151,7 @@ public class SaveState : MonoBehaviour {
         
         foreach ( KeyValuePair<Tuple, Building> entry in resourceBuildings) {
             jsonPlayerData += "{ ";
+            jsonPlayerData += "\"new\": \"" + entry.Value.created + "\", ";
             jsonPlayerData += "\"x_coordinate\": \"" + entry.Key.x + "\", ";
             jsonPlayerData += "\"y_coordinate\": \"" + entry.Key.y + "\", ";
             jsonPlayerData += "\"size\": \"" + entry.Value.size + "\" ";
