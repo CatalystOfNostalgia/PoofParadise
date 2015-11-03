@@ -205,6 +205,10 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
                 resource_buildings = queries.get_user_resource_buildings(user.user_id)
                 decorative_buildings = queries.get_user_decorative_buildings(user.user_id)
+                data['name'] = user.name
+                data['username'] = user.username
+                data['email'] = user.email
+                data['password'] = user.password
                 data['user_id'] = user.user_id
                 data['experience'] = user.experience
                 data['headquarters_level'] = user.headquarters_level
