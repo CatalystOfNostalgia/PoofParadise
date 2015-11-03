@@ -159,7 +159,6 @@ def save_building_info ( resource_buildings, decorative_buildings, user_id ):
 		else:
 			success = update_resource_building(building)
         if not success:
-            print(building['id'])
             return building
 
     # decorative buildings	
@@ -169,7 +168,6 @@ def save_building_info ( resource_buildings, decorative_buildings, user_id ):
 		else:
 			success = update_decorative_building(building)
         if not success:
-            print(building['id'])
             return building
 
 # updates an existing building in the database if the building cannot be found
@@ -184,12 +182,10 @@ def update_resource_building ( building ):
         updated_building.position_y = building['position_y']
 
         models.session.commit()
-        print('no exception')
         return True
 
     except:
         rollback()
-        print('exception')
         return False
 
 # updates an existing building in the database if the building cannot be found
@@ -205,11 +201,9 @@ def update_decorative_building ( building ):
         updated_building.position_y = building['position_y']
 
         models.session.commit()
-        print('no exception')
         return True
 
     except:
-        print('exception')
         rollback()
         return False
 

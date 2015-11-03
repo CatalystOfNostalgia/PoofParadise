@@ -268,13 +268,13 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
         if error_building == None:
             data = {'message' : 'Save successful!'} 
             self.send_response(200)
-            self.wfile.write(json.dumps(data))
             print(parsed_json['username'] + ' saved')
         else:
-            print(error_building)
             data = {"error" : 'cannot find building:' + \
                               error_building['id']}
             print('cannot find building' + error_building['id'])
+
+        self.wfile.write(json.dumps(data))
 
 # starting the server
 print('http server is starting...')
