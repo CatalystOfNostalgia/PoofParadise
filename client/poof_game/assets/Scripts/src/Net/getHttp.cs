@@ -67,6 +67,27 @@ public class GetHTTP : MonoBehaviour {
 		});
 	}
 
+	//save to server
+	public static void toSave(String jsonstuff){
+		var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://localhost:8000/save");
+		httpWebRequest.ContentType = "application/json";
+		httpWebRequest.Method = "POST";
+		
+		using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream())) {
+			streamWriter.Write(jsonstuff);
+			streamWriter.Flush();
+			streamWriter.Close();
+		}
+
+		var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+		using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+		{
+			var result = streamReader.ReadToEnd();
+			Debug.Log (result);
+		}
+
+	}
+
 
 	void addFriend(Hashtable table){
 		HTTP.Request theRequest = new HTTP.Request( "post", "http://localhost:8000/friends", table );

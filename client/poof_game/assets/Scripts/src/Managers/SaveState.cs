@@ -71,6 +71,8 @@ public class SaveState : MonoBehaviour {
 		
 		// Dumps JSON to text file
 		System.IO.File.WriteAllText(Application.persistentDataPath + "/save_state.dat", this.jsonify());
+
+		//
 	}
 	
 	/**
@@ -87,6 +89,9 @@ public class SaveState : MonoBehaviour {
 		}
 	}
 
+
+
+
 	/**
 	 * Pushes player data to server
 	 */
@@ -94,9 +99,13 @@ public class SaveState : MonoBehaviour {
 		
 		Debug.Log ("data.ToJSON");
 		string buildingJSON = this.jsonify();
-		
-		
+
+
 		// TODO Send JSON to server
+
+		Debug.Log("buildingJSON = " + buildingJSON);
+		GetHTTP.toSave (buildingJSON);
+
 	}
 	
 	/**
