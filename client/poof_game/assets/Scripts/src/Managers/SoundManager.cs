@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Collections;
 
 public class SoundManager : MonoBehaviour {
+
+    public static SoundManager soundManager;
+
 	public Dictionary<string, AudioSource> playDict{ get; set;}
 	public AudioSource[] playlist { get; set;}
 	public bool[] preferredPlaylist { get; set; }
@@ -102,7 +105,19 @@ public class SoundManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		index = 0;
+
+        // Converts SoundManager into a singleton
+        if (soundManager == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            soundManager = this;
+        }
+        else if (soundManager != this)
+        {
+            Destroy(gameObject);
+        }
+
+        index = 0;
 
 		//in the future, load user's music preference
 		playlist = getAvailableMusic();
