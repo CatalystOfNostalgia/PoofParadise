@@ -15,25 +15,9 @@ public class ModelPanel : MonoBehaviour {
 
 	public static ModelPanel modelPanel;
 
-    /**
-     * Turns this object into a singleton
-     */
-    void Awake()
-    {
-        if (modelPanel == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            modelPanel = this;
-        }
-        else if (modelPanel != this)
-        {
-            Destroy(gameObject);
-        }
-    }
-
 	public void Choice(string question, UnityAction button1Event, UnityAction button2Event, UnityAction button3Event, UnityAction button4Event){
 		//model panel should be visible on screen
-		modelPanel.gameObject.SetActive (true);
+		this.gameObject.SetActive (true);
 
 		button1.onClick.RemoveAllListeners ();
 		button1.onClick.AddListener (ClosePanel);

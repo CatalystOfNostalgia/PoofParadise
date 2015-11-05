@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class TestModalPanel : MonoBehaviour {
+public class TestModelPanel : MonoBehaviour {
 
 	private DisplayManager displayManager;
 

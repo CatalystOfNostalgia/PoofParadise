@@ -38,7 +38,6 @@ public class GameStart : MonoBehaviour {
             yield return null;
         }
 
-        Debug.Log("Building Grid");
         // build and populate the game grid
         TileScript.grid.BuildGameGrid();
 
