@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameStart : MonoBehaviour {
 
@@ -30,7 +31,7 @@ public class GameStart : MonoBehaviour {
 
         TileScript.grid.BuildGameGrid ();
         GameManager.gameManager.SpawnPoofs();
-       
+        SetUpMusicSettings();
     }
 
     /**
@@ -51,5 +52,12 @@ public class GameStart : MonoBehaviour {
     {
         SaveState.state.PullFromServer ();
         TileScript.grid.PopulateGameGrid ();
+    }
+
+    public void SetUpMusicSettings()
+    {
+        var button = GameObject.Find("Next Song");
+        Button nextSong = button.GetComponent<Button>();
+        nextSong.onClick.AddListener(SoundManager.soundManager.nextSong);
     }
 }
