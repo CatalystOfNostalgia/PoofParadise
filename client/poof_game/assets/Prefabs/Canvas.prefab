@@ -2044,7 +2044,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: nextSong
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4334,6 +4334,10 @@ MonoBehaviour:
   playButtonEarth: {fileID: 11468878}
   playButtonFire: {fileID: 11454690}
   playButtonWater: {fileID: 11442420}
+  nextSong: {fileID: 11409932}
+  masterVolumeSlider: {fileID: 11459850}
+  musicVolumeSlider: {fileID: 11487844}
+  soundVolumeSlider: {fileID: 11470426}
   exit: {fileID: 11491684}
 --- !u!114 &11476562
 MonoBehaviour:
