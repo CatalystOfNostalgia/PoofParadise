@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using System.Collections;
 
+/**
+ * A manager that deals with music
+ * Note: This manager cannot be added to the managers object as it stands.
+ * This is because the buttons in the sound panel depend on an object that
+ * must already be in the scene
+ */
 public class SoundManager : MonoBehaviour {
 
     public static SoundManager soundManager;
