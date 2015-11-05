@@ -12,21 +12,25 @@ public class ModelPanel : MonoBehaviour {
 	public Button button3;
 	public Button button4;
 	public Button exit;
-	public GameObject modelPanelObject;
 
-	private static ModelPanel modelPanel;
+	public static ModelPanel modelPanel;
 
-	public static ModelPanel Instance(){
-		if (!modelPanel) {
-			modelPanel = FindObjectOfType(typeof (ModelPanel)) as ModelPanel;
-			if(!modelPanel)
-				Debug.LogError ("There needs to be one active ModelPanel script on a GameObject in your scene.");
-		}
-		return modelPanel;
-	}
+    void Start()
+    {
+        if (modelPanel == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            modelPanel = this;
+        }
+        else if (modelPanel != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
 	public void Choice(string question, UnityAction button1Event, UnityAction button2Event, UnityAction button3Event, UnityAction button4Event){
 		//modal panel should be visible on screen
-		modelPanelObject.SetActive (true);
+		modelPanel.gameObject.SetActive (true);
 
 		button1.onClick.RemoveAllListeners ();
 		button1.onClick.AddListener (ClosePanel);
@@ -59,6 +63,6 @@ public class ModelPanel : MonoBehaviour {
 	}
 	
 	void ClosePanel(){
-		modelPanelObject.SetActive(false);
+		modelPanel.gameObject.SetActive(false);
 	}
 }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
  * game grid from which all other game functions are derived
  */
 
-public class TileScript : MonoBehaviour {
+public class TileScript : Manager {
 
     // Singleton variable so that only one grid variable is active per scene
     public static TileScript grid;

@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
-public class SaveState : MonoBehaviour {
+public class SaveState : Manager {
 
 	// Allows the scene to access this object without searching for it
 	public static SaveState state;

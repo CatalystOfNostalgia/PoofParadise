@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 
-public class BuildingManager : MonoBehaviour {
+public class BuildingManager : Manager {
 
 	/**
 	 * just dragging gameobjects to here for now

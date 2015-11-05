@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class GameStart : MonoBehaviour {
@@ -7,13 +8,22 @@ public class GameStart : MonoBehaviour {
     public GameObject manager;
     public Canvas canvas;
 
-    private Canvas canvasObject;
+    private List<Manager> managers;
 
-    // Adds all essential game objects to scene
+    /**
+     * Adds all essential game objects to scene
+     */
     void Awake () {
+        // Instantiates managers object along with the game canvas
         Instantiate(manager, new Vector3(0, 0, 15), Quaternion.identity);
-        canvasObject = Instantiate(canvas, new Vector3(0, 0, 0), Quaternion.identity) as Canvas;
+        Instantiate(canvas, new Vector3(0, 0, 0), Quaternion.identity);
+
+        // Generates a list of managers for use of RenderScene
+        BuildManagersList();
+
+        // Renders scene ones managers become active
         StartCoroutine("RenderScene");
+
         // Be careful! Anything after this coroutine will run 
         // before coroutine finishes
     }
@@ -31,11 +41,12 @@ public class GameStart : MonoBehaviour {
             yield return null;
         }
 
+        Debug.Log("Building Grid");
         // build and populate the game grid
+        TileScript.grid.BuildGameGrid();
 
-        TileScript.grid.BuildGameGrid ();
+        // Generate all poofs/elemari
         GameManager.gameManager.SpawnPoofs();
-        SetUpMusicSettings();
     }
 
     /**
@@ -44,26 +55,35 @@ public class GameStart : MonoBehaviour {
      */
     private bool SceneIsReady()
     {
-        // Too lazy to clean this up atm
-        if (GameManager.gameManager == null || SaveState.state == null || TileScript.grid == null || BuildingManager.manager == null || SoundManager.soundManager == null)
+        foreach(Manager manager in managers)
         {
-            return false;
+            if (manager == null)
+            {
+                return false;
+            }
         }
         return true;
     }
 
+    /**
+     * Builds a list of managers for testing
+     */ 
+    private void BuildManagersList()
+    {
+        managers = new List<Manager>();
+        managers.Add(GameManager.gameManager);
+        managers.Add(SaveState.state);
+        managers.Add(TileScript.grid);
+        managers.Add(BuildingManager.manager);
+        managers.Add(SoundManager.soundManager);
+    }
+
+    /**
+     * Runs a pull from server and populates the grid
+     */
     public void TestJSON()
     {
         SaveState.state.PullFromServer ();
         TileScript.grid.PopulateGameGrid ();
-    }
-
-    public void SetUpMusicSettings()
-    {
-        var dialogue = canvasObject.transform.FindChild("Settings Panel/Dialogue Panel");
-        var button1 = dialogue.transform.FindChild("Next Song");
-
-        Button nextSong = button1.GetComponent<Button>();
-        nextSong.onClick.AddListener(delegate { SoundManager.soundManager.nextSong(); });
     }
 }

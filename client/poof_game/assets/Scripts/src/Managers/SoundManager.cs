@@ -8,7 +8,7 @@ using System.Collections;
  * This is because the buttons in the sound panel depend on an object that
  * must already be in the scene
  */
-public class SoundManager : MonoBehaviour {
+public class SoundManager : Manager {
 
     public static SoundManager soundManager;
 
