@@ -3,7 +3,9 @@ using System.Collections;
 
 public class CanvasStart : MonoBehaviour {
 
-	// Use to initialize all static singleton children
+	/**
+     * Use to initialize all static singleton children
+     */
 	void Start () {
         GameObject modelPanel = this.transform.FindChild("Model Panel").gameObject;
 

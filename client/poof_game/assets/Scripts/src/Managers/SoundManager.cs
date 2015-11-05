@@ -7,20 +7,22 @@ using System.Collections;
  */
 public class SoundManager : Manager {
 
+    // Singleton field
     public static SoundManager soundManager;
 
+    // Fields
 	public Dictionary<string, AudioSource> playDict{ get; set;}
 	public AudioSource[] playlist { get; set;}
 	public bool[] preferredPlaylist { get; set; }
 	public AudioSource currentSong { get; set;}
-	bool currentSongPlayed;
-	bool allSongsDisabled;
+	private bool currentSongPlayed;
+	private bool allSongsDisabled;
 
-	//boolean to block new songs while song is changing
-	bool changingSong; 
+	// boolean to block new songs while song is changing
+	private bool changingSong; 
 
-	//this volume field gets changed by a slider in the scene
-	//should we create an explicit script to do so or is it fine to let generic unity slider to change it?
+	// this volume field gets changed by a slider in the scene
+	// should we create an explicit script to do so or is it fine to let generic unity slider to change it?
 	public float masterVolume {get; set; }
 	public float musicVolume { get; set; } 
 	public float soundVolume { get; set; }
