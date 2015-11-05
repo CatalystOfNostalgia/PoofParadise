@@ -8,7 +8,7 @@ public class GameStart : MonoBehaviour {
     public GameObject manager;
     public Canvas canvas;
 
-    private List<Manager> managers;
+    private Manager[] managers;
 
     /**
      * Adds all essential game objects to scene
@@ -17,9 +17,6 @@ public class GameStart : MonoBehaviour {
         // Instantiates managers object along with the game canvas
         Instantiate(manager, new Vector3(0, 0, 15), Quaternion.identity);
         Instantiate(canvas, new Vector3(0, 0, 0), Quaternion.identity);
-
-        // Generates a list of managers for use of RenderScene
-        BuildManagersList();
 
         // Renders scene ones managers become active
         StartCoroutine("RenderScene");
@@ -55,7 +52,8 @@ public class GameStart : MonoBehaviour {
      */
     private bool SceneIsReady()
     {
-        foreach(Manager manager in managers)
+        BuildManagersList();
+        foreach (Manager manager in managers)
         {
             if (manager == null)
             {
@@ -67,15 +65,15 @@ public class GameStart : MonoBehaviour {
 
     /**
      * Builds a list of managers for testing
-     */ 
+     */
     private void BuildManagersList()
     {
-        managers = new List<Manager>();
-        managers.Add(GameManager.gameManager);
-        managers.Add(SaveState.state);
-        managers.Add(TileScript.grid);
-        managers.Add(BuildingManager.manager);
-        managers.Add(SoundManager.soundManager);
+        managers = new Manager[5];
+        managers[0] = GameManager.gameManager;
+        managers[1] = SaveState.state;
+        managers[2] = TileScript.grid;
+        managers[3] = BuildingManager.manager;
+        managers[4] = SoundManager.soundManager;
     }
 
     /**
