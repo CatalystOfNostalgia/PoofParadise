@@ -18,7 +18,6 @@ public class SettingsMenu : MonoBehaviour {
 
 	public Button exit;
 	public GameObject settingsPanel;
-	public SoundManager soundManager;
 
 	/**
 	 * 1. get a reference to the Sound Manager and the songs
@@ -29,7 +28,7 @@ public class SettingsMenu : MonoBehaviour {
 
 	public void generatePanel(){
 		settingsPanel.SetActive (true);
-		AudioSource[] music = soundManager.playlist;
+		AudioSource[] music = SoundManager.soundManager.playlist;
 		//idk why loop approach doesn't work. it only plays water theme
 //		foreach (Button button in playButtons) {
 //			button.onClick.RemoveAllListeners();
