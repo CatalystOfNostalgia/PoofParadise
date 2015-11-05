@@ -4,9 +4,6 @@ using System.Collections;
 
 /**
  * A manager that deals with music
- * Note: This manager cannot be added to the managers object as it stands.
- * This is because the buttons in the sound panel depend on an object that
- * must already be in the scene
  */
 public class SoundManager : Manager {
 
@@ -17,7 +14,6 @@ public class SoundManager : Manager {
 	public bool[] preferredPlaylist { get; set; }
 	public AudioSource currentSong { get; set;}
 	bool currentSongPlayed;
-	bool isPlayingSpecialRequestSong;
 	bool allSongsDisabled;
 
 	//boolean to block new songs while song is changing
@@ -36,7 +32,6 @@ public class SoundManager : Manager {
 	}
 
 	public void playSong(string songName){
-		isPlayingSpecialRequestSong = true;
 		AudioSource song;
 		if (playDict.TryGetValue (songName, out song) && !changingSong) {
 			Debug.Log("SoundManager: now playing " + songName);
@@ -142,7 +137,6 @@ public class SoundManager : Manager {
 
 		currentSong = playlist [index];
 		currentSongPlayed = false;
-		isPlayingSpecialRequestSong = false;
 		allSongsDisabled = false;
 	}
 	

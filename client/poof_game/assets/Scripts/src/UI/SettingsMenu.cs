@@ -23,13 +23,6 @@ public class SettingsMenu : MonoBehaviour {
 
 	public Button exit;
 
-	/**
-	 * 1. get a reference to the Sound Manager and the songs
-	 */
-	// Use this for initialization
-	void Start () {
-	}
-
     /**
      * Adds functionality to all of the buttons on the panel
      */

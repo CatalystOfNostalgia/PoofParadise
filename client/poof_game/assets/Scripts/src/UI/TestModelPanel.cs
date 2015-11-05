@@ -16,7 +16,8 @@ public class TestModelPanel : MonoBehaviour {
 		displayManager = DisplayManager.Instance ();
 		myButton1Action = new UnityAction (TestButton1Function);
 		myButton2Action = new UnityAction (TestButton2Function);
-		myButton3Action = new UnityAction (TestButton3Function); 
+		myButton3Action = new UnityAction (TestButton3Function);
+        myCancelButtonAction = new UnityAction(TestCancelFunction);
 	}
 	public void Test123(){
         if (ModelPanel.modelPanel == null) { Debug.Log("NULL"); }
@@ -33,4 +34,8 @@ public class TestModelPanel : MonoBehaviour {
 	void TestButton3Function(){
 		displayManager.DisplayMessage ("Button 3 is the best button");
 	}
+    void TestCancelFunction()
+    {
+        displayManager.DisplayMessage("Cancel button");
+    }
 }

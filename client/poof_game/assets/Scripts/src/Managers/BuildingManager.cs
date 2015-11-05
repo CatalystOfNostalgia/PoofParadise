@@ -22,7 +22,6 @@ public class BuildingManager : Manager {
 	// the tile the mouse is currently one
 	public Tile selectedTile { get; set; }
 
-	ArrayList buildings;
 	//the dictionary containing all the different types of buildings that can be made
 	Dictionary <string, Building> buildingTypeDict;
 	Dictionary<Tuple, Building> existingBuildingDict;
