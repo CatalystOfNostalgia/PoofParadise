@@ -3,17 +3,11 @@ using System.Collections;
 
 public class GameStart : MonoBehaviour {
 
-    public TileScript grid;
-    public GameManager gManager;
-    public SaveState saveState;
-    public BuildingManager bManager;
+    public GameObject manager;
 
     // Adds all essential game objects to scene
     void Awake () {
-        Instantiate(grid, new Vector3(0, 0, 15), Quaternion.identity);
-        Instantiate(gManager, new Vector3(0, 0, 0), Quaternion.identity);
-        Instantiate(bManager, new Vector3 (0, 1, 0), Quaternion.identity);
-        Instantiate(saveState, new Vector3(0, 2, 0), Quaternion.identity);
+        Instantiate(manager, new Vector3(0, 0, 15), Quaternion.identity);
         StartCoroutine("RenderScene");
         // Be careful! Anything after this coroutine will run 
         // before coroutine finishes
