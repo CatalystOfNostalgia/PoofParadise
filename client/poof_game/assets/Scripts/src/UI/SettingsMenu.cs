@@ -36,13 +36,13 @@ public class SettingsMenu : MonoBehaviour {
 //			Debug.Log("SettingsMenu: added " + button.name + "'s action listener");
 //		}
 		playButtonAir.onClick.RemoveAllListeners ();
-		playButtonAir.onClick.AddListener (() => soundManager.playSong(playButtonAir.name));
+		playButtonAir.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonAir.name));
 		playButtonEarth.onClick.RemoveAllListeners ();
-		playButtonEarth.onClick.AddListener (() => soundManager.playSong(playButtonEarth.name));
+		playButtonEarth.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonEarth.name));
 		playButtonFire.onClick.RemoveAllListeners ();
-		playButtonFire.onClick.AddListener (() => soundManager.playSong(playButtonFire.name));
+		playButtonFire.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonFire.name));
 		playButtonWater.onClick.RemoveAllListeners ();
-		playButtonWater.onClick.AddListener (() => soundManager.playSong(playButtonWater.name));
+		playButtonWater.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonWater.name));
 		exit.onClick.RemoveAllListeners ();
 		exit.onClick.AddListener (ClosePanel);
 	}
