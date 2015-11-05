@@ -19,6 +19,7 @@ public class TestModalPanel : MonoBehaviour {
 		myButton3Action = new UnityAction (TestButton3Function); 
 	}
 	public void Test123(){
+        if (ModelPanel.modelPanel == null) { Debug.Log("NULL"); }
 		ModelPanel.modelPanel.Choice ("Choose a Button and brace yourself", myButton1Action, myButton2Action, myButton3Action, myCancelButtonAction);
 	}
 

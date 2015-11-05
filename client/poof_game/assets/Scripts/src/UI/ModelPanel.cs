@@ -15,7 +15,10 @@ public class ModelPanel : MonoBehaviour {
 
 	public static ModelPanel modelPanel;
 
-    void Start()
+    /**
+     * Turns this object into a singleton
+     */
+    void Awake()
     {
         if (modelPanel == null)
         {
@@ -29,7 +32,7 @@ public class ModelPanel : MonoBehaviour {
     }
 
 	public void Choice(string question, UnityAction button1Event, UnityAction button2Event, UnityAction button3Event, UnityAction button4Event){
-		//modal panel should be visible on screen
+		//model panel should be visible on screen
 		modelPanel.gameObject.SetActive (true);
 
 		button1.onClick.RemoveAllListeners ();

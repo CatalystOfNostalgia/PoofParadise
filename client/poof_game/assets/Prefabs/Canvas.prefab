@@ -1691,13 +1691,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1acad677b011eb14298a9a4daf9d9149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  question: {fileID: 0}
+  question: {fileID: 11466778}
   iconImage: {fileID: 0}
-  button1: {fileID: 0}
-  button2: {fileID: 0}
-  button3: {fileID: 0}
-  button4: {fileID: 0}
-  exit: {fileID: 0}
+  button1: {fileID: 11479082}
+  button2: {fileID: 11472742}
+  button3: {fileID: 11476562}
+  button4: {fileID: 11469490}
+  exit: {fileID: 11467798}
 --- !u!114 &11402764
 MonoBehaviour:
   m_ObjectHideFlags: 1
