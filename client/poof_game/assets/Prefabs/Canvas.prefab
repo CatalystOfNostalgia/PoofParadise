@@ -196,6 +196,7 @@ GameObject:
   - 224: {fileID: 22456686}
   - 222: {fileID: 22239780}
   - 114: {fileID: 11432840}
+  - 114: {fileID: 11411176}
   m_Layer: 5
   m_Name: 'Resource Panel '
   m_TagString: Untagged
@@ -2112,6 +2113,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &11411176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66837838c5bc2ad4a94e795fa57ee50a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireSlider: {fileID: 11495588}
+  waterSlider: {fileID: 11420256}
+  airSlider: {fileID: 11450586}
+  earthSlider: {fileID: 11443230}
 --- !u!114 &11411604
 MonoBehaviour:
   m_ObjectHideFlags: 1
