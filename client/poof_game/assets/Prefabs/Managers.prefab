@@ -45,6 +45,8 @@ GameObject:
   - 114: {fileID: 11455214}
   - 114: {fileID: 11439822}
   - 114: {fileID: 11454060}
+  - 114: {fileID: 11454460}
+  - 114: {fileID: 11432182}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -464,6 +466,20 @@ MonoBehaviour:
   airPrefab: {fileID: 100902, guid: 3776ec6194f591344881b572fcdd8229, type: 2}
   earthPrefab: {fileID: 199760, guid: 54cae649993b4954b8caa8beb6ae4506, type: 2}
   poofPrefab: {fileID: 128394, guid: 8d8ae364ba01e14448e129a195262345, type: 2}
+--- !u!114 &11432182
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1da19e1eb715de343aacdc5fc7558dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 0}
+  displayTime: 0
+  fadeTime: 0
 --- !u!114 &11439822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -486,6 +502,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2a9eb7a93333445b7a18474d496606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11454460
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66837838c5bc2ad4a94e795fa57ee50a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireSlider: {fileID: 0}
+  waterSlider: {fileID: 0}
+  airSlider: {fileID: 0}
+  earthSlider: {fileID: 0}
 --- !u!114 &11455214
 MonoBehaviour:
   m_ObjectHideFlags: 1

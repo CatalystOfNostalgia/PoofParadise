@@ -5,10 +5,14 @@ using UnityEngine.UI;
 public class GameStart : MonoBehaviour {
 
     public GameObject manager;
+    public Canvas canvas;
+
+    private Canvas canvasObject;
 
     // Adds all essential game objects to scene
     void Awake () {
         Instantiate(manager, new Vector3(0, 0, 15), Quaternion.identity);
+        canvasObject = Instantiate(canvas, new Vector3(0, 0, 0), Quaternion.identity) as Canvas;
         StartCoroutine("RenderScene");
         // Be careful! Anything after this coroutine will run 
         // before coroutine finishes
@@ -56,8 +60,10 @@ public class GameStart : MonoBehaviour {
 
     public void SetUpMusicSettings()
     {
-        var button = GameObject.Find("Next Song");
-        Button nextSong = button.GetComponent<Button>();
-        nextSong.onClick.AddListener(SoundManager.soundManager.nextSong);
+        var dialogue = canvasObject.transform.FindChild("Settings Panel/Dialogue Panel");
+        var button1 = dialogue.transform.FindChild("Next Song");
+
+        Button nextSong = button1.GetComponent<Button>();
+        nextSong.onClick.AddListener(delegate { SoundManager.soundManager.nextSong(); });
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class TestModalPanel : MonoBehaviour {
 
-	private ModalPanel modalPanel;
+	private ModelPanel modalPanel;
 	private DisplayManager displayManager;
 
 	private UnityAction myButton1Action;
@@ -15,7 +15,7 @@ public class TestModalPanel : MonoBehaviour {
 	
 
 	void Awake(){
-		modalPanel = ModalPanel.Instance ();
+		modalPanel = ModelPanel.Instance ();
 		displayManager = DisplayManager.Instance ();
 		myButton1Action = new UnityAction (TestButton1Function);
 		myButton2Action = new UnityAction (TestButton2Function);

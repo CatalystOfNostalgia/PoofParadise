@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class ModalPanel : MonoBehaviour {
+public class ModelPanel : MonoBehaviour {
 
 	public Text question;
 	public Image iconImage;
@@ -12,21 +12,21 @@ public class ModalPanel : MonoBehaviour {
 	public Button button3;
 	public Button button4;
 	public Button exit;
-	public GameObject modalPanelObject;
+	public GameObject modelPanelObject;
 
-	private static ModalPanel modalPanel;
+	private static ModelPanel modelPanel;
 
-	public static ModalPanel Instance(){
-		if (!modalPanel) {
-			modalPanel = FindObjectOfType(typeof (ModalPanel)) as ModalPanel;
-			if(!modalPanel)
-				Debug.LogError ("There needs to be one active ModalPanel script on a GameObject in your scene.");
+	public static ModelPanel Instance(){
+		if (!modelPanel) {
+			modelPanel = FindObjectOfType(typeof (ModelPanel)) as ModelPanel;
+			if(!modelPanel)
+				Debug.LogError ("There needs to be one active ModelPanel script on a GameObject in your scene.");
 		}
-		return modalPanel;
+		return modelPanel;
 	}
 	public void Choice(string question, UnityAction button1Event, UnityAction button2Event, UnityAction button3Event, UnityAction button4Event){
 		//modal panel should be visible on screen
-		modalPanelObject.SetActive (true);
+		modelPanelObject.SetActive (true);
 
 		button1.onClick.RemoveAllListeners ();
 		button1.onClick.AddListener (ClosePanel);
@@ -59,6 +59,6 @@ public class ModalPanel : MonoBehaviour {
 	}
 	
 	void ClosePanel(){
-		modalPanelObject.SetActive(false);
+		modelPanelObject.SetActive(false);
 	}
 }
