@@ -44,7 +44,7 @@ GameObject:
   - 114: {fileID: 11466512}
   - 114: {fileID: 11402638}
   m_Layer: 5
-  m_Name: Modal Panel
+  m_Name: Model Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -742,7 +742,7 @@ GameObject:
   - 222: {fileID: 22250450}
   - 114: {fileID: 11460114}
   m_Layer: 5
-  m_Name: Modal Dialogue Panel
+  m_Name: Model Dialogue Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -930,6 +930,7 @@ GameObject:
   - 222: {fileID: 22254176}
   - 114: {fileID: 11499906}
   - 114: {fileID: 11418156}
+  - 114: {fileID: 11475970}
   m_Layer: 5
   m_Name: Settings Panel
   m_TagString: Untagged
@@ -1201,6 +1202,7 @@ GameObject:
   - 223: {fileID: 22329532}
   - 114: {fileID: 11450962}
   - 114: {fileID: 11411170}
+  - 114: {fileID: 11443082}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1696,7 +1698,6 @@ MonoBehaviour:
   button3: {fileID: 0}
   button4: {fileID: 0}
   exit: {fileID: 0}
-  modelPanelObject: {fileID: 0}
 --- !u!114 &11402764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2569,7 +2570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03960973a3688c44cb2d6e8ace09fccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 0}
+  menu: {fileID: 11475970}
 --- !u!114 &11425182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3076,6 +3077,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11443082
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 167964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0063e264f3c2f344e820d2c49d7c0d8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11443230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4307,6 +4319,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dragOnSurfaces: 1
   buildingInstance: 3
+--- !u!114 &11475970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402887b32d3675944a386f5f67859703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playButtonAir: {fileID: 11496922}
+  playButtonEarth: {fileID: 11468878}
+  playButtonFire: {fileID: 11454690}
+  playButtonWater: {fileID: 11442420}
+  exit: {fileID: 11491684}
 --- !u!114 &11476562
 MonoBehaviour:
   m_ObjectHideFlags: 1
