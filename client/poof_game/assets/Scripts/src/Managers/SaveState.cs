@@ -41,7 +41,7 @@ public class SaveState : Manager {
 	/**
 	 * Produces a singleton on awake
 	 */
-	public void Awake() {
+	override public void Start() {
 		
 		if (state == null) {
 			DontDestroyOnLoad(gameObject);
@@ -189,28 +189,28 @@ public class SaveState : Manager {
 			switch (building["building_info_id"].AsInt) {
 
 				case 1:
-					newBuilding = BuildingManager.manager.fireTreeLevel1;
+					newBuilding = BuildingManager.buildingManager.fireTreeLevel1;
 					break;
 				case 2:
-					newBuilding = BuildingManager.manager.fireTreeLevel2;
+					newBuilding = BuildingManager.buildingManager.fireTreeLevel2;
 					break;
 				case 3:
-					newBuilding = BuildingManager.manager.pondLevel1;
+					newBuilding = BuildingManager.buildingManager.pondLevel1;
 					break;
 				case 4:
-					newBuilding = BuildingManager.manager.pondLevel2;
+					newBuilding = BuildingManager.buildingManager.pondLevel2;
 					break;
 				case 5:
-					newBuilding = BuildingManager.manager.windmillLevel1;
+					newBuilding = BuildingManager.buildingManager.windmillLevel1;
 					break;
 				case 6:
-					newBuilding = BuildingManager.manager.windmillLevel2;
+					newBuilding = BuildingManager.buildingManager.windmillLevel2;
 					break;
 				case 7:
-					newBuilding = BuildingManager.manager.caveLevel1;
+					newBuilding = BuildingManager.buildingManager.caveLevel1;
 					break;
 				case 8:
-					newBuilding = BuildingManager.manager.caveLevel2;
+					newBuilding = BuildingManager.buildingManager.caveLevel2;
 					break;
 				default:
 					newBuilding = null;

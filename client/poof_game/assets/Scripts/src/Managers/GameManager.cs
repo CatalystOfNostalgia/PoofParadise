@@ -20,7 +20,11 @@ public class GameManager : Manager {
     private List<GameObject> airActive;
     private List<GameObject> poofActive;
 
-    void Start()
+    /**
+     * Converts GameManager to a singleton
+     * Initializes poof/elemari lists
+     */
+    override public void Start()
     {
         if (gameManager == null)
         {

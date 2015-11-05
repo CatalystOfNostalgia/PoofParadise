@@ -18,9 +18,9 @@ public class SoundManager : Manager {
 
 	//boolean to block new songs while song is changing
 	bool changingSong; 
+
 	//this volume field gets changed by a slider in the scene
 	//should we create an explicit script to do so or is it fine to let generic unity slider to change it?
-
 	public float masterVolume {get; set; }
 	public float musicVolume { get; set; } 
 	public float soundVolume { get; set; }
@@ -105,7 +105,7 @@ public class SoundManager : Manager {
 	}
 
 	// Use this for initialization
-	void Start () {
+	override public void Start () {
 
         // Converts SoundManager into a singleton
         if (soundManager == null)

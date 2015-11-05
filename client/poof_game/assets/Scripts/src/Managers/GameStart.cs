@@ -71,7 +71,7 @@ public class GameStart : MonoBehaviour {
         managers[0] = GameManager.gameManager;
         managers[1] = SaveState.state;
         managers[2] = TileScript.grid;
-        managers[3] = BuildingManager.manager;
+        managers[3] = BuildingManager.buildingManager;
         managers[4] = SoundManager.soundManager;
     }
 

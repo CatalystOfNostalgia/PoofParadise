@@ -23,7 +23,7 @@ public class TileScript : Manager {
      * Initializes the list of tiles
      * Generates the game grid
      */
-	void Start() {
+	override public void Start() {
 		
         if (grid == null)
         {
@@ -55,7 +55,7 @@ public class TileScript : Manager {
 	{
 		foreach (KeyValuePair<Tuple, Building> entry in SaveState.state.resourceBuildings) 
 		{
-			BuildingManager.manager.PlaceBuilding(entry.Value, GetTile (entry.Key));
+			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));
 		}
 	}
 
