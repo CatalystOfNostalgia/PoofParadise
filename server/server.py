@@ -71,9 +71,16 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
         else:
 
-            length = int(self.headers['Content-Length'])
-            response_json = self.rfile.read(length)
-            parsed_json = json.loads(response_json)
+            try:
+                length = int(self.headers['Content-Length'])
+                response_json = self.rfile.read(length)
+                parsed_json = json.loads(response_json)
+            except: 
+                print(response_json)
+                self.send_response(400)
+                data = {'message' : 'Need JSON in the body'}
+                self.wfile.write(json.dumps(data))
+                return
 
             # creating an account
             if re.match('/create', self.path):
@@ -92,6 +99,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
                 # update the data and send a success response
                 if all (item in parsed_json for item in (required_items)):
 
+                    print(parsed_json)
                     self.save(parsed_json)
 
                 # if the required elements are not present send an error message

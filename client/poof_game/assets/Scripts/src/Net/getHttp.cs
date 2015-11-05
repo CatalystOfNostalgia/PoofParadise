@@ -68,16 +68,33 @@ public class GetHTTP : MonoBehaviour {
 	}
 
 	//save to server
-	public static void toSave(String jsonstuff){
+	public static void toSave(String jsonStuff){
+
 		var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://localhost:8000/save");
 		httpWebRequest.ContentType = "application/json";
 		httpWebRequest.Method = "POST";
 		
+        byte[] jsonBytes = new byte[jsonStuff.Length * sizeof(char)];
+        System.Buffer.BlockCopy(jsonStuff.ToCharArray(), 0, jsonBytes, 0, jsonBytes.Length);
+
+        char[] jsonChars = jsonStuff.ToCharArray();
+        Stream writer = httpWebRequest.GetRequestStream();
+        
+        for(int i = 0; i < jsonBytes.Length; i++) {
+            writer.WriteByte(jsonBytes[i]);
+        }
+
+        writer.Flush();
+        writer.Close();
+        
+        /*
 		using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream())) {
-			streamWriter.Write(jsonstuff);
+			streamWriter.Write(jsonstuff.ToCharArray());
+            Debug.Log(streamWriter.ToString());
 			streamWriter.Flush();
 			streamWriter.Close();
 		}
+        */
 
 		var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
 		using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
