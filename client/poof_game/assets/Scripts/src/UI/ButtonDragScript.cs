@@ -63,17 +63,10 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		
 		var rt = draggingIcon.GetComponent<RectTransform>();
 		rt.position = Input.mousePosition;
-
-//		Vector3 globalMousePos;
-//		if (RectTransformUtility.PointInRectangleGlobalSpace(draggingPlane, out globalMousePos, eventData.position, eventData.pressEventCamera))
-//		{
-//			rt.position = globalMousePos;
-//			rt.rotation = draggingPlane.rotation;
-//		}
 	}
 
 	public void OnEndDrag (PointerEventData eventData){
-		BuildingManager.Instance().makeNewBuilding(buildingInstance);
+		BuildingManager.buildingManager.makeNewBuilding(buildingInstance);
 		if (draggingIcon != null) {
 			Destroy(draggingIcon);
 		}
