@@ -60,6 +60,6 @@ public class SettingsMenu : MonoBehaviour {
     }
 
     void ClosePanel(){
-		this.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
 	}
 }
