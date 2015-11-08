@@ -120,6 +120,7 @@ public class SaveState : Manager {
         Debug.Log(userInfo);
 
         loadJSON (userInfo);
+		TileScript.grid.PopulateGameGrid ();
 
 		PushToServer ();
         
