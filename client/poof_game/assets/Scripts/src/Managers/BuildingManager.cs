@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using System.Collections;
 
@@ -18,11 +19,7 @@ public class BuildingManager : Manager {
 	public Building caveLevel1;
 	public Building caveLevel2;
 
-    private Object[] resourceBuildingObjects;
-    private Object[] decorativeBuildingObjects;
-
-    private Sprite[] resourceBuildingSprites;
-    private Sprite[] decorativeBuildingSprites;
+    private ResourceBuilding[] resourceBuildings;
 
 	private Building target;
 
@@ -60,12 +57,7 @@ public class BuildingManager : Manager {
         buildingTypeDict.Add("fire", fireTreeLevel1);
         existingBuildingDict = new Dictionary<Tuple, Building>();
 
-        GenerateImagesList();
-
-        resourceBuildingSprites = new Sprite[resourceBuildingObjects.Length];
-        //decorativeBuildingSprites = new Sprite[decorativeBuildingObjects.Length];
-
-        GenerateSpriteList(resourceBuildingObjects, resourceBuildingSprites);
+        resourceBuildings = Resources.LoadAll("Prefabs/Buildings", typeof(ResourceBuilding)).Cast<ResourceBuilding>().ToArray();
     }
 
     //this overload does nothing right now
@@ -73,7 +65,7 @@ public class BuildingManager : Manager {
 		buildingMode = true;
 		switch (buildingNum) {
 		case 1:
-			target = fireTreeLevel1;
+			target = resourceBuildings[0];
 			break;
 		case 2:
 			target = pondLevel1;
@@ -99,7 +91,7 @@ public class BuildingManager : Manager {
 		buildingMode = true;
 		switch (buttonNum) {
 		case 1:
-			target = fireTreeLevel1;
+			target = resourceBuildings[0];
 			break;
 		case 2:
 			target = pondLevel1;
@@ -123,7 +115,7 @@ public class BuildingManager : Manager {
 	// places a building on the currently selected tile
 	public void PlaceBuilding(Building prefab) {
 
-		PlaceBuilding (GenerateBuildingObject(4, "Fire Tree", 5, 0, 0, 0), selectedTile);
+		PlaceBuilding (prefab, selectedTile);
 	}
 	
 	// places a building on the given tile
@@ -155,15 +147,9 @@ public class BuildingManager : Manager {
     }
 
     /**
-     * Builds the lists of all game images
-     */
-    public void GenerateImagesList()
-    {
-        resourceBuildingObjects = Resources.LoadAll("Buildings/Resource Buildings");
-    }
-
-    /**
      * Builds a sprite list
+     *
+     * Deprecated -> Use if you wish to generate your own prefabs
      */
     public void GenerateSpriteList(Object[] objs, Sprite[] outList)
     {
@@ -185,13 +171,18 @@ public class BuildingManager : Manager {
 
     /**
      * Generates building object
+     *
+     * Deprecated -> Still using prefabs but generating list dynamically
+     * instead of storing references
      */ 
     public Building GenerateBuildingObject(int size, string name, int fireCost, int waterCost, int earthCost, int airCost)
     {
+        // This line creates an object -> We just want to generate a prefab
         GameObject obj = new GameObject();
+        obj.name = name;
 
         obj.AddComponent<SpriteRenderer>();
-        obj.GetComponent<SpriteRenderer>().sprite = resourceBuildingSprites[0];
+        //obj.GetComponent<SpriteRenderer>().sprite = resourceBuildingSprites[1];
 
         obj.AddComponent<ResourceBuilding>();
         Building ret = obj.transform.GetComponent<ResourceBuilding>();
@@ -201,6 +192,8 @@ public class BuildingManager : Manager {
         ret.waterCost = waterCost;
         ret.earthCost = earthCost;
         ret.airCost = airCost;
+
+        Destroy(obj);
 
         return ret;
     }
