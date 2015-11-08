@@ -1185,6 +1185,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 327409968}
+--- !u!114 &352822279 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11404906, guid: 842bbbf367869e34a96ecd52240a5cb7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1645889015}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &384507740
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,6 +2521,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 689763569}
+--- !u!114 &706642303 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11433674, guid: 4c277973c8a11ec428ece62b6af93493,
+    type: 2}
+  m_PrefabInternal: {fileID: 241174602}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &708250892
 GameObject:
   m_ObjectHideFlags: 0
@@ -3768,11 +3780,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   question: {fileID: 1223278853}
   iconImage: {fileID: 0}
-  button1: {fileID: 11401570, guid: 8df9dcbdd8e73e34cb95e89e42bbd03b, type: 2}
-  button2: {fileID: 11404906, guid: 842bbbf367869e34a96ecd52240a5cb7, type: 2}
-  button3: {fileID: 11433674, guid: 4c277973c8a11ec428ece62b6af93493, type: 2}
-  button4: {fileID: 11486764, guid: 3ac73e8d3b6ec6c44b81089a2d72b2e3, type: 2}
-  exit: {fileID: 2105069065}
+  button1: {fileID: 1065285253}
+  button2: {fileID: 352822279}
+  button3: {fileID: 706642303}
+  button4: {fileID: 1206133025}
+  exit: {fileID: 1442280946}
   modalPanelObject: {fileID: 212000804}
 --- !u!114 &965554309
 MonoBehaviour:
@@ -4152,6 +4164,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1054230038}
+--- !u!114 &1065285253 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11401570, guid: 8df9dcbdd8e73e34cb95e89e42bbd03b,
+    type: 2}
+  m_PrefabInternal: {fileID: 244262136}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1080095754
 GameObject:
   m_ObjectHideFlags: 0
@@ -4832,6 +4850,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1202743037}
+--- !u!114 &1206133025 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11486764, guid: 3ac73e8d3b6ec6c44b81089a2d72b2e3,
+    type: 2}
+  m_PrefabInternal: {fileID: 936009683}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1222675276
 GameObject:
   m_ObjectHideFlags: 0
@@ -6123,6 +6147,7 @@ GameObject:
   - 114: {fileID: 1456759534}
   - 114: {fileID: 1456759538}
   - 114: {fileID: 1456759539}
+  - 114: {fileID: 1456759537}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -6175,6 +6200,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!114 &1456759537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1456759533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d04e4759a100fd04c8214ddb5730944c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1456759538
 MonoBehaviour:
   m_ObjectHideFlags: 0
