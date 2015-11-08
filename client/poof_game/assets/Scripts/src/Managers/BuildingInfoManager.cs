@@ -23,7 +23,10 @@ public class BuildingInfoManager : MonoBehaviour {
 
 	}
 
-	private void sampleAddInfo(){
-
+	public void sampleAddInfo(){
+		infoDict.Add ("Fire Tree", new BuildingInfo ("Fire Tree", "It's a burning Tree!", 200, 0, 0, 0));
+		infoDict.Add ("Pond", new BuildingInfo ("Pond", "Poofs pee in this pond", 0, 200, 0, 0));
+		infoDict.Add ("Windmill", new BuildingInfo ("Windmill", "Spinning~", 0, 0, 200, 0));
+		infoDict.Add ("Fire Tree", new BuildingInfo ("Cave", "It's dark in here", 0, 0, 0, 200));
 	}
 }
