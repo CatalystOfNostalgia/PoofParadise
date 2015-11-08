@@ -74,34 +74,25 @@ public class GetHTTP : MonoBehaviour {
 		httpWebRequest.ContentType = "application/json";
 		httpWebRequest.Method = "POST";
 		
-        byte[] jsonBytes = new byte[jsonStuff.Length * sizeof(char)];
-        System.Buffer.BlockCopy(jsonStuff.ToCharArray(), 0, jsonBytes, 0, jsonBytes.Length);
-
-        char[] jsonChars = jsonStuff.ToCharArray();
-        Stream writer = httpWebRequest.GetRequestStream();
+        byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonStuff);
+        //System.Buffer.BlockCopy(jsonStuff.ToCharArray(), 0, jsonBytes, 0, jsonBytes.Length);
         
-        for(int i = 0; i < jsonBytes.Length; i++) {
-            writer.WriteByte(jsonBytes[i]);
-        }
-
+        Stream writer = httpWebRequest.GetRequestStream();
+        writer.Write(jsonBytes, 0, jsonBytes.Length);
         writer.Flush();
         writer.Close();
-        
-        /*
-		using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream())) {
-			streamWriter.Write(jsonstuff.ToCharArray());
-            Debug.Log(streamWriter.ToString());
-			streamWriter.Flush();
-			streamWriter.Close();
-		}
-        */
 
-		var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+		HttpWebResponse response = (HttpWebResponse)httpWebRequest.GetResponse();
+        
+		Debug.Log(getHttpBody(new StreamReader(response.GetResponseStream()).ReadToEnd()));
+        /*
 		using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
 		{
 			var result = streamReader.ReadToEnd();
 			Debug.Log (result);
+            writer.close();
 		}
+        */
 
 	}
 

@@ -71,16 +71,17 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
         else:
 
-            try:
-                length = int(self.headers['Content-Length'])
-                response_json = self.rfile.read(length)
-                parsed_json = json.loads(response_json)
-            except: 
-                print(response_json)
-                self.send_response(400)
-                data = {'message' : 'Need JSON in the body'}
-                self.wfile.write(json.dumps(data))
-                return
+            length = int(self.headers['Content-Length'])
+            print("reading request")
+            response_json = self.rfile.read(length)
+            print("read request")
+            print("response_json")
+            print(response_json)
+            parsed_json = json.loads(response_json)
+
+            self.send_response(400)
+            data = {'message' : 'Need JSON in the body'}
+            self.wfile.write(json.dumps(data))
 
             # creating an account
             if re.match('/create', self.path):
@@ -286,6 +287,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
                               error_building['id']}
             print('cannot find building' + error_building['id'])
 
+        print(json.dumps(data));
         self.wfile.write(json.dumps(data))
 
 # starting the server

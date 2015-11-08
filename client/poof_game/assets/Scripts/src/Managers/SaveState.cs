@@ -117,6 +117,7 @@ public class SaveState : MonoBehaviour {
         
         // get the JSON from the server
         String userInfo = GetHTTP.login("ted1", "password");
+        Debug.Log(userInfo);
 
         loadJSON (userInfo);
         
@@ -151,6 +152,7 @@ public class SaveState : MonoBehaviour {
         
         foreach ( KeyValuePair<Tuple, Building> entry in resourceBuildings) {
             jsonPlayerData += "{ ";
+            jsonPlayerData += "\"id\": \"" + entry.Value.id + "\", ";
             jsonPlayerData += "\"new\": \"" + entry.Value.created + "\", ";
             jsonPlayerData += "\"x_coordinate\": \"" + entry.Key.x + "\", ";
             jsonPlayerData += "\"y_coordinate\": \"" + entry.Key.y + "\", ";
@@ -241,7 +243,9 @@ public class SaveState : MonoBehaviour {
                     break;
             }
 
+            newBuilding.id = building["id"].AsInt;
             resourceBuildings.Add(new Tuple(x, y), newBuilding);
+
         }
 
     }
