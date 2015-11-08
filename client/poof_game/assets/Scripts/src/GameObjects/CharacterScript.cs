@@ -35,6 +35,7 @@ public class CharacterScript : MonoBehaviour {
 		if (!ms.getMoving() && ms.isQueueEmpty()) {
 			if (!IsInvoking()) {
 				Invoke("startMovement", 2f);
+
 			}
 		}
 	}

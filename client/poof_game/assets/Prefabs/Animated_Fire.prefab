@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11444774}
   - 114: {fileID: 11431364}
   - 114: {fileID: 11454160}
+  - 95: {fileID: 9541422}
   m_Layer: 0
   m_Name: Animated_Fire
   m_TagString: Poof
@@ -27,10 +28,27 @@ Transform:
   m_GameObject: {fileID: 186158}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.9000001, y: -1.5, z: 0}
-  m_LocalScale: {x: .100000001, y: .100000001, z: .100000001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!95 &9541422
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186158}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 19e6e2e45b2d76245bae38b1f43c80d8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11431364
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -42,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a96eb99a51ad8f4438bc83520eda58ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: .0299999993
+  movementSpeed: .00700000022
 --- !u!114 &11444774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,7 +108,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 35cf74d87a4c77243b2f062aa862ef3e, type: 3}
+  m_Sprite: {fileID: 21300212, guid: 7bace31ca83d0414a910b0121eba5492, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -101,15 +119,28 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
-      value: .100000001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.y
-      value: .100000001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
-      value: .100000001
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300212, guid: 7bace31ca83d0414a910b0121eba5492,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 19e6e2e45b2d76245bae38b1f43c80d8, type: 2}
+    - target: {fileID: 0}
+      propertyPath: movementSpeed
+      value: .00700000022
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
