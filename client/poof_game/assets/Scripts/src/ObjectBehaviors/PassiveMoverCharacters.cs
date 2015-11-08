@@ -9,7 +9,7 @@ using System.Collections.Generic;
 public class PassiveMoverCharacters : MonoBehaviour {
 	
 	// Enumeration that makes debugging more interesting to look at
-	public enum Direction {Down_Left, Down, Down_Right, Left, Stay, Right, Up_Left, Up, Up_Right};
+	//public enum Direction {Down_Left, Down, Down_Right, Left, Stay, Right, Up_Left, Up, Up_Right};
 	
 	// References to the attached character's scripts
 	// currently ms is not used, but might be in the future
@@ -18,6 +18,7 @@ public class PassiveMoverCharacters : MonoBehaviour {
 	
 	// Field containing the most recently calculated tile for the character to move to
 	private Tile nextTile { get; set; }
+	private TileScript ts;
 	
 	// bored facet hasn't been implemented yet; TO DO
 	//private bool bored;
@@ -31,18 +32,22 @@ public class PassiveMoverCharacters : MonoBehaviour {
 		ms = this.GetComponent<MovementScript>();
 		
 		likes = new ArrayList();
+		ts = GameObject.FindGameObjectWithTag("Grid").GetComponent<TileScript>();
 		
 	}
 	
 	private void calculateNextTile() {
 		
 		if (likes.Count == 0) {
-			
-			List<Tuple> tuples = TileScript.grid.GetPossiblePaths(cs.onTile.index); 
-			Tuple[] arr = tuples.ToArray();
-			Tuple next = arr[(int)Random.Range(0, arr.Length)];
-			Tile test = TileScript.grid.GetTile(next);
-			nextTile = test;
+			if (Random.Range (0,2) > 0) {
+				Tuple random = new Tuple (Random.Range(0, ts.gridX), Random.Range (0, ts.gridY));
+				nextTile = ts.GetTile(random);
+				if (nextTile == null)
+					nextTile = cs.onTile;
+			}
+			else {
+				nextTile = cs.onTile;
+			}
 		}
 		else {
 			int domain = likes.Count;
