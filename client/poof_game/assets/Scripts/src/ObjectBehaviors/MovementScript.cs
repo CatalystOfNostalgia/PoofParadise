@@ -46,12 +46,24 @@ public class MovementScript : MonoBehaviour {
 		movementQueue = new Queue();
 		currentPos = new Vector2(transform.position.x, transform.position.y);
 		targetPos = new Vector2();
+
+		Debug.Log(currentPos);
+		Debug.Log(targetPos);
 		
 		cs = this.GetComponent<CharacterScript>();
 		animator = this.GetComponent<Animator>();
 
 		if(cs.type == CharacterScript.Element.Wind){
 			transitionTiming = 1.917f;
+		}
+		if(cs.type == CharacterScript.Element.Water){
+			transitionTiming = 2.167f;
+		}
+		if(cs.type == CharacterScript.Element.Earth){
+			transitionTiming = 2.0f;
+		}
+		if(cs.type == CharacterScript.Element.Fire){
+			transitionTiming = 0.917f;
 		}
 
 		
@@ -88,7 +100,6 @@ public class MovementScript : MonoBehaviour {
 	
 	// Physically does the lerping of the poof to make the actual movement
 	private void continueMoving() {
-		
 		float totalDistance = Vector2.Distance(currentPos, targetPos);
 		float currentDistance = Vector2.Distance(currentPos, transform.position);
 		
@@ -107,6 +118,7 @@ public class MovementScript : MonoBehaviour {
 	// Resets all variables and halts movement progress from passive inputs
 	private void stopMoving() {
 		if (animator != null) {
+			//Debug.Log("stopping to move");
 			animator.SetInteger("Direction", 4);
 			Invoke("animatorChange", transitionTiming);
 		}
@@ -130,7 +142,8 @@ public class MovementScript : MonoBehaviour {
 	}
 	
 	// Only sets the isMoving flag to true, and also determines if the movement is a priority input
-	private void startMoving() {        
+	private void startMoving() 
+	{        
 		//Debug.Log(currentPos);
 		//Debug.Log(targetPos);
 		//Debug.Log("Starting to move");
@@ -157,7 +170,7 @@ public class MovementScript : MonoBehaviour {
         }
         else
         {
-            //Debug.Log("Congratulations, this character doesn't have a animation");
+			//Debug.Log("Congratulations, this character doesn't have a animation");
         }
 
 		isMoving = true;
@@ -166,6 +179,7 @@ public class MovementScript : MonoBehaviour {
 	}
 	
 	public void animatorChange() {
+		//Debug.Log("Transition");
 		animator.SetInteger("Direction", 4);
 	}
 	
