@@ -117,6 +117,10 @@ public class BuildingManager : Manager {
 	// places a building on the given tile
 	public void PlaceBuilding (Building prefab, Tile tile) {
 
+		if (tile == null) {
+			Debug.Log ("tile is null");
+		}
+
 		Building newBuilding = tile.PlaceBuilding (prefab);
         newBuilding.created = true;
 

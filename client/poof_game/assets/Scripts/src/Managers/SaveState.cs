@@ -204,7 +204,6 @@ public class SaveState : Manager {
         airEle          = data ["air_ele"].AsInt;
         poofCount       = data ["poof_count"].AsInt;
 
-
         // load the buildings
         loadedResourceBuildings = data ["resource_buildings"].AsArray;
         loadedDecorativeBuildings = data ["decorative_buildings"].AsArray;
@@ -246,7 +245,8 @@ public class SaveState : Manager {
                     break;
             }
 
-            newBuilding.id = building["id"].AsInt;
+			newBuilding.id = building["id"].AsInt;
+            
             resourceBuildings.Add(new Tuple(x, y), newBuilding);
 
         }

@@ -55,6 +55,7 @@ public class TileScript : Manager {
 	{
 		foreach (KeyValuePair<Tuple, Building> entry in SaveState.state.resourceBuildings) 
 		{
+
 			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));
 		}
 	}

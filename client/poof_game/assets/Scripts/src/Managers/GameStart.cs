@@ -43,6 +43,7 @@ public class GameStart : MonoBehaviour {
 
         // Generate all poofs/elemari
         GameManager.gameManager.SpawnPoofs();
+		Debug.Log ("scene is ready");
     }
 
     /**
