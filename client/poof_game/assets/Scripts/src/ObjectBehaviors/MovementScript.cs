@@ -33,6 +33,8 @@ public class MovementScript : MonoBehaviour {
 	private PassiveMoverPoofs pmp;
 	private CharacterScript cs;
 	private PoofScript ps;
+
+	private float transitionTiming = 0f;
 	
 	void Start () {
 	
@@ -45,9 +47,11 @@ public class MovementScript : MonoBehaviour {
 		movementQueue = new Queue();
 		currentPos = new Vector2(transform.position.x, transform.position.y);
 		targetPos = new Vector2();
+
+		Debug.Log(currentPos);
+		Debug.Log(targetPos);
 		
 		animator = this.GetComponent<Animator>();
-
 	}
 	
 	public void initializePoof() {
@@ -58,6 +62,19 @@ public class MovementScript : MonoBehaviour {
 	public void initializeCharacter() {
 		cs = this.GetComponent<CharacterScript>();
 		pcp = this.GetComponent<PassiveMoverCharacters>();
+
+		if(cs.type == CharacterScript.Element.Wind){
+			transitionTiming = 1.917f;
+		}
+		if(cs.type == CharacterScript.Element.Water){
+			transitionTiming = 2.167f;
+		}
+		if(cs.type == CharacterScript.Element.Earth){
+			transitionTiming = 2.0f;
+		}
+		if(cs.type == CharacterScript.Element.Fire){
+			transitionTiming = 0.917f;
+		}
 	}
 	
 	void Update () {
@@ -146,8 +163,12 @@ public class MovementScript : MonoBehaviour {
 	
 	// Resets all variables and halts movement progress from passive inputs
 	private void stopMoving() {
-		animator.SetInteger("Direction", 4);
-		Invoke("animatorChange", 1.917f);
+
+		if (animator != null) {
+			//Debug.Log("stopping to move");
+			animator.SetInteger("Direction", 4);
+			Invoke("animatorChange", transitionTiming);
+		}
 		if (isMoving) {
 			currentPos = targetPos;
 			isMoving = false;
@@ -179,6 +200,7 @@ public class MovementScript : MonoBehaviour {
 		
         if (animator != null)
         {
+			Invoke("animatorChange", transitionTiming);
             if (currentPos.x - targetPos.x > 0 && currentPos.y - targetPos.y > 0)
             {
                 animator.SetInteger("Direction", 0);
@@ -198,11 +220,16 @@ public class MovementScript : MonoBehaviour {
         }
         else
         {
-            //Debug.Log("Congratulations, this character doesn't have a animation");
+			//Debug.Log("Congratulations, this character doesn't have a animation");
         }
+
+		isMoving = true;
+		if (priorityInput)
+			priorityComplete = false;
 	}
 	
 	public void animatorChange() {
+		//Debug.Log("Transition");
 		animator.SetInteger("Direction", 4);
 	}
 	

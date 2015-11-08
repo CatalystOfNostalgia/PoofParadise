@@ -23,7 +23,7 @@ public class PassiveMoverPoofs : MonoBehaviour {
 	//public Direction mostRecent;
 	
 	// bored facet hasn't been implemented yet; TO DO
-	private bool bored;
+	//private bool bored;
 	
 	// List containing GameObjects that should affect the character's wandering patterns
 	//		currently not implemented; TO DO
@@ -42,7 +42,7 @@ public class PassiveMoverPoofs : MonoBehaviour {
 		
 		if (likes.Count == 0) {
 			if (Random.Range (0,2) > 0) {
-           		List<Tuple> tuples = TileScript.grid.GetPossiblePaths(ps.onTile.index); 
+           		List<Tuple> tuples = TileScript.grid.GetPossiblePaths(ps.onTile.index);
            		Tuple[] arr = tuples.ToArray();
            		Tuple next = arr[(int)Random.Range(0, arr.Length)];
             	Tile test = TileScript.grid.GetTile(next);
