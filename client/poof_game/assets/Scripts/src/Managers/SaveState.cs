@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using SimpleJSON;
 
 public class SaveState : Manager {
-
+            
 	// Allows the scene to access this object without searching for it
 	public static SaveState state;
 
@@ -53,6 +53,7 @@ public class SaveState : Manager {
 		// set the fields until we can load
 		state.fire = 0;
 		state.resourceBuildings = new Dictionary<Tuple, Building>();
+
 		fireEle = 2;
 		earthEle = 2;
 		waterEle = 2;
@@ -191,5 +192,4 @@ public class SaveState : Manager {
 		}
 
 	}
-
 }

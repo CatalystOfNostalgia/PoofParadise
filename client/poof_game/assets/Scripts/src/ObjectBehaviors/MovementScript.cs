@@ -29,9 +29,10 @@ public class MovementScript : MonoBehaviour {
 	// Queue that contains Vector2's of where the poof should be moving
 	private Queue movementQueue;
 	
-	// Not utilized at all at the moment, because the passive mover script is incomplete
-	//private PassiveMoverPoofs ps;
+	private PassiveMoverCharacters pcp;
+	private PassiveMoverPoofs pmp;
 	private CharacterScript cs;
+	private PoofScript ps;
 
 	private float transitionTiming = 0f;
 	
@@ -50,8 +51,17 @@ public class MovementScript : MonoBehaviour {
 		Debug.Log(currentPos);
 		Debug.Log(targetPos);
 		
-		cs = this.GetComponent<CharacterScript>();
 		animator = this.GetComponent<Animator>();
+	}
+	
+	public void initializePoof() {
+		ps = this.GetComponent<PoofScript>();
+		pmp = this.GetComponent<PassiveMoverPoofs>();
+	}
+	
+	public void initializeCharacter() {
+		cs = this.GetComponent<CharacterScript>();
+		pcp = this.GetComponent<PassiveMoverCharacters>();
 
 		if(cs.type == CharacterScript.Element.Wind){
 			transitionTiming = 1.917f;
@@ -65,8 +75,6 @@ public class MovementScript : MonoBehaviour {
 		if(cs.type == CharacterScript.Element.Fire){
 			transitionTiming = 0.917f;
 		}
-
-		
 	}
 	
 	void Update () {
@@ -88,18 +96,47 @@ public class MovementScript : MonoBehaviour {
 	}
 	
 	// Pops the first element out of the queue
-	private void getInputs() {
+	private bool getInputs() {
 		if (movementQueue.Count > 0) {
 			targetObj = movementQueue.Dequeue() as Tile;
 			if (targetObj != null) {
 				targetPos = parseObjToLoc(targetObj);
 				input = true;
+				return true;
+			}
+			else
+				return false;
+		}
+		else
+			return false;
+	}
+	
+	private void continueMoving() {
+		if (animator != null)
+		{
+			if (currentPos.x - targetPos.x > 0 && currentPos.y - targetPos.y > 0)
+			{
+				animator.SetInteger("Direction", 0);
+			}
+			if (currentPos.x - targetPos.x < 0 && currentPos.y - targetPos.y > 0)
+			{
+				animator.SetInteger("Direction", 1);
+			}
+			if (currentPos.x - targetPos.x < 0 && currentPos.y - targetPos.y < 0)
+			{
+				animator.SetInteger("Direction", 2);
+			}
+			if (currentPos.x - targetPos.x > 0 && currentPos.y - targetPos.y < 0)
+			{
+				animator.SetInteger("Direction", 3);
 			}
 		}
+		lerperoni();
 	}
 	
 	// Physically does the lerping of the poof to make the actual movement
-	private void continueMoving() {
+	private void lerperoni() {
+		
 		float totalDistance = Vector2.Distance(currentPos, targetPos);
 		float currentDistance = Vector2.Distance(currentPos, transform.position);
 		
@@ -108,28 +145,41 @@ public class MovementScript : MonoBehaviour {
 		if (progressAccum <= 1)
 			transform.position = Vector3.Lerp(new Vector3(currentPos.x, currentPos.y, currentPos.y - .3f), new Vector3(targetPos.x, targetPos.y, targetPos.y), progressAccum);
 		else {
-
-			if (priorityInput)
-				priorityComplete = true;
-			stopMoving();
+			if (!isQueueEmpty()) {
+				currentPos = targetPos;
+				targetPos = new Vector2();
+				targetPos = new Vector2();
+				if (cs != null && targetObj != null)
+					cs.onTile = targetObj;
+				else if (targetObj != null)
+					ps.onTile = targetObj;
+				getInputs();
+				continueMoving();
+			}
+			else
+				stopMoving();
 		}
 	}
 	
 	// Resets all variables and halts movement progress from passive inputs
 	private void stopMoving() {
+
 		if (animator != null) {
 			//Debug.Log("stopping to move");
 			animator.SetInteger("Direction", 4);
 			Invoke("animatorChange", transitionTiming);
 		}
-		if (isMoving && priorityComplete) {
+		if (isMoving) {
 			currentPos = targetPos;
 			isMoving = false;
 			priorityInput = false;
 			input = false;
 			progressAccum = 0;
 			targetPos = new Vector2();
-			cs.onTile = targetObj;
+			if (cs != null && targetObj != null)
+				cs.onTile = targetObj;
+			else if (targetObj != null)
+				ps.onTile = targetObj;
 			targetObj = null;
 			movementQueue.Clear();
 		}
@@ -142,11 +192,11 @@ public class MovementScript : MonoBehaviour {
 	}
 	
 	// Only sets the isMoving flag to true, and also determines if the movement is a priority input
-	private void startMoving() 
-	{        
-		//Debug.Log(currentPos);
-		//Debug.Log(targetPos);
-		//Debug.Log("Starting to move");
+	private void startMoving() {
+		Invoke("animatorChange", 1.917f);
+		isMoving = true;
+		if (priorityInput)
+			priorityComplete = false;
 		
         if (animator != null)
         {
@@ -185,14 +235,20 @@ public class MovementScript : MonoBehaviour {
 	
 	// Method that Enqueues an input direction; should be utilized by the passive mover script
 	public void receivePassiveInputs(Tile toTile) {
-		movementQueue.Enqueue(toTile);
+		// Needs to parse the toTile into a set of adjacent tiles that can be travelled consecutively
+		object[] toAdd = parseTileInput(toTile);
+		
+		for (int i = 0; i < toAdd.Length; i++) {
+			movementQueue.Enqueue(toAdd[i]);
+		}
 	}
 	
 	// Method that Enqueues player inputs and interrupts current passive inputs
+	//		errata'd out at the moment
 	public void receivePlayerInputs(Tile toTile) {
-		priorityInput = true;
+		/*priorityInput = true;
 		stopMoving();
-		movementQueue.Enqueue(toTile);
+		movementQueue.Enqueue(toTile);*/
 	}
 	
 	// Getter method that returns the isMoving flag
@@ -209,5 +265,108 @@ public class MovementScript : MonoBehaviour {
 	// Method that parses a GameObject into a Vector2 which is the input GameObject's position
 	private Vector2 parseObjToLoc(Tile toTile) {
 		return new Vector2(toTile.transform.position.x, toTile.transform.position.y);
+	}
+	
+	public bool isQueueEmpty() {
+		return movementQueue.Count == 0;
+	}
+	
+	private object[] parseTileInput(Tile toTile) {
+		ArrayList toReturn = new ArrayList();
+		
+		if (cs != null) {	
+			int h = getHorizontalDistance(cs.onTile, toTile);
+			int v = getVerticalDistance(cs.onTile, toTile);
+			Tile nextTile = cs.onTile;
+			
+			if (h > 0) {
+				for (int i = h; i >= 0; i--) {
+					if (nextTile != null) {
+						nextTile = nextTile.rightTile;
+						toReturn.Add(nextTile);
+					}
+				}
+			}
+			else {
+				for (int i = h; i <= 0; i++) {
+					if (nextTile != null) {
+						nextTile = nextTile.leftTile;
+						toReturn.Add(nextTile);
+					}
+				}
+			}
+			
+			if (v > 0) {
+				for (int i = v; i >= 0; i--) {
+					if (nextTile != null) {
+						nextTile = nextTile.upTile;
+						toReturn.Add(nextTile);
+					}
+				}
+			}
+			else {
+				for (int i = v; i <= 0; i++) {
+					if (nextTile != null) {
+						nextTile = nextTile.downTile;
+						toReturn.Add(nextTile);
+					}
+				}
+			}
+			
+			return toReturn.ToArray();
+		}
+		else {
+			int h = getHorizontalDistance(ps.onTile, toTile);
+			int v = getVerticalDistance(ps.onTile, toTile);
+			Tile nextTile = ps.onTile;
+			
+			if (h > 0) {
+				for (int i = h; i >= 0; i--) {
+					if (nextTile != null) {
+						nextTile = nextTile.rightTile;
+						toReturn.Add(nextTile);
+					}
+				}
+			}
+			else {
+				for (int i = h; i <= 0; i++) {
+					if (nextTile != null) {
+						nextTile = nextTile.leftTile;
+						toReturn.Add(nextTile);
+					}
+				}
+			}
+			
+			if (v > 0) {
+				for (int i = v; i >= 0; i--) {
+					if (nextTile != null) {
+						nextTile = nextTile.upTile;
+						toReturn.Add(nextTile);
+					}
+				}
+			}
+			else {
+				for (int i = v; i <= 0; i++) {
+					if (nextTile != null) {
+						nextTile = nextTile.downTile;
+						toReturn.Add(nextTile);
+					}
+				}
+			}
+			
+			return toReturn.ToArray();
+		}
+	}
+	
+	private int getHorizontalDistance(Tile t1, Tile t2) {
+		int x1 = t1.index.x;
+		int x2 = t2.index.x;
+		return x2 - x1;
+	}
+	
+	private int getVerticalDistance(Tile t1, Tile t2) {
+		int y1 = t1.index.y;
+		int y2 = t2.index.y;
+		return y2 - y1;
 	}
 }

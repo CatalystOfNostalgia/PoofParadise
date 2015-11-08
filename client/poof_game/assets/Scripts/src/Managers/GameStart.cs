@@ -43,6 +43,7 @@ public class GameStart : MonoBehaviour {
 
         // Generate all poofs/elemari
         GameManager.gameManager.SpawnPoofs();
+		Debug.Log ("scene is ready");
     }
 
     /**
@@ -80,7 +81,13 @@ public class GameStart : MonoBehaviour {
      */
     public void TestJSON()
     {
-        SaveState.state.PullFromServer ();
+
+		SaveState.state.PullFromServer ();
         TileScript.grid.PopulateGameGrid ();
+
+		//testing saving game
+		SaveState.state.PushToServer ();
+
+
     }
 }

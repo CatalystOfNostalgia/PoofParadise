@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tile
+  - Poof
+  - Grid
   layers:
   - Default
   - TransparentFX

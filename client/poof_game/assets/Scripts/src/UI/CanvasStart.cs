@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class CanvasStart : MonoBehaviour {
 
@@ -7,6 +8,12 @@ public class CanvasStart : MonoBehaviour {
      * Use to initialize all static singleton children
      */
 	void Start () {
+
+		Button jsonButton = this.transform.FindChild ("Test JSON").gameObject.GetComponent<Button>();
+
+		jsonButton.onClick.RemoveAllListeners ();
+		jsonButton.onClick.AddListener (() => SaveState.state.PullFromServer()); 
+
         GameObject modelPanel = this.transform.FindChild("Model Panel").gameObject;
 
         if (ModelPanel.modelPanel == null)
