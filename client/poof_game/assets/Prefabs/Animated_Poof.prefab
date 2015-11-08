@@ -41,7 +41,7 @@ Animator:
   m_GameObject: {fileID: 128394}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a99a8780849dcb44d9ede1581dce7b7c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9a05409d3eec25547a11c0d7b127ecb4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -72,7 +72,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abff9fffd88243d4fa7deb2317587da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mostRecent: 0
 --- !u!114 &11468364
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -109,7 +108,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300016, guid: 7ea547f8f1e598c4c8d35ba326b1c996, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2735c84b87edfb44ca52aa0faf928a63, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -126,6 +125,15 @@ Prefab:
       propertyPath: movementSpeed
       value: .0130000003
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2735c84b87edfb44ca52aa0faf928a63,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9a05409d3eec25547a11c0d7b127ecb4, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 128394}

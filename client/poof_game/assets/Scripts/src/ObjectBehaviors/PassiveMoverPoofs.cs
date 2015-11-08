@@ -23,7 +23,7 @@ public class PassiveMoverPoofs : MonoBehaviour {
 	//public Direction mostRecent;
 	
 	// bored facet hasn't been implemented yet; TO DO
-	private bool bored;
+	//private bool bored;
 	
 	// List containing GameObjects that should affect the character's wandering patterns
 	//		currently not implemented; TO DO

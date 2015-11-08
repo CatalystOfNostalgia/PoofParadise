@@ -72,7 +72,7 @@ public class Tile : MonoBehaviour {
     {
         startColor = GetComponent<Renderer>().material.color;
 
-        BuildingManager.manager.selectedTile = this;
+        BuildingManager.buildingManager.selectedTile = this;
 
         if (isVacant)
         {
