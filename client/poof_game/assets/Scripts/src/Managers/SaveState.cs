@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
-public class SaveState : MonoBehaviour {
+public class SaveState : Manager {
 
     // Allows the scene to access this object without searching for it
     public static SaveState state;
@@ -46,7 +46,7 @@ public class SaveState : MonoBehaviour {
     /**
      * Produces a singleton on awake
      */
-    public void Awake() {
+    override public void Start() {
         
         if (state == null) {
             DontDestroyOnLoad(gameObject);
@@ -106,7 +106,7 @@ public class SaveState : MonoBehaviour {
         // TODO Send JSON to server
 
         Debug.Log("buildingJSON = " + buildingJSON);
-        GetHTTP.toSave (buildingJSON);
+		StartCoroutine (GetHTTP.toSave(buildingJSON));
 
     }
     
@@ -120,6 +120,8 @@ public class SaveState : MonoBehaviour {
         Debug.Log(userInfo);
 
         loadJSON (userInfo);
+
+		PushToServer ();
         
     }
 
@@ -215,28 +217,28 @@ public class SaveState : MonoBehaviour {
             switch (building["building_info_id"].AsInt) {
 
                 case 1:
-                    newBuilding = BuildingManager.manager.fireTreeLevel1;
+                    newBuilding = BuildingManager.buildingManager.fireTreeLevel1;
                     break;
                 case 2:
-                    newBuilding = BuildingManager.manager.fireTreeLevel2;
+                    newBuilding = BuildingManager.buildingManager.fireTreeLevel2;
                     break;
                 case 3:
-                    newBuilding = BuildingManager.manager.pondLevel1;
+                    newBuilding = BuildingManager.buildingManager.pondLevel1;
                     break;
                 case 4:
-                    newBuilding = BuildingManager.manager.pondLevel2;
+                    newBuilding = BuildingManager.buildingManager.pondLevel2;
                     break;
                 case 5:
-                    newBuilding = BuildingManager.manager.windmillLevel1;
+                    newBuilding = BuildingManager.buildingManager.windmillLevel1;
                     break;
                 case 6:
-                    newBuilding = BuildingManager.manager.windmillLevel2;
+                    newBuilding = BuildingManager.buildingManager.windmillLevel2;
                     break;
                 case 7:
-                    newBuilding = BuildingManager.manager.caveLevel1;
+                    newBuilding = BuildingManager.buildingManager.caveLevel1;
                     break;
                 case 8:
-                    newBuilding = BuildingManager.manager.caveLevel2;
+                    newBuilding = BuildingManager.buildingManager.caveLevel2;
                     break;
                 default:
                     newBuilding = null;
@@ -247,7 +249,5 @@ public class SaveState : MonoBehaviour {
             resourceBuildings.Add(new Tuple(x, y), newBuilding);
 
         }
-
     }
-
 }

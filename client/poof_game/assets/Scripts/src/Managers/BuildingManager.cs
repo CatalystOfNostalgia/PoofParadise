@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 
-public class BuildingManager : MonoBehaviour {
+public class BuildingManager : Manager {
 
 	/**
 	 * just dragging gameobjects to here for now
@@ -22,26 +22,41 @@ public class BuildingManager : MonoBehaviour {
 	// the tile the mouse is currently one
 	public Tile selectedTile { get; set; }
 
-	ArrayList buildings;
 	//the dictionary containing all the different types of buildings that can be made
 	Dictionary <string, Building> buildingTypeDict;
 	Dictionary<Tuple, Building> existingBuildingDict;
+
 	//the dictionary containing buildings on the grid
-	public static BuildingManager manager;
+	public static BuildingManager buildingManager;
 
 	public bool buildingMode;
-	
-	public static BuildingManager Instance(){
-		if (!manager) {
-			manager = FindObjectOfType(typeof (BuildingManager)) as BuildingManager;
-			if(!manager)
-				Debug.LogError ("There needs to be one active BuildingManager script on a GameObject in your scene.");
-		}
-		return manager;
-	}
 
-	//this overload does nothing right now
-	public void dragNewBuilding (int buildingNum, Vector3 cursor){
+    /**
+     * Initializes BuildingManager as a singleton
+     *
+     * Initializes fields
+     */
+    override public void Start()
+    {
+
+        if (buildingManager == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            buildingManager = this;
+        }
+        else if (buildingManager != this)
+        {
+            Destroy(gameObject);
+        }
+
+        buildingTypeDict = new Dictionary<string, Building>();
+        buildingTypeDict.Add("fire", fireTreeLevel1);
+        existingBuildingDict = new Dictionary<Tuple, Building>();
+
+    }
+
+    //this overload does nothing right now
+    public void dragNewBuilding (int buildingNum, Vector3 cursor){
 		buildingMode = true;
 		switch (buildingNum) {
 		case 1:
@@ -119,21 +134,12 @@ public class BuildingManager : MonoBehaviour {
 	private float getDistance(float x1, float y1, float x2, float y2){
 		return (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2);
 	}
-		
-	//helper method to get mouse position
-	private Vector3 getCurrentMousePosition(){
-		return Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 10));
-	}
 
-	// Use this for initialization
-	void Start () {
-
-		Instance ();
-		buildingTypeDict = new Dictionary<string, Building>();
-		buildingTypeDict.Add ("fire", fireTreeLevel1);
-		existingBuildingDict = new Dictionary<Tuple, Building>();
-
-	}
+    //helper method to get mouse position
+    private Vector3 getCurrentMousePosition()
+    {
+        return Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+    }
 	
 	// Update is called once per frame
 	void Update () {

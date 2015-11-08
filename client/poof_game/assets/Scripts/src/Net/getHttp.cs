@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Net;
 using System;
 using System.IO;
@@ -14,36 +15,6 @@ public class GetHTTP : MonoBehaviour {
 	}
 
 	public static Request request;
-
-	/* commented out so that it doesn't do anything crazy
-	void Start () {
-
-		/*
-		 * Create new account
-		 *
-		Hashtable data = new Hashtable();
-		data.Add( "name", "Eric" );
-		data.Add( "email", "something345@case.edu" );
-		data.Add ("user", "DacoolchickenXP");
-		data.Add ("pass", "notsecurepass");
-		data.Add ("level", 9001);
-
-		toCreate (data);
-
-		/*
-		 * login attempt
-		 *
-		string x = "Ted1";
-		string y = "password";
-		//string y = "wrongPass";
-		toLogin (x, y);
-
-		Hashtable data2 = new Hashtable();
-		data.Add ("user", "Lisa");
-
-		addFriend (data2);
-	}
-	*/
 
 	/*
 	 * Account creation 
@@ -68,30 +39,48 @@ public class GetHTTP : MonoBehaviour {
 	}
 
 	//save to server
-	public static void toSave(String jsonStuff){
+	public static IEnumerator toSave(String jsonStuff){
 
-		var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://localhost:8000/save");
-		httpWebRequest.ContentType = "application/json";
-		httpWebRequest.Method = "POST";
-		
+
+		String url = "http://localhost:8000/save";
+		byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonStuff);
+
+		Dictionary<String, String> headers = new Dictionary<String, String>();
+
+		headers.Add("Content-Type", "application/json");
+		headers.Add ("Content-Length", jsonBytes.Length.ToString());
+		WWW request = new WWW(url, jsonBytes, headers);
+
+		yield return request;
+
+		Debug.Log ("got request");
+		Debug.Log (request.text);
+
+		/*
+        // get a byte array
         byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonStuff);
-        //System.Buffer.BlockCopy(jsonStuff.ToCharArray(), 0, jsonBytes, 0, jsonBytes.Length);
-        
-        Stream writer = httpWebRequest.GetRequestStream();
-        writer.Write(jsonBytes, 0, jsonBytes.Length);
-        writer.Flush();
-        writer.Close();
 
-		HttpWebResponse response = (HttpWebResponse)httpWebRequest.GetResponse();
+        // creating the web request
+		HttpWebRequest request = 
+            (HttpWebRequest)WebRequest.Create("http://localhost:8000/save");
+
+		request.ContentType = "application/json";
+		request.Method = "POST";
+        request.ContentLength = jsonBytes.Length;
         
-		Debug.Log(getHttpBody(new StreamReader(response.GetResponseStream()).ReadToEnd()));
-        /*
-		using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-		{
-			var result = streamReader.ReadToEnd();
-			Debug.Log (result);
-            writer.close();
-		}
+        // write the request body
+        using (Stream writer = request.GetRequestStream()) {
+            writer.Write(jsonBytes, 0, jsonBytes.Length);
+        }
+
+        // get the response
+        WebResponse response = request.GetResponse();
+        Stream data = response.GetResponseStream();
+
+        //read the response
+
+        // close everything
+        response.Close();
         */
 
 	}

@@ -68,20 +68,20 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_response(400)
             data = {'message' : 'Need JSON in the body'}
             self.wfile.write(json.dumps(data))
+            print ('content type is wrong')
+            return
 
         else:
 
             length = int(self.headers['Content-Length'])
-            print("reading request")
             response_json = self.rfile.read(length)
-            print("read request")
-            print("response_json")
-            print(response_json)
-            parsed_json = json.loads(response_json)
 
-            self.send_response(400)
-            data = {'message' : 'Need JSON in the body'}
-            self.wfile.write(json.dumps(data))
+            try:
+                parsed_json = json.loads(response_json)
+            except:
+                print('could not parse json')
+                data = {'error' : 'Could not parse JSON'}
+                return 
 
             # creating an account
             if re.match('/create', self.path):
@@ -100,7 +100,6 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
                 # update the data and send a success response
                 if all (item in parsed_json for item in (required_items)):
 
-                    print(parsed_json)
                     self.save(parsed_json)
 
                 # if the required elements are not present send an error message
