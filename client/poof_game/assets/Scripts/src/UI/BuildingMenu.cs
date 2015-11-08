@@ -13,7 +13,7 @@ public class BuildingMenu : MonoBehaviour {
 	public Button button4;
 	public Button exit;
 	public GameObject modalPanelObject;
-	
+
 	private static BuildingMenu modalPanel;
 	
 	public static BuildingMenu Instance(){
@@ -30,21 +30,21 @@ public class BuildingMenu : MonoBehaviour {
 		
 		button1.onClick.RemoveAllListeners ();
 		button1.onClick.AddListener (ClosePanel);
-		//button1.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(1));
+		button1.onClick.AddListener (() => BuildingInfoMenu.Instance().openMenu(BuildingInfoManager.Instance().getInfo("Fire Tree")));
 		
 		
 		button2.onClick.RemoveAllListeners ();
 		button2.onClick.AddListener (ClosePanel);
-		//button2.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(2));
+		button2.onClick.AddListener (() => BuildingInfoMenu.Instance().openMenu(BuildingInfoManager.Instance().getInfo("Pond")));
 		
 		
 		button3.onClick.RemoveAllListeners ();
 		button3.onClick.AddListener (ClosePanel);
-		//button3.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(3));
+		button3.onClick.AddListener (() => BuildingInfoMenu.Instance().openMenu(BuildingInfoManager.Instance().getInfo("Cave")));
 		
 		button4.onClick.RemoveAllListeners ();
 		button4.onClick.AddListener (ClosePanel);
-		//button4.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(4));
+		button4.onClick.AddListener (() => BuildingInfoMenu.Instance().openMenu(BuildingInfoManager.Instance().getInfo("Windmill")));
 		
 		exit.onClick.RemoveAllListeners ();
 		exit.onClick.AddListener (ClosePanel);

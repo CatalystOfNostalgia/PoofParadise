@@ -18,10 +18,10 @@ public class BuildingInfo : MonoBehaviour {
 		this.earthCost = earthCost;
 	}
 
-	public string Name { get; }
-	public string Description { get; }
-	public int FireCost { get; }
-	public int WaterCost { get; }
-	public int AirCost { get; }
-	public int EarthCost { get; }
+	public string Name { get{return name;} }
+	public string Description { get{return description;} }
+	public int FireCost { get{return fireCost;} }
+	public int WaterCost { get{ return waterCost; } }
+	public int AirCost { get{ return airCost; } }
+	public int EarthCost { get{ return earthCost; } }
 }

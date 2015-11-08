@@ -25,6 +25,9 @@ public class BuildingInfoMenu : MonoBehaviour {
 		return modalPanel;
 	}
 
+	public void openMenu(BuildingInfo info){
+		openMenu (info.Name, info.Description, info.FireCost, info.WaterCost, info.EarthCost, info.AirCost);
+	}
 	public void openMenu(string buildingName, string buildingDescription, int fireCost, int waterCost, int airCost, int earthCost){
 		buildingNameText.text = buildingName;
 		buildingDescriptionText.text = buildingDescription;

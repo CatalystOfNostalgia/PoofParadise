@@ -6,9 +6,20 @@ public class BuildingInfoManager : MonoBehaviour {
 
 	private Dictionary<string, BuildingInfo> infoDict;
 
+	public static BuildingInfoManager manager;
+	public static BuildingInfoManager Instance(){
+		if (!manager) {
+			manager = FindObjectOfType(typeof (BuildingInfoManager)) as BuildingInfoManager;
+			if(!manager)
+				Debug.LogError ("There needs to be one active BuildingInfoManager script on a GameObject in your scene.");
+		}
+		return manager;
+	}
+
 	// Use this for initialization
 	void Start () {
 		infoDict = new Dictionary<string, BuildingInfo> ();
+		sampleAddInfo ();
 	}
 
 	public BuildingInfo getInfo(string key){

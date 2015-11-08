@@ -294,7 +294,7 @@ Transform:
   - {fileID: 1248852307}
   - {fileID: 1130490467}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!114 &102594991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2460,7 +2460,7 @@ GameObject:
   - 222: {fileID: 689763572}
   - 114: {fileID: 689763571}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Earth Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3586,7 +3586,7 @@ GameObject:
   - 222: {fileID: 958563493}
   - 114: {fileID: 958563492}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Water Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3717,6 +3717,7 @@ GameObject:
   - 4: {fileID: 965554307}
   - 114: {fileID: 965554306}
   - 114: {fileID: 965554308}
+  - 114: {fileID: 965554309}
   m_Layer: 0
   m_Name: Menus
   m_TagString: Untagged
@@ -3753,7 +3754,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!114 &965554308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3773,6 +3774,25 @@ MonoBehaviour:
   button4: {fileID: 11486764, guid: 3ac73e8d3b6ec6c44b81089a2d72b2e3, type: 2}
   exit: {fileID: 2105069065}
   modalPanelObject: {fileID: 212000804}
+--- !u!114 &965554309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 965554305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82a12fabaf8c6a14a8823c98e3216494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingNameText: {fileID: 1202743040}
+  buildingDescriptionText: {fileID: 1675442005}
+  fireResourceCostText: {fileID: 1944506789}
+  waterResourceCostText: {fileID: 958563492}
+  airResourceCostText: {fileID: 1815233466}
+  earthResourceCostText: {fileID: 689763571}
+  buildingInfoPanel: {fileID: 2089578245}
+  exitButton: {fileID: 1345409891}
 --- !u!1 &1000020269
 GameObject:
   m_ObjectHideFlags: 0
@@ -3830,8 +3850,7 @@ Transform:
   m_LocalRotation: {x: -.408217967, y: .234569386, z: -.109381512, w: -.875426173}
   m_LocalPosition: {x: .99000001, y: 3.54999995, z: -11.9399996}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1456759536}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!1 &1014635421
@@ -4740,7 +4759,7 @@ GameObject:
   - 114: {fileID: 1202743040}
   - 114: {fileID: 1202743039}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Building Name Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6150,12 +6169,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1456759533}
-  m_LocalRotation: {x: .408217967, y: -.234569386, z: .109381512, w: -.875426173}
-  m_LocalPosition: {x: 346.759827, y: -42.2376022, z: -239.672516}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 394.5, y: 160, z: 1.8119812e-05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1000020271}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
 --- !u!114 &1456759538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7380,7 +7399,7 @@ GameObject:
   - 114: {fileID: 1675442005}
   - 114: {fileID: 1675442004}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Building Description Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7480,7 +7499,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!114 &1699504814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8011,7 +8030,7 @@ GameObject:
   - 222: {fileID: 1815233467}
   - 114: {fileID: 1815233466}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Air Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8380,7 +8399,7 @@ GameObject:
   - 222: {fileID: 1944506790}
   - 114: {fileID: 1944506789}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Fire Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
