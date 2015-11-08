@@ -174,22 +174,21 @@ def save_building_info ( resource_buildings, decorative_buildings, user_id ):
 # returns False
 def update_resource_building ( building, user_id ):
 
-#    try:
+    try:
 
-    print(building.keys())
-    building_id = building['id']
-    updated_building = models.session.query(models.UserResourceBuilding).filter( \
-                       models.UserResourceBuilding.id == building_id).one()
+        building_id = building['id']
+        updated_building = models.session.query(models.UserResourceBuilding).filter( \
+                           models.UserResourceBuilding.id == building_id).one()
 
-    updated_building.x_coordinate = building['x_coordinate']
-    updated_building.y_coordinate = building['y_coordinate']
+        updated_building.x_coordinate = building['x_coordinate']
+        updated_building.y_coordinate = building['y_coordinate']
 
-    models.session.commit()
-    return True
+        models.session.commit()
+        return True
 
-#    except:
-#        rollback()
-#        return False
+    except:
+        rollback()
+        return False
 
 # updates an existing building in the database if the building cannot be found
 # returns False
