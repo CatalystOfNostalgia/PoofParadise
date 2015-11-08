@@ -30,6 +30,13 @@ public class BuildingInfoManager : MonoBehaviour {
 		return null;
 	}
 
+	public Dictionary<string, BuildingInfo> InfoDict{ get { return infoDict; } }
+
+	//TODO
+	/// <summary>
+	/// Populates the dict from JSON.
+	/// the server will determine what the user can build
+	/// </summary>
 	public void populateDictFromJSON(){
 
 	}
@@ -38,6 +45,7 @@ public class BuildingInfoManager : MonoBehaviour {
 		infoDict.Add ("Fire Tree", new BuildingInfo ("Fire Tree", "It's a burning Tree!", 200, 0, 0, 0));
 		infoDict.Add ("Pond", new BuildingInfo ("Pond", "Poofs pee in this pond", 0, 200, 0, 0));
 		infoDict.Add ("Windmill", new BuildingInfo ("Windmill", "Spinning~", 0, 0, 0, 200));
-		infoDict.Add ("Cave", new BuildingInfo ("Cave", "It's dark in here", 0, 0, 200, 0));
+		//lets say cave is blocked
+		//infoDict.Add ("Cave", new BuildingInfo ("Cave", "It's dark in here", 0, 0, 200, 0));
 	}
 }
