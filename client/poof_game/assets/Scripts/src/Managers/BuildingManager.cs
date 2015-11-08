@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor;
 using System.Collections;
 
 public class BuildingManager : Manager {
@@ -17,7 +18,11 @@ public class BuildingManager : Manager {
 	public Building caveLevel1;
 	public Building caveLevel2;
 
-    public Object[] resourceBuildingImages;
+    private Object[] resourceBuildingObjects;
+    private Object[] decorativeBuildingObjects;
+
+    private Sprite[] resourceBuildingSprites;
+    private Sprite[] decorativeBuildingSprites;
 
 	private Building target;
 
@@ -56,6 +61,11 @@ public class BuildingManager : Manager {
         existingBuildingDict = new Dictionary<Tuple, Building>();
 
         GenerateImagesList();
+
+        resourceBuildingSprites = new Sprite[resourceBuildingObjects.Length];
+        //decorativeBuildingSprites = new Sprite[decorativeBuildingObjects.Length];
+
+        GenerateSpriteList(resourceBuildingObjects, resourceBuildingSprites);
     }
 
     //this overload does nothing right now
@@ -105,16 +115,15 @@ public class BuildingManager : Manager {
 			break;
 		}
 	}
-	void deleteBuilding(){
-	}
 
 	public bool isOccupied (){
 		return false;
 	}
+
 	// places a building on the currently selected tile
 	public void PlaceBuilding(Building prefab) {
 
-		PlaceBuilding (prefab, selectedTile);
+		PlaceBuilding (GenerateBuildingObject(4, "Fire Tree", 5, 0, 0, 0), selectedTile);
 	}
 	
 	// places a building on the given tile
@@ -150,7 +159,50 @@ public class BuildingManager : Manager {
      */
     public void GenerateImagesList()
     {
-        resourceBuildingImages = Resources.LoadAll("Buildings/Resource Buildings");
+        resourceBuildingObjects = Resources.LoadAll("Buildings/Resource Buildings");
+    }
+
+    /**
+     * Builds a sprite list
+     */
+    public void GenerateSpriteList(Object[] objs, Sprite[] outList)
+    {
+        for (int i = 0; i < objs.Length; i++)
+        {
+            System.Type type = objs[i].GetType();
+
+            if (type == typeof(UnityEngine.Texture2D))
+            {
+
+                Texture2D tex = objs[i] as Texture2D;
+
+                Sprite newSprite = Sprite.Create(objs[i] as Texture2D, new Rect(0f, 0f, tex.width, tex.height), Vector2.zero);
+
+                outList[i] = newSprite;
+            }
+        }
+    }
+
+    /**
+     * Generates building object
+     */ 
+    public Building GenerateBuildingObject(int size, string name, int fireCost, int waterCost, int earthCost, int airCost)
+    {
+        GameObject obj = new GameObject();
+
+        obj.AddComponent<SpriteRenderer>();
+        obj.GetComponent<SpriteRenderer>().sprite = resourceBuildingSprites[0];
+
+        obj.AddComponent<ResourceBuilding>();
+        Building ret = obj.transform.GetComponent<ResourceBuilding>();
+        ret.size = size;
+        ret.buildingName = name;
+        ret.fireCost = fireCost;
+        ret.waterCost = waterCost;
+        ret.earthCost = earthCost;
+        ret.airCost = airCost;
+
+        return ret;
     }
 	
 	// Update is called once per frame
