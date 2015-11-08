@@ -6,21 +6,10 @@ using System.Collections;
 
 public class BuildingManager : Manager {
 
-	/**
-	 * just dragging gameobjects to here for now
-	 * maybe we can just search them later?
-	 */
-	public Building windmillLevel1;
-	public Building windmillLevel2;
-	public Building pondLevel1;
-	public Building pondLevel2;
-	public Building fireTreeLevel1;
-	public Building fireTreeLevel2;
-	public Building caveLevel1;
-	public Building caveLevel2;
+    // Contains the list of resource buildings as generated from the folder
+    public ResourceBuilding[] resourceBuildings { get; set; }
 
-    private ResourceBuilding[] resourceBuildings;
-
+    // The target building
 	private Building target;
 
 	// the tile the mouse is currently one
@@ -54,7 +43,6 @@ public class BuildingManager : Manager {
         }
 
         buildingTypeDict = new Dictionary<string, Building>();
-        buildingTypeDict.Add("fire", fireTreeLevel1);
         existingBuildingDict = new Dictionary<Tuple, Building>();
 
         resourceBuildings = Resources.LoadAll("Prefabs/Buildings", typeof(ResourceBuilding)).Cast<ResourceBuilding>().ToArray();
@@ -63,23 +51,7 @@ public class BuildingManager : Manager {
     //this overload does nothing right now
     public void dragNewBuilding (int buildingNum, Vector3 cursor){
 		buildingMode = true;
-		switch (buildingNum) {
-		case 1:
-			target = resourceBuildings[0];
-			break;
-		case 2:
-			target = pondLevel1;
-			break;
-		case 3:
-			target = caveLevel1;
-			break;
-		case 4:
-			target = windmillLevel1;
-			break;
-		default:
-			target = windmillLevel1;
-			break;
-		}
+        target = resourceBuildings[buildingNum];
 	}
 	/**
 	 * 1. check building cost
@@ -89,23 +61,7 @@ public class BuildingManager : Manager {
 	 */
 	public void makeNewBuilding (int buttonNum){
 		buildingMode = true;
-		switch (buttonNum) {
-		case 1:
-			target = resourceBuildings[0];
-			break;
-		case 2:
-			target = pondLevel1;
-			break;
-		case 3:
-			target = caveLevel1;
-			break;
-		case 4:
-			target = windmillLevel1;
-			break;
-		default:
-			target = windmillLevel1;
-			break;
-		}
+        target = resourceBuildings[buttonNum];
 	}
 
 	public bool isOccupied (){

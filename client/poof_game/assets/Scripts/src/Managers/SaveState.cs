@@ -184,38 +184,8 @@ public class SaveState : Manager {
 			int x = building["position_x"].AsInt;
 			int y = building["position_y"].AsInt;
 
-			Building newBuilding;
-
-			switch (building["building_info_id"].AsInt) {
-
-				case 1:
-					newBuilding = BuildingManager.buildingManager.fireTreeLevel1;
-					break;
-				case 2:
-					newBuilding = BuildingManager.buildingManager.fireTreeLevel2;
-					break;
-				case 3:
-					newBuilding = BuildingManager.buildingManager.pondLevel1;
-					break;
-				case 4:
-					newBuilding = BuildingManager.buildingManager.pondLevel2;
-					break;
-				case 5:
-					newBuilding = BuildingManager.buildingManager.windmillLevel1;
-					break;
-				case 6:
-					newBuilding = BuildingManager.buildingManager.windmillLevel2;
-					break;
-				case 7:
-					newBuilding = BuildingManager.buildingManager.caveLevel1;
-					break;
-				case 8:
-					newBuilding = BuildingManager.buildingManager.caveLevel2;
-					break;
-				default:
-					newBuilding = null;
-					break;
-			}
+            // Retrieves a building from the resource buildings list
+			Building newBuilding = BuildingManager.buildingManager.resourceBuildings[building["building_info_id"].AsInt];
 
 			resourceBuildings.Add(new Tuple(x, y), newBuilding);
 		}
