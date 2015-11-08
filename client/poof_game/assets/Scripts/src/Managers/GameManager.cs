@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : Manager {
 
     public static GameManager gameManager;
 
@@ -20,7 +20,11 @@ public class GameManager : MonoBehaviour {
     private List<GameObject> airActive;
     private List<GameObject> poofActive;
 
-    void Start()
+    /**
+     * Converts GameManager to a singleton
+     * Initializes poof/elemari lists
+     */
+    override public void Start()
     {
         if (gameManager == null)
         {
