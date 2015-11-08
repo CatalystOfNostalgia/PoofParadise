@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-// This will be a passive component that calculates the next random movement for a character based on
+// This will be a passive component that calculates the next random movement for a poof based on
 //		1. the character's nearest likeable object
 //		2. the most recent movement (to dissuade back and forth motions)
 //		3. a boredom factor (incites the poof to move around the map and reset)
@@ -11,9 +11,9 @@ public class PassiveMoverPoofs : MonoBehaviour {
 	// Enumeration that makes debugging more interesting to look at
 	public enum Direction {Down_Left, Down, Down_Right, Left, Stay, Right, Up_Left, Up, Up_Right};
 	
-	// References to the attached character's scripts
+	// References to the attached poof's scripts
 	// currently ms is not used, but might be in the future
-	private CharacterScript cs;
+	private PoofScript ps;
 	private MovementScript ms;
 
 	// Field containing the most recently calculated tile for the character to move to
@@ -30,7 +30,7 @@ public class PassiveMoverPoofs : MonoBehaviour {
 	private ArrayList likes;
 	
 	void Start() {
-		cs = this.GetComponent<CharacterScript>();
+		ps = this.GetComponent<PoofScript>();
 		ms = this.GetComponent<MovementScript>();
 		
 		//mostRecent = Direction.Stay;
@@ -42,14 +42,14 @@ public class PassiveMoverPoofs : MonoBehaviour {
 		
 		if (likes.Count == 0) {
 			if (Random.Range (0,2) > 0) {
-           		List<Tuple> tuples = TileScript.grid.GetPossiblePaths(cs.onTile.index); 
+           		List<Tuple> tuples = TileScript.grid.GetPossiblePaths(ps.onTile.index); 
            		Tuple[] arr = tuples.ToArray();
            		Tuple next = arr[(int)Random.Range(0, arr.Length)];
             	Tile test = TileScript.grid.GetTile(next);
             	nextTile = test;
             }
             else {
-            	nextTile = cs.onTile;
+            	nextTile = ps.onTile;
             }
 		}
 		else {

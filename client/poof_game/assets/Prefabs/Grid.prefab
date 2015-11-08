@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11435338}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: Grid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,6 +91,10 @@ Prefab:
       value: 
       objectReference: {fileID: 11455616, guid: 9bc629b379decbb4183f6d3c7b9c1ca4,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Grid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182886}

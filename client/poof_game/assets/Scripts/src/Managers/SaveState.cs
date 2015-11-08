@@ -57,7 +57,7 @@ public class SaveState : MonoBehaviour {
 		earthEle = 0;
 		waterEle = 0;
 		airEle = 1;
-		poofCount = 0;
+		poofCount = 3;
 		
 	}
 
