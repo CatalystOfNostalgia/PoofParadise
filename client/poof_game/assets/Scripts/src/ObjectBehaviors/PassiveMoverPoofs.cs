@@ -47,6 +47,8 @@ public class PassiveMoverPoofs : MonoBehaviour {
            		Tuple next = arr[(int)Random.Range(0, arr.Length)];
             	Tile test = TileScript.grid.GetTile(next);
             	nextTile = test;
+            	if (nextTile == null)
+            		nextTile = ps.onTile;
             }
             else {
             	nextTile = ps.onTile;

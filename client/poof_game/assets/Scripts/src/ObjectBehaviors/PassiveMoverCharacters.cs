@@ -42,6 +42,8 @@ public class PassiveMoverCharacters : MonoBehaviour {
 			if (Random.Range (0,2) > 0) {
 				Tuple random = new Tuple (Random.Range(0, ts.gridX), Random.Range (0, ts.gridY));
 				nextTile = ts.GetTile(random);
+				if (nextTile == null)
+					nextTile = cs.onTile;
 			}
 			else {
 				nextTile = cs.onTile;

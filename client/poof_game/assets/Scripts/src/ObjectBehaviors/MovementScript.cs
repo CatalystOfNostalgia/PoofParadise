@@ -149,9 +149,9 @@ public class MovementScript : MonoBehaviour {
 				currentPos = targetPos;
 				targetPos = new Vector2();
 				targetPos = new Vector2();
-				if (cs != null)
+				if (cs != null && targetObj != null)
 					cs.onTile = targetObj;
-				else
+				else if (targetObj != null)
 					ps.onTile = targetObj;
 				getInputs();
 				continueMoving();
@@ -176,9 +176,9 @@ public class MovementScript : MonoBehaviour {
 			input = false;
 			progressAccum = 0;
 			targetPos = new Vector2();
-			if (cs != null)
+			if (cs != null && targetObj != null)
 				cs.onTile = targetObj;
-			else
+			else if (targetObj != null)
 				ps.onTile = targetObj;
 			targetObj = null;
 			movementQueue.Clear();
