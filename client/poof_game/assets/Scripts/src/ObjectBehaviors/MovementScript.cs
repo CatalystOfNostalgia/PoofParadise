@@ -30,7 +30,7 @@ public class MovementScript : MonoBehaviour {
 	private Queue movementQueue;
 	
 	// Not utilized at all at the moment, because the passive mover script is incomplete
-	private PassiveMoverPoofs ps;
+	//private PassiveMoverPoofs ps;
 	private CharacterScript cs;
 
 	private float transitionTiming = 0f;

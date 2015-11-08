@@ -6,7 +6,7 @@ using System.Collections.Generic;
  * game grid from which all other game functions are derived
  */
 
-public class TileScript : MonoBehaviour {
+public class TileScript : Manager {
 
     // Singleton variable so that only one grid variable is active per scene
     public static TileScript grid;
@@ -23,7 +23,7 @@ public class TileScript : MonoBehaviour {
      * Initializes the list of tiles
      * Generates the game grid
      */
-	void Start() {
+	override public void Start() {
 		
         if (grid == null)
         {
@@ -55,7 +55,7 @@ public class TileScript : MonoBehaviour {
 	{
 		foreach (KeyValuePair<Tuple, Building> entry in SaveState.state.resourceBuildings) 
 		{
-			BuildingManager.manager.PlaceBuilding(entry.Value, GetTile (entry.Key));
+			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));
 		}
 	}
 
