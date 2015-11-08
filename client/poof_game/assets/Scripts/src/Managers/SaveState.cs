@@ -53,10 +53,10 @@ public class SaveState : Manager {
 		// set the fields until we can load
 		state.fire = 0;
 		state.resourceBuildings = new Dictionary<Tuple, Building>();
-		fireEle = 1;
-		earthEle = 1;
-		waterEle = 1;
-		airEle = 1;
+		fireEle = 2;
+		earthEle = 2;
+		waterEle = 2;
+		airEle = 2;
 		poofCount = 3;
 		
 	}
