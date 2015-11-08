@@ -13,10 +13,10 @@ public class TestModelPanel : MonoBehaviour {
 	private UnityAction myCancelButtonAction;
 
 	void Awake(){
-        displayManager = DisplayManager.Instance ();
-        myButton1Action = new UnityAction (TestButton1Function);
-        myButton2Action = new UnityAction (TestButton2Function);
-        myButton3Action = new UnityAction (TestButton3Function);
+		displayManager = DisplayManager.Instance ();
+		myButton1Action = new UnityAction (TestButton1Function);
+		myButton2Action = new UnityAction (TestButton2Function);
+		myButton3Action = new UnityAction (TestButton3Function);
         myCancelButtonAction = new UnityAction(TestCancelFunction);
 	}
 	public void Test123(){
