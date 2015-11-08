@@ -17,6 +17,8 @@ public class BuildingManager : Manager {
 	public Building caveLevel1;
 	public Building caveLevel2;
 
+    public Object[] resourceBuildingImages;
+
 	private Building target;
 
 	// the tile the mouse is currently one
@@ -53,6 +55,7 @@ public class BuildingManager : Manager {
         buildingTypeDict.Add("fire", fireTreeLevel1);
         existingBuildingDict = new Dictionary<Tuple, Building>();
 
+        GenerateImagesList();
     }
 
     //this overload does nothing right now
@@ -134,10 +137,20 @@ public class BuildingManager : Manager {
 		return (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2);
 	}
 
-    //helper method to get mouse position
+    /**
+     * Helper method to get mouse position
+     */
     private Vector3 getCurrentMousePosition()
     {
         return Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+    }
+
+    /**
+     * Builds the lists of all game images
+     */
+    public void GenerateImagesList()
+    {
+        resourceBuildingImages = Resources.LoadAll("Buildings/Resource Buildings");
     }
 	
 	// Update is called once per frame
