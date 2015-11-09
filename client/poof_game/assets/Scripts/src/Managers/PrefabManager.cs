@@ -6,8 +6,9 @@ public class PrefabManager : Manager {
     // Static reference to this gameobject
     public static PrefabManager prefabManager;
 
-    // Contains the list of resource buildings as generated from the folder
+    // Below are lists of prefabs for use by the entire game
     public ResourceBuilding[] resourceBuildings { get; set; }
+    public DecorativeBuilding[] decorativeBuildigs { get; set; }
 
     // Use this for initialization
     override public void Start () {
@@ -24,9 +25,15 @@ public class PrefabManager : Manager {
         GeneratePrefabLists();
     }
 	
+    /**
+     * Generates all the lists of prefabs needed by the game 
+     *
+     * For now directory paths are hard coded
+     */
     private void GeneratePrefabLists()
     {
-        resourceBuildings = Resources.LoadAll("Prefabs/Buildings", typeof(ResourceBuilding)).Cast<ResourceBuilding>().ToArray();
+        resourceBuildings = Resources.LoadAll("Prefabs/Buildings/Resource Buildings", typeof(ResourceBuilding)).Cast<ResourceBuilding>().ToArray();
+        decorativeBuildigs = Resources.LoadAll("Prefabs/Buildings/Decorative Buildings", typeof(DecorativeBuilding)).Cast<DecorativeBuilding>().ToArray();
     }
 
     /**
