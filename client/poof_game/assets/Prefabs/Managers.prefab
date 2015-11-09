@@ -46,6 +46,7 @@ GameObject:
   - 114: {fileID: 11439822}
   - 114: {fileID: 11454060}
   - 114: {fileID: 11432182}
+  - 114: {fileID: 11481954}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Grid
@@ -440,14 +441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a07b713a8b6c3447ba6141a6d311fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windmillLevel1: {fileID: 11437698, guid: 5a34cf04bb9144ff595c82f381cf3b70, type: 2}
-  windmillLevel2: {fileID: 11472288, guid: 85b25dd89062542ee82de86e3b873499, type: 2}
-  pondLevel1: {fileID: 11451576, guid: 353720d56df2d4f9fbad4ee65de584b3, type: 2}
-  pondLevel2: {fileID: 11460966, guid: 3023d26c8e54040fe85995f9a3e97ba6, type: 2}
-  fireTreeLevel1: {fileID: 11401248, guid: 4d181cc8513824ef78ab60c88c1571d2, type: 2}
-  fireTreeLevel2: {fileID: 11417386, guid: aabbc3d87a4a94ac6b06114f77963911, type: 2}
-  caveLevel1: {fileID: 11450436, guid: 8c859afa300bf4d93b04385c7bcd0b54, type: 2}
-  caveLevel2: {fileID: 11418770, guid: becae3fc92454477a9cd208245efd170, type: 2}
   buildingMode: 0
 --- !u!114 &11413180
 MonoBehaviour:
@@ -517,6 +510,17 @@ MonoBehaviour:
   prefabs:
   - {fileID: 11470250, guid: b4bd629bec064ae43a94dda0335ce945, type: 2}
   - {fileID: 11455616, guid: 9bc629b379decbb4183f6d3c7b9c1ca4, type: 2}
+--- !u!114 &11481954
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ecb0968d5b2c004a8fea7e2d8288745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
