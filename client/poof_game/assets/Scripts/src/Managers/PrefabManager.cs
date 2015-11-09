@@ -9,6 +9,7 @@ public class PrefabManager : Manager {
     // Below are lists of prefabs for use by the entire game
     public ResourceBuilding[] resourceBuildings { get; set; }
     public DecorativeBuilding[] decorativeBuildigs { get; set; }
+    public Tile[] tiles { get; set; }
 
     // Use this for initialization
     override public void Start () {
@@ -34,6 +35,7 @@ public class PrefabManager : Manager {
     {
         resourceBuildings = Resources.LoadAll("Prefabs/Buildings/Resource Buildings", typeof(ResourceBuilding)).Cast<ResourceBuilding>().ToArray();
         decorativeBuildigs = Resources.LoadAll("Prefabs/Buildings/Decorative Buildings", typeof(DecorativeBuilding)).Cast<DecorativeBuilding>().ToArray();
+        tiles = Resources.LoadAll("Prefabs/Grid", typeof(Tile)).Cast<Tile>().ToArray();
     }
 
     /**
