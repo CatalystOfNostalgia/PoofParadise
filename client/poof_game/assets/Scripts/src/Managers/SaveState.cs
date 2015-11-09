@@ -186,7 +186,7 @@ public class SaveState : Manager {
 			int y = building["position_y"].AsInt;
 
             // Retrieves a building from the resource buildings list
-			Building newBuilding = BuildingManager.buildingManager.resourceBuildings[building["building_info_id"].AsInt];
+			Building newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
 
 			resourceBuildings.Add(new Tuple(x, y), newBuilding);
 		}

@@ -6,9 +6,6 @@ using System.Collections;
 
 public class BuildingManager : Manager {
 
-    // Contains the list of resource buildings as generated from the folder
-    public ResourceBuilding[] resourceBuildings { get; set; }
-
     // The target building
 	private Building target;
 
@@ -45,13 +42,12 @@ public class BuildingManager : Manager {
         buildingTypeDict = new Dictionary<string, Building>();
         existingBuildingDict = new Dictionary<Tuple, Building>();
 
-        resourceBuildings = Resources.LoadAll("Prefabs/Buildings", typeof(ResourceBuilding)).Cast<ResourceBuilding>().ToArray();
     }
 
     //this overload does nothing right now
     public void dragNewBuilding (int buildingNum, Vector3 cursor){
 		buildingMode = true;
-        target = resourceBuildings[buildingNum];
+        target = PrefabManager.prefabManager.resourceBuildings[buildingNum];
 	}
 	/**
 	 * 1. check building cost
@@ -61,7 +57,7 @@ public class BuildingManager : Manager {
 	 */
 	public void makeNewBuilding (int buttonNum){
 		buildingMode = true;
-        target = resourceBuildings[buttonNum];
+        target = PrefabManager.prefabManager.resourceBuildings[buttonNum];
 	}
 
 	public bool isOccupied (){
@@ -105,58 +101,6 @@ public class BuildingManager : Manager {
     private Vector3 getCurrentMousePosition()
     {
         return Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
-    }
-
-    /**
-     * Builds a sprite list
-     *
-     * Deprecated -> Use if you wish to generate your own prefabs
-     */
-    public void GenerateSpriteList(Object[] objs, Sprite[] outList)
-    {
-        for (int i = 0; i < objs.Length; i++)
-        {
-            System.Type type = objs[i].GetType();
-
-            if (type == typeof(UnityEngine.Texture2D))
-            {
-
-                Texture2D tex = objs[i] as Texture2D;
-
-                Sprite newSprite = Sprite.Create(objs[i] as Texture2D, new Rect(0f, 0f, tex.width, tex.height), Vector2.zero);
-
-                outList[i] = newSprite;
-            }
-        }
-    }
-
-    /**
-     * Generates building object
-     *
-     * Deprecated -> Still using prefabs but generating list dynamically
-     * instead of storing references
-     */ 
-    public Building GenerateBuildingObject(int size, string name, int fireCost, int waterCost, int earthCost, int airCost)
-    {
-        // This line creates an object -> We just want to generate a prefab
-        GameObject obj = new GameObject();
-        obj.name = name;
-
-        obj.AddComponent<SpriteRenderer>();
-        //obj.GetComponent<SpriteRenderer>().sprite = resourceBuildingSprites[1];
-
-        obj.AddComponent<ResourceBuilding>();
-        Building ret = obj.transform.GetComponent<ResourceBuilding>();
-        ret.size = size;
-        ret.buildingName = name;
-        ret.fireCost = fireCost;
-        ret.waterCost = waterCost;
-        ret.earthCost = earthCost;
-        ret.airCost = airCost;
-
-        Destroy(obj);
-
-        return ret;
     }
 	
 	// Update is called once per frame
