@@ -10,6 +10,7 @@ public class PrefabManager : Manager {
     public ResourceBuilding[] resourceBuildings { get; set; }
     public DecorativeBuilding[] decorativeBuildigs { get; set; }
     public Tile[] tiles { get; set; }
+    public NPC[] npcs { get; set; }
 
     // Use this for initialization
     override public void Start () {
@@ -36,6 +37,7 @@ public class PrefabManager : Manager {
         resourceBuildings = Resources.LoadAll("Prefabs/Buildings/Resource Buildings", typeof(ResourceBuilding)).Cast<ResourceBuilding>().ToArray();
         decorativeBuildigs = Resources.LoadAll("Prefabs/Buildings/Decorative Buildings", typeof(DecorativeBuilding)).Cast<DecorativeBuilding>().ToArray();
         tiles = Resources.LoadAll("Prefabs/Grid", typeof(Tile)).Cast<Tile>().ToArray();
+        npcs = Resources.LoadAll("Prefabs/NPCs", typeof(NPC)).Cast<NPC>().ToArray();
     }
 
     /**
