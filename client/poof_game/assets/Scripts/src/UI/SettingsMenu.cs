@@ -10,7 +10,7 @@ using UnityEngine.Events;
  * 2) Set a single/not play other songs
  * 3) Adjust the volume ratio between sound effects and music.
  */
-public class SettingsMenu : MonoBehaviour {
+public class SettingsMenu : GamePanel {
 
     private Button nextSong;
 
@@ -25,7 +25,7 @@ public class SettingsMenu : MonoBehaviour {
     /**
      * Generates references based on children
      */
-    void Start()
+    override public void Start()
     {
         List<Button> list = new List<Button>();
         // Generates a list of buttons from the children of this object
@@ -67,43 +67,6 @@ public class SettingsMenu : MonoBehaviour {
 
         soundVolumeSlider.onValueChanged.RemoveAllListeners();
         soundVolumeSlider.onValueChanged.AddListener(delegate { SoundManager.soundManager.soundVolume = soundVolumeSlider.value; });
-    }
-
-    /**
-     * Searches for a button in a list
-     * Removes the listeners on that button
-     * Adds a listener to that button
-     */
-    private void FindAndModifyButton(string name, Button[] list, UnityAction method)
-    {
-        // Runs a search for a button by name
-        int index = FindButton(name, list);
-
-        // Lets the user know that their button doesn't exist
-        if (index == -1)
-        {
-            Debug.LogError("FindAndModifyButton failed to find " + name + " in button list");
-            return;
-        }
-
-        // Removes all listeners and adds functionality
-        buttons[index].onClick.RemoveAllListeners();
-        buttons[index].onClick.AddListener(method);
-    }
-
-    /**
-     * Returns a button by name
-     */
-    private int FindButton(string button, Button[] list)
-    {
-        for (int i = 0; i < list.Length; i++)
-        {
-            if (list[i].name == button)
-            {
-                return i;
-            }
-        }
-        return -1;
     }
 
     void ClosePanel(){
