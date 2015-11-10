@@ -10,7 +10,7 @@ public class CanvasStart : MonoBehaviour {
 
         BuildUI();
 
-		Button jsonButton = this.transform.FindChild ("Test JSON").gameObject.GetComponent<Button>();
+		Button jsonButton = this.transform.FindChild ("Test Panel(Clone)/Test JSON").gameObject.GetComponent<Button>();
 
 		jsonButton.onClick.RemoveAllListeners ();
 		jsonButton.onClick.AddListener (() => SaveState.state.PullFromServer()); 
