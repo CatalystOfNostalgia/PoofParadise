@@ -1,22 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
 
 public class BuildingManager : Manager {
 
-	/**
-	 * just dragging gameobjects to here for now
-	 * maybe we can just search them later?
-	 */
-	public Building windmillLevel1;
-	public Building windmillLevel2;
-	public Building pondLevel1;
-	public Building pondLevel2;
-	public Building fireTreeLevel1;
-	public Building fireTreeLevel2;
-	public Building caveLevel1;
-	public Building caveLevel2;
-
+    // The target building
 	private Building target;
 
 	// the tile the mouse is currently one
@@ -50,7 +37,6 @@ public class BuildingManager : Manager {
         }
 
         buildingTypeDict = new Dictionary<string, Building>();
-        buildingTypeDict.Add("fire", fireTreeLevel1);
         existingBuildingDict = new Dictionary<Tuple, Building>();
 
     }
@@ -58,23 +44,7 @@ public class BuildingManager : Manager {
     //this overload does nothing right now
     public void dragNewBuilding (int buildingNum, Vector3 cursor){
 		buildingMode = true;
-		switch (buildingNum) {
-		case 1:
-			target = fireTreeLevel1;
-			break;
-		case 2:
-			target = pondLevel1;
-			break;
-		case 3:
-			target = caveLevel1;
-			break;
-		case 4:
-			target = windmillLevel1;
-			break;
-		default:
-			target = windmillLevel1;
-			break;
-		}
+        target = PrefabManager.prefabManager.resourceBuildings[buildingNum];
 	}
 	/**
 	 * 1. check building cost
@@ -84,30 +54,13 @@ public class BuildingManager : Manager {
 	 */
 	public void makeNewBuilding (int buttonNum){
 		buildingMode = true;
-		switch (buttonNum) {
-		case 1:
-			target = fireTreeLevel1;
-			break;
-		case 2:
-			target = pondLevel1;
-			break;
-		case 3:
-			target = caveLevel1;
-			break;
-		case 4:
-			target = windmillLevel1;
-			break;
-		default:
-			target = windmillLevel1;
-			break;
-		}
-	}
-	void deleteBuilding(){
+        target = PrefabManager.prefabManager.resourceBuildings[buttonNum];
 	}
 
 	public bool isOccupied (){
 		return false;
 	}
+
 	// places a building on the currently selected tile
 	public void PlaceBuilding(Building prefab) {
 
@@ -139,7 +92,9 @@ public class BuildingManager : Manager {
 		return (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2);
 	}
 
-    //helper method to get mouse position
+    /**
+     * Helper method to get mouse position
+     */
     private Vector3 getCurrentMousePosition()
     {
         return Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
