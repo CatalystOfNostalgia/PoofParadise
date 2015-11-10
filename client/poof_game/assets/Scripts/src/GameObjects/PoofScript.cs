@@ -5,7 +5,7 @@ using System.Collections;
  * such as where they are, their type, and information for how they
  * can move */
 
-public class PoofScript : MonoBehaviour {
+public class PoofScript : NPC {
 	
 	// Enum to identify type
 	public enum Element {Fire, Water, Wind, Earth};

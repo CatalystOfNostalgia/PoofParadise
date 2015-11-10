@@ -7,11 +7,6 @@ public class BuildingMenu : MonoBehaviour {
 	
 	public Text question;
 	public Image iconImage;
-	public Button button1;
-	public Button button2;
-	public Button button3;
-	public Button button4;
-	public Button exit;
 	public GameObject modalPanelObject;
 	
 	private static BuildingMenu modalPanel;
@@ -24,39 +19,22 @@ public class BuildingMenu : MonoBehaviour {
 		}
 		return modalPanel;
 	}
+
 	public void Choice(){
 		//modal panel should be visible on screen
 		modalPanelObject.SetActive (true);
-		
-		button1.onClick.RemoveAllListeners ();
-		button1.onClick.AddListener (ClosePanel);
-		//button1.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(1));
-		
-		
-		button2.onClick.RemoveAllListeners ();
-		button2.onClick.AddListener (ClosePanel);
-		//button2.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(2));
-		
-		
-		button3.onClick.RemoveAllListeners ();
-		button3.onClick.AddListener (ClosePanel);
-		//button3.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(3));
-		
-		button4.onClick.RemoveAllListeners ();
-		button4.onClick.AddListener (ClosePanel);
-		//button4.onClick.AddListener (() => BuildingManager.Instance().makeNewBuilding(4));
-		
-		exit.onClick.RemoveAllListeners ();
-		exit.onClick.AddListener (ClosePanel);
+
+        // Adds listener to all buttons
+        foreach (Button b in PrefabManager.prefabManager.buttons)
+        {
+            b.onClick.RemoveAllListeners();
+            b.onClick.AddListener(ClosePanel);
+            b.gameObject.SetActive(true);
+        }
 
 		string buildquestion = "Select a Building";
 		this.question.text = buildquestion; //sets question in dialogue box
-		//this.iconImage.gameObject.SetActive (false);
-		
-		button1.gameObject.SetActive (true);
-		button2.gameObject.SetActive (true);
-		button3.gameObject.SetActive (true);
-		
+		//this.iconImage.gameObject.SetActive (false);	
 	}
 	
 	void ClosePanel(){

@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
+/**
+ * The GameManager script is responsible
+ * for managing the game state
+ */
 public class GameManager : Manager {
 
     public static GameManager gameManager;
