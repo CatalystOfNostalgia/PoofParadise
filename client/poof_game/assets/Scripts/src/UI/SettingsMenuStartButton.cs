@@ -7,6 +7,6 @@ public class SettingsMenuStartButton : MonoBehaviour {
 
 	public SettingsMenu menu;
 	public void activateMenu(){
-		menu.generatePanel ();
+		menu.gameObject.SetActive (true);
 	}
 }

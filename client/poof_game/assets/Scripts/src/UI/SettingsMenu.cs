@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 /**
  * Let's add a settings menu. It will be used to control music mainly.
@@ -38,22 +39,20 @@ public class SettingsMenu : MonoBehaviour {
             list.Add(t.GetComponent<Button>());
         }
         buttons = list.ToArray();
+        GeneratePanel();
     }
 
     /**
      * Adds functionality to all of the buttons on the panel
      */
-	public void generatePanel(){
+	public void GeneratePanel(){
 		this.gameObject.SetActive (true);
 		AudioSource[] music = SoundManager.soundManager.playlist;
 
-        playButtonAir = FindButton("Air Theme", buttons);
-		playButtonAir.onClick.RemoveAllListeners ();
-		playButtonAir.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonAir.name));
+        // Locates the button and gives it a function
+        FindAndModifyButton("Air Theme", buttons, ref playButtonAir, () => SoundManager.soundManager.playSong(playButtonAir.name));
 
-        playButtonEarth = FindButton("Earth Theme", buttons);
-		playButtonEarth.onClick.RemoveAllListeners ();
-		playButtonEarth.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonEarth.name));
+        FindAndModifyButton("Earth Theme", buttons, ref playButtonEarth, () => SoundManager.soundManager.playSong(playButtonEarth.name));
 
         playButtonFire = FindButton("Fire Theme", buttons);
 		playButtonFire.onClick.RemoveAllListeners ();
@@ -83,15 +82,36 @@ public class SettingsMenu : MonoBehaviour {
     }
 
     /**
+     * Searches for a button in a list
+     * Removes the listeners on that button
+     * Adds a listener to that button
+     */
+    private void FindAndModifyButton(string name, Button[] list, ref Button local, UnityAction method)
+    {
+        // Runs a search for a button by name
+        local = FindButton(name, list);
+
+        // Lets the user know that their button doesn't exist
+        if (local == null)
+        {
+            Debug.LogError("FindAndModifyButton failed to find " + name + " in button list");
+        }
+
+        // Removes all listeners and adds functionality
+        local.onClick.RemoveAllListeners();
+        local.onClick.AddListener(method);
+    }
+
+    /**
      * Returns a button by name
      */
-    private Button FindButton(string button, Button[] buttons)
+    private Button FindButton(string button, Button[] list)
     {
-        for (int i = 0; i < buttons.Length; i++)
+        for (int i = 0; i < list.Length; i++)
         {
-            if (buttons[i].name == button)
+            if (list[i].name == button)
             {
-                return buttons[i];
+                return list[i];
             }
         }
         return null;
