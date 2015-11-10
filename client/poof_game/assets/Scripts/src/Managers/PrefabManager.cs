@@ -13,6 +13,7 @@ public class PrefabManager : Manager {
     public Tile[] tiles { get; set; }
     public NPC[] npcs { get; set; }
     public Button[] buttons { get; set; }
+    public CanvasRenderer[] panels { get; set; }
     public Canvas canvas { get; set; }
 
     // Use this for initialization
@@ -43,6 +44,7 @@ public class PrefabManager : Manager {
         npcs = Resources.LoadAll("Prefabs/NPCs", typeof(NPC)).Cast<NPC>().ToArray();
         buttons = Resources.LoadAll("Prefabs/UI/Buttons", typeof(Button)).Cast<Button>().ToArray();
         canvas = (Canvas)Resources.Load("Prefabs/UI/Canvas", typeof(Canvas));
+        panels = Resources.LoadAll("Prefabs/UI/Panels", typeof(CanvasRenderer)).Cast<CanvasRenderer>().ToArray();
     }
 
     /**

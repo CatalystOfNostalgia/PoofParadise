@@ -9,6 +9,9 @@ public class CanvasStart : MonoBehaviour {
      */
 	void Start () {
 
+        BuildUI();
+
+        /**
 		Button jsonButton = this.transform.FindChild ("Test JSON").gameObject.GetComponent<Button>();
 
 		jsonButton.onClick.RemoveAllListeners ();
@@ -25,8 +28,20 @@ public class CanvasStart : MonoBehaviour {
         else if (ModelPanel.modelPanel != modelPanel)
         {
             Destroy(this);
-        }
+        }*/
 	}
+
+    /**
+     * Generates the UI from prefab panels
+     */
+    private void BuildUI()
+    {
+        foreach (CanvasRenderer cr in PrefabManager.prefabManager.panels)
+        {
+            CanvasRenderer temp = Instantiate(cr, cr.transform.position, Quaternion.identity) as CanvasRenderer;
+            temp.transform.SetParent(this.transform, false);
+        }
+    }
 
     /**
      * A sad attempt at making a singleton function
