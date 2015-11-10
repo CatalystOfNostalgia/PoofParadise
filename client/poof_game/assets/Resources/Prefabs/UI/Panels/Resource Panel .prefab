@@ -51,7 +51,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &117136
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -67,7 +67,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &122710
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -248,7 +248,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &183738
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -257,6 +257,21 @@ GameObject:
   - 114: {fileID: 11412200}
   m_Layer: 5
   m_Name: Earth Slider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &184356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 22440312}
+  m_Layer: 5
+  m_Name: Sliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -281,7 +296,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &194282
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -354,10 +369,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66837838c5bc2ad4a94e795fa57ee50a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireSlider: {fileID: 11498106}
-  waterSlider: {fileID: 11402350}
-  airSlider: {fileID: 11487354}
-  earthSlider: {fileID: 11412200}
 --- !u!114 &11410008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -844,11 +855,11 @@ RectTransform:
   m_Children:
   - {fileID: 22486756}
   - {fileID: 22473362}
-  m_Father: {fileID: 22465372}
+  m_Father: {fileID: 22440312}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 38.5999985, y: -12.5}
+  m_AnchoredPosition: {x: -19.4000015, y: 25}
   m_SizeDelta: {x: 132.050003, y: 19.3999996}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22411726
@@ -915,11 +926,11 @@ RectTransform:
   m_Children:
   - {fileID: 22456364}
   - {fileID: 22435602}
-  m_Father: {fileID: 22465372}
+  m_Father: {fileID: 22440312}
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 35, y: -43.2999992}
+  m_AnchoredPosition: {x: -23, y: -5.79999542}
   m_SizeDelta: {x: 135.649994, y: 19.3999996}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22435602
@@ -939,6 +950,27 @@ RectTransform:
   m_AnchorMax: {x: 1, y: .75}
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
+  m_Pivot: {x: .5, y: .5}
+--- !u!224 &22440312
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184356}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 22402208}
+  - {fileID: 22431468}
+  - {fileID: 22453104}
+  - {fileID: 22448800}
+  m_Father: {fileID: 22465372}
+  m_RootOrder: 0
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22440716
 RectTransform:
@@ -1004,11 +1036,11 @@ RectTransform:
   m_Children:
   - {fileID: 22427912}
   - {fileID: 22440716}
-  m_Father: {fileID: 22465372}
+  m_Father: {fileID: 22440312}
   m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 35, y: -104.699997}
+  m_AnchoredPosition: {x: -23, y: -67.1999969}
   m_SizeDelta: {x: 130.5, y: 21.1000004}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22453104
@@ -1023,11 +1055,11 @@ RectTransform:
   m_Children:
   - {fileID: 22476148}
   - {fileID: 22422672}
-  m_Father: {fileID: 22465372}
+  m_Father: {fileID: 22440312}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 36.1499939, y: -75.2999878}
+  m_AnchoredPosition: {x: -21.8500061, y: -37.7999878}
   m_SizeDelta: {x: 134.5, y: 19.3999996}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22456364
@@ -1057,10 +1089,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 22402208}
-  - {fileID: 22431468}
-  - {fileID: 22453104}
-  - {fileID: 22448800}
+  - {fileID: 22440312}
   - {fileID: 22469002}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1097,7 +1126,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22465372}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 98.4000015, y: -85.5}

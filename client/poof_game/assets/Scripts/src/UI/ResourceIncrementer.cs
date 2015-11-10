@@ -44,9 +44,11 @@ public class ResourceIncrementer : GamePanel
         return null;
     }
 
+
     /**
      * A helper method for handling various types of resources
      */
+/**
     private void ManageSlider(int add, ref int current, int max, Slider s)
     {
         Debug.Log(SaveState.state.fire);
@@ -98,4 +100,5 @@ public class ResourceIncrementer : GamePanel
 		}
 
 	}
+*/
 }
