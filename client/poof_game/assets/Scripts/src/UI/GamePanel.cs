@@ -57,4 +57,17 @@ public abstract class GamePanel : MonoBehaviour {
         }
         return list.ToArray();
     }
+
+    /**
+     * Proves the list of sliders for this panel
+     */
+     public Slider[] RetrieveSliderList(string path)
+    {
+        List<Slider> list = new List<Slider>();
+        foreach(Transform t in this.transform.Find(path))
+        {
+            list.Add(t.GetComponent<Slider>());
+        }
+        return list.ToArray();
+    }
 }

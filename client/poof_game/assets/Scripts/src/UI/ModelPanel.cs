@@ -36,16 +36,18 @@ public class ModelPanel : GamePanel {
         }
     }
 
+    /**
+     * Apparently this links some text
+     * TODO: Figure out its importance
+     */
     public void Choice(string question){
-		//model panel should be visible on screen
-		this.gameObject.SetActive (true);
-
-
-
+        this.gameObject.SetActive(true);
 		this.question.text = question; //sets question in dialogue box
-		//this.iconImage.gameObject.SetActive (false);
 	}
 	
+    /**
+     * Shorthand for setactive(false)
+     */
 	void ClosePanel(){
 		modelPanel.gameObject.SetActive(false);
 	}
