@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 public abstract class GamePanel : MonoBehaviour {
 
     abstract public void Start();
+    abstract public void GeneratePanel();
 
     /**
      * Searches for a button in a list
@@ -41,5 +43,18 @@ public abstract class GamePanel : MonoBehaviour {
             }
         }
         return -1;
+    }
+
+    /**
+     * Provides the list of buttons for this panel
+     */
+    public Button[] RetrieveButtonList(string path)
+    {
+        List<Button> list = new List<Button>();
+        foreach (Transform t in this.transform.Find(path))
+        {
+            list.Add(t.GetComponent<Button>());
+        }
+        return list.ToArray();
     }
 }

@@ -27,7 +27,20 @@ public class CanvasStart : MonoBehaviour {
         {
             Destroy(this);
         }
-	}
+
+        GameObject settingsMenu = this.transform.FindChild("Settings Panel(Clone)").gameObject;
+
+        if (SettingsMenu.menu == null)
+        {
+            DontDestroyOnLoad(modelPanel);
+            SettingsMenu.menu = settingsMenu.GetComponent<SettingsMenu>();
+        }
+
+        else if (SettingsMenu.menu != settingsMenu)
+        {
+            Destroy(this);
+        }
+    }
 
     /**
      * Generates the UI from prefab panels

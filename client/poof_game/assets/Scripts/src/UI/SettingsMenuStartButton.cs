@@ -5,8 +5,7 @@ using System.Collections;
  */
 public class SettingsMenuStartButton : MonoBehaviour {
 
-	public SettingsMenu menu;
 	public void activateMenu(){
-		menu.gameObject.SetActive (true);
+		SettingsMenu.menu.gameObject.SetActive (true);
 	}
 }

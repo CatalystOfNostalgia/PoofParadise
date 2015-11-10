@@ -12,6 +12,9 @@ using UnityEngine.Events;
  */
 public class SettingsMenu : GamePanel {
 
+    // A static reference to this object
+    public static SettingsMenu menu;
+
     private Button[] buttons;
 
     public Slider masterVolumeSlider;
@@ -25,20 +28,14 @@ public class SettingsMenu : GamePanel {
      */
     override public void Start()
     {
-        List<Button> list = new List<Button>();
-        // Generates a list of buttons from the children of this object
-        foreach (Transform t in this.transform.GetChild(0).FindChild("Buttons"))
-        {
-            list.Add(t.GetComponent<Button>());
-        }
-        buttons = list.ToArray();
+        buttons = RetrieveButtonList("Dialogue Panel/Buttons");
         GeneratePanel();
     }
 
     /**
      * Adds functionality to all of the buttons on the panel
      */
-	public void GeneratePanel(){
+	override public void GeneratePanel(){
 		this.gameObject.SetActive (true);
 		AudioSource[] music = SoundManager.soundManager.playlist;
 
