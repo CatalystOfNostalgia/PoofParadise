@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.Events;
+using System.Collections.Generic;
+
 /**
  * Let's add a settings menu. It will be used to control music mainly.
  * This menu should
@@ -11,11 +12,13 @@ using UnityEngine.Events;
  */
 public class SettingsMenu : MonoBehaviour {
 
-	public Button playButtonAir;
-	public Button playButtonEarth;
-	public Button playButtonFire;
-	public Button playButtonWater;
-    public Button nextSong;
+	private Button playButtonAir;
+	private Button playButtonEarth;
+	private Button playButtonFire;
+	private Button playButtonWater;
+    private Button nextSong;
+
+    private Button[] buttons;
 
     public Slider masterVolumeSlider;
     public Slider musicVolumeSlider;
@@ -24,27 +27,47 @@ public class SettingsMenu : MonoBehaviour {
 	public Button exit;
 
     /**
+     * Generates references based on children
+     */
+    void Start()
+    {
+        List<Button> list = new List<Button>();
+        // Generates a list of buttons from the children of this object
+        foreach (Transform t in this.transform.GetChild(0))
+        {
+            list.Add(t.GetComponent<Button>());
+        }
+        buttons = list.ToArray();
+    }
+
+    /**
      * Adds functionality to all of the buttons on the panel
      */
 	public void generatePanel(){
 		this.gameObject.SetActive (true);
 		AudioSource[] music = SoundManager.soundManager.playlist;
 
+        playButtonAir = FindButton("Air Theme", buttons);
 		playButtonAir.onClick.RemoveAllListeners ();
 		playButtonAir.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonAir.name));
 
+        playButtonEarth = FindButton("Earth Theme", buttons);
 		playButtonEarth.onClick.RemoveAllListeners ();
 		playButtonEarth.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonEarth.name));
 
+        playButtonFire = FindButton("Fire Theme", buttons);
 		playButtonFire.onClick.RemoveAllListeners ();
 		playButtonFire.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonFire.name));
 
+        playButtonWater = FindButton("Water Theme", buttons);
 		playButtonWater.onClick.RemoveAllListeners ();
 		playButtonWater.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonWater.name));
 
+        exit = FindButton("Exit Button", buttons);
 		exit.onClick.RemoveAllListeners ();
 		exit.onClick.AddListener (ClosePanel);
 
+        nextSong = FindButton("Next Song", buttons);
         nextSong.onClick.RemoveAllListeners();
         nextSong.onClick.AddListener(() => SoundManager.soundManager.nextSong());
 
@@ -57,6 +80,21 @@ public class SettingsMenu : MonoBehaviour {
 
         soundVolumeSlider.onValueChanged.RemoveAllListeners();
         soundVolumeSlider.onValueChanged.AddListener(delegate { SoundManager.soundManager.soundVolume = soundVolumeSlider.value; });
+    }
+
+    /**
+     * Returns a button by name
+     */
+    private Button FindButton(string button, Button[] buttons)
+    {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            if (buttons[i].name == button)
+            {
+                return buttons[i];
+            }
+        }
+        return null;
     }
 
     void ClosePanel(){
