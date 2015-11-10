@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.Events;
@@ -13,10 +12,6 @@ using UnityEngine.Events;
  */
 public class SettingsMenu : MonoBehaviour {
 
-	private Button playButtonAir;
-	private Button playButtonEarth;
-	private Button playButtonFire;
-	private Button playButtonWater;
     private Button nextSong;
 
     private Button[] buttons;
@@ -34,7 +29,7 @@ public class SettingsMenu : MonoBehaviour {
     {
         List<Button> list = new List<Button>();
         // Generates a list of buttons from the children of this object
-        foreach (Transform t in this.transform.GetChild(0))
+        foreach (Transform t in this.transform.GetChild(0).FindChild("Buttons"))
         {
             list.Add(t.GetComponent<Button>());
         }
@@ -51,21 +46,17 @@ public class SettingsMenu : MonoBehaviour {
 
         // Locates the button and gives it a function
         // TODO: Change this function such that a search is not needed but rather that songs can be call based on button names
-        FindAndModifyButton("Air Theme", buttons, ref playButtonAir, () => SoundManager.soundManager.playSong(playButtonAir.name));
+        FindAndModifyButton("Air Theme", buttons, () => SoundManager.soundManager.playSong("Air Theme"));
 
-        FindAndModifyButton("Earth Theme", buttons, ref playButtonEarth, () => SoundManager.soundManager.playSong(playButtonEarth.name));
+        FindAndModifyButton("Earth Theme", buttons, () => SoundManager.soundManager.playSong("Earth Theme"));
 
-        FindAndModifyButton("Fire Theme", buttons, ref playButtonFire, () => SoundManager.soundManager.playSong(playButtonFire.name));
+        FindAndModifyButton("Fire Theme", buttons, () => SoundManager.soundManager.playSong("Fire Theme"));
 
-        FindAndModifyButton("Water Theme", buttons, ref playButtonWater, () => SoundManager.soundManager.playSong(playButtonWater.name));
+        FindAndModifyButton("Water Theme", buttons, () => SoundManager.soundManager.playSong("Water Theme"));
 
-        exit = FindButton("Exit Button", buttons);
-		exit.onClick.RemoveAllListeners ();
-		exit.onClick.AddListener (ClosePanel);
+        FindAndModifyButton("Exit Button", buttons, ClosePanel);
 
-        nextSong = FindButton("Next Song", buttons);
-        nextSong.onClick.RemoveAllListeners();
-        nextSong.onClick.AddListener(() => SoundManager.soundManager.nextSong());
+        FindAndModifyButton("Next Song", buttons, () => SoundManager.soundManager.nextSong());
 
         // It would probably be easier to just write a function for the slider, but...
         masterVolumeSlider.onValueChanged.RemoveAllListeners();
@@ -83,35 +74,36 @@ public class SettingsMenu : MonoBehaviour {
      * Removes the listeners on that button
      * Adds a listener to that button
      */
-    private void FindAndModifyButton(string name, Button[] list, ref Button local, UnityAction method)
+    private void FindAndModifyButton(string name, Button[] list, UnityAction method)
     {
         // Runs a search for a button by name
-        local = FindButton(name, list);
+        int index = FindButton(name, list);
 
         // Lets the user know that their button doesn't exist
-        if (local == null)
+        if (index == -1)
         {
             Debug.LogError("FindAndModifyButton failed to find " + name + " in button list");
+            return;
         }
 
         // Removes all listeners and adds functionality
-        local.onClick.RemoveAllListeners();
-        local.onClick.AddListener(method);
+        buttons[index].onClick.RemoveAllListeners();
+        buttons[index].onClick.AddListener(method);
     }
 
     /**
      * Returns a button by name
      */
-    private Button FindButton(string button, Button[] list)
+    private int FindButton(string button, Button[] list)
     {
         for (int i = 0; i < list.Length; i++)
         {
             if (list[i].name == button)
             {
-                return list[i];
+                return i;
             }
         }
-        return null;
+        return -1;
     }
 
     void ClosePanel(){

@@ -32,6 +32,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &103256
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 22436624}
+  m_Layer: 5
+  m_Name: Buttons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &103308
 GameObject:
   m_ObjectHideFlags: 1
@@ -5834,15 +5849,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 22458130}
-  - {fileID: 22412252}
-  - {fileID: 22434584}
-  - {fileID: 22459936}
-  - {fileID: 22494156}
   - {fileID: 22442570}
   - {fileID: 22463572}
   - {fileID: 22443378}
-  - {fileID: 22456100}
+  - {fileID: 22436624}
   m_Father: {fileID: 22490450}
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
@@ -5913,7 +5923,7 @@ RectTransform:
   m_Children:
   - {fileID: 22410642}
   - {fileID: 22495216}
-  m_Father: {fileID: 22409328}
+  m_Father: {fileID: 22436624}
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
@@ -6287,7 +6297,7 @@ RectTransform:
   m_Children:
   - {fileID: 22486948}
   - {fileID: 22460478}
-  m_Father: {fileID: 22409328}
+  m_Father: {fileID: 22436624}
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
@@ -6361,6 +6371,29 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 9, y: -.5}
   m_SizeDelta: {x: -28, y: -3}
+  m_Pivot: {x: .5, y: .5}
+--- !u!224 &22436624
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103256}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 22458130}
+  - {fileID: 22412252}
+  - {fileID: 22434584}
+  - {fileID: 22459936}
+  - {fileID: 22494156}
+  - {fileID: 22456100}
+  m_Father: {fileID: 22409328}
+  m_RootOrder: 3
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22437610
 RectTransform:
@@ -6466,7 +6499,7 @@ RectTransform:
   - {fileID: 22484814}
   - {fileID: 22456820}
   m_Father: {fileID: 22409328}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 39, y: 55.9000015}
@@ -6503,7 +6536,7 @@ RectTransform:
   - {fileID: 22432524}
   - {fileID: 22448530}
   m_Father: {fileID: 22409328}
-  m_RootOrder: 7
+  m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 39, y: -31.7000008}
@@ -6695,8 +6728,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22428524}
-  m_Father: {fileID: 22409328}
-  m_RootOrder: 8
+  m_Father: {fileID: 22436624}
+  m_RootOrder: 5
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -95.4000015, y: -109}
@@ -6786,7 +6819,7 @@ RectTransform:
   m_Children:
   - {fileID: 22499678}
   - {fileID: 22489608}
-  m_Father: {fileID: 22409328}
+  m_Father: {fileID: 22436624}
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
@@ -6822,7 +6855,7 @@ RectTransform:
   m_Children:
   - {fileID: 22449834}
   - {fileID: 22441246}
-  m_Father: {fileID: 22409328}
+  m_Father: {fileID: 22436624}
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
@@ -6897,7 +6930,7 @@ RectTransform:
   - {fileID: 22402464}
   - {fileID: 22425752}
   m_Father: {fileID: 22409328}
-  m_RootOrder: 6
+  m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 38.9999962, y: 10.0000114}
@@ -7262,7 +7295,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22405094}
-  m_Father: {fileID: 22409328}
+  m_Father: {fileID: 22436624}
   m_RootOrder: 4
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
