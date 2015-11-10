@@ -61,7 +61,6 @@ public class SoundManager : Manager {
         foreach (AudioSource music in playlist)
         {
             playDict.Add(music.name, music);
-            Debug.Log("SoundManager: Added " + music.name + " to the dictionary");
         }
         masterVolume = 1f;
         musicVolume = 1f;
