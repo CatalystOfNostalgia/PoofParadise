@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 526956ddc9600704c86777eee8567e33
-timeCreated: 1446584487
+timeCreated: 1447024081
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -77,6 +77,7 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -96,8 +97,8 @@ TextureImporter:
         y: 1024
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_1
       rect:
@@ -106,8 +107,8 @@ TextureImporter:
         y: 1024
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_2
       rect:
@@ -116,8 +117,8 @@ TextureImporter:
         y: 1024
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_3
       rect:
@@ -126,8 +127,8 @@ TextureImporter:
         y: 1024
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_4
       rect:
@@ -136,8 +137,8 @@ TextureImporter:
         y: 1024
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_5
       rect:
@@ -146,8 +147,8 @@ TextureImporter:
         y: 1024
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_6
       rect:
@@ -156,8 +157,8 @@ TextureImporter:
         y: 1024
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_7
       rect:
@@ -166,8 +167,8 @@ TextureImporter:
         y: 1024
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_8
       rect:
@@ -176,8 +177,8 @@ TextureImporter:
         y: 768
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_9
       rect:
@@ -186,8 +187,8 @@ TextureImporter:
         y: 768
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_10
       rect:
@@ -196,8 +197,8 @@ TextureImporter:
         y: 768
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_11
       rect:
@@ -206,8 +207,8 @@ TextureImporter:
         y: 768
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_12
       rect:
@@ -216,8 +217,8 @@ TextureImporter:
         y: 768
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_13
       rect:
@@ -226,8 +227,8 @@ TextureImporter:
         y: 768
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_14
       rect:
@@ -236,8 +237,8 @@ TextureImporter:
         y: 768
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_15
       rect:
@@ -246,8 +247,8 @@ TextureImporter:
         y: 768
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_16
       rect:
@@ -256,8 +257,8 @@ TextureImporter:
         y: 512
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_17
       rect:
@@ -266,8 +267,8 @@ TextureImporter:
         y: 512
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_18
       rect:
@@ -276,8 +277,8 @@ TextureImporter:
         y: 512
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_19
       rect:
@@ -286,8 +287,8 @@ TextureImporter:
         y: 512
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_20
       rect:
@@ -296,8 +297,8 @@ TextureImporter:
         y: 512
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_21
       rect:
@@ -306,8 +307,8 @@ TextureImporter:
         y: 512
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_22
       rect:
@@ -316,8 +317,8 @@ TextureImporter:
         y: 512
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_23
       rect:
@@ -326,8 +327,8 @@ TextureImporter:
         y: 512
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_24
       rect:
@@ -336,8 +337,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_25
       rect:
@@ -346,8 +347,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_26
       rect:
@@ -356,8 +357,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_27
       rect:
@@ -366,8 +367,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_28
       rect:
@@ -376,8 +377,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_29
       rect:
@@ -386,8 +387,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_30
       rect:
@@ -396,8 +397,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_31
       rect:
@@ -406,8 +407,8 @@ TextureImporter:
         y: 256
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_32
       rect:
@@ -416,8 +417,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_33
       rect:
@@ -426,8 +427,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_34
       rect:
@@ -436,8 +437,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_35
       rect:
@@ -446,8 +447,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_36
       rect:
@@ -456,8 +457,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_37
       rect:
@@ -466,8 +467,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_38
       rect:
@@ -476,8 +477,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Volcano_256x256sprite_24fps_39
       rect:
@@ -486,8 +487,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .550000012, y: .270000011}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
