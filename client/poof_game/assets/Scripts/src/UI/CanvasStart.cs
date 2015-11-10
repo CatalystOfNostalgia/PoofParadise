@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasStart : MonoBehaviour {
 
@@ -9,13 +10,12 @@ public class CanvasStart : MonoBehaviour {
 
         BuildUI();
 
-        /**
 		Button jsonButton = this.transform.FindChild ("Test JSON").gameObject.GetComponent<Button>();
 
 		jsonButton.onClick.RemoveAllListeners ();
 		jsonButton.onClick.AddListener (() => SaveState.state.PullFromServer()); 
 
-        GameObject modelPanel = this.transform.FindChild("Model Panel").gameObject;
+        GameObject modelPanel = this.transform.FindChild("Model Panel(Clone)").gameObject;
 
         if (ModelPanel.modelPanel == null)
         {
@@ -26,7 +26,7 @@ public class CanvasStart : MonoBehaviour {
         else if (ModelPanel.modelPanel != modelPanel)
         {
             Destroy(this);
-        }*/
+        }
 	}
 
     /**

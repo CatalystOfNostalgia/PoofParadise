@@ -2,14 +2,23 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System;
 
-public class ModelPanel : MonoBehaviour {
+public class ModelPanel : GamePanel {
 
 	public Text question;
 	public Image iconImage;
 	public static ModelPanel modelPanel;
 
-	public void Choice(string question){
+    /**
+     * Initializes panel
+     */
+    override public void Start()
+    {
+        Debug.Log("Model Panel is Active");
+    }
+
+    public void Choice(string question){
 		//model panel should be visible on screen
 		this.gameObject.SetActive (true);
 

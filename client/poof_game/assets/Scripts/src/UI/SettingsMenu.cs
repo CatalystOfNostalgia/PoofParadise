@@ -12,8 +12,6 @@ using UnityEngine.Events;
  */
 public class SettingsMenu : GamePanel {
 
-    private Button nextSong;
-
     private Button[] buttons;
 
     public Slider masterVolumeSlider;
