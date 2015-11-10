@@ -50,17 +50,14 @@ public class SettingsMenu : MonoBehaviour {
 		AudioSource[] music = SoundManager.soundManager.playlist;
 
         // Locates the button and gives it a function
+        // TODO: Change this function such that a search is not needed but rather that songs can be call based on button names
         FindAndModifyButton("Air Theme", buttons, ref playButtonAir, () => SoundManager.soundManager.playSong(playButtonAir.name));
 
         FindAndModifyButton("Earth Theme", buttons, ref playButtonEarth, () => SoundManager.soundManager.playSong(playButtonEarth.name));
 
-        playButtonFire = FindButton("Fire Theme", buttons);
-		playButtonFire.onClick.RemoveAllListeners ();
-		playButtonFire.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonFire.name));
+        FindAndModifyButton("Fire Theme", buttons, ref playButtonFire, () => SoundManager.soundManager.playSong(playButtonFire.name));
 
-        playButtonWater = FindButton("Water Theme", buttons);
-		playButtonWater.onClick.RemoveAllListeners ();
-		playButtonWater.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonWater.name));
+        FindAndModifyButton("Water Theme", buttons, ref playButtonWater, () => SoundManager.soundManager.playSong(playButtonWater.name));
 
         exit = FindButton("Exit Button", buttons);
 		exit.onClick.RemoveAllListeners ();
