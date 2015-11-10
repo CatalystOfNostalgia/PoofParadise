@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class PrefabManager : Manager {
 
@@ -11,6 +12,7 @@ public class PrefabManager : Manager {
     public DecorativeBuilding[] decorativeBuildigs { get; set; }
     public Tile[] tiles { get; set; }
     public NPC[] npcs { get; set; }
+    public Button[] buttons { get; set; }
 
     // Use this for initialization
     override public void Start () {
@@ -38,6 +40,7 @@ public class PrefabManager : Manager {
         decorativeBuildigs = Resources.LoadAll("Prefabs/Buildings/Decorative Buildings", typeof(DecorativeBuilding)).Cast<DecorativeBuilding>().ToArray();
         tiles = Resources.LoadAll("Prefabs/Grid", typeof(Tile)).Cast<Tile>().ToArray();
         npcs = Resources.LoadAll("Prefabs/NPCs", typeof(NPC)).Cast<NPC>().ToArray();
+        buttons = Resources.LoadAll("Prefabs/Buttons", typeof(Button)).Cast<Button>().ToArray();
     }
 
     /**
