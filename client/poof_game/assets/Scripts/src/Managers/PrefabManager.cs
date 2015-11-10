@@ -13,6 +13,7 @@ public class PrefabManager : Manager {
     public Tile[] tiles { get; set; }
     public NPC[] npcs { get; set; }
     public Button[] buttons { get; set; }
+    public Canvas canvas { get; set; }
 
     // Use this for initialization
     override public void Start () {
@@ -41,6 +42,7 @@ public class PrefabManager : Manager {
         tiles = Resources.LoadAll("Prefabs/Grid", typeof(Tile)).Cast<Tile>().ToArray();
         npcs = Resources.LoadAll("Prefabs/NPCs", typeof(NPC)).Cast<NPC>().ToArray();
         buttons = Resources.LoadAll("Prefabs/Buttons", typeof(Button)).Cast<Button>().ToArray();
+        canvas = (Canvas)Resources.Load("Prefabs/UI/Canvas", typeof(Canvas));
     }
 
     /**
