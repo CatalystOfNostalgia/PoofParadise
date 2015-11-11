@@ -16,7 +16,6 @@ public class ModelPanel : GamePanel {
      */
     override public void Start()
     {
-        Debug.Log("Model Panel is Active");
         buttons = RetrieveButtonList("Model Dialogue Panel/Buttons");
         GeneratePanel();
     }
