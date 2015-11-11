@@ -23,7 +23,7 @@ public abstract class GamePanel : MonoBehaviour {
     public void FindAndModifyButton(string name, Button[] list, UnityAction method)
     {
         // Runs a search for a button by name
-        int index = FindButton(name, list);
+        int index = FindUIElement(name, list);
 
         // Lets the user know that their button doesn't exist
         if (index == -1)
@@ -40,11 +40,26 @@ public abstract class GamePanel : MonoBehaviour {
     /**
      * Returns a button by name
      */
-    public int FindButton(string button, Button[] list)
+    public int FindUIElement(string name, Button[] list)
     {
         for (int i = 0; i < list.Length; i++)
         {
-            if (list[i].name == button)
+            if (list[i].name == name)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Returns a slider by name
+     */
+    public int FindUIElement(string name, Slider[] list)
+    {
+        for (int i = 0; i < list.Length; i++)
+        {
+            if (list[i].name == name)
             {
                 return i;
             }
