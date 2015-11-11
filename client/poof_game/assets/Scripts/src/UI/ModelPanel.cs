@@ -30,7 +30,7 @@ public class ModelPanel : GamePanel {
         foreach (Button b in buttons)
         {
             b.onClick.RemoveAllListeners();
-            b.onClick.AddListener(ClosePanel);
+            b.onClick.AddListener(TogglePanel);
             b.gameObject.SetActive(true);
         }
     }
@@ -42,12 +42,5 @@ public class ModelPanel : GamePanel {
     public void Choice(string question){
         this.gameObject.SetActive(true);
 		this.question.text = question; //sets question in dialogue box
-	}
-	
-    /**
-     * Shorthand for setactive(false)
-     */
-	void ClosePanel(){
-		modelPanel.gameObject.SetActive(false);
 	}
 }

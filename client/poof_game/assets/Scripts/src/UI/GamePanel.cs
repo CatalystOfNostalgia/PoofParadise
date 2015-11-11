@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public abstract class GamePanel : MonoBehaviour {
 
+    public bool windowState { get; set; }
+
     abstract public void Start();
     abstract public void GeneratePanel();
 
@@ -69,5 +71,14 @@ public abstract class GamePanel : MonoBehaviour {
             list.Add(t.GetComponent<Slider>());
         }
         return list.ToArray();
+    }
+
+    /**
+     * Toggles the window on and off
+     */
+    public void TogglePanel()
+    {
+        windowState = !windowState;
+        this.gameObject.SetActive(windowState);
     }
 }

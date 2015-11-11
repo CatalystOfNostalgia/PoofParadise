@@ -36,8 +36,6 @@ public class SettingsMenu : GamePanel {
      * Adds functionality to all of the buttons on the panel
      */
 	override public void GeneratePanel(){
-		this.gameObject.SetActive (true);
-		AudioSource[] music = SoundManager.soundManager.playlist;
 
         // Locates the button and gives it a function
         // TODO: Change this function such that a search is not needed but rather that songs can be call based on button names
@@ -49,7 +47,7 @@ public class SettingsMenu : GamePanel {
 
         FindAndModifyButton("Water Theme", buttons, () => SoundManager.soundManager.playSong("Water Theme"));
 
-        FindAndModifyButton("Exit Button", buttons, ClosePanel);
+        FindAndModifyButton("Exit Button", buttons, TogglePanel);
 
         FindAndModifyButton("Next Song", buttons, () => SoundManager.soundManager.nextSong());
 
@@ -64,7 +62,5 @@ public class SettingsMenu : GamePanel {
         soundVolumeSlider.onValueChanged.AddListener(delegate { SoundManager.soundManager.soundVolume = soundVolumeSlider.value; });
     }
 
-    void ClosePanel(){
-        this.gameObject.SetActive(false);
-	}
+
 }

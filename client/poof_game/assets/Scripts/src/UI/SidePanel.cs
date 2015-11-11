@@ -1,5 +1,4 @@
 ﻿using UnityEngine.UI;
-using System;
 
 public class SidePanel : GamePanel {
 
@@ -18,6 +17,9 @@ public class SidePanel : GamePanel {
      */
     public override void GeneratePanel()
     {
-        FindAndModifyButton("Menu Button", buttons, () => ModelPanel.modelPanel.Choice("Choose a Button and brace yourself"));
+        FindAndModifyButton("Menu Button", buttons, () => ModelPanel.modelPanel.TogglePanel());
+        // TODO: Setup functionality for achievement button
+        // TODO: Setup functionality
+        FindAndModifyButton("Options Button", buttons, () => SettingsMenu.menu.TogglePanel());
     }
 }
