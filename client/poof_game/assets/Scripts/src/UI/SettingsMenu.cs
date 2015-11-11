@@ -13,6 +13,7 @@ public class SettingsMenu : GamePanel {
     public static SettingsMenu menu;
 
     private Button[] buttons;
+    private Slider[] sliders;
 
     public Slider masterVolumeSlider;
     public Slider musicVolumeSlider;
@@ -26,6 +27,7 @@ public class SettingsMenu : GamePanel {
     override public void Start()
     {
         buttons = RetrieveButtonList("Dialogue Panel/Buttons");
+        sliders = RetrieveSliderList("Dialogue Panel/Sliders");
         GeneratePanel();
     }
 
