@@ -15,10 +15,6 @@ public class SettingsMenu : GamePanel {
     private Button[] buttons;
     private Slider[] sliders;
 
-    public Slider masterVolumeSlider;
-    public Slider musicVolumeSlider;
-    public Slider soundVolumeSlider;
-
 	public Button exit;
 
     /**
@@ -50,15 +46,11 @@ public class SettingsMenu : GamePanel {
 
         FindAndModifyUIElement("Next Song", buttons, () => SoundManager.soundManager.nextSong());
 
-        // It would probably be easier to just write a function for the slider, but...
-        masterVolumeSlider.onValueChanged.RemoveAllListeners();
-        masterVolumeSlider.onValueChanged.AddListener(delegate { SoundManager.soundManager.masterVolume = masterVolumeSlider.value; });
+        FindAndModifyUIElement("Master Volume Slider", sliders, delegate { SoundManager.soundManager.masterVolume = sliders[FindUIElement("Master Volume Slider", sliders)].value; });
 
-        musicVolumeSlider.onValueChanged.RemoveAllListeners();
-        musicVolumeSlider.onValueChanged.AddListener(delegate { SoundManager.soundManager.musicVolume = musicVolumeSlider.value; });
+        FindAndModifyUIElement("Music Volume Slider", sliders, delegate { SoundManager.soundManager.musicVolume = sliders[FindUIElement("Music Volume Slider", sliders)].value; });
 
-        soundVolumeSlider.onValueChanged.RemoveAllListeners();
-        soundVolumeSlider.onValueChanged.AddListener(delegate { SoundManager.soundManager.soundVolume = soundVolumeSlider.value; });
+        FindAndModifyUIElement("Sound Volume Slider", sliders, delegate { SoundManager.soundManager.soundVolume = sliders[FindUIElement("Sound Volume Slider", sliders)].value; });
     }
 
 
