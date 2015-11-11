@@ -20,7 +20,7 @@ public abstract class GamePanel : MonoBehaviour {
      * Removes the listeners on that button
      * Adds a listener to that button
      */
-    public void FindAndModifyButton(string name, Button[] list, UnityAction method)
+    public void FindAndModifyUIElement(string name, Button[] list, UnityAction method)
     {
         // Runs a search for a button by name
         int index = FindUIElement(name, list);
@@ -28,7 +28,7 @@ public abstract class GamePanel : MonoBehaviour {
         // Lets the user know that their button doesn't exist
         if (index == -1)
         {
-            Debug.LogError("FindAndModifyButton failed to find " + name + " in button list");
+            Debug.LogError("FindAndModifyUIElement failed to find " + name + " in button list");
             return;
         }
 
@@ -38,9 +38,29 @@ public abstract class GamePanel : MonoBehaviour {
     }
 
     /**
+     * Searches for a slider in a list
+     * Removes the listeners from that silder
+     * Adds a listener that that slider
+     */
+    public void FindAndModifyUIElement(string name, Slider[] list, UnityAction<float> method)
+    {
+        // Runs a search for a button by name
+        int index = FindUIElement(name, list);
+
+        // Lets the user know that their button doesn't exist
+        if (index == -1)
+        {
+            Debug.LogError("FindAndModifyUIElement failed to find " + name + " in button list");
+            return;
+        }
+        list[index].onValueChanged.RemoveAllListeners();
+        list[index].onValueChanged.AddListener(method);
+    }
+
+    /**
      * Returns a button by name
      */
-    public int FindUIElement(string name, Button[] list)
+    public int FindUIElement(string name, Selectable[] list)
     {
         for (int i = 0; i < list.Length; i++)
         {
@@ -52,20 +72,7 @@ public abstract class GamePanel : MonoBehaviour {
         return -1;
     }
 
-    /**
-     * Returns a slider by name
-     */
-    public int FindUIElement(string name, Slider[] list)
-    {
-        for (int i = 0; i < list.Length; i++)
-        {
-            if (list[i].name == name)
-            {
-                return i;
-            }
-        }
-        return -1;
-    }
+
 
     /**
      * Provides the list of buttons for this panel

@@ -38,17 +38,17 @@ public class SettingsMenu : GamePanel {
 
         // Locates the button and gives it a function
         // TODO: Change this function such that a search is not needed but rather that songs can be call based on button names
-        FindAndModifyButton("Air Theme", buttons, () => SoundManager.soundManager.playSong("Air Theme"));
+        FindAndModifyUIElement("Air Theme", buttons, () => SoundManager.soundManager.playSong("Air Theme"));
 
-        FindAndModifyButton("Earth Theme", buttons, () => SoundManager.soundManager.playSong("Earth Theme"));
+        FindAndModifyUIElement("Earth Theme", buttons, () => SoundManager.soundManager.playSong("Earth Theme"));
 
-        FindAndModifyButton("Fire Theme", buttons, () => SoundManager.soundManager.playSong("Fire Theme"));
+        FindAndModifyUIElement("Fire Theme", buttons, () => SoundManager.soundManager.playSong("Fire Theme"));
 
-        FindAndModifyButton("Water Theme", buttons, () => SoundManager.soundManager.playSong("Water Theme"));
+        FindAndModifyUIElement("Water Theme", buttons, () => SoundManager.soundManager.playSong("Water Theme"));
 
-        FindAndModifyButton("Exit Button", buttons, TogglePanel);
+        FindAndModifyUIElement("Exit Button", buttons, TogglePanel);
 
-        FindAndModifyButton("Next Song", buttons, () => SoundManager.soundManager.nextSong());
+        FindAndModifyUIElement("Next Song", buttons, () => SoundManager.soundManager.nextSong());
 
         // It would probably be easier to just write a function for the slider, but...
         masterVolumeSlider.onValueChanged.RemoveAllListeners();

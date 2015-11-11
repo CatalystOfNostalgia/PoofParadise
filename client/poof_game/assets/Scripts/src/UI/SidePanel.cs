@@ -17,9 +17,9 @@ public class SidePanel : GamePanel {
      */
     public override void GeneratePanel()
     {
-        FindAndModifyButton("Menu Button", buttons, () => ModelPanel.modelPanel.TogglePanel());
+        FindAndModifyUIElement("Menu Button", buttons, () => ModelPanel.modelPanel.TogglePanel());
         // TODO: Setup functionality for achievement button
         // TODO: Setup functionality
-        FindAndModifyButton("Options Button", buttons, () => SettingsMenu.menu.TogglePanel());
+        FindAndModifyUIElement("Options Button", buttons, () => SettingsMenu.menu.TogglePanel());
     }
 }
