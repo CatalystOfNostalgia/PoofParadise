@@ -31,7 +31,6 @@ public class ModelPanel : GamePanel {
         {
             b.onClick.RemoveAllListeners();
             b.onClick.AddListener(TogglePanel);
-            b.gameObject.SetActive(true);
         }
     }
 
@@ -40,7 +39,7 @@ public class ModelPanel : GamePanel {
      * TODO: Figure out its importance
      */
     public void Choice(string question){
-        this.gameObject.SetActive(true);
+        TogglePanel();
 		this.question.text = question; //sets question in dialogue box
 	}
 }
