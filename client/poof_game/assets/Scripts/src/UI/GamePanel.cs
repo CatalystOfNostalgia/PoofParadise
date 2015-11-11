@@ -3,6 +3,11 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections.Generic;
 
+/**
+ * An abstract class used to handle basic 
+ * UI panel operation - All game panels should 
+ * extend this
+ */
 public abstract class GamePanel : MonoBehaviour {
 
     public bool windowState { get; set; }

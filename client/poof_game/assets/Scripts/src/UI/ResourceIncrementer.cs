@@ -1,10 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
+﻿using UnityEngine.UI;
 using System;
-//currently no player game object, could be slider...
 
-// a class to deal with resources
+/**
+ * A class to deal with resources
+ */
 public class ResourceIncrementer : GamePanel
 {
 	// singleton object

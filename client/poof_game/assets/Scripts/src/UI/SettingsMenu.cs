@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections.Generic;
-using UnityEngine.Events;
+﻿using UnityEngine.UI;
 
 /**
  * Let's add a settings menu. It will be used to control music mainly.
