@@ -1,8 +1,14 @@
+# Unity generated files
 client/poof_game/[Ll]ibrary/
 client/poof_game/[Tt]emp/
 client/poof_game/[Oo]bj/
 client/poof_game/[Bb]uild/
+sysinfo.txt
+*.stackdump
 
+# Visual studios generated
+[Ee]xported[Oo]bj/
+.vs/
 *.csproj
 *.unityproj
 *.sln
@@ -12,6 +18,7 @@ client/poof_game/[Bb]uild/
 *.userprefs
 *.pidb
 *.booproj
+*.meta
 
 *.pidb.meta
 
