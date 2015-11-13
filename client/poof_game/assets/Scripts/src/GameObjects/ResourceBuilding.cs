@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 
 [Serializable]
@@ -17,16 +16,16 @@ public class ResourceBuilding : Building {
 		collectionRate = 5;
 		switch (type){
 		case ResourceType.air:
-			InvokeRepeating ("tickAir", .01f, 1.0f);
+			//InvokeRepeating ("tickAir", .01f, 1.0f);
 			break;
 		case ResourceType.earth:
-			InvokeRepeating ("tickEarth", .01f, 1.0f);
+			//InvokeRepeating ("tickEarth", .01f, 1.0f);
 			break;
 		case ResourceType.fire:
-			InvokeRepeating ("tickFire", .01f, 1.0f);
+			//InvokeRepeating ("tickFire", .01f, 1.0f);
 			break;
 		case ResourceType.water:
-			InvokeRepeating ("tickWater", .01f, 1.0f);
+			//InvokeRepeating ("tickWater", .01f, 1.0f);
 			break;
 		default:
 			Debug.Log("ResourceBuilding: Illegal resource type");
@@ -34,18 +33,5 @@ public class ResourceBuilding : Building {
 		}
 	}
 
-	//copypasta code because InvokeRepeating can't take in param.
-	void tickFire (){
-		ResourceIncrementer.incrementer.ResourceGain (collectionRate, ResourceType.fire);
-	}
-	void tickWater (){
-		ResourceIncrementer.incrementer.ResourceGain (collectionRate, ResourceType.water);
-	}
-	void tickAir (){
-		ResourceIncrementer.incrementer.ResourceGain (collectionRate, ResourceType.air);
-	}
-	void tickEarth (){
-		ResourceIncrementer.incrementer.ResourceGain (collectionRate, ResourceType.earth);
-	}
 
 }

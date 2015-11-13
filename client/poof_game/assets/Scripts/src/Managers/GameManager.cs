@@ -23,6 +23,8 @@ public class GameManager : Manager {
     private List<GameObject> airActive;
     private List<GameObject> poofActive;
 
+    private GameObject nest;
+
     /**
      * Converts GameManager to a singleton
      * Initializes poof/elemari lists
@@ -61,6 +63,9 @@ public class GameManager : Manager {
         int earthLeft = earthTotal;
         int airLeft = airTotal;
         int poofLeft = poofTotal;
+
+        nest = new GameObject();
+        nest.name = "Character Nest";
 
         // Fire loop
         if (fireActive.Count < fireTotal && fireLeft > 0)
@@ -124,6 +129,7 @@ public class GameManager : Manager {
         CharacterScript cs = go.GetComponent<CharacterScript>();
         cs.onTile = TileScript.grid.GetTile(spawnPoint);
         go.GetComponent<MovementScript>().initializeCharacter();
+        go.transform.SetParent(nest.transform);
     }
     
     /**
@@ -137,7 +143,8 @@ public class GameManager : Manager {
 		PoofScript ps = go.GetComponent<PoofScript>();
 		ps.onTile = TileScript.grid.GetTile(spawnPoint);
 		go.GetComponent<MovementScript>().initializePoof();
-	}
+        go.transform.SetParent(nest.transform);
+    }
 
     /**
      * Generates a random tuple for spawning poofs

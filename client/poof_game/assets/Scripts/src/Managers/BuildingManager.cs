@@ -1,22 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/**
+ * Handles all building operations
+ */
 public class BuildingManager : Manager {
 
     // The target building
 	private Building target;
 
-	// the tile the mouse is currently one
+	// The tile the mouse is currently one
 	public Tile selectedTile { get; set; }
 
-	//the dictionary containing all the different types of buildings that can be made
+	// The dictionary containing all the different types of buildings that can be made
 	Dictionary <string, Building> buildingTypeDict;
 	Dictionary<Tuple, Building> existingBuildingDict;
 
-	//the dictionary containing buildings on the grid
+	// The dictionary containing buildings on the grid
 	public static BuildingManager buildingManager;
 
+    // Does a thing
 	public bool buildingMode;
+
+    // A convenience object for holding all instantiated buildings
+    private GameObject buildings;
 
     /**
      * Initializes BuildingManager as a singleton
@@ -36,16 +43,22 @@ public class BuildingManager : Manager {
             Destroy(gameObject);
         }
 
+        buildings = new GameObject();
+        buildings.name = "Buildings";
         buildingTypeDict = new Dictionary<string, Building>();
         existingBuildingDict = new Dictionary<Tuple, Building>();
 
     }
 
-    //this overload does nothing right now
+    /**
+     * This overload does nothing right now
+     * TODO: Make this do something
+     */ 
     public void dragNewBuilding (int buildingNum, Vector3 cursor){
 		buildingMode = true;
         target = PrefabManager.prefabManager.resourceBuildings[buildingNum];
 	}
+
 	/**
 	 * 1. check building cost
 	 * 2. see if user has enough resource to cover the cost
@@ -61,13 +74,17 @@ public class BuildingManager : Manager {
 		return false;
 	}
 
-	// places a building on the currently selected tile
+	/**
+     * Places a building on the currently selected tile
+     */
 	public void PlaceBuilding(Building prefab) {
 
 		PlaceBuilding (prefab, selectedTile);
 	}
 	
-	// places a building on the given tile
+	/**
+     * Places a building on the given tile
+     */
 	public void PlaceBuilding (Building prefab, Tile tile) {
 
 		if (tile == null) {
@@ -76,18 +93,27 @@ public class BuildingManager : Manager {
 
 		Building newBuilding = tile.PlaceBuilding (prefab);
         newBuilding.created = true;
+        
+        // Sets the new building's parent to our convenience object
+        newBuilding.transform.SetParent(buildings.transform);
 
 		// TODO this feels pretty iffy
 		if (!SaveState.state.resourceBuildings.ContainsKey (tile.index)) {
 			SaveState.state.resourceBuildings.Add (tile.index, newBuilding);
 		}
 	}
+
+    /**
+     * TODO: Give description
+     */
 	private bool isTileTaken(Tuple t){
 		return SaveState.state.resourceBuildings.ContainsKey (t);
 
 	}
 
-	//rough estimate of distance because sqrt takes a lot of computation
+	/**
+     * Rough estimate of distance because sqrt takes a lot of computation
+     */
 	private float getDistance(float x1, float y1, float x2, float y2){
 		return (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2);
 	}
@@ -100,9 +126,10 @@ public class BuildingManager : Manager {
         return Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
     }
 	
-	// Update is called once per frame
+	/**
+     * Update is called once per frame
+     */
 	void Update () {
-		//if (buildingMode && Input.GetMouseButtonDown (0)) {
 		if (buildingMode) {
 			buildingMode = false;
 			if (!target) {
