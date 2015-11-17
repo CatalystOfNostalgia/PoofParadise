@@ -46,6 +46,7 @@ GameObject:
   - 114: {fileID: 11439822}
   - 114: {fileID: 11454060}
   - 114: {fileID: 11432182}
+  - 114: {fileID: 11401450}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -164,7 +165,6 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -234,7 +234,6 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -304,7 +303,6 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -374,7 +372,6 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -429,6 +426,17 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &11401450
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d04e4759a100fd04c8214ddb5730944c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11409304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -523,7 +531,16 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: buildingButtons.Array.data[0]
+      value: 
+      objectReference: {fileID: 11473262, guid: 16167914334e58149bd628dd2336389d,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: buildingPanel
+      value: 
+      objectReference: {fileID: 146586, guid: ee4ea3ec6ab07b64c9a5020ace78a21a, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 153708}

@@ -28,7 +28,7 @@ public class BuildingMenuManager : MonoBehaviour {
 	public void populateMenu(){
 		List<BuildingInfo> buildingList = BuildingInfoManager.Instance ().InfoDict.Values.ToList();
 
-		for (int i = 0; i<buildingList.Count; i++) {
+		for (int i = 0; i<buildingList.Count-1; i++) {
 			Button buildingButtonPrefab = findBuildingButton(buildingList[i].Name);
 			Button buttonGameobject = (Button)Instantiate(buildingButtons[i]);
 			buttonGameobject.transform.parent = this.transform;

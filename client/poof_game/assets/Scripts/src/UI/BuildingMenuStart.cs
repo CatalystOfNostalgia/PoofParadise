@@ -8,6 +8,7 @@ public class BuildingMenuStart : MonoBehaviour {
 	public BuildingMenu buildMenu;
 
 	public void activateBuildMenu(){
+		BuildingMenuManager.Instance ().populateMenu ();
 		buildMenu.Choice();
 	}
 }
