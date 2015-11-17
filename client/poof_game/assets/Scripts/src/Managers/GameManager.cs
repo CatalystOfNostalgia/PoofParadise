@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
+/**
+ * The GameManager script is responsible
+ * for managing the game state
+ */
 public class GameManager : Manager {
 
     public static GameManager gameManager;
@@ -19,6 +22,8 @@ public class GameManager : Manager {
     private List<GameObject> earthActive;
     private List<GameObject> airActive;
     private List<GameObject> poofActive;
+
+    private GameObject nest;
 
     /**
      * Converts GameManager to a singleton
@@ -59,12 +64,15 @@ public class GameManager : Manager {
         int airLeft = airTotal;
         int poofLeft = poofTotal;
 
+        nest = new GameObject();
+        nest.name = "Character Nest";
+
         // Fire loop
         if (fireActive.Count < fireTotal && fireLeft > 0)
         {
             for (int i = 0; i < fireTotal; i++)
             {
-                SpawnPoof(firePrefab, GetRandomSpawnPoint(), fireActive);
+                SpawnCharacter(firePrefab, GetRandomSpawnPoint(), fireActive);
                 fireLeft--;
             }
         }
@@ -74,7 +82,7 @@ public class GameManager : Manager {
         {
             for (int i = 0; i < waterTotal; i++)
             {
-                SpawnPoof(waterPrefab, GetRandomSpawnPoint(), waterActive);
+                SpawnCharacter(waterPrefab, GetRandomSpawnPoint(), waterActive);
                 waterLeft--;
             }
         }
@@ -84,7 +92,7 @@ public class GameManager : Manager {
         {
             for (int i = 0; i < earthTotal; i++)
             {
-                SpawnPoof(earthPrefab, GetRandomSpawnPoint(), earthActive);
+                SpawnCharacter(earthPrefab, GetRandomSpawnPoint(), earthActive);
                 earthLeft--;
             }
         }
@@ -94,7 +102,7 @@ public class GameManager : Manager {
         {
             for (int i = 0; i < airTotal; i++)
             {
-                SpawnPoof(airPrefab, GetRandomSpawnPoint(), airActive);
+                SpawnCharacter(airPrefab, GetRandomSpawnPoint(), airActive);
                 airLeft--;
             }
         }
@@ -111,15 +119,31 @@ public class GameManager : Manager {
     }
 
     /**
-     * Allows the caller to spawn a poof
+     * Allows the caller to spawn an elemari
      */
-    public void SpawnPoof(GameObject prefab, Tuple spawnPoint, List<GameObject> active)
+    public void SpawnCharacter(GameObject prefab, Tuple spawnPoint, List<GameObject> active)
     {
         Vector3 position = GetSpawnVector(spawnPoint);
         GameObject go = Instantiate(prefab, position, Quaternion.identity) as GameObject;
         active.Add(go);
         CharacterScript cs = go.GetComponent<CharacterScript>();
         cs.onTile = TileScript.grid.GetTile(spawnPoint);
+        go.GetComponent<MovementScript>().initializeCharacter();
+        go.transform.SetParent(nest.transform);
+    }
+    
+    /**
+     * Allows the caller to spawn a poof
+     */
+    public void SpawnPoof(GameObject prefab, Tuple spawnPoint, List<GameObject> active)
+    {
+		Vector3 position = GetSpawnVector(spawnPoint);
+		GameObject go = Instantiate(prefab, position, Quaternion.identity) as GameObject;
+		active.Add(go);
+		PoofScript ps = go.GetComponent<PoofScript>();
+		ps.onTile = TileScript.grid.GetTile(spawnPoint);
+		go.GetComponent<MovementScript>().initializePoof();
+        go.transform.SetParent(nest.transform);
     }
 
     /**

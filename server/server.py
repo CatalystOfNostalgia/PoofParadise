@@ -68,12 +68,20 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_response(400)
             data = {'message' : 'Need JSON in the body'}
             self.wfile.write(json.dumps(data))
+            print ('content type is wrong')
+            return
 
         else:
 
             length = int(self.headers['Content-Length'])
             response_json = self.rfile.read(length)
-            parsed_json = json.loads(response_json)
+
+            try:
+                parsed_json = json.loads(response_json)
+            except:
+                print('could not parse json')
+                data = {'error' : 'Could not parse JSON'}
+                return 
 
             # creating an account
             if re.match('/create', self.path):
@@ -205,6 +213,10 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
                 resource_buildings = queries.get_user_resource_buildings(user.user_id)
                 decorative_buildings = queries.get_user_decorative_buildings(user.user_id)
+                data['name'] = user.name
+                data['username'] = user.username
+                data['email'] = user.email
+                data['password'] = user.password
                 data['user_id'] = user.user_id
                 data['experience'] = user.experience
                 data['headquarters_level'] = user.headquarters_level
@@ -261,23 +273,28 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
         user_id = parsed_json['user_id']
 
         queries.save_user_info(parsed_json)
-        queries.save_building_info(resource_buildings, \
-                                   decorative_buildings, \
-                                   user_id\
-                                  )
+        error_building = queries.save_building_info(resource_buildings, \
+                                           decorative_buildings, \
+                                           user_id\
+                                          )
+        if error_building == None:
+            data = {'message' : 'Save successful!'} 
+            self.send_response(200)
+            print(parsed_json['username'] + ' saved')
+        else:
+            data = {"error" : 'cannot find building:' + \
+                              error_building['id']}
+            print('cannot find building' + error_building['id'])
 
-        data = {'message' : 'Save successful!'} 
-        self.send_response(200)
+        print(json.dumps(data));
         self.wfile.write(json.dumps(data))
-        print(parsed_json['username'] + ' saved')
-
 
 # starting the server
 print('http server is starting...')
-
-server_address = ('127.0.0.1', 8000)
+port_number = 51234
+server_address = ('127.0.0.1', port_number)
 httpd = HTTPServer(server_address, GraveHubHTTPRequestHandler)
-print('http server is running on 127.0.0.1:8000')
+print('http server is running on 127.0.0.1:{value}'.format(value=port_number))
 httpd.serve_forever()
 
 if __name__ == '__main__':

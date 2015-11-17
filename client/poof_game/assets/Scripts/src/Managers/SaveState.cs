@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using SimpleJSON;
 
 public class SaveState : Manager {
-
+            
 	// Allows the scene to access this object without searching for it
 	public static SaveState state;
 
@@ -53,6 +53,7 @@ public class SaveState : Manager {
 		// set the fields until we can load
 		state.fire = 0;
 		state.resourceBuildings = new Dictionary<Tuple, Building>();
+
 		fireEle = 2;
 		earthEle = 2;
 		waterEle = 2;
@@ -184,42 +185,11 @@ public class SaveState : Manager {
 			int x = building["position_x"].AsInt;
 			int y = building["position_y"].AsInt;
 
-			Building newBuilding;
-
-			switch (building["building_info_id"].AsInt) {
-
-				case 1:
-					newBuilding = BuildingManager.buildingManager.fireTreeLevel1;
-					break;
-				case 2:
-					newBuilding = BuildingManager.buildingManager.fireTreeLevel2;
-					break;
-				case 3:
-					newBuilding = BuildingManager.buildingManager.pondLevel1;
-					break;
-				case 4:
-					newBuilding = BuildingManager.buildingManager.pondLevel2;
-					break;
-				case 5:
-					newBuilding = BuildingManager.buildingManager.windmillLevel1;
-					break;
-				case 6:
-					newBuilding = BuildingManager.buildingManager.windmillLevel2;
-					break;
-				case 7:
-					newBuilding = BuildingManager.buildingManager.caveLevel1;
-					break;
-				case 8:
-					newBuilding = BuildingManager.buildingManager.caveLevel2;
-					break;
-				default:
-					newBuilding = null;
-					break;
-			}
+            // Retrieves a building from the resource buildings list
+			Building newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
 
 			resourceBuildings.Add(new Tuple(x, y), newBuilding);
 		}
 
 	}
-
 }

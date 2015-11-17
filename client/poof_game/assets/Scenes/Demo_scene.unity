@@ -456,5 +456,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eda51d4697c81c48b0ed579f5881965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 153708, guid: 7d9651eecf644ac43917542c866a9fb2, type: 2}
-  canvas: {fileID: 22329532, guid: c9427d092eb1a404caf8806452b7cd71, type: 2}

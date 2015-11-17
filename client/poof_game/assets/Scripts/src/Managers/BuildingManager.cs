@@ -1,35 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
 
+/**
+ * Handles all building operations
+ */
 public class BuildingManager : Manager {
 
-	/**
-	 * just dragging gameobjects to here for now
-	 * maybe we can just search them later?
-	 */
-	public Building windmillLevel1;
-	public Building windmillLevel2;
-	public Building pondLevel1;
-	public Building pondLevel2;
-	public Building fireTreeLevel1;
-	public Building fireTreeLevel2;
-	public Building caveLevel1;
-	public Building caveLevel2;
-
+    // The target building
 	private Building target;
 
-	// the tile the mouse is currently one
+	// The tile the mouse is currently one
 	public Tile selectedTile { get; set; }
 
-	//the dictionary containing all the different types of buildings that can be made
+	// The dictionary containing all the different types of buildings that can be made
 	Dictionary <string, Building> buildingTypeDict;
 	Dictionary<Tuple, Building> existingBuildingDict;
 
-	//the dictionary containing buildings on the grid
+	// The dictionary containing buildings on the grid
 	public static BuildingManager buildingManager;
 
+    // Does a thing
 	public bool buildingMode;
+
+    // A convenience object for holding all instantiated buildings
+    private GameObject buildings;
 
     /**
      * Initializes BuildingManager as a singleton
@@ -49,33 +43,22 @@ public class BuildingManager : Manager {
             Destroy(gameObject);
         }
 
+        buildings = new GameObject();
+        buildings.name = "Buildings";
         buildingTypeDict = new Dictionary<string, Building>();
-        buildingTypeDict.Add("fire", fireTreeLevel1);
         existingBuildingDict = new Dictionary<Tuple, Building>();
 
     }
 
-    //this overload does nothing right now
+    /**
+     * This overload does nothing right now
+     * TODO: Make this do something
+     */ 
     public void dragNewBuilding (int buildingNum, Vector3 cursor){
 		buildingMode = true;
-		switch (buildingNum) {
-		case 1:
-			target = fireTreeLevel1;
-			break;
-		case 2:
-			target = pondLevel1;
-			break;
-		case 3:
-			target = caveLevel1;
-			break;
-		case 4:
-			target = windmillLevel1;
-			break;
-		default:
-			target = windmillLevel1;
-			break;
-		}
+        target = PrefabManager.prefabManager.resourceBuildings[buildingNum];
 	}
+
 	/**
 	 * 1. check building cost
 	 * 2. see if user has enough resource to cover the cost
@@ -84,65 +67,69 @@ public class BuildingManager : Manager {
 	 */
 	public void makeNewBuilding (int buttonNum){
 		buildingMode = true;
-		switch (buttonNum) {
-		case 1:
-			target = fireTreeLevel1;
-			break;
-		case 2:
-			target = pondLevel1;
-			break;
-		case 3:
-			target = caveLevel1;
-			break;
-		case 4:
-			target = windmillLevel1;
-			break;
-		default:
-			target = windmillLevel1;
-			break;
-		}
-	}
-	void deleteBuilding(){
+        target = PrefabManager.prefabManager.resourceBuildings[buttonNum];
 	}
 
 	public bool isOccupied (){
 		return false;
 	}
-	// places a building on the currently selected tile
+
+	/**
+     * Places a building on the currently selected tile
+     */
 	public void PlaceBuilding(Building prefab) {
 
 		PlaceBuilding (prefab, selectedTile);
 	}
 	
-	// places a building on the given tile
+	/**
+     * Places a building on the given tile
+     */
 	public void PlaceBuilding (Building prefab, Tile tile) {
 
+		if (tile == null) {
+			Debug.Log ("tile is null");
+		}
+
 		Building newBuilding = tile.PlaceBuilding (prefab);
+        newBuilding.created = true;
+        
+        // Sets the new building's parent to our convenience object
+        newBuilding.transform.SetParent(buildings.transform);
 
 		// TODO this feels pretty iffy
 		if (!SaveState.state.resourceBuildings.ContainsKey (tile.index)) {
 			SaveState.state.resourceBuildings.Add (tile.index, newBuilding);
 		}
 	}
+
+    /**
+     * TODO: Give description
+     */
 	private bool isTileTaken(Tuple t){
 		return SaveState.state.resourceBuildings.ContainsKey (t);
 
 	}
 
-	//rough estimate of distance because sqrt takes a lot of computation
+	/**
+     * Rough estimate of distance because sqrt takes a lot of computation
+     */
 	private float getDistance(float x1, float y1, float x2, float y2){
 		return (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2);
 	}
 
-    //helper method to get mouse position
+    /**
+     * Helper method to get mouse position
+     */
     private Vector3 getCurrentMousePosition()
     {
         return Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
     }
 	
-	// Update is called once per frame
+	/**
+     * Update is called once per frame
+     */
 	void Update () {
-		//if (buildingMode && Input.GetMouseButtonDown (0)) {
 		if (buildingMode) {
 			buildingMode = false;
 			if (!target) {

@@ -1,0 +1,220 @@
+fileFormatVersion: 2
+guid: 6df9e0f30f68a9940ac21b21bdfe1897
+timeCreated: 1447027854
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Waterfall_256x256sprite_24fps_0
+    21300002: Waterfall_256x256sprite_24fps_1
+    21300004: Waterfall_256x256sprite_24fps_2
+    21300006: Waterfall_256x256sprite_24fps_3
+    21300008: Waterfall_256x256sprite_24fps_4
+    21300010: Waterfall_256x256sprite_24fps_5
+    21300012: Waterfall_256x256sprite_24fps_6
+    21300014: Waterfall_256x256sprite_24fps_7
+    21300016: Waterfall_256x256sprite_24fps_8
+    21300018: Waterfall_256x256sprite_24fps_9
+    21300020: Waterfall_256x256sprite_24fps_10
+    21300022: Waterfall_256x256sprite_24fps_11
+    21300024: Waterfall_256x256sprite_24fps_12
+    21300026: Waterfall_256x256sprite_24fps_13
+    21300028: Waterfall_256x256sprite_24fps_14
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 8192
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Waterfall_256x256sprite_24fps_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Waterfall_256x256sprite_24fps_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 768
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Waterfall_256x256sprite_24fps_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Waterfall_256x256sprite_24fps_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Waterfall_256x256sprite_24fps_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Waterfall_256x256sprite_24fps_5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 512
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Waterfall_256x256sprite_24fps_6
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Waterfall_256x256sprite_24fps_7
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 512
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Waterfall_256x256sprite_24fps_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Waterfall_256x256sprite_24fps_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Waterfall_256x256sprite_24fps_10
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Waterfall_256x256sprite_24fps_11
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 256
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Waterfall_256x256sprite_24fps_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Waterfall_256x256sprite_24fps_13
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Waterfall_256x256sprite_24fps_14
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .529999971, y: .289999992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
