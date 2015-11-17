@@ -47,6 +47,7 @@ GameObject:
   - 114: {fileID: 11454060}
   - 114: {fileID: 11432182}
   - 114: {fileID: 11481954}
+  - 114: {fileID: 11401450}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Grid
@@ -428,7 +429,7 @@ AudioSource:
     m_PostInfinity: 2
 --- !u!114 &11401450
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153708}
