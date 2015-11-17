@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
-public class DisplayManager : MonoBehaviour {
+public class DisplayManager : Manager {
 	
 	public Text displayText;
 	public float displayTime;
@@ -11,16 +12,22 @@ public class DisplayManager : MonoBehaviour {
 	private IEnumerator fadeAlpha;
 	
 	private static DisplayManager displayManager;
-	
-	public static DisplayManager Instance () {
-		if (!displayManager) {
-			displayManager = FindObjectOfType(typeof (DisplayManager)) as DisplayManager;
-			if (!displayManager)
-				Debug.LogError ("There needs to be one active DisplayManager script on a GameObject in your scene.");
-		}
-		
-		return displayManager;
-	}
+
+    /**
+     * Initializes manager
+     */
+    public override void Start()
+    {
+        if (displayManager == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            displayManager = this;
+        }
+        else if (displayManager != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 	
 	public void DisplayMessage (string message) {
 		displayText.text = message;

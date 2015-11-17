@@ -291,10 +291,10 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
 # starting the server
 print('http server is starting...')
-
-server_address = ('127.0.0.1', 8000)
+port_number = 51234
+server_address = ('127.0.0.1', port_number)
 httpd = HTTPServer(server_address, GraveHubHTTPRequestHandler)
-print('http server is running on 127.0.0.1:8000')
+print('http server is running on 127.0.0.1:{value}'.format(value=port_number))
 httpd.serve_forever()
 
 if __name__ == '__main__':
