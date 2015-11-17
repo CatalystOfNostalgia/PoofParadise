@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
 public class CanvasStart : MonoBehaviour {
 
@@ -7,7 +7,15 @@ public class CanvasStart : MonoBehaviour {
      * Use to initialize all static singleton children
      */
 	void Start () {
-        GameObject modelPanel = this.transform.FindChild("Model Panel").gameObject;
+
+        BuildUI();
+
+		Button jsonButton = this.transform.FindChild ("Test Panel(Clone)/Test JSON").gameObject.GetComponent<Button>();
+
+		jsonButton.onClick.RemoveAllListeners ();
+		jsonButton.onClick.AddListener (() => SaveState.state.PullFromServer()); 
+
+        GameObject modelPanel = this.transform.FindChild("Model Panel(Clone)").gameObject;
 
         if (ModelPanel.modelPanel == null)
         {
@@ -19,7 +27,32 @@ public class CanvasStart : MonoBehaviour {
         {
             Destroy(this);
         }
-	}
+
+        GameObject settingsMenu = this.transform.FindChild("Settings Panel(Clone)").gameObject;
+
+        if (SettingsMenu.menu == null)
+        {
+            DontDestroyOnLoad(modelPanel);
+            SettingsMenu.menu = settingsMenu.GetComponent<SettingsMenu>();
+        }
+
+        else if (SettingsMenu.menu != settingsMenu)
+        {
+            Destroy(this);
+        }
+    }
+
+    /**
+     * Generates the UI from prefab panels
+     */
+    private void BuildUI()
+    {
+        foreach (CanvasRenderer cr in PrefabManager.prefabManager.panels)
+        {
+            CanvasRenderer temp = Instantiate(cr, cr.transform.position, Quaternion.identity) as CanvasRenderer;
+            temp.transform.SetParent(this.transform, false);
+        }
+    }
 
     /**
      * A sad attempt at making a singleton function

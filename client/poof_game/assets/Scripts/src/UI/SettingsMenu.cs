@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
-using UnityEngine.Events;
+﻿using UnityEngine.UI;
+
 /**
  * Let's add a settings menu. It will be used to control music mainly.
  * This menu should
@@ -9,57 +7,51 @@ using UnityEngine.Events;
  * 2) Set a single/not play other songs
  * 3) Adjust the volume ratio between sound effects and music.
  */
-public class SettingsMenu : MonoBehaviour {
+public class SettingsMenu : GamePanel {
 
-	public Button playButtonAir;
-	public Button playButtonEarth;
-	public Button playButtonFire;
-	public Button playButtonWater;
-    public Button nextSong;
+    // A static reference to this object
+    public static SettingsMenu menu;
 
-    public Slider masterVolumeSlider;
-    public Slider musicVolumeSlider;
-    public Slider soundVolumeSlider;
+    private Button[] buttons;
+    private Slider[] sliders;
 
 	public Button exit;
 
     /**
-     * Adds functionality to all of the buttons on the panel
+     * Generates references based on children
      */
-	public void generatePanel(){
-		this.gameObject.SetActive (true);
-		AudioSource[] music = SoundManager.soundManager.playlist;
-
-		playButtonAir.onClick.RemoveAllListeners ();
-		playButtonAir.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonAir.name));
-
-		playButtonEarth.onClick.RemoveAllListeners ();
-		playButtonEarth.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonEarth.name));
-
-		playButtonFire.onClick.RemoveAllListeners ();
-		playButtonFire.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonFire.name));
-
-		playButtonWater.onClick.RemoveAllListeners ();
-		playButtonWater.onClick.AddListener (() => SoundManager.soundManager.playSong(playButtonWater.name));
-
-		exit.onClick.RemoveAllListeners ();
-		exit.onClick.AddListener (ClosePanel);
-
-        nextSong.onClick.RemoveAllListeners();
-        nextSong.onClick.AddListener(() => SoundManager.soundManager.nextSong());
-
-        // It would probably be easier to just write a function for the slider, but...
-        masterVolumeSlider.onValueChanged.RemoveAllListeners();
-        masterVolumeSlider.onValueChanged.AddListener(delegate { SoundManager.soundManager.masterVolume = masterVolumeSlider.value; });
-
-        musicVolumeSlider.onValueChanged.RemoveAllListeners();
-        musicVolumeSlider.onValueChanged.AddListener(delegate { SoundManager.soundManager.musicVolume = musicVolumeSlider.value; });
-
-        soundVolumeSlider.onValueChanged.RemoveAllListeners();
-        soundVolumeSlider.onValueChanged.AddListener(delegate { SoundManager.soundManager.soundVolume = soundVolumeSlider.value; });
+    override public void Start()
+    {
+        buttons = RetrieveButtonList("Dialogue Panel/Buttons");
+        sliders = RetrieveSliderList("Dialogue Panel/Sliders");
+        GeneratePanel();
     }
 
-    void ClosePanel(){
-        this.gameObject.SetActive(false);
-	}
+    /**
+     * Adds functionality to all of the buttons on the panel
+     */
+	override public void GeneratePanel(){
+
+        // Locates the button and gives it a function
+        // TODO: Change this function such that a search is not needed but rather that songs can be call based on button names
+        FindAndModifyUIElement("Air Theme", buttons, () => SoundManager.soundManager.playSong("Air Theme"));
+
+        FindAndModifyUIElement("Earth Theme", buttons, () => SoundManager.soundManager.playSong("Earth Theme"));
+
+        FindAndModifyUIElement("Fire Theme", buttons, () => SoundManager.soundManager.playSong("Fire Theme"));
+
+        FindAndModifyUIElement("Water Theme", buttons, () => SoundManager.soundManager.playSong("Water Theme"));
+
+        FindAndModifyUIElement("Exit Button", buttons, TogglePanel);
+
+        FindAndModifyUIElement("Next Song", buttons, () => SoundManager.soundManager.nextSong());
+
+        FindAndModifyUIElement("Master Volume Slider", sliders, delegate { SoundManager.soundManager.masterVolume = sliders[FindUIElement("Master Volume Slider", sliders)].value; });
+
+        FindAndModifyUIElement("Music Volume Slider", sliders, delegate { SoundManager.soundManager.musicVolume = sliders[FindUIElement("Music Volume Slider", sliders)].value; });
+
+        FindAndModifyUIElement("Sound Volume Slider", sliders, delegate { SoundManager.soundManager.soundVolume = sliders[FindUIElement("Sound Volume Slider", sliders)].value; });
+    }
+
+
 }

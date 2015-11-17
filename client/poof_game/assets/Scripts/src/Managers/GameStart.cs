@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
 
 public class GameStart : MonoBehaviour {
 
-    public GameObject manager;
-    public Canvas canvas;
+    public Manager manager { get; set; }
 
     private Manager[] managers;
 
@@ -14,9 +11,9 @@ public class GameStart : MonoBehaviour {
      * Adds all essential game objects to scene
      */
     void Awake () {
-        // Instantiates managers object along with the game canvas
+        // Instantiates managers object
+        manager = (Manager)Resources.Load("Prefabs/Managers/Managers", typeof(Manager));
         Instantiate(manager, new Vector3(0, 0, 15), Quaternion.identity);
-        Instantiate(canvas, new Vector3(0, 0, 0), Quaternion.identity);
 
         // Renders scene ones managers become active
         StartCoroutine("RenderScene");
@@ -38,11 +35,15 @@ public class GameStart : MonoBehaviour {
             yield return null;
         }
 
+        // Build canvas
+        Instantiate(PrefabManager.prefabManager.canvas, new Vector3(0, 0, 0), Quaternion.identity);
+
         // build and populate the game grid
         TileScript.grid.BuildGameGrid();
 
         // Generate all poofs/elemari
         GameManager.gameManager.SpawnPoofs();
+		Debug.Log ("scene is ready");
     }
 
     /**
@@ -67,12 +68,13 @@ public class GameStart : MonoBehaviour {
      */
     private void BuildManagersList()
     {
-        managers = new Manager[5];
+        managers = new Manager[6];
         managers[0] = GameManager.gameManager;
         managers[1] = SaveState.state;
         managers[2] = TileScript.grid;
         managers[3] = BuildingManager.buildingManager;
         managers[4] = SoundManager.soundManager;
+        managers[5] = PrefabManager.prefabManager;
     }
 
     /**
@@ -80,7 +82,13 @@ public class GameStart : MonoBehaviour {
      */
     public void TestJSON()
     {
-        SaveState.state.PullFromServer ();
+
+		SaveState.state.PullFromServer ();
         TileScript.grid.PopulateGameGrid ();
+
+		//testing saving game
+		SaveState.state.PushToServer ();
+
+
     }
 }
