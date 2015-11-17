@@ -3,18 +3,21 @@ using System.Collections;
 
 public class GameStart : MonoBehaviour {
 
-    public TileScript grid;
-    public GameManager gManager;
-    public SaveState saveState;
-    public BuildingManager bManager;
+    public Manager manager { get; set; }
 
-    // Adds all essential game objects to scene
+    private Manager[] managers;
+
+    /**
+     * Adds all essential game objects to scene
+     */
     void Awake () {
-        Instantiate(grid, new Vector3(0, 0, 15), Quaternion.identity);
-        Instantiate(gManager, new Vector3(0, 0, 0), Quaternion.identity);
-        Instantiate(bManager, new Vector3 (0, 1, 0), Quaternion.identity);
-        Instantiate(saveState, new Vector3(0, 2, 0), Quaternion.identity);
+        // Instantiates managers object
+        manager = (Manager)Resources.Load("Prefabs/Managers/Managers", typeof(Manager));
+        Instantiate(manager, new Vector3(0, 0, 15), Quaternion.identity);
+
+        // Renders scene ones managers become active
         StartCoroutine("RenderScene");
+
         // Be careful! Anything after this coroutine will run 
         // before coroutine finishes
     }
@@ -32,11 +35,15 @@ public class GameStart : MonoBehaviour {
             yield return null;
         }
 
-        // build and populate the game grid
+        // Build canvas
+        Instantiate(PrefabManager.prefabManager.canvas, new Vector3(0, 0, 0), Quaternion.identity);
 
-        TileScript.grid.BuildGameGrid ();
+        // build and populate the game grid
+        TileScript.grid.BuildGameGrid();
+
+        // Generate all poofs/elemari
         GameManager.gameManager.SpawnPoofs();
-       
+		Debug.Log ("scene is ready");
     }
 
     /**
@@ -45,16 +52,43 @@ public class GameStart : MonoBehaviour {
      */
     private bool SceneIsReady()
     {
-        if (GameManager.gameManager == null || SaveState.state == null || TileScript.grid == null || BuildingManager.manager == null)
+        BuildManagersList();
+        foreach (Manager manager in managers)
         {
-            return false;
+            if (manager == null)
+            {
+                return false;
+            }
         }
         return true;
     }
 
+    /**
+     * Builds a list of managers for testing
+     */
+    private void BuildManagersList()
+    {
+        managers = new Manager[6];
+        managers[0] = GameManager.gameManager;
+        managers[1] = SaveState.state;
+        managers[2] = TileScript.grid;
+        managers[3] = BuildingManager.buildingManager;
+        managers[4] = SoundManager.soundManager;
+        managers[5] = PrefabManager.prefabManager;
+    }
+
+    /**
+     * Runs a pull from server and populates the grid
+     */
     public void TestJSON()
     {
-        SaveState.state.PullFromServer ();
+
+		SaveState.state.PullFromServer ();
         TileScript.grid.PopulateGameGrid ();
+
+		//testing saving game
+		SaveState.state.PushToServer ();
+
+
     }
 }

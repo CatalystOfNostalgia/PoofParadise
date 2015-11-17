@@ -5,7 +5,7 @@ using System.Collections;
  * such as where they are, their type, and information for how they
  * can move */
 
-public class CharacterScript : MonoBehaviour {
+public class CharacterScript : NPC {
 
     // Enum to identify type
 	public enum Element {Fire, Water, Wind, Earth};
@@ -15,7 +15,7 @@ public class CharacterScript : MonoBehaviour {
 	
 	// References to the movement based scripts for the character
 	private MovementScript ms;
-	private PassiveMoverPoofs ps;
+	private PassiveMoverCharacters pc;
 	
 	// Tile that the poof is currently standing on
 	public Tile onTile { get; set;}
@@ -25,22 +25,22 @@ public class CharacterScript : MonoBehaviour {
      */
 	void Start() {
 		ms = this.GetComponent<MovementScript>();
-		ps = this.GetComponent<PassiveMoverPoofs>();
-        onTile = TileScript.grid.tiles[(int)Random.Range(0, TileScript.grid.tiles.Length - 1)];
+		pc = this.GetComponent<PassiveMoverCharacters>();
 	}
 	
     /**
      * Changes the game state after every frame
      */
 	void Update() {
-		if (!ms.getMoving()) {
+		if (!ms.getMoving() && ms.isQueueEmpty()) {
 			if (!IsInvoking()) {
-				Invoke("startMovement", 3f);
+				Invoke("startMovement", 2f);
+
 			}
 		}
 	}
 	
 	void startMovement() {
-		ms.receivePassiveInputs(ps.getNewTile());
+		ms.receivePassiveInputs(pc.getNewTile());
 	}
 }

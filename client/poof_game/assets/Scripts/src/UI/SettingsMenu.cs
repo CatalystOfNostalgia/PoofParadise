@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
-using UnityEngine.Events;
+﻿using UnityEngine.UI;
+
 /**
  * Let's add a settings menu. It will be used to control music mainly.
  * This menu should
@@ -9,46 +7,51 @@ using UnityEngine.Events;
  * 2) Set a single/not play other songs
  * 3) Adjust the volume ratio between sound effects and music.
  */
-public class SettingsMenu : MonoBehaviour {
+public class SettingsMenu : GamePanel {
 
-	public Button playButtonAir;
-	public Button playButtonEarth;
-	public Button playButtonFire;
-	public Button playButtonWater;
+    // A static reference to this object
+    public static SettingsMenu menu;
+
+    private Button[] buttons;
+    private Slider[] sliders;
 
 	public Button exit;
-	public GameObject settingsPanel;
-	public SoundManager soundManager;
 
-	/**
-	 * 1. get a reference to the Sound Manager and the songs
-	 */
-	// Use this for initialization
-	void Start () {
-	}
+    /**
+     * Generates references based on children
+     */
+    override public void Start()
+    {
+        buttons = RetrieveButtonList("Dialogue Panel/Buttons");
+        sliders = RetrieveSliderList("Dialogue Panel/Sliders");
+        GeneratePanel();
+    }
 
-	public void generatePanel(){
-		settingsPanel.SetActive (true);
-		AudioSource[] music = soundManager.playlist;
-		//idk why loop approach doesn't work. it only plays water theme
-//		foreach (Button button in playButtons) {
-//			button.onClick.RemoveAllListeners();
-//			button.onClick.AddListener (() => soundManager.playSong(button.name));
-//			Debug.Log("SettingsMenu: added " + button.name + "'s action listener");
-//		}
-		playButtonAir.onClick.RemoveAllListeners ();
-		playButtonAir.onClick.AddListener (() => soundManager.playSong(playButtonAir.name));
-		playButtonEarth.onClick.RemoveAllListeners ();
-		playButtonEarth.onClick.AddListener (() => soundManager.playSong(playButtonEarth.name));
-		playButtonFire.onClick.RemoveAllListeners ();
-		playButtonFire.onClick.AddListener (() => soundManager.playSong(playButtonFire.name));
-		playButtonWater.onClick.RemoveAllListeners ();
-		playButtonWater.onClick.AddListener (() => soundManager.playSong(playButtonWater.name));
-		exit.onClick.RemoveAllListeners ();
-		exit.onClick.AddListener (ClosePanel);
-	}
+    /**
+     * Adds functionality to all of the buttons on the panel
+     */
+	override public void GeneratePanel(){
 
-	void ClosePanel(){
-		settingsPanel.SetActive(false);
-	}
+        // Locates the button and gives it a function
+        // TODO: Change this function such that a search is not needed but rather that songs can be call based on button names
+        FindAndModifyUIElement("Air Theme", buttons, () => SoundManager.soundManager.playSong("Air Theme"));
+
+        FindAndModifyUIElement("Earth Theme", buttons, () => SoundManager.soundManager.playSong("Earth Theme"));
+
+        FindAndModifyUIElement("Fire Theme", buttons, () => SoundManager.soundManager.playSong("Fire Theme"));
+
+        FindAndModifyUIElement("Water Theme", buttons, () => SoundManager.soundManager.playSong("Water Theme"));
+
+        FindAndModifyUIElement("Exit Button", buttons, TogglePanel);
+
+        FindAndModifyUIElement("Next Song", buttons, () => SoundManager.soundManager.nextSong());
+
+        FindAndModifyUIElement("Master Volume Slider", sliders, delegate { SoundManager.soundManager.masterVolume = sliders[FindUIElement("Master Volume Slider", sliders)].value; });
+
+        FindAndModifyUIElement("Music Volume Slider", sliders, delegate { SoundManager.soundManager.musicVolume = sliders[FindUIElement("Music Volume Slider", sliders)].value; });
+
+        FindAndModifyUIElement("Sound Volume Slider", sliders, delegate { SoundManager.soundManager.soundVolume = sliders[FindUIElement("Sound Volume Slider", sliders)].value; });
+    }
+
+
 }

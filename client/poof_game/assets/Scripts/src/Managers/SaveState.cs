@@ -5,8 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
-public class SaveState : MonoBehaviour {
-
+public class SaveState : Manager {
+            
 	// Allows the scene to access this object without searching for it
 	public static SaveState state;
 
@@ -41,7 +41,7 @@ public class SaveState : MonoBehaviour {
 	/**
 	 * Produces a singleton on awake
 	 */
-	public void Awake() {
+	override public void Start() {
 		
 		if (state == null) {
 			DontDestroyOnLoad(gameObject);
@@ -53,10 +53,11 @@ public class SaveState : MonoBehaviour {
 		// set the fields until we can load
 		state.fire = 0;
 		state.resourceBuildings = new Dictionary<Tuple, Building>();
-		fireEle = 1;
-		earthEle = 1;
-		waterEle = 1;
-		airEle = 1;
+
+		fireEle = 2;
+		earthEle = 2;
+		waterEle = 2;
+		airEle = 2;
 		poofCount = 3;
 		
 	}
@@ -184,42 +185,11 @@ public class SaveState : MonoBehaviour {
 			int x = building["position_x"].AsInt;
 			int y = building["position_y"].AsInt;
 
-			Building newBuilding;
-
-			switch (building["building_info_id"].AsInt) {
-
-				case 1:
-					newBuilding = BuildingManager.manager.fireTreeLevel1;
-					break;
-				case 2:
-					newBuilding = BuildingManager.manager.fireTreeLevel2;
-					break;
-				case 3:
-					newBuilding = BuildingManager.manager.pondLevel1;
-					break;
-				case 4:
-					newBuilding = BuildingManager.manager.pondLevel2;
-					break;
-				case 5:
-					newBuilding = BuildingManager.manager.windmillLevel1;
-					break;
-				case 6:
-					newBuilding = BuildingManager.manager.windmillLevel2;
-					break;
-				case 7:
-					newBuilding = BuildingManager.manager.caveLevel1;
-					break;
-				case 8:
-					newBuilding = BuildingManager.manager.caveLevel2;
-					break;
-				default:
-					newBuilding = null;
-					break;
-			}
+            // Retrieves a building from the resource buildings list
+			Building newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
 
 			resourceBuildings.Add(new Tuple(x, y), newBuilding);
 		}
 
 	}
-
 }

@@ -7,6 +7,8 @@ name_pool = ['Ted', 'Margaret', 'Eric', 'Anthony', 'Jeremy', 'Anjana', \
 
 used_positions = [[False for x in range(25)] for x in range(25)]
 
+building_id = 0;
+
 def free_spot(x, y):
     if not used_positions[x][y] and \
        not used_positions[x - 1][y] \
@@ -47,7 +49,6 @@ def sample_insert_building(name):
     position_x = random.randrange(1, 24, 1)
     position_y = random.randrange(1, 24, 1)
     while (not free_spot(position_x, position_y)):
-        print("x: " + str(position_x) + "y: " + str(position_y))
         position_x = random.randrange(1, 24, 1)
         position_y = random.randrange(1, 24, 1)
 
@@ -83,12 +84,11 @@ def sample_select_email(name):
 
 def sample_select_buildings(name):
     user_id = models.session.query(models.User).filter(models.User.name==name).one().user_id
-    selected = models.session.query(models.UserResourceBuilding).filter(models.UserDecorativeBuilding.user_id==user_id).all()
+    selected = models.session.query(models.UserResourceBuilding).filter(models.UserResourceBuilding.user_id==user_id).all()
     for building in selected:
         print (name + ' has a building with info_id ' + \
                str(building.building_info_id) + \
-               ' and with level: ' + \
-               str(building.level))
+               ' and with id: ' + str(building.id))
     
 def sample_remove(name):
     selected = models.session.query(models.User).filter(models.User.name==name).one()
@@ -101,8 +101,13 @@ def exists(name):
         return False
     else:
         return True
+def select_buildings():
+    selected = models.session.query(models.UserResourceBuilding).all()
+    for building in selected:
+        print(str(building.id))
 
 sample_insert_group()
 sample_select_group()
 sample_insert_building_group()
 sample_select_buildings_group()
+# select_buildings()

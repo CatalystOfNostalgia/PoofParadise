@@ -6,7 +6,7 @@ using System.Collections.Generic;
  * game grid from which all other game functions are derived
  */
 
-public class TileScript : MonoBehaviour {
+public class TileScript : Manager {
 
     // Singleton variable so that only one grid variable is active per scene
     public static TileScript grid;
@@ -17,13 +17,12 @@ public class TileScript : MonoBehaviour {
 	// Public fields
 	public int gridX;
 	public int gridY;
-    public Tile[] prefabs;
 	
     /**
      * Initializes the list of tiles
      * Generates the game grid
      */
-	void Start() {
+	override public void Start() {
 		
         if (grid == null)
         {
@@ -44,7 +43,7 @@ public class TileScript : MonoBehaviour {
      */
     public void BuildGameGrid()
     {
-        GenerateTiles(prefabs, transform.position, gridY, gridX);
+        GenerateTiles(PrefabManager.prefabManager.tiles, transform.position, gridY, gridX);
         GiveNeighbors();
     }
 
@@ -55,7 +54,8 @@ public class TileScript : MonoBehaviour {
 	{
 		foreach (KeyValuePair<Tuple, Building> entry in SaveState.state.resourceBuildings) 
 		{
-			BuildingManager.manager.PlaceBuilding(entry.Value, GetTile (entry.Key));
+
+			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));
 		}
 	}
 
@@ -64,15 +64,19 @@ public class TileScript : MonoBehaviour {
      */
     private void GenerateTiles(Tile[] tile, Vector3 orig, int width, int height)
     {
-        int tilesGenerated = 0;
+        // Create a grid object to attach all of the tiles
+        GameObject grid = new GameObject();
+        grid.name = "Grid";
+
         // Builds the tile grid
+        int tilesGenerated = 0;
         for (int i = 0; i < gridY; i++)
         {
             for (int j = 0; j < gridX; j++)
             {
                 Vector3 location = orig + new Vector3(0.55f*(i + j - 5), .32f*(j - i), -2);
                 Tile myTile = Instantiate(tile[(i + j) % tile.Length], location, Quaternion.identity) as Tile;
-                myTile.transform.parent = this.transform; // Make tile a child of the grid
+                myTile.transform.parent = grid.transform; // Make tile a child of the grid object
                 myTile.index = new Tuple(i, j);
                 myTile.id = tilesGenerated;
 				myTile.isVacant = true;

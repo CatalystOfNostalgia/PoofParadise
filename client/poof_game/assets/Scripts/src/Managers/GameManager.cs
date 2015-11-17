@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour {
+/**
+ * The GameManager script is responsible
+ * for managing the game state
+ */
+public class GameManager : Manager {
 
     public static GameManager gameManager;
 
@@ -20,7 +23,13 @@ public class GameManager : MonoBehaviour {
     private List<GameObject> airActive;
     private List<GameObject> poofActive;
 
-    void Start()
+    private GameObject nest;
+
+    /**
+     * Converts GameManager to a singleton
+     * Initializes poof/elemari lists
+     */
+    override public void Start()
     {
         if (gameManager == null)
         {
@@ -55,12 +64,15 @@ public class GameManager : MonoBehaviour {
         int airLeft = airTotal;
         int poofLeft = poofTotal;
 
+        nest = new GameObject();
+        nest.name = "Character Nest";
+
         // Fire loop
         if (fireActive.Count < fireTotal && fireLeft > 0)
         {
             for (int i = 0; i < fireTotal; i++)
             {
-                SpawnPoof(firePrefab, GetRandomSpawnPoint(), fireActive);
+                SpawnCharacter(firePrefab, GetRandomSpawnPoint(), fireActive);
                 fireLeft--;
             }
         }
@@ -70,7 +82,7 @@ public class GameManager : MonoBehaviour {
         {
             for (int i = 0; i < waterTotal; i++)
             {
-                SpawnPoof(waterPrefab, GetRandomSpawnPoint(), waterActive);
+                SpawnCharacter(waterPrefab, GetRandomSpawnPoint(), waterActive);
                 waterLeft--;
             }
         }
@@ -80,7 +92,7 @@ public class GameManager : MonoBehaviour {
         {
             for (int i = 0; i < earthTotal; i++)
             {
-                SpawnPoof(earthPrefab, GetRandomSpawnPoint(), earthActive);
+                SpawnCharacter(earthPrefab, GetRandomSpawnPoint(), earthActive);
                 earthLeft--;
             }
         }
@@ -90,7 +102,7 @@ public class GameManager : MonoBehaviour {
         {
             for (int i = 0; i < airTotal; i++)
             {
-                SpawnPoof(airPrefab, GetRandomSpawnPoint(), airActive);
+                SpawnCharacter(airPrefab, GetRandomSpawnPoint(), airActive);
                 airLeft--;
             }
         }
@@ -107,15 +119,31 @@ public class GameManager : MonoBehaviour {
     }
 
     /**
-     * Allows the caller to spawn a poof
+     * Allows the caller to spawn an elemari
      */
-    public void SpawnPoof(GameObject prefab, Tuple spawnPoint, List<GameObject> active)
+    public void SpawnCharacter(GameObject prefab, Tuple spawnPoint, List<GameObject> active)
     {
         Vector3 position = GetSpawnVector(spawnPoint);
         GameObject go = Instantiate(prefab, position, Quaternion.identity) as GameObject;
         active.Add(go);
         CharacterScript cs = go.GetComponent<CharacterScript>();
         cs.onTile = TileScript.grid.GetTile(spawnPoint);
+        go.GetComponent<MovementScript>().initializeCharacter();
+        go.transform.SetParent(nest.transform);
+    }
+    
+    /**
+     * Allows the caller to spawn a poof
+     */
+    public void SpawnPoof(GameObject prefab, Tuple spawnPoint, List<GameObject> active)
+    {
+		Vector3 position = GetSpawnVector(spawnPoint);
+		GameObject go = Instantiate(prefab, position, Quaternion.identity) as GameObject;
+		active.Add(go);
+		PoofScript ps = go.GetComponent<PoofScript>();
+		ps.onTile = TileScript.grid.GetTile(spawnPoint);
+		go.GetComponent<MovementScript>().initializePoof();
+        go.transform.SetParent(nest.transform);
     }
 
     /**
