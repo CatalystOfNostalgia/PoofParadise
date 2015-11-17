@@ -109,6 +109,8 @@ public class SaveState : Manager {
 		String userInfo = GetHTTP.login("ted1", "password");
 
 		loadJSON (userInfo);
+
+        TileScript.grid.PopulateGameGrid();
 		
 	}
 
@@ -176,7 +178,6 @@ public class SaveState : Manager {
 		airEle = data ["air_ele"].AsInt;
 		poofCount = data ["poof_count"].AsInt;
 
-
 		// load the buildings
 		loadedResourceBuildings = data ["resource_buildings"].AsArray;
 		loadedDecorativeBuildings = data ["decorative_buildings"].AsArray;
@@ -186,10 +187,10 @@ public class SaveState : Manager {
 			int y = building["position_y"].AsInt;
 
             // Retrieves a building from the resource buildings list
+            Debug.Log("index: " + building["building_info_id"].AsInt);
 			Building newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
 
 			resourceBuildings.Add(new Tuple(x, y), newBuilding);
 		}
-
 	}
 }
