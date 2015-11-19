@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 
 /**
  * Handles all building operations
@@ -103,19 +104,19 @@ public class BuildingManager : Manager {
     /**
      * Maps the button to a string
      */
-    public void makeNewBuilding(string name)
+    public void makeNewBuilding(Image sr)
     {
         buildingMode = true;
         foreach (Building b in PrefabManager.prefabManager.resourceBuildings)
         {
             // Does not work because the buttons have generic names + Button(clone)
-            if (b.name == name)
+            if (b.GetComponent<SpriteRenderer>().name == sr.name)
             {
                 target = b;
                 return;
             }
         }
-        Debug.Log(string.Format("The building [{0}] you are trying to map from a button to a physical building was not found", name));
+        Debug.Log(string.Format("The building you are trying to map from a button to a physical building was not found"));
     }
 
 	public bool isOccupied (){

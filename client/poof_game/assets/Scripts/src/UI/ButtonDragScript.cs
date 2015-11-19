@@ -66,7 +66,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	}
 
 	public void OnEndDrag (PointerEventData eventData){
-		BuildingManager.buildingManager.makeNewBuilding(this.name);
+		BuildingManager.buildingManager.makeNewBuilding(this.GetComponent<Image>());
 		if (draggingIcon != null) {
 			Destroy(draggingIcon);
 		}
