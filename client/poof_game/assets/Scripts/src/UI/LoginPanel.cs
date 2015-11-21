@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.UI;
 
 public class LoginPanel : GamePanel {
@@ -9,8 +10,10 @@ public class LoginPanel : GamePanel {
      * Initialize
      */
     override public void Start () {
+        Debug.Log("initializing panel");
         buttons = RetrieveButtonList("Buttons");
         inputFields = RetrieveInputFieldList("TextFields");
+        GeneratePanel ();
     }
 
     /**
@@ -19,7 +22,6 @@ public class LoginPanel : GamePanel {
     override public void GeneratePanel () {
 
         FindAndModifyUIElement("Log In Button", buttons, () => LogIn());
-        // FindAndModifyUIElement("Create Account Button", inputFields, () => CreateAccount());
 
     }
 
@@ -27,6 +29,10 @@ public class LoginPanel : GamePanel {
      * Logs the user into the server and changes the scene
      */
     public void LogIn() {
+
+        Debug.Log("logIN!!!");
+        SaveState.state.PullFromServer();
+        //Debug.Log("pulled from server");
 
     }
 
