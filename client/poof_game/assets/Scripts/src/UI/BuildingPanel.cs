@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+using UnityEngine.UI;
+using UnityEngine;
 
 /**.
  * This menu should
@@ -19,7 +20,14 @@ public class BuildingPanel : GamePanel {
      */
 	override public void Start()
 	{
-		buttons = RetrieveButtonList("Dialogue Panel/Buttons");
+		if (buildingPanel == null) {
+			DontDestroyOnLoad(gameObject);
+			buildingPanel = this;
+		} 
+		else if (buildingPanel != this) {
+			Destroy(gameObject);
+		}
+	    buttons = RetrieveButtonList("Dialogue Panel/Buttons");
 		GeneratePanel();
 	}
 	
