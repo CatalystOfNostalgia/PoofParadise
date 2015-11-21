@@ -72,8 +72,6 @@ public abstract class GamePanel : MonoBehaviour {
         return -1;
     }
 
-
-
     /**
      * Provides the list of buttons for this panel
      */
@@ -90,12 +88,12 @@ public abstract class GamePanel : MonoBehaviour {
     /**
      * Provides the list of text fields for this panel
      */
-    public TextField[] RetrieveTextFieldList(string path)
+    public InputField[] RetrieveInputFieldList(string path)
     {
-        List<TextField> list = new List<TextField>();
+        List<InputField> list = new List<InputField>();
         foreach (Transform t in this.transform.Find(path))
         {
-            list.Add(t.getComponent<TextField>());
+            list.Add(t.GetComponent<InputField>());
         }
         return list.ToArray();
     }

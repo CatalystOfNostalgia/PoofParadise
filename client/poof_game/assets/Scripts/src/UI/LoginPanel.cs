@@ -3,13 +3,14 @@ using UnityEngine.UI;
 public class LoginPanel : GamePanel {
 
     private Button[] buttons;
+    private InputField[] inputFields;
     
     /**
      * Initialize
      */
     override public void Start () {
         buttons = RetrieveButtonList("Buttons");
-        textFields = RetrieveTextFieldList("TextFields");
+        inputFields = RetrieveInputFieldList("TextFields");
     }
 
     /**
@@ -18,7 +19,7 @@ public class LoginPanel : GamePanel {
     override public void GeneratePanel () {
 
         FindAndModifyUIElement("Log In Button", buttons, () => LogIn());
-        FindAndModifyUIElement("Create Account Button", buttons, () => CreateAccount());
+        // FindAndModifyUIElement("Create Account Button", inputFields, () => CreateAccount());
 
     }
 
