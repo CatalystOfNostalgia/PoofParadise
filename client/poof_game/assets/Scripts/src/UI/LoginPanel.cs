@@ -10,7 +10,6 @@ public class LoginPanel : GamePanel {
      * Initialize
      */
     override public void Start () {
-        Debug.Log("initializing panel");
         buttons = RetrieveButtonList("Buttons");
         inputFields = RetrieveInputFieldList("TextFields");
         GeneratePanel ();
@@ -31,8 +30,8 @@ public class LoginPanel : GamePanel {
     public void LogIn() {
 
         Debug.Log("logIN!!!");
-        SaveState.state.PullFromServer();
-        //Debug.Log("pulled from server");
+        SaveState.state.PullFromServer("ted1", "password");
+        Debug.Log("Logged In");
 
     }
 

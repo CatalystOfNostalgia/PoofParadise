@@ -83,7 +83,7 @@ public class GameStart : MonoBehaviour {
     public void TestJSON()
     {
 
-		SaveState.state.PullFromServer ();
+		SaveState.state.PullFromServer ("ted1", "password");
         TileScript.grid.PopulateGameGrid ();
 
 		//testing saving game

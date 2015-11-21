@@ -103,12 +103,14 @@ public class SaveState : Manager {
 	/**
 	 * Pulls player data from server
 	 */
-	public void PullFromServer() {
+	public void PullFromServer(String username, String password) {
 		
 		// get the JSON from the server
-		String userInfo = GetHTTP.login("ted1", "password");
+		String userInfo = GetHTTP.login(username, password);
 
 		loadJSON (userInfo);
+
+        Debug.Log(jsonify());
 
         TileScript.grid.PopulateGameGrid();
 		
