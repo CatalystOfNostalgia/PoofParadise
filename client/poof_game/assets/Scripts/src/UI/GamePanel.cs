@@ -88,6 +88,19 @@ public abstract class GamePanel : MonoBehaviour {
     }
 
     /**
+     * Provides the list of text fields for this panel
+     */
+    public TextField[] RetrieveTextFieldList(string path)
+    {
+        List<TextField> list = new List<TextField>();
+        foreach (Transform t in this.transform.Find(path))
+        {
+            list.Add(t.getComponent<TextField>());
+        }
+        return list.ToArray();
+    }
+
+    /**
      * Provides the list of sliders for this panel
      */
      public Slider[] RetrieveSliderList(string path)
