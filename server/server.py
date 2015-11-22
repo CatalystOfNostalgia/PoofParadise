@@ -204,7 +204,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
             if user is None: 
                 self.send_response(400)
-                data['error'] = 'no username password combination exists'
+                data['error'] = 'No username password combination exists'
                 print("user: " + username + " failed to log in")
 
             else:

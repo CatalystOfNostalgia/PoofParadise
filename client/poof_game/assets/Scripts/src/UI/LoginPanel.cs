@@ -5,6 +5,7 @@ using SimpleJSON;
 
 public class LoginPanel : GamePanel {
 
+    public static LoginPanel panel;
     private Button[] buttons;
     private InputField[] inputFields;
     
@@ -12,6 +13,14 @@ public class LoginPanel : GamePanel {
      * Initialize
      */
     override public void Start () {
+
+        if (panel == null) {
+            panel = this;
+        } else if (panel != this) {
+            Destroy(gameObject);
+        }
+
+        windowState = true;
         buttons = RetrieveButtonList("Buttons");
         inputFields = RetrieveInputFieldList("TextFields");
         GeneratePanel ();
@@ -42,6 +51,9 @@ public class LoginPanel : GamePanel {
             Application.LoadLevel("Demo_scene");
         } else {
             Debug.Log(data["error"]);
+            ErrorPanel.panel.TogglePanel();
+            ErrorPanel.panel.texts[0].text = data["error"];
+            TogglePanel();
             // TODO: Create a popup window to display the error
         }
 

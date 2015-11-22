@@ -86,6 +86,19 @@ public abstract class GamePanel : MonoBehaviour {
     }
 
     /**
+     * Provides the list of Texts for this panel
+     */
+    public Text[] RetrieveTextList(string path)
+    {
+        List<Text> list = new List<Text>();
+        foreach (Transform t in this.transform.Find(path))
+        {
+            list.Add(t.GetComponent<Text>());
+        }
+        return list.ToArray();
+    }
+
+    /**
      * Provides the list of text fields for this panel
      */
     public InputField[] RetrieveInputFieldList(string path)
