@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ForceModuleActive: 0
+  m_AllowActivationOnStandalone: 0
 --- !u!114 &875088680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
-  m_ForceModuleActive: 0
+  m_AllowActivationOnMobileDevice: 0
 --- !u!114 &875088681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,8 +268,8 @@ Camera:
   m_GameObject: {fileID: 1636634768}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: .225994825, g: .355428189, b: .558823526, a: .0196078438}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: .243137255, g: .423529416, b: .200000003, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
