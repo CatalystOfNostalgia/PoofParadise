@@ -11,9 +11,9 @@ public class CanvasStart : MonoBehaviour {
         BuildUI();
 
 		Button jsonButton = this.transform.FindChild ("Test Panel(Clone)/Test JSON").gameObject.GetComponent<Button>();
-
+		
 		jsonButton.onClick.RemoveAllListeners ();
-		jsonButton.onClick.AddListener (() => SaveState.state.PullFromServer()); 
+		jsonButton.onClick.AddListener (() => SaveState.state.PullFromServer());
 
         GameObject modelPanel = this.transform.FindChild("Model Panel(Clone)").gameObject;
 
@@ -40,6 +40,19 @@ public class CanvasStart : MonoBehaviour {
         {
             Destroy(this);
         }
+        
+		GameObject microMenu = this.transform.FindChild("Microtransaction Menu(Clone)").gameObject;
+		
+		if (MicrotransactionPanel.mp == null)
+		{
+			DontDestroyOnLoad(microMenu);
+			MicrotransactionPanel.mp = microMenu.GetComponent<MicrotransactionPanel>();
+		}
+		
+		else if (MicrotransactionPanel.mp != microMenu)
+		{
+			Destroy(this);
+		}
     }
 
     /**
