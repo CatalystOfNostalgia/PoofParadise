@@ -28,7 +28,14 @@ public abstract class Building : MonoBehaviour {
     {
         //gameObject.AddComponent<ButtonDragScript>();
         gameObject.AddComponent<BoxCollider2D>();
-		//gameObject.AddComponent<BuildingOptionMenu>();
+
+
+//		Canvas canvas = new Canvas();
+//		canvas.transform.parent = this.transform;
+//
+//		BuildingOptionPanel panel = Instantiate (new BuildingOptionPanel());
+//		panel.transform.SetParent(canvas.transform);
+
         created = false;
         selected = true;
         placed = false;
