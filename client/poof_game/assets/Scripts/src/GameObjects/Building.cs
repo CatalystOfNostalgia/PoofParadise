@@ -31,13 +31,12 @@ public abstract class Building : MonoBehaviour {
     {
         //gameObject.AddComponent<ButtonDragScript>();
         gameObject.AddComponent<BoxCollider2D>();
-
-
-//		Canvas canvas = new Canvas();
-//		canvas.transform.parent = this.transform;
-//
-//		BuildingOptionPanel panel = Instantiate (new BuildingOptionPanel());
-//		panel.transform.SetParent(canvas.transform);
+		Canvas canvas = Instantiate (PrefabManager.prefabManager.buildingOptionCanvas);
+		canvas.transform.parent = this.transform;
+		//canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+		//canvas.renderMode = RenderMode.ScreenSpaceCamera;
+		canvas.renderMode = RenderMode.WorldSpace;
+		canvas.transform.localPosition = new Vector2 (0, 0);
 
         created = false;
         selected = true;
