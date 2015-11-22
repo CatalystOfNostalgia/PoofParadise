@@ -1,5 +1,6 @@
 using UnityEngine.UI;
 using UnityEngine;
+using System.Collections.Generic;
 
 /**.
  * This menu should
@@ -12,6 +13,8 @@ public class BuildingPanel : GamePanel {
 	public static BuildingPanel buildingPanel;
 	
 	private Button[] buttons;
+
+    public Button prefab;
 	
 	public Button exit;
 	
@@ -27,7 +30,7 @@ public class BuildingPanel : GamePanel {
 		else if (buildingPanel != this) {
 			Destroy(gameObject);
 		}
-	    buttons = RetrieveButtonList("Dialogue Panel/Buttons");
+        buttons = CreateButtons();
 		GeneratePanel();
 	}
 	
@@ -51,5 +54,27 @@ public class BuildingPanel : GamePanel {
 		
 	}
 	
-	
+    /**
+     * Dynamically creates buttons
+     */
+	public Button[] CreateButtons()
+    {
+        List<Button> list = new List<Button>();
+        int i = 0;
+        foreach (Building b in PrefabManager.prefabManager.resourceBuildings)
+        {
+            SpriteRenderer sr = b.GetComponent<SpriteRenderer>();
+            Button button = (Button)Instantiate(prefab);
+            button.transform.SetParent(this.transform.Find("Dialogue Panel/Buttons"));
+            button.image.sprite = sr.sprite;
+            button.image.color = Color.white;
+            button.name = b.name;
+            button.GetComponentInChildren<Text>().text = b.name;
+            button.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 120);// Set(i * 100 + 50, 50, 140, 120);
+            button.transform.position = new Vector3(i*100 + 50, 100);
+            button.gameObject.AddComponent<ButtonDragScript>().ID = b.ID;
+            i++;
+        }
+        return list.ToArray();
+    }
 }
