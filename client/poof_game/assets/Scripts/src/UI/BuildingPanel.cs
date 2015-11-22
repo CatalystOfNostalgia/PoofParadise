@@ -63,6 +63,7 @@ public class BuildingPanel : GamePanel {
         int i = 0;
         foreach (Building b in PrefabManager.prefabManager.resourceBuildings)
         {
+            // Filters out buildings that are anything but level 1
             if (b.name.Contains("1"))
             {
                 SpriteRenderer sr = b.GetComponent<SpriteRenderer>();
