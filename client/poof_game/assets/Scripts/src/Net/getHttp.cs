@@ -36,12 +36,13 @@ public class GetHTTP : MonoBehaviour {
         request.ContentType = "application/json";
         request.ContentLength = jsonBytes.Length;
 
-        using (Stream stream = request.GetRequestStream()) {
+        HttpWebResponse response;
 
-            stream.Write(jsonBytes, 0, jsonBytes.Length);
-        }
+        Stream stream = request.GetRequestStream();
+        stream.Write(jsonBytes, 0, jsonBytes.Length);
+        stream.Close();
 
-        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        response = (HttpWebResponse)request.GetResponse();
 
         string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
