@@ -1,0 +1,594 @@
+fileFormatVersion: 2
+guid: 028a5d1fd7ebe5a41be05a4e767e2d8d
+timeCreated: 1448219904
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: HQ_512x512sprite_24fps_0
+    21300002: HQ_512x512sprite_24fps_1
+    21300004: HQ_512x512sprite_24fps_2
+    21300006: HQ_512x512sprite_24fps_3
+    21300008: HQ_512x512sprite_24fps_4
+    21300010: HQ_512x512sprite_24fps_5
+    21300012: HQ_512x512sprite_24fps_6
+    21300014: HQ_512x512sprite_24fps_7
+    21300016: HQ_512x512sprite_24fps_8
+    21300018: HQ_512x512sprite_24fps_9
+    21300020: HQ_512x512sprite_24fps_10
+    21300022: HQ_512x512sprite_24fps_11
+    21300024: HQ_512x512sprite_24fps_12
+    21300026: HQ_512x512sprite_24fps_13
+    21300028: HQ_512x512sprite_24fps_14
+    21300030: HQ_512x512sprite_24fps_15
+    21300032: HQ_512x512sprite_24fps_16
+    21300034: HQ_512x512sprite_24fps_17
+    21300036: HQ_512x512sprite_24fps_18
+    21300038: HQ_512x512sprite_24fps_19
+    21300040: HQ_512x512sprite_24fps_20
+    21300042: HQ_512x512sprite_24fps_21
+    21300044: HQ_512x512sprite_24fps_22
+    21300046: HQ_512x512sprite_24fps_23
+    21300048: HQ_512x512sprite_24fps_24
+    21300050: HQ_512x512sprite_24fps_25
+    21300052: HQ_512x512sprite_24fps_26
+    21300054: HQ_512x512sprite_24fps_27
+    21300056: HQ_512x512sprite_24fps_28
+    21300058: HQ_512x512sprite_24fps_29
+    21300060: HQ_512x512sprite_24fps_30
+    21300062: HQ_512x512sprite_24fps_31
+    21300064: HQ_512x512sprite_24fps_32
+    21300066: HQ_512x512sprite_24fps_33
+    21300068: HQ_512x512sprite_24fps_34
+    21300070: HQ_512x512sprite_24fps_35
+    21300072: HQ_512x512sprite_24fps_36
+    21300074: HQ_512x512sprite_24fps_37
+    21300076: HQ_512x512sprite_24fps_38
+    21300078: HQ_512x512sprite_24fps_39
+    21300080: HQ_512x512sprite_24fps_40
+    21300082: HQ_512x512sprite_24fps_41
+    21300084: HQ_512x512sprite_24fps_42
+    21300086: HQ_512x512sprite_24fps_43
+    21300088: HQ_512x512sprite_24fps_44
+    21300090: HQ_512x512sprite_24fps_45
+    21300092: HQ_512x512sprite_24fps_46
+    21300094: HQ_512x512sprite_24fps_47
+    21300096: HQ_512x512sprite_24fps_48
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 8192
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: HQ_512x512sprite_24fps_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_4
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_5
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_6
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_7
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_8
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_9
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_11
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_12
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_13
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_14
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_15
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_16
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_17
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_18
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_19
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_21
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_22
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_23
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_24
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_25
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_26
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_27
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_28
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_29
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_31
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_32
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_33
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_34
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_35
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_36
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_37
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_38
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_39
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_41
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_42
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_43
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_44
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_45
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_46
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_47
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HQ_512x512sprite_24fps_48
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: .50999999, y: .170000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
