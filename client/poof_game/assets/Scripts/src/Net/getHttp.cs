@@ -10,7 +10,8 @@ using HTTP;
 
 public class GetHTTP : MonoBehaviour {
 
-    static String server = "http://129.22.150.55:51234";
+    //static String server = "http://129.22.150.55:51234";
+    static String server = "http://localhost:51234";
 
 	/*
 	 * Account creation 
@@ -31,6 +32,24 @@ public class GetHTTP : MonoBehaviour {
 			
 		});
 	}
+
+    // create an account
+    public static String createAccount(String name, String username, String password, String email) {
+
+        String url = server + "/create";        
+
+        String body = "{ \"name\": \"" + name + "\", ";
+        body += "\"username\": \"" + username + "\", ";
+        body += "\"password\": \"" + password + "\", ";
+        body += "\"email\": \"" + email + "\"}";
+
+        Debug.Log(body);
+
+        byte[] jsonBytes = Encoding.UTF8.GetBytes(body);
+
+        return body;
+
+    }
 
 	//save to server
 	public static IEnumerator toSave(String jsonStuff){
@@ -64,6 +83,7 @@ public class GetHTTP : MonoBehaviour {
 			
 		});
 	}
+
 	// Attempts to log into the site, returns the user info in a json string
 	public static string login(string inputUser, string inputPass){
 

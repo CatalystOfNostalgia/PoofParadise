@@ -32,6 +32,7 @@ public class LoginPanel : GamePanel {
     override public void GeneratePanel () {
 
         FindAndModifyUIElement("Log In Button", buttons, () => LogIn());
+        FindAndModifyUIElement("Create Account Button", buttons, () => CreateAccount());
 
     }
 
@@ -40,10 +41,10 @@ public class LoginPanel : GamePanel {
      */
     public void LogIn() {
 
-        String password = inputFields[0].textComponent.text;
-        String username = inputFields[1].textComponent.text;
+        string password = inputFields[0].textComponent.text;
+        string username = inputFields[1].textComponent.text;
 
-        String userInfo = GetHTTP.login(username, password);
+        string userInfo = GetHTTP.login(username, password);
         JSONNode data = JSON.Parse(userInfo);
 
         if (data["error"] == null) {
@@ -63,7 +64,11 @@ public class LoginPanel : GamePanel {
      * Creates an accont for the user
      */
     public void CreateAccount() {
+        
+        string password = inputFields[0].textComponent.text;
+        string username = inputFields[1].textComponent.text;
 
+        GetHTTP.createAccount("timothy", username, password, username + "@chi.com");
     }
 
 }

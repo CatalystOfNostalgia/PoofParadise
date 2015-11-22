@@ -30,7 +30,7 @@ public class GameStart : MonoBehaviour {
 	}
 
 	void OnApplicationQuit(){
-		SaveState.state.PushToServer();
+		//SaveState.state.PushToServer();
 		Debug.Log("Save ON QUITTING!!!");
 	}
 
