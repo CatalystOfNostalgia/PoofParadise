@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using SimpleJSON;
 
 public class LoginPanel : GamePanel {
 
@@ -34,8 +35,16 @@ public class LoginPanel : GamePanel {
         String username = inputFields[1].textComponent.text;
 
         String userInfo = GetHTTP.login(username, password);
-        SceneState.state.userInfo = userInfo;
-        Application.LoadLevel("Demo_scene");
+
+        JSONNode data = JSON.Parse(userInfo);
+
+        if (data["error"] == null) {
+            SceneState.state.userInfo = userInfo;
+            Application.LoadLevel("Demo_scene");
+        } else {
+            Debug.Log(data["error"]);
+            // TODO: Create a popup window to display the error
+        }
 
     }
 
