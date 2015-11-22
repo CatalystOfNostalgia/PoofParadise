@@ -28,6 +28,7 @@ public abstract class Building : MonoBehaviour {
     {
         //gameObject.AddComponent<ButtonDragScript>();
         gameObject.AddComponent<BoxCollider2D>();
+		//gameObject.AddComponent<BuildingOptionMenu>();
         created = false;
         selected = true;
         placed = false;
@@ -40,6 +41,12 @@ public abstract class Building : MonoBehaviour {
     void OnMouseDown()
     {
         GetComponent<Renderer>().material.color = Color.red;
+		/// bring up the building option panel
+		/// which includes 1. move building. 2. upgrade building. 3. remove building. 4. info on leaf
+		/// 
+		/// 
+
+		//
     }
 
     void OnMouseDrag()
