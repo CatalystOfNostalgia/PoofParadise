@@ -20,7 +20,14 @@ public class GameStart : MonoBehaviour {
 
         // Be careful! Anything after this coroutine will run 
         // before coroutine finishes
+
+		InvokeRepeating ("autoSave", 2, 30F);
     }
+
+	void autoSave () {
+	
+		SaveState.state.PushToServer();	
+	}
 
     /**
      * Use this function to build the scene

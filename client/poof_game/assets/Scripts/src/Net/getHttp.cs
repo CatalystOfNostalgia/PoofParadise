@@ -25,7 +25,7 @@ public class GetHTTP : MonoBehaviour {
 
 		//link to SaveState script
 		//PushtoServer
-		HTTP.Request theRequest = new HTTP.Request( "post", "http://localhost:8000/create", table );
+		HTTP.Request theRequest = new HTTP.Request( "post", "http://localhost:51234/create", table );
 		theRequest.Send( ( request ) => {
 			
 			Hashtable result = request.response.Object;
@@ -42,7 +42,7 @@ public class GetHTTP : MonoBehaviour {
 	public static IEnumerator toSave(String jsonStuff){
 
 
-		String url = "http://localhost:8000/save";
+		String url = "http://localhost:51234/save"; 
 		byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonStuff);
 
 		Dictionary<String, String> headers = new Dictionary<String, String>();
@@ -87,7 +87,7 @@ public class GetHTTP : MonoBehaviour {
 
 
 	void addFriend(Hashtable table){
-		HTTP.Request theRequest = new HTTP.Request( "post", "http://localhost:8000/friends", table );
+		HTTP.Request theRequest = new HTTP.Request( "post", "http://localhost:51234/friends", table );
 		theRequest.Send( ( request ) => {
 			
 			Hashtable result = request.response.Object;
@@ -102,7 +102,7 @@ public class GetHTTP : MonoBehaviour {
 	// Attempts to log into the site, returns the user info in a json string
 	public static string login(string inputUser, string inputPass){
 
-		string template = "http://localhost:8000/login?user={0}&pass={1}";
+		string template = "http://localhost:51234/login?user={0}&pass={1}";
 		string username = inputUser;
 		string password = inputPass;
 		string link = string.Format (template, username, password);
