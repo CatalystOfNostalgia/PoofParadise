@@ -23,6 +23,9 @@ public abstract class Building : MonoBehaviour {
     public int earthCost { get; set; }
     public int airCost { get; set; }
 
+    // Interface flags
+    public bool canDrag { get; set; }
+
     // Use this for initialization
     protected virtual void Start()
     {
@@ -39,6 +42,7 @@ public abstract class Building : MonoBehaviour {
         created = false;
         selected = true;
         placed = false;
+        canDrag = false;
         size = 1;
     }
 
@@ -47,7 +51,6 @@ public abstract class Building : MonoBehaviour {
      */
     void OnMouseDown()
     {
-        GetComponent<Renderer>().material.color = Color.red;
 		/// bring up the building option panel
 		/// which includes 1. move building. 2. upgrade building. 3. remove building. 4. info on leaf
 		/// 
@@ -56,10 +59,16 @@ public abstract class Building : MonoBehaviour {
 		//
     }
 
+    /**
+     * Handles building drag behavior
+     */
     void OnMouseDrag()
     {
-        Vector3 loc = BuildingManager.buildingManager.selectedTile.transform.position;
-        this.transform.position = new Vector3(loc.x, loc.y, loc.z - 1);
-        this.GetComponent<BoxCollider2D>().enabled = false;
+        if (canDrag)
+        {
+            Vector3 loc = BuildingManager.buildingManager.selectedTile.transform.position;
+            this.transform.position = new Vector3(loc.x, loc.y, loc.z - 1);
+            this.GetComponent<BoxCollider2D>().enabled = false;
+        }
     }
 }
