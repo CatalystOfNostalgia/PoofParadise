@@ -34,8 +34,9 @@ public class GetHTTP : MonoBehaviour {
 	}
 
     // create an account
-    public static IEnumerator createAccount(String name, String username, String password, String email) {
+    public static void createAccount(String name, String username, String password, String email) {
 
+        Debug.Log("creating");
         String url = server + "/create";        
 
         String body = "{ \"name\": \"" + name + "\", ";
@@ -52,9 +53,21 @@ public class GetHTTP : MonoBehaviour {
         headers.Add("Content-Type", "application/json");
         headers.Add("Content-Length", jsonBytes.Length.ToString());
 
-        WWW request = new WWW(url, jsonBytes, headers);
+        HTTPWebRequest request = (HTTPWebRequest)WebRequest.Create(url);
+        
+        request.Method = "POST";
+        request.ContentType = "application/json";
+        request.ContentLength = jsonBytes.Length;
 
-        yield return request;
+        using (Stream stream = request.GetRequestStream()) {
+
+            stream.Write(jsonBytes, 0, jsonBytes.Length);
+        }
+
+        HTTPWebResponse response = (HTTPWebResponse)request.GetResponse();
+
+        string responseString = new StreamReader(response.GetResponseStream()).readToEnd();
+
     }
 
 	//save to server
@@ -128,7 +141,7 @@ public class GetHTTP : MonoBehaviour {
 
 	}
 
-	private IEnumerator WaitForRequest(WWW www)
+	private static IEnumerator WaitForRequest(WWW www)
 	{
 
 		Debug.Log ("waiting for request");
