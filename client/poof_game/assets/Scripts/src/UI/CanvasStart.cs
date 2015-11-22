@@ -53,6 +53,19 @@ public class CanvasStart : MonoBehaviour {
 		{
 			Destroy(this);
 		}
+
+		GameObject buildingPanel = this.transform.FindChild("Building Panel(Clone)").gameObject;
+
+		if (BuildingPanel.buildingPanel == null)
+		{
+			DontDestroyOnLoad(modelPanel);
+			BuildingPanel.buildingPanel = buildingPanel.GetComponent<BuildingPanel>();
+		}
+		
+		else if (BuildingPanel.buildingPanel != buildingPanel)
+		{
+			Destroy(this);
+		}
     }
 
     /**
