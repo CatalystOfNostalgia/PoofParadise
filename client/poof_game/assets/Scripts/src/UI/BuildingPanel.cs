@@ -13,6 +13,8 @@ public class BuildingPanel : GamePanel {
 	public static BuildingPanel buildingPanel;
 	
 	private Button[] buttons;
+
+    public Button prefab;
 	
 	public Button exit;
 	
@@ -28,7 +30,7 @@ public class BuildingPanel : GamePanel {
 		else if (buildingPanel != this) {
 			Destroy(gameObject);
 		}
-	    buttons = RetrieveButtonList("Dialogue Panel/Buttons");
+        buttons = CreateButtons();
 		GeneratePanel();
 	}
 	
@@ -55,13 +57,17 @@ public class BuildingPanel : GamePanel {
     /**
      * Dynamically creates buttons
      */
-	public void CreateButtons()
+	public Button[] CreateButtons()
     {
         List<Button> list = new List<Button>();
         foreach (Building b in PrefabManager.prefabManager.resourceBuildings)
         {
-            SpriteRenderer i = b.GetComponent<SpriteRenderer>();
-
+            SpriteRenderer sr = b.GetComponent<SpriteRenderer>();
+            Button button = (Button)Instantiate(prefab);
+            button.transform.SetParent(this.transform.Find("Dialogue Panel/Buttons"));
+            button.image.sprite = sr.sprite;
+            button.name = b.name;
         }
+        return list.ToArray();
     }
 }
