@@ -50,12 +50,11 @@ public class SaveState : Manager {
 			Destroy(gameObject);
 		}
 
-        loadJSON(SceneState.state.userInfo);
+		state.resourceBuildings = new Dictionary<Tuple, Building>();
 
 	/*	
 		// set the fields until we can load
 		state.fire = 0;
-		state.resourceBuildings = new Dictionary<Tuple, Building>();
 
 		fireEle = 2;
 		earthEle = 2;
@@ -178,6 +177,9 @@ public class SaveState : Manager {
 
             // Retrieves a building from the resource buildings list
             Debug.Log("index: " + building["building_info_id"].AsInt);
+            if (PrefabManager.prefabManager == null) {
+                Debug.Log("prefab manager");
+            }
 			Building newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
 
 			resourceBuildings.Add(new Tuple(x, y), newBuilding);

@@ -34,7 +34,8 @@ public class GameStart : MonoBehaviour {
         {
             yield return null;
         }
-
+    
+        Debug.Log("scene is ready");
         // Build canvas
         Instantiate(PrefabManager.prefabManager.canvas, new Vector3(0, 0, 0), Quaternion.identity);
 
@@ -45,7 +46,7 @@ public class GameStart : MonoBehaviour {
 
         // Generate all poofs/elemari
         GameManager.gameManager.SpawnPoofs();
-		Debug.Log ("scene is ready");
+		Debug.Log ("scene is generated");
     }
 
     /**
