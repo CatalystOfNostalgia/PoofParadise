@@ -71,6 +71,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		if (draggingIcon != null) {
 			Destroy(draggingIcon);
 		}
+		BuildingPanel.buildingPanel.windowState = false;
 		buildingModalPanel.SetActive (false);
 	}
 
