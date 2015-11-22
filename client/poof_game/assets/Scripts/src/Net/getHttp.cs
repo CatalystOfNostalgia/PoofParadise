@@ -13,38 +13,15 @@ public class GetHTTP : MonoBehaviour {
     //static String server = "http://129.22.150.55:51234";
     static String server = "http://localhost:51234";
 
-	/*
-	 * Account creation 
-	 * user enters their information as table 
-	 * Table is posted onto the server
-	 */
-	void toCreate(Hashtable table){
-
-		HTTP.Request theRequest = new HTTP.Request( "post", server + "/create", table );
-		theRequest.Send( ( request ) => {
-			
-			Hashtable result = request.response.Object;
-			if ( result == null )
-			{
-				Debug.LogWarning( "Could not parse JSON response!" );
-				return;
-			}
-			
-		});
-	}
-
     // create an account
     public static void createAccount(String name, String username, String password, String email) {
 
-        Debug.Log("creating");
         String url = server + "/create";        
 
         String body = "{ \"name\": \"" + name + "\", ";
         body += "\"username\": \"" + username + "\", ";
         body += "\"password\": \"" + password + "\", ";
         body += "\"email\": \"" + email + "\"}";
-
-        Debug.Log(body);
 
         byte[] jsonBytes = Encoding.UTF8.GetBytes(body);
 
@@ -53,7 +30,7 @@ public class GetHTTP : MonoBehaviour {
         headers.Add("Content-Type", "application/json");
         headers.Add("Content-Length", jsonBytes.Length.ToString());
 
-        HTTPWebRequest request = (HTTPWebRequest)WebRequest.Create(url);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
         
         request.Method = "POST";
         request.ContentType = "application/json";
@@ -64,9 +41,11 @@ public class GetHTTP : MonoBehaviour {
             stream.Write(jsonBytes, 0, jsonBytes.Length);
         }
 
-        HTTPWebResponse response = (HTTPWebResponse)request.GetResponse();
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-        string responseString = new StreamReader(response.GetResponseStream()).readToEnd();
+        string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+        Debug.Log(responseString);
 
     }
 
