@@ -6,10 +6,11 @@ using System.Collections;
 public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
 	public bool dragOnSurfaces = true;
-	public int buildingInstance;
 	private GameObject draggingIcon;
 	private RectTransform draggingPlane;
 	GameObject buildingModalPanel;
+    public int ID { get; set; }
+
 	public void OnBeginDrag (PointerEventData eventData){
 		//Canvas canvas = GetComponent<Canvas>();
 		Canvas canvas = FindInParents<Canvas> (gameObject);
@@ -66,7 +67,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	}
 
 	public void OnEndDrag (PointerEventData eventData){
-		BuildingManager.buildingManager.makeNewBuilding(buildingInstance);
+		BuildingManager.buildingManager.makeNewBuilding(ID);
 		if (draggingIcon != null) {
 			Destroy(draggingIcon);
 		}

@@ -72,7 +72,7 @@ public class BuildingPanel : GamePanel {
             button.GetComponentInChildren<Text>().text = b.name;
             button.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 120);// Set(i * 100 + 50, 50, 140, 120);
             button.transform.position = new Vector3(i*100 + 50, 100);
-            button.gameObject.AddComponent<ButtonDragScript>();
+            button.gameObject.AddComponent<ButtonDragScript>().ID = b.ID;
             i++;
         }
         return list.ToArray();
