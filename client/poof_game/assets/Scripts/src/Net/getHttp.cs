@@ -34,7 +34,7 @@ public class GetHTTP : MonoBehaviour {
 	}
 
     // create an account
-    public static String createAccount(String name, String username, String password, String email) {
+    public static IEnumerator createAccount(String name, String username, String password, String email) {
 
         String url = server + "/create";        
 
@@ -47,8 +47,14 @@ public class GetHTTP : MonoBehaviour {
 
         byte[] jsonBytes = Encoding.UTF8.GetBytes(body);
 
-        return body;
+        Dictionary<String, String> headers = new Dictionary<String, String>();
 
+        headers.Add("Content-Type", "application/json");
+        headers.Add("Content-Length", jsonBytes.Length.ToString());
+
+        WWW request = new WWW(url, jsonBytes, headers);
+
+        yield return request;
     }
 
 	//save to server
