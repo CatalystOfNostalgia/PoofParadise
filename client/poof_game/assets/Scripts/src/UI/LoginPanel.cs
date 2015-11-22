@@ -5,8 +5,6 @@ using System;
 public class LoginPanel : GamePanel {
 
     private Button[] buttons;
-    public InputField usernameField;
-    public InputField passwordField;
     private InputField[] inputFields;
     
     /**
@@ -34,10 +32,10 @@ public class LoginPanel : GamePanel {
 
         String password = inputFields[0].textComponent.text;
         String username = inputFields[1].textComponent.text;
+
         String userInfo = GetHTTP.login(username, password);
-        Debug.Log(userInfo);
+        SceneState.state.userInfo = userInfo;
         Application.LoadLevel("Demo_scene");
-        //SaveState.state.PullFromServer("ted1", "password");
 
     }
 

@@ -12,8 +12,8 @@ public class CanvasStart : MonoBehaviour {
 
 		Button jsonButton = this.transform.FindChild ("Test Panel(Clone)/Test JSON").gameObject.GetComponent<Button>();
 
-		jsonButton.onClick.RemoveAllListeners ();
-		jsonButton.onClick.AddListener (() => SaveState.state.PullFromServer("ted1", "password")); 
+		//jsonButton.onClick.RemoveAllListeners ();
+		//jsonButton.onClick.AddListener (() => SaveState.state.PullFromServer("ted1", "password")); 
 
         GameObject modelPanel = this.transform.FindChild("Model Panel(Clone)").gameObject;
 

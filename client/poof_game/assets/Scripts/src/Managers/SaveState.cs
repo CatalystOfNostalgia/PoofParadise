@@ -49,7 +49,10 @@ public class SaveState : Manager {
 		} else if (state != this) {
 			Destroy(gameObject);
 		}
-		
+
+        loadJSON(SceneState.state.userInfo);
+
+	/*	
 		// set the fields until we can load
 		state.fire = 0;
 		state.resourceBuildings = new Dictionary<Tuple, Building>();
@@ -59,6 +62,7 @@ public class SaveState : Manager {
 		waterEle = 2;
 		airEle = 2;
 		poofCount = 3;
+        */
 		
 	}
 
@@ -100,22 +104,6 @@ public class SaveState : Manager {
 		// TODO Send JSON to server
 	}
 	
-	/**
-	 * Pulls player data from server
-	 */
-	public void PullFromServer(String username, String password) {
-		
-		// get the JSON from the server
-		String userInfo = GetHTTP.login(username, password);
-
-		loadJSON (userInfo);
-
-        Debug.Log(jsonify());
-
-        TileScript.grid.PopulateGameGrid();
-		
-	}
-
 	// turns the save data into a JSON String
 	public String jsonify() {
 		
@@ -155,7 +143,7 @@ public class SaveState : Manager {
 	}
 
 	// This method populates the save data with data from a json string
-	private void loadJSON(String json){
+	public void loadJSON(String json){
 
 		JSONArray loadedResourceBuildings;
 		JSONArray loadedDecorativeBuildings;

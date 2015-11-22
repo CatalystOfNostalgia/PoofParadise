@@ -40,6 +40,8 @@ public class GameStart : MonoBehaviour {
 
         // build and populate the game grid
         TileScript.grid.BuildGameGrid();
+        SaveState.state.loadJSON(SceneState.state.userInfo);
+        TileScript.grid.PopulateGameGrid();
 
         // Generate all poofs/elemari
         GameManager.gameManager.SpawnPoofs();
@@ -83,11 +85,11 @@ public class GameStart : MonoBehaviour {
     public void TestJSON()
     {
 
-		SaveState.state.PullFromServer ("ted1", "password");
+		//SaveState.state.PullFromServer ("ted1", "password");
         TileScript.grid.PopulateGameGrid ();
 
 		//testing saving game
-		SaveState.state.PushToServer ();
+		//SaveState.state.PushToServer ();
 
 
     }
