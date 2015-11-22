@@ -29,6 +29,11 @@ public class GameStart : MonoBehaviour {
 		SaveState.state.PushToServer();	
 	}
 
+	void OnApplicationQuit(){
+		SaveState.state.PushToServer();
+		Debug.Log("Save ON QUITTING!!!");
+	}
+
     /**
      * Use this function to build the scene
      * The coroutine allows us to let Unity 
