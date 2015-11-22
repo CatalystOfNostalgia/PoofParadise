@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class LoginPanel : GamePanel {
 
     private Button[] buttons;
+    public InputField usernameField;
+    public InputField passwordField;
     private InputField[] inputFields;
     
     /**
@@ -29,9 +32,12 @@ public class LoginPanel : GamePanel {
      */
     public void LogIn() {
 
-        Debug.Log("logIN!!!");
-        SaveState.state.PullFromServer("ted1", "password");
-        Debug.Log("Logged In");
+        String password = inputFields[0].textComponent.text;
+        String username = inputFields[1].textComponent.text;
+        String userInfo = GetHTTP.login(username, password);
+        Debug.Log(userInfo);
+        Application.LoadLevel("Demo_scene");
+        //SaveState.state.PullFromServer("ted1", "password");
 
     }
 
