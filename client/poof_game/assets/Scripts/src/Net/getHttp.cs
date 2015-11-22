@@ -10,7 +10,7 @@ using HTTP;
 
 public class GetHTTP : MonoBehaviour {
 
-    static String server = "http://localhost:51234";
+    static String server = "http://129.22.150.55:51234";
 
 	/*
 	 * Account creation 
