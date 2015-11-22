@@ -27,9 +27,18 @@ public abstract class Building : MonoBehaviour {
     protected virtual void Start()
     {
         gameObject.AddComponent<ButtonDragScript>();
+        gameObject.AddComponent<BoxCollider2D>();
         created = false;
         selected = true;
         placed = false;
         size = 1;
+    }
+
+    /**
+     * On click functionality for building
+     */
+    void OnMouseDown()
+    {
+        GetComponent<Renderer>().material.color = Color.red;
     }
 }
