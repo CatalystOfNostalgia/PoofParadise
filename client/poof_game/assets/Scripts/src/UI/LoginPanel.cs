@@ -35,7 +35,6 @@ public class LoginPanel : GamePanel {
         String username = inputFields[1].textComponent.text;
 
         String userInfo = GetHTTP.login(username, password);
-
         JSONNode data = JSON.Parse(userInfo);
 
         if (data["error"] == null) {

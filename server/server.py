@@ -192,6 +192,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
     # logs into the database and returns user info
     def login(self, parameters):
 
+        data = {}
         self.send_header('Content-type', 'application/json')
         self.end_headers()
 
@@ -200,8 +201,6 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
             password = parameters['pass'][0]
             
             user = queries.log_in(username = username, password = password)
-
-            data = {}
 
             if user is None: 
                 self.send_response(400)
@@ -243,10 +242,11 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
             self.wfile.write(json.dumps(data))
 
-
         else:
             self.send_response(400)
-            self.wfile.write('Need a username and password')
+            data['error'] = 'Need a username and password'
+            print("no username and password given")
+            self.wfile.write(json.dumps(data))
 
     # returns the friends of a user in JSON
     def getFriends(self, parameters):
