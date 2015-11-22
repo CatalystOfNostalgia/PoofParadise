@@ -1,5 +1,6 @@
 using UnityEngine.UI;
 using UnityEngine;
+using System.Collections.Generic;
 
 /**.
  * This menu should
@@ -51,5 +52,16 @@ public class BuildingPanel : GamePanel {
 		
 	}
 	
-	
+    /**
+     * Dynamically creates buttons
+     */
+	public void CreateButtons()
+    {
+        List<Button> list = new List<Button>();
+        foreach (Building b in PrefabManager.prefabManager.resourceBuildings)
+        {
+            SpriteRenderer i = b.GetComponent<SpriteRenderer>();
+
+        }
+    }
 }
