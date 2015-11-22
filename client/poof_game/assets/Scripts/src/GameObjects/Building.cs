@@ -26,7 +26,7 @@ public abstract class Building : MonoBehaviour {
     // Use this for initialization
     protected virtual void Start()
     {
-        gameObject.AddComponent<ButtonDragScript>();
+        //gameObject.AddComponent<ButtonDragScript>();
         gameObject.AddComponent<BoxCollider2D>();
         created = false;
         selected = true;
@@ -40,5 +40,12 @@ public abstract class Building : MonoBehaviour {
     void OnMouseDown()
     {
         GetComponent<Renderer>().material.color = Color.red;
+    }
+
+    void OnMouseDrag()
+    {
+        Vector3 loc = BuildingManager.buildingManager.selectedTile.transform.position;
+        this.transform.position = new Vector3(loc.x, loc.y, loc.z - 1);
+        this.GetComponent<BoxCollider2D>().enabled = false;
     }
 }
