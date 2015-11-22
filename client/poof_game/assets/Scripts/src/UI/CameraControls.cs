@@ -15,11 +15,11 @@ public class CameraControls : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		var pos = this.transform.position;
-		if (Input.mousePosition.x < sensitivity && pos.x > -xEdge) {
+		if (Input.mousePosition.x < sensitivity && pos.x > (-xEdge+4.95)) {
 			//move camera left
 			pos.x -= speed;
 		}
-		else if (Input.mousePosition.x > Screen.width - sensitivity && pos.x < xEdge) {
+		else if (Input.mousePosition.x > Screen.width - sensitivity && pos.x < (xEdge+4.95)) {
 			//move camera right
 			pos.x += speed;
 		}
@@ -33,11 +33,11 @@ public class CameraControls : MonoBehaviour {
 		}
 
 		var d = Input.GetAxis("Mouse ScrollWheel");
-		if (d > 0f && Camera.main.orthographicSize > 3f)
+		if (d > 0f && Camera.main.orthographicSize > 2f)
 		{
 			Camera.main.orthographicSize -= speed;
 		}
-		else if (d < 0f && Camera.main.orthographicSize < 8f)
+		else if (d < 0f && Camera.main.orthographicSize < 6f)
 		{
 			Camera.main.orthographicSize += speed;
 		}

@@ -19,8 +19,6 @@ public class GetHTTP : MonoBehaviour {
 	 */
 	void toCreate(Hashtable table){
 
-		//link to SaveState script
-		//PushtoServer
 		HTTP.Request theRequest = new HTTP.Request( "post", server + "/create", table );
 		theRequest.Send( ( request ) => {
 			
@@ -36,7 +34,6 @@ public class GetHTTP : MonoBehaviour {
 
 	//save to server
 	public static IEnumerator toSave(String jsonStuff){
-
 
 		String url = server + "/save";
 		byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonStuff);

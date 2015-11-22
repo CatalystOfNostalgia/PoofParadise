@@ -28,6 +28,7 @@ public class PrefabManager : Manager {
         }
 
         GeneratePrefabLists();
+        SetIDs();
     }
 	
     /**
@@ -43,6 +44,19 @@ public class PrefabManager : Manager {
         npcs = Resources.LoadAll("Prefabs/NPCs", typeof(NPC)).Cast<NPC>().ToArray();
         canvas = (Canvas)Resources.Load("Prefabs/UI/Canvas", typeof(Canvas));
         panels = Resources.LoadAll("Prefabs/UI/Panels", typeof(CanvasRenderer)).Cast<CanvasRenderer>().ToArray();
+    }
+
+    /**
+     * Sets the ID of the building prefabs
+     */
+    private void SetIDs()
+    {
+        int i = 0;
+        foreach(Building b in resourceBuildings)
+        {
+            b.ID = i;
+            i++; 
+        }
     }
 
     /**
