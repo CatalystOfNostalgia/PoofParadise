@@ -33,7 +33,6 @@ public abstract class Building : MonoBehaviour {
         gameObject.AddComponent<BoxCollider2D>();
         Vector3 pos = new Vector3(transform.position.x + .7f, transform.position.y + 1, transform.position.z);
 		Canvas canvas = (Canvas) Instantiate (PrefabManager.prefabManager.buildingOptionCanvas, pos, Quaternion.identity);
-        canvas.renderMode = RenderMode.WorldSpace;
         canvas.transform.SetParent(this.transform);
 
         created = false;
