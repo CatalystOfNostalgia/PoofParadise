@@ -40,7 +40,6 @@ public class CanvasStart : MonoBehaviour {
         {
             Destroy(this);
         }
-<<<<<<< HEAD
         
 		GameObject microMenu = this.transform.FindChild("Microtransaction Menu(Clone)").gameObject;
 		
@@ -54,8 +53,6 @@ public class CanvasStart : MonoBehaviour {
 		{
 			Destroy(this);
 		}
-=======
->>>>>>> 8c6d110613c0e56107d1ac6dff95f0cac2e46db7
 
 		GameObject buildingPanel = this.transform.FindChild("Building Panel(Clone)").gameObject;
 
