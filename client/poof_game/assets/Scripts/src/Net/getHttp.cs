@@ -14,7 +14,7 @@ public class GetHTTP : MonoBehaviour {
     static String server = "http://localhost:51234";
 
     // create an account
-    public static void createAccount(String name, String username, String password, String email) {
+    public static IEnumerator createAccount(String name, String username, String password, String email) {
 
         String url = server + "/create";        
 
@@ -29,24 +29,13 @@ public class GetHTTP : MonoBehaviour {
 
         headers.Add("Content-Type", "application/json");
         headers.Add("Content-Length", jsonBytes.Length.ToString());
-
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
         
-        request.Method = "POST";
-        request.ContentType = "application/json";
-        request.ContentLength = jsonBytes.Length;
+        WWW request = new WWW(url, jsonBytes, headers);
 
-        HttpWebResponse response;
+        yield return request;
 
-        Stream stream = request.GetRequestStream();
-        stream.Write(jsonBytes, 0, jsonBytes.Length);
-        stream.Close();
-
-        response = (HttpWebResponse)request.GetResponse();
-
-        string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-
-        Debug.Log(responseString);
+        Debug.Log("got request");
+        Debug.Log(request.text);
 
     }
 

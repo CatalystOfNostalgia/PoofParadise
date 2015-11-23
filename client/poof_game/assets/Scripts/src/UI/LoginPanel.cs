@@ -68,7 +68,7 @@ public class LoginPanel : GamePanel {
         string password = inputFields[0].textComponent.text;
         string username = inputFields[1].textComponent.text;
 
-        GetHTTP.createAccount("timothy", username, password, username + "@chi.com");
+        StartCoroutine(GetHTTP.createAccount("timothy", username, password, username + "@chi.com"));
     }
 
 }
