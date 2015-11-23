@@ -158,8 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18c437f8817c604eb8ff15809448b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  exit: {fileID: 0}
+  prefab: {fileID: 11417350, guid: b50d43396039289458c7f39e069a63e0, type: 2}
+  exit: {fileID: 11417350, guid: b50d43396039289458c7f39e069a63e0, type: 2}
 --- !u!114 &11468234
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -329,7 +329,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: 0}
   m_AnchorMax: {x: .5, y: 0}
   m_AnchoredPosition: {x: 0, y: 127}
-  m_SizeDelta: {x: 1024, y: 256}
+  m_SizeDelta: {x: 1024, y: 350}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &100100000
 Prefab:
@@ -341,6 +341,16 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: prefab
       value: 
+      objectReference: {fileID: 11417350, guid: b50d43396039289458c7f39e069a63e0,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: exit
+      value: 
+      objectReference: {fileID: 11417350, guid: b50d43396039289458c7f39e069a63e0,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_SizeDelta.y
+      value: 350
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

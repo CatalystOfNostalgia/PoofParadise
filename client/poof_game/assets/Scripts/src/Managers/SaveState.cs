@@ -37,7 +37,12 @@ public class SaveState : Manager {
 	// buildings
 	public Dictionary<Tuple, Building> resourceBuildings { get; set; }
 	public Dictionary<Tuple, Building> decorativeBuildings { get; set; }
-	
+
+	//resource collection fields
+	public int firetreeRes { get; set; }
+	public int windmillRes { get; set; }
+	public int pondRes { get; set; }
+	public int caveRes { get; set; }
 	/**
 	 * Produces a singleton on awake
 	 */
@@ -59,6 +64,11 @@ public class SaveState : Manager {
 		waterEle = 2;
 		airEle = 2;
 		poofCount = 3;
+
+		firetreeRes = 0;
+		windmillRes = 0;
+		pondRes = 0;
+		caveRes = 0;
 		
 	}
 
