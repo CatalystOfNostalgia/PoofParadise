@@ -51,23 +51,44 @@ public class LoginPanel : GamePanel {
             SceneState.state.userInfo = userInfo;
             Application.LoadLevel("Demo_scene");
         } else {
-            MessagePanel.panel.TogglePanel();
             MessagePanel.panel.texts[0].text = data["error"];
+            MessagePanel.panel.TogglePanel();
             TogglePanel();
-            // TODO: Create a popup window to display the error
         }
 
     }
 
     /**
-     * Creates an accont for the user
+     * Creates an account for the user
      */
     public void CreateAccount() {
         
         string password = inputFields[0].textComponent.text;
         string username = inputFields[1].textComponent.text;
 
-        StartCoroutine(GetHTTP.createAccount("timothy", username, password, username + "@chi.com"));
+        StartCoroutine(GetHTTP.createAccount("timothy", 
+                                             username, 
+                                             password, 
+                                             username + "@chi.com", 
+                                             verifyAccount));
+
+    }
+
+    // to be called after the account is created in case of errors
+    public void verifyAccount(string response) {
+
+        Debug.Log(response);
+
+        JSONNode data = JSON.Parse(response);
+
+        if (data["error"] == null) {
+            MessagePanel.panel.texts[0].text = data["message"];
+        } else {
+            MessagePanel.panel.texts[0].text = data["error"];
+        }
+        MessagePanel.panel.TogglePanel();
+        TogglePanel();
+
     }
 
 }

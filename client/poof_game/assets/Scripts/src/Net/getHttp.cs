@@ -14,7 +14,11 @@ public class GetHTTP : MonoBehaviour {
     static String server = "http://localhost:51234";
 
     // create an account
-    public static IEnumerator createAccount(String name, String username, String password, String email) {
+    public static IEnumerator createAccount(String name, 
+                                            String username, 
+                                            String password, 
+                                            String email, 
+                                            Action<String> callback) {
 
         String url = server + "/create";        
 
@@ -34,98 +38,97 @@ public class GetHTTP : MonoBehaviour {
 
         yield return request;
 
-        Debug.Log("got request");
         Debug.Log(request.text);
+        callback(getHttpBody(request.text));
+    }
+
+    //save to server
+    public static IEnumerator toSave(String jsonStuff){
+
+        String url = server + "/save";
+        byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonStuff);
+
+        Dictionary<String, String> headers = new Dictionary<String, String>();
+
+        headers.Add("Content-Type", "application/json");
+        headers.Add ("Content-Length", jsonBytes.Length.ToString());
+        WWW request = new WWW(url, jsonBytes, headers);
+
+        yield return request;
+
+        Debug.Log ("got request");
+        Debug.Log (request.text);
+    }
+
+
+    void addFriend(Hashtable table){
+        HTTP.Request theRequest = new HTTP.Request( "post", server + "/friends", table );
+        theRequest.Send( ( request ) => {
+            
+            Hashtable result = request.response.Object;
+            if ( result == null )
+            {
+                Debug.LogWarning( "Could not parse JSON response!" );
+                return;
+            }
+            
+        });
+    }
+
+    // Attempts to log into the site, returns the user info in a json string
+    public static string login(string inputUser, string inputPass){
+
+        string template = server + "/login?user={0}&pass={1}";
+        string username = inputUser;
+        string password = inputPass;
+        string link = string.Format (template, username, password);
+        string url = link;
+
+        HttpWebRequest loginrequest = (HttpWebRequest)WebRequest.Create (url);
+
+        HttpWebResponse response = (HttpWebResponse)loginrequest.GetResponse ();
+
+        return getHttpBody(new StreamReader(response.GetResponseStream()).ReadToEnd());
+    
+    }
+
+
+    // this trims the headers from an http response
+    private static String getHttpBody(String response) {
+
+        int count = 0;
+        String body = "";
+        String[] full = response.Split ('\n');
+
+        foreach (String line in full) {
+            if (count > 2) {
+                body += line;
+            }
+            else {
+                count++;
+            }
+        }
+
+        return body;
 
     }
 
-	//save to server
-	public static IEnumerator toSave(String jsonStuff){
+    private static IEnumerator WaitForRequest(WWW www)
+    {
 
-		String url = server + "/save";
-		byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonStuff);
+        Debug.Log ("waiting for request");
 
-		Dictionary<String, String> headers = new Dictionary<String, String>();
+        yield return www;
 
-		headers.Add("Content-Type", "application/json");
-		headers.Add ("Content-Length", jsonBytes.Length.ToString());
-		WWW request = new WWW(url, jsonBytes, headers);
+        Debug.Log ("got response");
 
-		yield return request;
-
-		Debug.Log ("got request");
-		Debug.Log (request.text);
-	}
-
-
-	void addFriend(Hashtable table){
-		HTTP.Request theRequest = new HTTP.Request( "post", server + "/friends", table );
-		theRequest.Send( ( request ) => {
-			
-			Hashtable result = request.response.Object;
-			if ( result == null )
-			{
-				Debug.LogWarning( "Could not parse JSON response!" );
-				return;
-			}
-			
-		});
-	}
-
-	// Attempts to log into the site, returns the user info in a json string
-	public static string login(string inputUser, string inputPass){
-
-		string template = server + "/login?user={0}&pass={1}";
-		string username = inputUser;
-		string password = inputPass;
-		string link = string.Format (template, username, password);
-		string url = link;
-
-		HttpWebRequest loginrequest = (HttpWebRequest)WebRequest.Create (url);
-
-		HttpWebResponse response = (HttpWebResponse)loginrequest.GetResponse ();
-
-		return getHttpBody(new StreamReader(response.GetResponseStream()).ReadToEnd());
-	
-	}
-
-
-	// this trims the headers from an http response
-	private static String getHttpBody(String response) {
-
-		int count = 0;
-		String body = "";
-		String[] full = response.Split ('\n');
-
-		foreach (String line in full) {
-			if (count > 2) {
-				body += line;
-			}
-			else {
-				count++;
-			}
-		}
-
-		return body;
-
-	}
-
-	private static IEnumerator WaitForRequest(WWW www)
-	{
-
-		Debug.Log ("waiting for request");
-
-		yield return www;
-
-		Debug.Log ("got response");
-
-		//check for errors
-		if (www.error == null) {
-			Debug.Log("WWW Ok!: " + www.text);
-		} else {
-			Debug.Log("WWW Error: "+ www.error);
-		}    
-		
-	}  
+        //check for errors
+        if (www.error == null) {
+            Debug.Log("WWW Ok!: " + www.text);
+        } else {
+            Debug.Log("WWW Error: "+ www.error);
+        }    
+        
+    }  
 
 }

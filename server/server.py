@@ -164,6 +164,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
                                         )
                 
                 data['user_id'] = user.user_id
+                data['message'] = "Account Created"
 
                 print("account created")
                 print("name: " + name + \
