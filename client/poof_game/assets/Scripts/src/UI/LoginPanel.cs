@@ -53,6 +53,7 @@ public class LoginPanel : GamePanel {
      */
     public void verifyLogin(string response) {
 
+        Debug.Log(response);
         JSONNode data = JSON.Parse(response);
 
         if (data["error"] == null) {
