@@ -37,12 +37,19 @@ public class SaveState : Manager {
 	// buildings
 	public Dictionary<Tuple, Building> resourceBuildings { get; set; }
 	public Dictionary<Tuple, Building> decorativeBuildings { get; set; }
+<<<<<<< HEAD
 
 	//resource collection fields
 	public int firetreeRes { get; set; }
 	public int windmillRes { get; set; }
 	public int pondRes { get; set; }
 	public int caveRes { get; set; }
+=======
+	
+	// wooly beans?
+	public int woolyBeans { get; set; }
+	
+>>>>>>> fff26551b4373aef03412b2d3f1e3ab45bc67289
 	/**
 	 * Produces a singleton on awake
 	 */
@@ -70,6 +77,7 @@ public class SaveState : Manager {
 		pondRes = 0;
 		caveRes = 0;
 		
+		woolyBeans = 0;
 	}
 
 	
