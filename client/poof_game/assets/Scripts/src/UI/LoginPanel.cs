@@ -51,9 +51,8 @@ public class LoginPanel : GamePanel {
             SceneState.state.userInfo = userInfo;
             Application.LoadLevel("Demo_scene");
         } else {
-            Debug.Log(data["error"]);
-            ErrorPanel.panel.TogglePanel();
-            ErrorPanel.panel.texts[0].text = data["error"];
+            MessagePanel.panel.TogglePanel();
+            MessagePanel.panel.texts[0].text = data["error"];
             TogglePanel();
             // TODO: Create a popup window to display the error
         }

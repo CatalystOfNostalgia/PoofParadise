@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ErrorPanel : GamePanel {
+public class MessagePanel : GamePanel {
 
     public Text[] texts { get; set; }
     private Button[] buttons;
-    public static ErrorPanel panel;
+    public static MessagePanel panel;
 
     /**
      * Initialize
