@@ -118,7 +118,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -5.7421875, y: 71.3203888}
+  m_AnchoredPosition: {x: 0, y: 15}
   m_SizeDelta: {x: 220, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &221085271
@@ -146,7 +146,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Error Message
+  m_Text: 'Message
 
 '
 --- !u!222 &221085272
@@ -264,7 +264,7 @@ GameObject:
   - 114: {fileID: 639460238}
   - 114: {fileID: 639460240}
   m_Layer: 5
-  m_Name: ErrorPanel
+  m_Name: Message Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: .39199999}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 639460236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecdaf884bc66e44f28ccd08e2d116a91, type: 3}
+  m_Script: {fileID: 11500000, guid: 3852584ea28d74d16b32c73346f91982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &669543433
@@ -1250,7 +1250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: .39199999}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
