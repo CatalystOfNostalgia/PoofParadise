@@ -13,8 +13,6 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
 
-        self.send_response(200)
-
         parameters = parse_qs(urlparse(self.path).query)
 
         # logging in
@@ -59,9 +57,6 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):
 
-        self.send_header('Content-type', 'application/json')
-        self.end_headers()
-        
         # If the body isn't JSON then reject
         if self.headers['Content-Type'] != 'application/json':
             
@@ -85,7 +80,6 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
             # creating an account
             if re.match('/create', self.path):
-                self.send_response(200)
                 self.createAccount(parsed_json)
 
             # saving
@@ -171,6 +165,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
                       "\nusername: " + username + \
                       "\nemail: " + email + '\n' \
                       )
+                self.send_response(200)
 
             except:
                 queries.rollback()

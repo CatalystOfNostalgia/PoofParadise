@@ -76,7 +76,9 @@ public class GetHTTP : MonoBehaviour {
     }
 
     // Attempts to log into the site, returns the user info in a json string
-    public static string login(string inputUser, string inputPass){
+    public static IEnumerator login(string inputUser, 
+                                    string inputPass, 
+                                    Action<string> callback){
 
         string template = server + "/login?user={0}&pass={1}";
         string username = inputUser;
@@ -84,12 +86,14 @@ public class GetHTTP : MonoBehaviour {
         string link = string.Format (template, username, password);
         string url = link;
 
-        HttpWebRequest loginrequest = (HttpWebRequest)WebRequest.Create (url);
+        WWW request = new WWW(url);
 
-        HttpWebResponse response = (HttpWebResponse)loginrequest.GetResponse ();
+        yield return request;
 
-        return getHttpBody(new StreamReader(response.GetResponseStream()).ReadToEnd());
-    
+        Debug.Log(request.text);
+
+        callback(getHttpBody(request.text));
+
     }
 
 
@@ -101,8 +105,8 @@ public class GetHTTP : MonoBehaviour {
         String[] full = response.Split ('\n');
 
         foreach (String line in full) {
-            if (count > 2) {
-                body += line;
+            if (count > 4) {
+                body += line + "\n";
             }
             else {
                 count++;

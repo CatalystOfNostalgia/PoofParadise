@@ -44,18 +44,25 @@ public class LoginPanel : GamePanel {
         string password = inputFields[0].textComponent.text;
         string username = inputFields[1].textComponent.text;
 
-        string userInfo = GetHTTP.login(username, password);
-        JSONNode data = JSON.Parse(userInfo);
+        StartCoroutine(GetHTTP.login(username, password, verifyLogin));
+
+    }
+
+    /**
+     * verifies that the log in information is correct
+     */
+    public void verifyLogin(string response) {
+
+        JSONNode data = JSON.Parse(response);
 
         if (data["error"] == null) {
-            SceneState.state.userInfo = userInfo;
+            SceneState.state.userInfo = response;
             Application.LoadLevel("Demo_scene");
         } else {
             MessagePanel.panel.texts[0].text = data["error"];
             MessagePanel.panel.TogglePanel();
             TogglePanel();
         }
-
     }
 
     /**
