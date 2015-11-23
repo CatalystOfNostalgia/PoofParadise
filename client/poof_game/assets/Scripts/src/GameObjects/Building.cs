@@ -31,12 +31,10 @@ public abstract class Building : MonoBehaviour {
     {
         //gameObject.AddComponent<ButtonDragScript>();
         gameObject.AddComponent<BoxCollider2D>();
-		Canvas canvas = Instantiate (PrefabManager.prefabManager.buildingOptionCanvas);
-		canvas.transform.parent = this.transform;
-		//canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-		//canvas.renderMode = RenderMode.ScreenSpaceCamera;
-		canvas.renderMode = RenderMode.WorldSpace;
-		canvas.transform.localPosition = new Vector2 (0, 0);
+        Vector3 pos = new Vector3(transform.position.x + .7f, transform.position.y + 1, transform.position.z);
+		Canvas canvas = (Canvas) Instantiate (PrefabManager.prefabManager.buildingOptionCanvas, pos, Quaternion.identity);
+        canvas.renderMode = RenderMode.WorldSpace;
+        canvas.transform.SetParent(this.transform);
 
         created = false;
         selected = true;
