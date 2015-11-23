@@ -25,6 +25,9 @@ public abstract class Building : MonoBehaviour {
 
     // Interface flags
     public bool canDrag { get; set; }
+    public bool showOptions { get; set; }
+
+    private Canvas options;
 
     // Use this for initialization
     protected virtual void Start()
@@ -32,13 +35,14 @@ public abstract class Building : MonoBehaviour {
         //gameObject.AddComponent<ButtonDragScript>();
         gameObject.AddComponent<BoxCollider2D>();
         Vector3 pos = new Vector3(transform.position.x + .7f, transform.position.y + 1, transform.position.z);
-		Canvas canvas = (Canvas) Instantiate (PrefabManager.prefabManager.buildingOptionCanvas, pos, Quaternion.identity);
-        canvas.transform.SetParent(this.transform);
+		options = (Canvas) Instantiate (PrefabManager.prefabManager.buildingOptionCanvas, pos, Quaternion.identity);
+        options.transform.SetParent(this.transform);
 
         created = false;
         selected = true;
         placed = false;
         canDrag = false;
+        showOptions = false;
         size = 1;
     }
 
@@ -47,11 +51,12 @@ public abstract class Building : MonoBehaviour {
      */
     void OnMouseDown()
     {
-		/// bring up the building option panel
-		/// which includes 1. move building. 2. upgrade building. 3. remove building. 4. info on leaf
-		/// 
-		/// 
-
+        /// bring up the building option panel
+        /// which includes 1. move building. 2. upgrade building. 3. remove building. 4. info on leaf
+        /// 
+        /// 
+        showOptions = !showOptions;
+        options.gameObject.SetActive(showOptions);
 		//
     }
 
