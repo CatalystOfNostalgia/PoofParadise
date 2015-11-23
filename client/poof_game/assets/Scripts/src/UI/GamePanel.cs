@@ -90,7 +90,7 @@ public abstract class GamePanel : MonoBehaviour {
     /**
      * Provides the list of sliders for this panel
      */
-     public Slider[] RetrieveSliderList(string path)
+    public Slider[] RetrieveSliderList(string path)
     {
         List<Slider> list = new List<Slider>();
         foreach(Transform t in this.transform.Find(path))
@@ -103,7 +103,7 @@ public abstract class GamePanel : MonoBehaviour {
     /**
      * Provides the list of selectable objects on this panel
      */
-     public Selectable[] RetrievesSelectableList(string path)
+    public Selectable[] RetrievesSelectableList(string path)
     {
         List<Selectable> list = new List<Selectable>();
         foreach(Transform t in this.transform.Find(path))

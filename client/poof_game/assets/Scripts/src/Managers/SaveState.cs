@@ -38,6 +38,9 @@ public class SaveState : Manager {
 	public Dictionary<Tuple, Building> resourceBuildings { get; set; }
 	public Dictionary<Tuple, Building> decorativeBuildings { get; set; }
 	
+	// wooly beans?
+	public int woolyBeans { get; set; }
+	
 	/**
 	 * Produces a singleton on awake
 	 */
@@ -60,6 +63,7 @@ public class SaveState : Manager {
 		airEle = 2;
 		poofCount = 3;
 		
+		woolyBeans = 0;
 	}
 
 	
