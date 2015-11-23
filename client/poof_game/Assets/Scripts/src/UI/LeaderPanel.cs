@@ -5,7 +5,8 @@ public class LeaderPanel : GamePanel {
 	
 	// Stores a static reference to this object
 	public static LeaderPanel leaderPanel;
-	
+
+	private Button[] buttons;
 	/**
      * Initializes panel
      */
@@ -17,7 +18,8 @@ public class LeaderPanel : GamePanel {
 		} else if (leaderPanel != this) {
 			Destroy(gameObject);
 		}
-		GeneratePanel();
+		buttons = RetrieveButtonList ("Buttons");
+		GeneratePanel ();
 	}
 	
 	/**
@@ -26,7 +28,7 @@ public class LeaderPanel : GamePanel {
      */
 	override public void GeneratePanel()
 	{
-		//nothing happens since we haven't established database connection yet
+		FindAndModifyUIElement ("Exit Button", buttons, TogglePanel);
 	}
 	
 	/**
