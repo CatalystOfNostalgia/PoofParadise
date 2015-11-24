@@ -48,8 +48,8 @@ public class MovementScript : MonoBehaviour {
 		currentPos = new Vector2(transform.position.x, transform.position.y);
 		targetPos = new Vector2();
 
-		Debug.Log(currentPos);
-		Debug.Log(targetPos);
+		//Debug.Log(currentPos);
+		//Debug.Log(targetPos);
 		
 		animator = this.GetComponent<Animator>();
 	}

@@ -72,8 +72,6 @@ public abstract class GamePanel : MonoBehaviour {
         return -1;
     }
 
-
-
     /**
      * Provides the list of buttons for this panel
      */
@@ -88,9 +86,35 @@ public abstract class GamePanel : MonoBehaviour {
     }
 
     /**
+     * Provides the list of Texts for this panel
+     */
+    public Text[] RetrieveTextList(string path)
+    {
+        List<Text> list = new List<Text>();
+        foreach (Transform t in this.transform.Find(path))
+        {
+            list.Add(t.GetComponent<Text>());
+        }
+        return list.ToArray();
+    }
+
+    /**
+     * Provides the list of text fields for this panel
+     */
+    public InputField[] RetrieveInputFieldList(string path)
+    {
+        List<InputField> list = new List<InputField>();
+        foreach (Transform t in this.transform.Find(path))
+        {
+            list.Add(t.GetComponent<InputField>());
+        }
+        return list.ToArray();
+    }
+
+    /**
      * Provides the list of sliders for this panel
      */
-     public Slider[] RetrieveSliderList(string path)
+    public Slider[] RetrieveSliderList(string path)
     {
         List<Slider> list = new List<Slider>();
         foreach(Transform t in this.transform.Find(path))
@@ -103,7 +127,7 @@ public abstract class GamePanel : MonoBehaviour {
     /**
      * Provides the list of selectable objects on this panel
      */
-     public Selectable[] RetrievesSelectableList(string path)
+    public Selectable[] RetrievesSelectableList(string path)
     {
         List<Selectable> list = new List<Selectable>();
         foreach(Transform t in this.transform.Find(path))

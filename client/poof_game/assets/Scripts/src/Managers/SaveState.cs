@@ -37,7 +37,16 @@ public class SaveState : Manager {
 	// buildings
 	public Dictionary<Tuple, Building> resourceBuildings { get; set; }
 	public Dictionary<Tuple, Building> decorativeBuildings { get; set; }
+
+
+	//resource collection fields
+	public int firetreeRes { get; set; }
+	public int windmillRes { get; set; }
+	public int pondRes { get; set; }
+	public int caveRes { get; set; }
 	
+	// wooly beans?
+	public int woolyBeans { get; set; }
 	/**
 	 * Produces a singleton on awake
 	 */
@@ -49,17 +58,22 @@ public class SaveState : Manager {
 		} else if (state != this) {
 			Destroy(gameObject);
 		}
-		
+
+		state.resourceBuildings = new Dictionary<Tuple, Building>();
+
+	/*	
 		// set the fields until we can load
 		state.fire = 0;
-		state.resourceBuildings = new Dictionary<Tuple, Building>();
 
 		fireEle = 2;
 		earthEle = 2;
 		waterEle = 2;
 		airEle = 2;
 		poofCount = 3;
+<<<<<<< HEAD
+        */
 		
+		woolyBeans = 0;
 	}
 
 	
@@ -100,18 +114,6 @@ public class SaveState : Manager {
 		// TODO Send JSON to server
 	}
 	
-	/**
-	 * Pulls player data from server
-	 */
-	public void PullFromServer() {
-		
-		// get the JSON from the server
-		String userInfo = GetHTTP.login("ted1", "password");
-
-		loadJSON (userInfo);
-		
-	}
-
 	// turns the save data into a JSON String
 	public String jsonify() {
 		
@@ -151,7 +153,7 @@ public class SaveState : Manager {
 	}
 
 	// This method populates the save data with data from a json string
-	private void loadJSON(String json){
+	public void loadJSON(String json){
 
 		JSONArray loadedResourceBuildings;
 		JSONArray loadedDecorativeBuildings;
@@ -176,7 +178,6 @@ public class SaveState : Manager {
 		airEle = data ["air_ele"].AsInt;
 		poofCount = data ["poof_count"].AsInt;
 
-
 		// load the buildings
 		loadedResourceBuildings = data ["resource_buildings"].AsArray;
 		loadedDecorativeBuildings = data ["decorative_buildings"].AsArray;
@@ -186,10 +187,13 @@ public class SaveState : Manager {
 			int y = building["position_y"].AsInt;
 
             // Retrieves a building from the resource buildings list
+            Debug.Log("index: " + building["building_info_id"].AsInt);
+            if (PrefabManager.prefabManager == null) {
+                Debug.Log("prefab manager");
+            }
 			Building newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
 
 			resourceBuildings.Add(new Tuple(x, y), newBuilding);
 		}
-
 	}
 }

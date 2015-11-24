@@ -5,7 +5,7 @@ name_pool = ['Ted', 'Margaret', 'Eric', 'Anthony', 'Jeremy', 'Anjana', \
              'Robert', 'Alex', 'Austin', 'Brittany', 'William', 'Bryn', 'Zach',\
              'Alberto', 'Ian', 'Dan', 'Madison', 'Dylan', 'Lisa']
 
-used_positions = [[False for x in range(25)] for x in range(25)]
+used_positions = [[False for x in range(15)] for x in range(15)]
 
 building_id = 0;
 
@@ -32,7 +32,10 @@ def sample_select_group():
 def sample_insert_building_group():
     for name in name_pool:
         if (exists(name)):
-            for i in range(5):
+
+            global used_positions
+            used_positions = [[False for x in range(15)] for x in range(15)]
+            for i in range(3):
                 sample_insert_building(name)
 
 def sample_select_buildings_group():
@@ -43,14 +46,13 @@ def sample_select_buildings_group():
 def sample_insert_building(name):
     user_id = models.session.query(models.User).filter(models.User.name==name).one().user_id
     lv = random.randrange(10)
-    building_info_id = random.randrange(8)
-    building_info_id = building_info_id + 1
+    building_info_id = random.randrange(7)
 
-    position_x = random.randrange(1, 24, 1)
-    position_y = random.randrange(1, 24, 1)
+    position_x = random.randrange(1, 14, 1)
+    position_y = random.randrange(1, 14, 1)
     while (not free_spot(position_x, position_y)):
-        position_x = random.randrange(1, 24, 1)
-        position_y = random.randrange(1, 24, 1)
+        position_x = random.randrange(1, 14, 1)
+        position_y = random.randrange(1, 14, 1)
 
     used_positions[position_x][position_y] = True
     used_positions[position_x - 1][position_y] = True
