@@ -13,8 +13,6 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
 
-        self.send_response(200)
-
         parameters = parse_qs(urlparse(self.path).query)
 
         # logging in
@@ -59,9 +57,6 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):
 
-        self.send_header('Content-type', 'application/json')
-        self.end_headers()
-        
         # If the body isn't JSON then reject
         if self.headers['Content-Type'] != 'application/json':
             
@@ -85,7 +80,6 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
             # creating an account
             if re.match('/create', self.path):
-                self.send_response(200)
                 self.createAccount(parsed_json)
 
             # saving
@@ -164,12 +158,14 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
                                         )
                 
                 data['user_id'] = user.user_id
+                data['message'] = "Account Created"
 
                 print("account created")
                 print("name: " + name + \
                       "\nusername: " + username + \
                       "\nemail: " + email + '\n' \
                       )
+                self.send_response(200)
 
             except:
                 queries.rollback()
@@ -192,6 +188,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
     # logs into the database and returns user info
     def login(self, parameters):
 
+        data = {}
         self.send_header('Content-type', 'application/json')
         self.end_headers()
 
@@ -201,11 +198,9 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
             
             user = queries.log_in(username = username, password = password)
 
-            data = {}
-
             if user is None: 
                 self.send_response(400)
-                data['error'] = 'no username password combination exists'
+                data['error'] = 'No username password combination exists'
                 print("user: " + username + " failed to log in")
 
             else:
@@ -243,10 +238,11 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
             self.wfile.write(json.dumps(data))
 
-
         else:
             self.send_response(400)
-            self.wfile.write('Need a username and password')
+            data['error'] = 'Need a username and password'
+            print("no username and password given")
+            self.wfile.write(json.dumps(data))
 
     # returns the friends of a user in JSON
     def getFriends(self, parameters):

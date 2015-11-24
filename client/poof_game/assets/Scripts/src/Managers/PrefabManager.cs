@@ -11,9 +11,11 @@ public class PrefabManager : Manager {
     public ResourceBuilding[] resourceBuildings { get; set; }
     public DecorativeBuilding[] decorativeBuildigs { get; set; }
     public Tile[] tiles { get; set; }
+	public GameObject[] borders { get; set; }
     public NPC[] npcs { get; set; }
     public CanvasRenderer[] panels { get; set; }
     public Canvas canvas { get; set; }
+	public Canvas buildingOptionCanvas { get; set; }
 
     // Use this for initialization
     override public void Start () {
@@ -40,10 +42,12 @@ public class PrefabManager : Manager {
     {
         resourceBuildings = Resources.LoadAll("Prefabs/Buildings/Resource Buildings", typeof(ResourceBuilding)).Cast<ResourceBuilding>().ToArray();
         decorativeBuildigs = Resources.LoadAll("Prefabs/Buildings/Decorative Buildings", typeof(DecorativeBuilding)).Cast<DecorativeBuilding>().ToArray();
-        tiles = Resources.LoadAll("Prefabs/Grid", typeof(Tile)).Cast<Tile>().ToArray();
+        tiles = Resources.LoadAll("Prefabs/Grid/Tile", typeof(Tile)).Cast<Tile>().ToArray();
+		borders = Resources.LoadAll("Prefabs/Grid/border", typeof(GameObject)).Cast<GameObject>().ToArray();
         npcs = Resources.LoadAll("Prefabs/NPCs", typeof(NPC)).Cast<NPC>().ToArray();
-        canvas = (Canvas)Resources.Load("Prefabs/UI/Canvas", typeof(Canvas));
         panels = Resources.LoadAll("Prefabs/UI/Panels", typeof(CanvasRenderer)).Cast<CanvasRenderer>().ToArray();
+		canvas = (Canvas)Resources.Load("Prefabs/UI/Canvas", typeof(Canvas));
+		buildingOptionCanvas = (Canvas)Resources.Load ("Prefabs/UI/local Panels/Building Option Canvas", typeof(Canvas));
     }
 
     /**
