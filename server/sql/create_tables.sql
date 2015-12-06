@@ -40,6 +40,28 @@ CREATE TABLE headquarters_upgrade(
     PRIMARY KEY (level)
 );
 
+CREATE TABLE residence_upgrade(
+    level int,
+    resource_cost_fire int NULL,
+    resource_cost_water int NULL,
+    resource_cost_earth int NULL,
+    resource_cost_air int NULL,
+    poof_cap int NOT NULL,
+    experience_gain int NULL,
+    PRIMARY KEY (level)
+);
+
+CREATE TABLE user_residence_buliding( 
+    id int NOT NULL AUTO_INCREMENT,
+    user_id int NOT NULL,
+    building_info_id int NOT NULL,
+    level int NOT NULL,
+    position_x int NOT NULL,
+    position_y int NOT NULL,
+    PRIMARY KEY (id)
+);
+
+
 CREATE TABLE user_decorative_building(
     id int NOT NULL AUTO_INCREMENT,
     user_id int NOT NULL,
