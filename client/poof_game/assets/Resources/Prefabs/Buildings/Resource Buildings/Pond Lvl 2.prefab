@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11460966}
   - 212: {fileID: 21268724}
   - 95: {fileID: 9506158}
+  - 61: {fileID: 6190880}
   m_Layer: 0
   m_Name: Pond Lvl 2
   m_TagString: Untagged
@@ -30,6 +31,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!61 &6190880
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155132}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -.100000001, y: .100000001}
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1}
 --- !u!95 &9506158
 Animator:
   serializedVersion: 3
@@ -39,7 +53,7 @@ Animator:
   m_GameObject: {fileID: 155132}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 178371b7d46d9dc46afaac5d991dfbce, type: 2}
+  m_Controller: {fileID: 9100000, guid: f720a0583c1137442b81ab997331095d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -77,13 +91,15 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8b245d6ac93784f479e93ce052cbacf4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 683465226c14cf94ebc38bd1d225de6a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -99,12 +115,32 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8b245d6ac93784f479e93ce052cbacf4,
+      objectReference: {fileID: 21300000, guid: 683465226c14cf94ebc38bd1d225de6a,
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 178371b7d46d9dc46afaac5d991dfbce, type: 2}
+      objectReference: {fileID: 9100000, guid: f720a0583c1137442b81ab997331095d, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Offset.x
+      value: -.100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Offset.y
+      value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 155132}

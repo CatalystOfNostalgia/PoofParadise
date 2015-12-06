@@ -124,6 +124,7 @@ public class GameManager : Manager {
     public void SpawnCharacter(GameObject prefab, Tuple spawnPoint, List<GameObject> active)
     {
         Vector3 position = GetSpawnVector(spawnPoint);
+        position.z = position.z - 1;
         GameObject go = Instantiate(prefab, position, Quaternion.identity) as GameObject;
         active.Add(go);
         CharacterScript cs = go.GetComponent<CharacterScript>();
@@ -138,7 +139,8 @@ public class GameManager : Manager {
     public void SpawnPoof(GameObject prefab, Tuple spawnPoint, List<GameObject> active)
     {
 		Vector3 position = GetSpawnVector(spawnPoint);
-		GameObject go = Instantiate(prefab, position, Quaternion.identity) as GameObject;
+        position.z = position.z - 1;
+        GameObject go = Instantiate(prefab, position, Quaternion.identity) as GameObject;
 		active.Add(go);
 		PoofScript ps = go.GetComponent<PoofScript>();
 		ps.onTile = TileScript.grid.GetTile(spawnPoint);

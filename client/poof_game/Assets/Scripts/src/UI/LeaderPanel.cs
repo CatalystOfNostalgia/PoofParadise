@@ -28,13 +28,9 @@ public class LeaderPanel : GamePanel {
      */
 	override public void GeneratePanel()
 	{
-		FindAndModifyUIElement ("Exit Button", buttons, TogglePanel);
+		FindAndModifyUIElement ("Exit", buttons, TogglePanel);
 	}
-	
-	/**
-     * Apparently this links some text
-     * TODO: Figure out its importance
-     */
+
 }
 
 

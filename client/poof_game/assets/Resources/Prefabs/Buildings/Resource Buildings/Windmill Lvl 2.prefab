@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11472288}
   - 95: {fileID: 9530756}
   - 212: {fileID: 21216174}
+  - 61: {fileID: 6178288}
   m_Layer: 0
   m_Name: Windmill Lvl 2
   m_TagString: Untagged
@@ -30,6 +31,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!61 &6178288
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191180}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: .400000006}
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5}
 --- !u!95 &9530756
 Animator:
   serializedVersion: 3
@@ -39,7 +53,7 @@ Animator:
   m_GameObject: {fileID: 191180}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dd7e3eea72ff8e9409ade960cf562eae, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4e3faa0df04e8704d85eb66208e662d3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -77,13 +91,15 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8829377d204476142b7d913b50c7b2f1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1bf980e2241f82d40bc5d66d7637ae1e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -99,12 +115,32 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8829377d204476142b7d913b50c7b2f1,
+      objectReference: {fileID: 21300000, guid: 1bf980e2241f82d40bc5d66d7637ae1e,
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: dd7e3eea72ff8e9409ade960cf562eae, type: 2}
+      objectReference: {fileID: 9100000, guid: 4e3faa0df04e8704d85eb66208e662d3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Offset.y
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 191180}

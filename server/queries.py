@@ -13,12 +13,17 @@ def create_account( name, email, username, password ):
 
 # returns the user given a username and password
 def log_in( username, password ):
-    user = models.session.query(models.User).filter( \
-        models.User.username == username, \
-        models.User.password == password \
-        ).one()
+    try:
+        user = models.session.query(models.User).filter( \
+            models.User.username == username, \
+            models.User.password == password \
+            ).one()
 
-    return user
+        return user
+
+    except:
+        return None
+
 
 # updates a user info given a user dictionary
 def save_user_info( user ):
