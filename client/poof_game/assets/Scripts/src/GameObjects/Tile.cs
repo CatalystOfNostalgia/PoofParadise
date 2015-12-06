@@ -95,8 +95,8 @@ public class Tile : MonoBehaviour {
 
         // if the new selected tile is already set the we don't want to set it to null
         if (BuildingManager.buildingManager.selectedTile == null || 
-            this.index.Equals(BuildingManager.buildingManager.selectedTile.index)) {
-           // do nothing 
+            !this.index.Equals(BuildingManager.buildingManager.selectedTile.index)) {
+
         } else {
             BuildingManager.buildingManager.selectedTile = null;
         }
