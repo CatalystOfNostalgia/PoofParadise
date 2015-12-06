@@ -106,7 +106,7 @@ public class BuildingManager : Manager {
                     SaveState.state.buildings.Add (tile.index, newBuilding);
                 }
 
-                GameManager.gameManager.CalculatePoofs();
+                GameManager.gameManager.SpawnPoofs();
             }
         }
 	}

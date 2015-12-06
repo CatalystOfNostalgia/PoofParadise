@@ -56,10 +56,10 @@ public class GameManager : Manager {
         int waterTotal = SaveState.state.waterEle;
         int earthTotal = SaveState.state.earthEle;
         int airTotal = SaveState.state.airEle;
-        int poofTotal = SaveState.state.poofCount;
+        // int poofTotal = SaveState.state.poofCount;
         
         // calculate the total poofs
-        CalculatePoofs();
+        int poofTotal = CalculatePoofs();
 
         int fireLeft = fireTotal;
         int waterLeft = waterTotal;
@@ -123,10 +123,9 @@ public class GameManager : Manager {
 
     /**
      * determines the total poofs and poofs generated
-     * returns a tuple with the x value being max number of poofs
-     * and the y value is the generated poofs
+     * returns the generated poofs
      */
-    public Tuple CalculatePoofs() 
+    public int CalculatePoofs() 
     {
 
         int maxPoofs = 0;
@@ -148,7 +147,7 @@ public class GameManager : Manager {
 
         if (generatedPoofs > maxPoofs) { generatedPoofs = maxPoofs; }
 
-        return new Tuple (maxPoofs, generatedPoofs);
+        return generatedPoofs;
     }
 
     /**
