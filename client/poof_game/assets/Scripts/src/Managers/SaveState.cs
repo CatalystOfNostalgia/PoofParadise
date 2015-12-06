@@ -38,8 +38,8 @@ public class SaveState : Manager {
     public int maxPoofs { get; set; }
 
 	// buildings
-	public Dictionary<Tuple, Building> resourceBuildings { get; set; }
-	public Dictionary<Tuple, Building> decorativeBuildings { get; set; }
+	//TODO do we actually need separate dictionaries for the different building type?
+	public Dictionary<Tuple, Building> buildings { get; set; }
 
 	//resource collection fields
 	public int firetreeRes { get; set; }
@@ -62,7 +62,7 @@ public class SaveState : Manager {
 			Destroy(gameObject);
 		}
 
-		state.resourceBuildings = new Dictionary<Tuple, Building>();
+		state.buildings = new Dictionary<Tuple, Building>();
 
 	/*	
 		// set the fields until we can load
@@ -136,7 +136,7 @@ public class SaveState : Manager {
 		jsonPlayerData += "\"airElements\": \"" + airEle + "\", ";
 		jsonPlayerData += "\"resource_buildings\": [ ";
 		
-		foreach ( KeyValuePair<Tuple, Building> entry in resourceBuildings) {
+		foreach ( KeyValuePair<Tuple, Building> entry in buildings) {
 			jsonPlayerData += "{ ";
 			jsonPlayerData += "\"x_coordinate\": \"" + entry.Key.x + "\", ";
 			jsonPlayerData += "\"y_coordinate\": \"" + entry.Key.y + "\", ";
@@ -196,7 +196,10 @@ public class SaveState : Manager {
             }
 			Building newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
 
-			resourceBuildings.Add(new Tuple(x, y), newBuilding);
+			buildings.Add(new Tuple(x, y), newBuilding);
+		}
+		//TODO foreach loop for decorative building
+		foreach (JSONNode building in loadedDecorativeBuildings) {
 		}
 	}
 }

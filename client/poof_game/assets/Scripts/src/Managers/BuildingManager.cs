@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 /**
@@ -98,8 +98,8 @@ public class BuildingManager : Manager {
         newBuilding.transform.SetParent(buildings.transform);
 
 		// TODO this feels pretty iffy
-		if (!SaveState.state.resourceBuildings.ContainsKey (tile.index)) {
-			SaveState.state.resourceBuildings.Add (tile.index, newBuilding);
+		if (!SaveState.state.buildings.ContainsKey (tile.index)) {
+			SaveState.state.buildings.Add (tile.index, newBuilding);
 		}
 	}
 
@@ -107,7 +107,7 @@ public class BuildingManager : Manager {
      * TODO: Give description
      */
 	private bool isTileTaken(Tuple t){
-		return SaveState.state.resourceBuildings.ContainsKey (t);
+		return SaveState.state.buildings.ContainsKey (t);
 
 	}
 
