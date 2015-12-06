@@ -55,10 +55,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 179592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e249cc4f0a274d0d99ee08ca64a5f7a, type: 3}
+  m_Script: {fileID: 11500000, guid: aac2ef994354c4a7281732601f41c142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  generatedPoofs: 0
 --- !u!212 &21250098
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -77,7 +77,9 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}

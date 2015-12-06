@@ -15,6 +15,8 @@ public class BuildingPanel : GamePanel {
 	private Button[] resourceButtons;
     private Button[] decorativeButtons;
 
+    private int activePanel;
+
     public Button prefab;
 	
 	public Button exit;
@@ -31,6 +33,8 @@ public class BuildingPanel : GamePanel {
 		else if (buildingPanel != this) {
 			Destroy(gameObject);
 		}
+        activePanel = 1;
+        this.transform.GetChild(activePanel).gameObject.SetActive(true);
         resourceButtons = CreateButtons("Resource Building Panel/Buttons", PrefabManager.prefabManager.resourceBuildings);
         decorativeButtons = CreateButtons("Decorative Building Panel/Buttons", PrefabManager.prefabManager.decorativeBuildigs);
 		GeneratePanel();
