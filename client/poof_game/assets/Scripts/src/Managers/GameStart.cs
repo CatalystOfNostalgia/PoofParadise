@@ -57,8 +57,9 @@ public class GameStart : MonoBehaviour {
 		try{
 			SaveState.state.loadJSON(SceneState.state.userInfo);
 		}
-		catch(UnityException e){
+		catch(System.NullReferenceException e){
 			Debug.Log("[GameStart] User did not log in");
+			Debug.Log(e);
 		}
         TileScript.grid.PopulateGameGrid();
 
