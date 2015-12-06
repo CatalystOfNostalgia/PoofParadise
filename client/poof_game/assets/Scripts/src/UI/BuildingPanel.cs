@@ -41,8 +41,8 @@ public class BuildingPanel : GamePanel {
         resourceIndex = 0;
         activePanel = panel.RESOURCE;
         this.transform.GetChild((int)activePanel).gameObject.SetActive(true);
-        resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, ref resourceIndex);
-        decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildigs, ref decorativeIndex);
+        resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, ref resourceIndex, "Resource Building Panel/Buttons");
+        decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildigs, ref decorativeIndex, "Decorative Building Panel/Buttons");
 		GeneratePanel();
 	}
 	
@@ -65,25 +65,14 @@ public class BuildingPanel : GamePanel {
     /**
      * Generates buttons per panel
      */
-    public Button[] AddButtonsToPanel(Building[] buildings)
+    public Button[] AddButtonsToPanel(Building[] buildings, string path)
     {
         List<Button> list = new List<Button>();
         // If we are adding buttons to the decorative building panel
-        if (activePanel == panel.DECORATIVE) {
-            for (int i = 0; i < buildings.Length; i++)
-            {
-                // TODO: place buttons under the building info assets
-                list.Add(MakeButton("Decorative Building Panel/Buttons", new Vector3(i * 100 + this.transform.position.x - (buildings.Length * 100 / 2), 100), buildings[i]));
-            }
-        }
-        // If we are adding buttons to the resource building panel
-        else
+        for (int i = 0; i < buildings.Length; i++)
         {
-            for (int i = 0; i < buildings.Length; i++)
-            {
-                // TODO: place buttons under the building info assets
-                list.Add(MakeButton("Resource Building Panel/Buttons", new Vector3(i * 100 + this.transform.position.x - (buildings.Length * 100 / 2), 100), buildings[i]));
-            }
+            // TODO: place buttons under the building info assets
+            list.Add(MakeButton(path, new Vector3(i * 100 + this.transform.position.x - (buildings.Length * 100 / 2), 100), buildings[i]));
         }
         return list.ToArray();
     }
@@ -107,7 +96,7 @@ public class BuildingPanel : GamePanel {
      * Dynamically creates buttons
      * path - supplies the path the the parent for the buttons
      */
-	public Button[] CreateButtons(Building[] buildingList, ref int index)
+	public Button[] CreateButtons(Building[] buildingList, ref int index, string path)
     {
        
         List<Building> list = new List<Building>();
@@ -117,6 +106,6 @@ public class BuildingPanel : GamePanel {
             list.Add(buildingList[i]);
         }
         index = i;
-        return AddButtonsToPanel(list.ToArray());
+        return AddButtonsToPanel(list.ToArray(), path);
     }
 }
