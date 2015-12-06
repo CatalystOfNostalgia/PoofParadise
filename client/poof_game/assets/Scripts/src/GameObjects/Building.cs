@@ -33,7 +33,7 @@ public abstract class Building : MonoBehaviour {
     protected virtual void Start()
     {
         //gameObject.AddComponent<ButtonDragScript>();
-        gameObject.AddComponent<BoxCollider2D>();
+        //gameObject.AddComponent<BoxCollider2D>();
         Vector3 pos = new Vector3(transform.position.x + .7f, transform.position.y + 1, transform.position.z);
 		options = (Canvas) Instantiate (PrefabManager.prefabManager.buildingOptionCanvas, pos, Quaternion.identity);
         options.transform.SetParent(this.transform);
