@@ -41,8 +41,8 @@ public class BuildingPanel : GamePanel {
         resourceIndex = 0;
         activePanel = panel.RESOURCE;
         this.transform.GetChild((int)activePanel).gameObject.SetActive(true);
-        resourceButtons = CreateButtons("Resource Building Panel/Buttons", PrefabManager.prefabManager.resourceBuildings);
-        decorativeButtons = CreateButtons("Decorative Building Panel/Buttons", PrefabManager.prefabManager.decorativeBuildigs);
+        resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, ref resourceIndex);
+        decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildigs, ref decorativeIndex);
 		GeneratePanel();
 	}
 	
@@ -65,52 +65,58 @@ public class BuildingPanel : GamePanel {
     /**
      * Generates buttons per panel
      */
-    public void AddButtonsToPanel(Button[] buttons)
+    public Button[] AddButtonsToPanel(Building[] buildings)
     {
+        List<Button> list = new List<Button>();
         // If we are adding buttons to the decorative building panel
         if (activePanel == panel.DECORATIVE) {
-            for (int i = 0; i < buttons.Length; i++)
+            for (int i = 0; i < buildings.Length; i++)
             {
                 // TODO: place buttons under the building info assets
+                list.Add(MakeButton("Decorative Building Panel/Buttons", new Vector3(i * 100 + this.transform.position.x - (buildings.Length * 100 / 2), 100), buildings[i]));
             }
         }
         // If we are adding buttons to the resource building panel
         else
         {
-            // Repeat code above -> or just make a method you heathen
+            for (int i = 0; i < buildings.Length; i++)
+            {
+                // TODO: place buttons under the building info assets
+                list.Add(MakeButton("Resource Building Panel/Buttons", new Vector3(i * 100 + this.transform.position.x - (buildings.Length * 100 / 2), 100), buildings[i]));
+            }
         }
+        return list.ToArray();
+    }
+
+    public Button MakeButton(string path, Vector3 position, Building b)
+    {
+        SpriteRenderer sr = b.GetComponent<SpriteRenderer>();
+        Button button = (Button)Instantiate(prefab);
+        button.transform.SetParent(this.transform.Find(path));
+        button.image.sprite = sr.sprite;
+        button.image.color = Color.white;
+        button.name = b.name;
+        button.GetComponentInChildren<Text>().text = b.name;
+        button.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 120);// Set(i * 100 + 50, 50, 140, 120);
+        button.transform.position = position; //;
+        button.gameObject.AddComponent<ButtonDragScript>().ID = b.ID;
+        return button;
     }
 	
     /**
      * Dynamically creates buttons
      * path - supplies the path the the parent for the buttons
      */
-	public Button[] CreateButtons(string path, Building[] buildingList)
+	public Button[] CreateButtons(Building[] buildingList, ref int index)
     {
-        if (buildingList.Length > 4)
+       
+        List<Building> list = new List<Building>();
+        int i;
+        for (i = index; i < buildingList.Length && i < index + 4; i++)
         {
-            Debug.LogError("Building lists must be size 4");
-            return null;
+            list.Add(buildingList[i]);
         }
-        else
-        {
-            List<Button> list = new List<Button>();
-            int i = 0;
-            foreach (Building b in buildingList)
-            {
-                SpriteRenderer sr = b.GetComponent<SpriteRenderer>();
-                Button button = (Button)Instantiate(prefab);
-                button.transform.SetParent(this.transform.Find(path));
-                button.image.sprite = sr.sprite;
-                button.image.color = Color.white;
-                button.name = b.name;
-                button.GetComponentInChildren<Text>().text = b.name;
-                button.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 120);// Set(i * 100 + 50, 50, 140, 120);
-                button.transform.position = new Vector3(i * 100 + this.transform.position.x - (buildingList.Length * 100 / 2), 100);
-                button.gameObject.AddComponent<ButtonDragScript>().ID = b.ID;
-                i++;
-            }
-            return list.ToArray();
-        }
+        index = i;
+        return AddButtonsToPanel(list.ToArray());
     }
 }
