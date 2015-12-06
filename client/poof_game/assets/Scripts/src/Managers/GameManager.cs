@@ -123,24 +123,32 @@ public class GameManager : Manager {
 
     /**
      * determines the total poofs and poofs generated
+     * returns a tuple with the x value being max number of poofs
+     * and the y value is the generated poofs
      */
     public Tuple CalculatePoofs() 
     {
 
-        Debug.Log("Calculating poofs");
+        int maxPoofs = 0;
+        int generatedPoofs = 0;
+
         foreach ( KeyValuePair<Tuple, Building> entry in SaveState.state.buildings) {
             
-            if (entry.Value is ResourceBuilding) {
-                Debug.Log("building is ResourceBuilding");
-            }
-            if (entry.Value.GetType() == typeof(ResourceBuilding)) {
-                Debug.Log("building.GetType() == typeof(ResourceBuilding)");
+            if (entry.Value.GetType() == typeof(DecorativeBuilding)) {
+                DecorativeBuilding decBuilding = (DecorativeBuilding)entry.Value;
+                generatedPoofs += decBuilding.generatedPoofs;
             }
 
-            Debug.Log(entry.Value.GetType());
+            if (entry.Value.GetType() == typeof(ResidenceBuilding)) {
+                ResidenceBuilding resBuilding = (ResidenceBuilding)entry.Value;
+                maxPoofs += resBuilding.poofsAllowed;
+            }
+
         }
 
-        return new Tuple (0, 0);
+        if (generatedPoofs > maxPoofs) { generatedPoofs = maxPoofs; }
+
+        return new Tuple (maxPoofs, generatedPoofs);
     }
 
     /**

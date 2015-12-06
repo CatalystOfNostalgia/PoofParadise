@@ -82,7 +82,6 @@ public class Tile : MonoBehaviour {
         {
             GetComponent<Renderer>().material.color = Color.red;
         }
-        Debug.Log("enter tile: (" + index.x + ", " + index.y + ")");
     }
 
     /**
@@ -101,7 +100,6 @@ public class Tile : MonoBehaviour {
             BuildingManager.buildingManager.selectedTile = null;
         }
 
-        Debug.Log("exit tile: (" + index.x + ", " + index.y + ")");
     }
 
     /**

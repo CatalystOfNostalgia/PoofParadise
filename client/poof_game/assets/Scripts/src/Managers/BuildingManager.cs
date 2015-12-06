@@ -105,6 +105,8 @@ public class BuildingManager : Manager {
                 if (!SaveState.state.buildings.ContainsKey (tile.index)) {
                     SaveState.state.buildings.Add (tile.index, newBuilding);
                 }
+
+                GameManager.gameManager.CalculatePoofs();
             }
         }
 	}
