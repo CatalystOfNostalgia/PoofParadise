@@ -42,9 +42,9 @@ public class Tile : MonoBehaviour {
 
             // set tiles to filled
             isVacant = false;
-            leftTile.isVacant = false; 
-            downTile.isVacant = false;
-            downLeftTile.isVacant = false;
+            if ( leftTile != null ) { leftTile.isVacant = false; }
+            if ( downTile != null ) { downTile.isVacant = false; }
+            if ( downLeftTile != null ) { downLeftTile.isVacant = false; }
 
             return building;
         }
@@ -82,6 +82,7 @@ public class Tile : MonoBehaviour {
         {
             GetComponent<Renderer>().material.color = Color.red;
         }
+        Debug.Log("enter tile: (" + index.x + ", " + index.y + ")");
     }
 
     /**
@@ -91,6 +92,16 @@ public class Tile : MonoBehaviour {
     private void OnMouseExit()
     {
         GetComponent<Renderer>().material.color = startColor;
+
+        // if the new selected tile is already set the we don't want to set it to null
+        if (BuildingManager.buildingManager.selectedTile == null || 
+            this.index.Equals(BuildingManager.buildingManager.selectedTile.index)) {
+           // do nothing 
+        } else {
+            BuildingManager.buildingManager.selectedTile = null;
+        }
+
+        Debug.Log("exit tile: (" + index.x + ", " + index.y + ")");
     }
 
     /**

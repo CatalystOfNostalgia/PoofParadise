@@ -90,17 +90,23 @@ public class BuildingManager : Manager {
 		if (tile == null) {
 			Debug.Log ("tile is null");
 		}
+        else {
 
-		Building newBuilding = tile.PlaceBuilding (prefab);
-        newBuilding.created = true;
-        
-        // Sets the new building's parent to our convenience object
-        newBuilding.transform.SetParent(buildings.transform);
+            Building newBuilding = tile.PlaceBuilding (prefab);
 
-		// TODO this feels pretty iffy
-		if (!SaveState.state.buildings.ContainsKey (tile.index)) {
-			SaveState.state.buildings.Add (tile.index, newBuilding);
-		}
+                if (newBuilding != null) {
+
+                newBuilding.created = true;
+                
+                // Sets the new building's parent to our convenience object
+                newBuilding.transform.SetParent(buildings.transform);
+
+                // TODO this feels pretty iffy
+                if (!SaveState.state.buildings.ContainsKey (tile.index)) {
+                    SaveState.state.buildings.Add (tile.index, newBuilding);
+                }
+            }
+        }
 	}
 
     /**
