@@ -7,6 +7,7 @@ TagManager:
   - Tile
   - Poof
   - Grid
+  - Building Panel
   layers:
   - Default
   - TransparentFX

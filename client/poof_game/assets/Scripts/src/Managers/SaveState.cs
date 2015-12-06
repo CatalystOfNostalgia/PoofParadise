@@ -34,10 +34,13 @@ public class SaveState : Manager {
 	public int earthEle { get; set; }
 	public int airEle { get; set; }
 
+    // poofs
+    public int totalPoofs { get; set; }
+    public int maxPoofs { get; set; }
+
 	// buildings
 	//TODO do we actually need separate dictionaries for the different building type?
 	public Dictionary<Tuple, Building> buildings { get; set; }
-
 
 	//resource collection fields
 	public int firetreeRes { get; set; }
@@ -47,6 +50,7 @@ public class SaveState : Manager {
 	
 	// wooly beans?
 	public int woolyBeans { get; set; }
+
 	/**
 	 * Produces a singleton on awake
 	 */
