@@ -55,7 +55,7 @@ public class TileScript : Manager {
 	{
 		if (SaveState.state.resourceBuildings.Count == 0) {
 			// Hopefully HQ building lv1 is at index 0
-			SaveState.state.resourceBuildings.Add(new Tuple(), PrefabManager.prefabManager.headQuarterBuildings[0]);
+			SaveState.state.resourceBuildings.Add(new Tuple((int)(gridX/2 + .5),(int)(gridY/2 + .5)), PrefabManager.prefabManager.headQuarterBuildings[0]);
 			Debug.Log("The user is a virgin");
 		}
 		foreach (KeyValuePair<Tuple, Building> entry in SaveState.state.resourceBuildings) 
