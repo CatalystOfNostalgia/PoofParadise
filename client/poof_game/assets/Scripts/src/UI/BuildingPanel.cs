@@ -39,17 +39,36 @@ public class BuildingPanel : GamePanel {
 		}
         decorativeIndex = 0;
         resourceIndex = 0;
-        activePanel = panel.RESOURCE;
-        this.transform.GetChild((int)activePanel).gameObject.SetActive(true);
+        activePanel = panel.DECORATIVE;
+        SwitchPanels();
         resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, ref resourceIndex, "Resource Building Panel/Buttons");
         decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildigs, ref decorativeIndex, "Decorative Building Panel/Buttons");
 		GeneratePanel();
 	}
-	
-	/**
+
+    public void SwitchPanels()
+    {
+        // Turn off current panel
+        this.transform.GetChild((int)activePanel).gameObject.SetActive(false);
+
+        // Set activePanel
+        if (activePanel == panel.RESOURCE)
+        {
+            activePanel = panel.DECORATIVE;
+        }
+        else
+        {
+            activePanel = panel.RESOURCE;
+        }
+
+        // Turn on current panel
+        this.transform.GetChild((int)activePanel).gameObject.SetActive(true);
+    }
+
+    /**
      * Adds functionality to all of the buttons on the panel
      */
-	override public void GeneratePanel(){
+    override public void GeneratePanel(){
 		foreach (Button b in resourceButtons)
 		{
 			b.onClick.RemoveAllListeners();
@@ -85,7 +104,7 @@ public class BuildingPanel : GamePanel {
         button.image.sprite = sr.sprite;
         button.image.color = Color.white;
         button.name = b.name;
-        button.GetComponentInChildren<Text>().text = b.name;
+        //button.GetComponentInChildren<Text>().text = b.name;
         button.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 120);// Set(i * 100 + 50, 50, 140, 120);
         button.transform.position = position; //;
         button.gameObject.AddComponent<ButtonDragScript>().ID = b.ID;
