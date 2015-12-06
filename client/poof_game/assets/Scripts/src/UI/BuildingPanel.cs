@@ -12,7 +12,8 @@ public class BuildingPanel : GamePanel {
 	// A static reference to this object
 	public static BuildingPanel buildingPanel;
 	
-	private Button[] buttons;
+	private Button[] resourceButtons;
+    private Button[] decorativeButtons;
 
     public Button prefab;
 	
@@ -30,7 +31,8 @@ public class BuildingPanel : GamePanel {
 		else if (buildingPanel != this) {
 			Destroy(gameObject);
 		}
-        buttons = CreateButtons();
+        resourceButtons = CreateButtons("Resource Building Panel/Buttons", PrefabManager.prefabManager.resourceBuildings);
+        decorativeButtons = CreateButtons("Decorative Building Panel/Buttons", PrefabManager.prefabManager.decorativeBuildigs);
 		GeneratePanel();
 	}
 	
@@ -38,46 +40,39 @@ public class BuildingPanel : GamePanel {
      * Adds functionality to all of the buttons on the panel
      */
 	override public void GeneratePanel(){
-		foreach (Button b in buttons)
+		foreach (Button b in resourceButtons)
 		{
 			b.onClick.RemoveAllListeners();
 			b.onClick.AddListener(TogglePanel);
 		}
-
-		/**FindAndModifyUIElement("Fire Tree Button", buttons, () => BuildingManager.buildingManager.PlaceBuilding("Fire Tree Button"));
-		
-		FindAndModifyUIElement("Pond Button", buttons, () => BuildingManager.buildingManager.PlaceBuilding("Pond Button"));
-		
-		FindAndModifyUIElement("Cave Button", buttons, () => BuildingManager.buildingManager.PlaceBuilding("Cave Button"));
-		
-		FindAndModifyUIElement("Windmill Button", buttons, () => BuildingManager.buildingManager.PlaceBuilding("Windmill Button"));**/
-		
+        foreach (Button b in decorativeButtons)
+        {
+            b.onClick.RemoveAllListeners();
+            b.onClick.AddListener(TogglePanel);
+        }
 	}
 	
     /**
      * Dynamically creates buttons
+     * path - supplies the path the the parent for the buttons
      */
-	public Button[] CreateButtons()
+	public Button[] CreateButtons(string path, Building[] buildingList)
     {
         List<Button> list = new List<Button>();
         int i = 0;
-        foreach (Building b in PrefabManager.prefabManager.resourceBuildings)
+        foreach (Building b in buildingList)
         {
-            // Filters out buildings that are anything but level 1
-            if (b.name.Contains("1"))
-            {
                 SpriteRenderer sr = b.GetComponent<SpriteRenderer>();
                 Button button = (Button)Instantiate(prefab);
-                button.transform.SetParent(this.transform.Find("Dialogue Panel/Buttons"));
+                button.transform.SetParent(this.transform.Find(path));
                 button.image.sprite = sr.sprite;
                 button.image.color = Color.white;
                 button.name = b.name;
                 button.GetComponentInChildren<Text>().text = b.name;
                 button.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 120);// Set(i * 100 + 50, 50, 140, 120);
-                button.transform.position = new Vector3(i * 100 + this.transform.position.x - (PrefabManager.prefabManager.resourceBuildings.Length*100/2), 100);
+                button.transform.position = new Vector3(i * 100 + this.transform.position.x - (buildingList.Length*100/2), 100);
                 button.gameObject.AddComponent<ButtonDragScript>().ID = b.ID;
-            }
-            i++;
+                i++;
         }
         return list.ToArray();
     }
