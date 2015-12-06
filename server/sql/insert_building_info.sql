@@ -7,6 +7,20 @@
 
 USE gravehub;
 
+INSERT INTO residence_upgrade(
+    level, resource_cost_fire, resource_cost_water, resource_cost_earth, 
+    resource_cost_air, poof_cap, experience_gain 
+) VALUES (
+    1, 20, 20, 20, 20, 10, 0
+);
+
+INSERT INTO residence_upgrade(
+    level, resource_cost_fire, resource_cost_water, resource_cost_earth, 
+    resource_cost_air, poof_cap, experience_gain 
+) VALUES (
+    2, 30, 30, 30, 30, 20, 0
+);
+
 -- level 1 fire tree
 INSERT INTO resource_building(
     level, next_building_id, name, size, production_rate, production_type, 
