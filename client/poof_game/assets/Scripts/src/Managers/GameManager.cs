@@ -4,7 +4,7 @@ using System.Collections.Generic;
 /**
  * The GameManager script is responsible
  * for managing the game state
- *
+ */
 public class GameManager : Manager {
 
     public static GameManager gameManager;
@@ -59,6 +59,7 @@ public class GameManager : Manager {
         int poofTotal = SaveState.state.poofCount;
         
         // calculate the total poofs
+        CalculatePoofs();
 
         int fireLeft = fireTotal;
         int waterLeft = waterTotal;
@@ -125,9 +126,21 @@ public class GameManager : Manager {
      */
     public Tuple CalculatePoofs() 
     {
-        foreach (Building building in Savestate.state.buildings) {
 
+        Debug.Log("Calculating poofs");
+        foreach ( KeyValuePair<Tuple, Building> entry in SaveState.state.buildings) {
+            
+            if (entry.Value is ResourceBuilding) {
+                Debug.Log("building is ResourceBuilding");
+            }
+            if (entry.Value.GetType() == typeof(ResourceBuilding)) {
+                Debug.Log("building.GetType() == typeof(ResourceBuilding)");
+            }
+
+            Debug.Log(entry.Value.GetType());
         }
+
+        return new Tuple (0, 0);
     }
 
     /**
