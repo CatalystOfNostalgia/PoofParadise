@@ -64,8 +64,8 @@ public class BuildingPanel : GamePanel {
         foreach (Building b in PrefabManager.prefabManager.resourceBuildings)
         {
             // Filters out buildings that are anything but level 1
-            //if (b.name.Contains("1"))
-           // {
+            if (b.name.Contains("1"))
+            {
                 SpriteRenderer sr = b.GetComponent<SpriteRenderer>();
                 Button button = (Button)Instantiate(prefab);
                 button.transform.SetParent(this.transform.Find("Dialogue Panel/Buttons"));
@@ -76,7 +76,7 @@ public class BuildingPanel : GamePanel {
                 button.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 120);// Set(i * 100 + 50, 50, 140, 120);
                 button.transform.position = new Vector3(i * 100 + this.transform.position.x - (PrefabManager.prefabManager.resourceBuildings.Length*100/2), 100);
                 button.gameObject.AddComponent<ButtonDragScript>().ID = b.ID;
-           // }
+            }
             i++;
         }
         return list.ToArray();
