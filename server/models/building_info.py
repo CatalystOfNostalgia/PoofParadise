@@ -47,3 +47,14 @@ class ResourceBuildingInfo(Base):
     resource_cost_air = Column(Integer, nullable=False)
     resource_cost_earth = Column(Integer, nullable=False)
 
+class ResidenceUpgrade(Base):
+    __tablename__='user_residence_building'
+
+    level = Column(Integer, primary_key=True)
+    resource_cost_fire = Column(Integer, nullable=False)
+    resource_cost_water = Column(Integer, nullable=False)
+    resource_cost_air = Column(Integer, nullable=False)
+    resource_cost_earth = Column(Integer, nullable=False)
+    poof_cap = Column(Integer, nullable=False)
+    experience_gain = Column(Integer, nullable=False)
+

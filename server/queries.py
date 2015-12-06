@@ -122,6 +122,35 @@ def get_user_decorative_buildings( user_id ):
 
     return buildings
 
+# get the user's residence buildings 
+def get_user_residence_buildings(user_id):
+    user_buildings = models.session.query(models.UserResidenceBuilding).filter(
+        models.UserResidenceBuilding.user_id == user_id
+    ).all()
+
+    buildings = dict_buildings(user_buildings)
+
+    if buildings:
+        for building in buildings:
+            building_info = get_residence_building_info(building['building_info_id'])
+            building.update(building_info)
+
+
+    return buildings
+
+# get the building info of a residence_building
+def get_residence_building_info(building_info_id):
+    building_info = models.session.query(models.ResidenceUpdate).filter(
+        models.ResidenceUpgrade.level == building_info_id    
+    ).one()
+    
+    building = {
+        'level': building_info.level,
+        'poof_cap': building_info.poof_cap
+    }
+
+    return building
+
 # gets the building info of a resource building
 def get_resource_building_info( building_info_id ):
 
