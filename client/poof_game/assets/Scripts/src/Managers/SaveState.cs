@@ -16,7 +16,6 @@ public class SaveState : Manager {
 	public int userExperience { get; set; }
 	public int hqLevel { get; set; }
 	public int poofCount { get; set; }
-	// List game state variables here
 
 	// resources
 	public int fire { get; set; }

@@ -77,8 +77,6 @@ def get_friends( user_id ):
         new_friends[friend_username] = friend_id
         user_friends.append(new_friend)
 
-    print(user_friends)
-
     return user_friends
 
 # adds a friend connection between users

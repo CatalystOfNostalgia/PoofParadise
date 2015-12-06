@@ -4,7 +4,7 @@ using System.Collections.Generic;
 /**
  * The GameManager script is responsible
  * for managing the game state
- */
+ *
 public class GameManager : Manager {
 
     public static GameManager gameManager;
@@ -57,6 +57,8 @@ public class GameManager : Manager {
         int earthTotal = SaveState.state.earthEle;
         int airTotal = SaveState.state.airEle;
         int poofTotal = SaveState.state.poofCount;
+        
+        // calculate the total poofs
 
         int fireLeft = fireTotal;
         int waterLeft = waterTotal;
@@ -115,6 +117,16 @@ public class GameManager : Manager {
         		SpawnPoof(poofPrefab, GetRandomSpawnPoint(), poofActive);
         		poofLeft--;
         	}
+        }
+    }
+
+    /**
+     * determines the total poofs and poofs generated
+     */
+    public Tuple CalculatePoofs() 
+    {
+        foreach (Building building in Savestate.state.buildings) {
+
         }
     }
 
