@@ -191,6 +191,7 @@ def save_building_info ( resource_buildings, decorative_buildings, user_id ):
     for building in resource_buildings:
         if building['new'] == 'True':
             create_resource_building(building, user_id)
+            success = True
         else:
             success = update_resource_building(building, user_id)
         if not success:
@@ -200,6 +201,7 @@ def save_building_info ( resource_buildings, decorative_buildings, user_id ):
     for building in decorative_buildings:
         if building['new'] == 'True':
             create_decorative_building(building, user_id)
+            success = True
         else:
             success = update_decorative_building(building)
         if not success:

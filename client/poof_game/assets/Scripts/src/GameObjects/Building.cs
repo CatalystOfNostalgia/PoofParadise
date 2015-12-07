@@ -6,7 +6,10 @@ public abstract class Building : MonoBehaviour {
 
     private bool selected { get; set; }
     private bool placed { get; set; }
+
+    // database management data
     public bool created;
+    public int buildingInfoID;
 
     // Tracks the state of the building as a button
     public int ID { get; set; }
@@ -38,7 +41,6 @@ public abstract class Building : MonoBehaviour {
 		options = (Canvas) Instantiate (PrefabManager.prefabManager.buildingOptionCanvas, pos, Quaternion.identity);
         options.transform.SetParent(this.transform);
 
-        created = false;
         selected = true;
         placed = false;
         canDrag = false;

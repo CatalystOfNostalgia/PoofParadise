@@ -21,7 +21,7 @@ public class GameStart : MonoBehaviour {
         // Be careful! Anything after this coroutine will run 
         // before coroutine finishes
 
-		InvokeRepeating ("autoSave", 2, 30F);
+		InvokeRepeating ("autoSave", .1f, 1f);
     }
 
 	void autoSave () {
