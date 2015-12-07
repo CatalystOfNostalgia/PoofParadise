@@ -18,6 +18,33 @@ public class BuildingInformationManager {
         addDecorativeBuildingInfo();
 	}
 	
+    /// <summary>
+    /// 
+    /// gets the resource building information
+    /// returns null if not found
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    public ResourceBuildingInformation getResourceBuildingInformation (string key)
+    {
+        ResourceBuildingInformation info;
+        if (resourceBuildingInformationDict.TryGetValue(key, out info))
+        {
+            return info;
+        }
+        return null;
+    }
+
+    public ResourceBuildingInformation getDecorativeBuildingInformation(string key)
+    {
+        ResourceBuildingInformation info;
+        if (decorativeBuildingInformationDict.TryGetValue(key, out info))
+        {
+            return info;
+        }
+        return null;
+    }
+
     private void addResourceBuildingInfo()
     {
         resourceBuildingInformationDict.Add("Fire Tree Lvl 1", new ResourceBuildingInformation(1, 50, 0, 0, 0, 5, 0, 0, 0));
