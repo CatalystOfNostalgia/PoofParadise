@@ -18,6 +18,7 @@ public class BuildingInformationManager {
         addDecorativeBuildingInfo();
 	}
 	
+    public Dictionary<string, ResourceBuildingInformation> ResourceBuildingInformationDict { get { return resourceBuildingInformationDict; } }
     /// <summary>
     /// 
     /// gets the resource building information
