@@ -93,11 +93,11 @@ INSERT INTO resource_building(
     2, null, 'cave', 2, 10, 1, 0, 0, 0, 50, 20
 );
 
--- poof residence
+-- geode
 INSERT INTO decorative_building_info(
 	level, name, size, next_building_id, resource_cost_fire, resource_cost_water, resource_cost_earth, resource_cost_air, poofs_generated, experience_gain
 ) VALUES (
-	1, "Poof Residence", 2, null, 0,0,100,0,2,30
+	1, "Geode", 2, null, 0,0,100,0,2,30
 );
 
 -- Volcano
