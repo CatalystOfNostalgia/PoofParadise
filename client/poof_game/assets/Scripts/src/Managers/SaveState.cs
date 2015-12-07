@@ -17,8 +17,6 @@ public class SaveState : Manager {
 	public int userLevel { get; set; }
 	public int userExperience { get; set; }
 	public int hqLevel { get; set; }
-    public int hqPosX { get; set; }
-    public int hqPosY { get; set; }
 	public int poofCount { get; set; }
 
 	// resources
@@ -138,8 +136,8 @@ public class SaveState : Manager {
         jsonPlayerData += "\"airElements\": \"" + airEle + "\", ";
 
         jsonPlayerData += "\"headquarters_level\": \"" + hqLevel + "\", ";
-        jsonPlayerData += "\"hq_pos_x\": \"" + hqPosX + "\", ";
-        jsonPlayerData += "\"hq_pos_y\": \"" + hqPosY + "\", ";
+        jsonPlayerData += "\"hq_pos_x\": \"" + hqLocation.x + "\", ";
+        jsonPlayerData += "\"hq_pos_y\": \"" + hqLocation.y + "\", ";
         jsonPlayerData += "\"resource_buildings\": [ ";
 		
 		foreach ( KeyValuePair<Tuple, ResourceBuilding> entry in resourceBuildings) {
@@ -233,6 +231,6 @@ public class SaveState : Manager {
         hqLocation.y = data["hq_pos_y"].AsInt;
         Debug.Log("hqLevel is: " + hqLevel);
         //since array start at 0, lv 1-> index 0, lv 2 -> index 1
-        // buildings.Add(new Tuple(hqPosX, hqPosY), PrefabManager.prefabManager.headQuarterBuildings[hqLevel-1]);
+        hq = PrefabManager.prefabManager.headQuarterBuildings[hqLevel-1];
 	}
 }
