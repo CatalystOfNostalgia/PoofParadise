@@ -35,9 +35,9 @@ install:
 .PHONY: build_poof
 build_poof:
 	@echo 'Building database (gravehub)...'
-	@echo '\. $(TABLES)' | sudo mysql
+	@echo '\. $(TABLES)' | mysql --user=root
 	@echo 'Tables built...'
-	@echo '\. $(INSERTS)' | sudo mysql
+	@echo '\. $(INSERTS)' | mysql --user=root
 	@echo 'Static data inserted...'
 	@python populate.py
 	@echo 'Database populated with sample data'

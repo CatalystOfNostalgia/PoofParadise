@@ -53,7 +53,7 @@ public class TileScript : Manager {
 	 */
 	public void PopulateGameGrid()
 	{
-		foreach (KeyValuePair<Tuple, Building> entry in SaveState.state.resourceBuildings) 
+		foreach (KeyValuePair<Tuple, Building> entry in SaveState.state.buildings) 
 		{
 			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));
 		}

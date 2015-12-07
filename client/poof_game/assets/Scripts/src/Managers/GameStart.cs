@@ -53,7 +53,14 @@ public class GameStart : MonoBehaviour {
 
         // build and populate the game grid
         TileScript.grid.BuildGameGrid();
-        SaveState.state.loadJSON(SceneState.state.userInfo);
+        
+		try{
+			SaveState.state.loadJSON(SceneState.state.userInfo);
+		}
+		catch(System.NullReferenceException e){
+			Debug.Log("[GameStart] User did not log in");
+			Debug.Log(e);
+		}
         TileScript.grid.PopulateGameGrid();
 
         // Generate all poofs/elemari

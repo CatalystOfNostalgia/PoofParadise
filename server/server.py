@@ -231,7 +231,8 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
                 data['earth_ele'] = user.earth_ele
                 data['air_ele'] = user.air_ele
                 data['poof_count'] = user.poof_count
-
+                data['hq_pos_x'] = user.hq_pos_x
+                data['hq_pos_y'] = user.hq_pos_y
                 print("user: " + username + \
                       " is logging in with user id: " + \
                       str(user.user_id) + "\n")
@@ -288,7 +289,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 # starting the server
 print('http server is starting...')
 port_number = 51234
-server_address = ('127.0.0.1', port_number)
+server_address = ('129.22.150.55', port_number)
 httpd = HTTPServer(server_address, GraveHubHTTPRequestHandler)
 print('http server is running on 127.0.0.1:{value}'.format(value=port_number))
 httpd.serve_forever()
