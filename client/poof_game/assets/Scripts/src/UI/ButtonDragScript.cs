@@ -80,17 +80,19 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		if (go == null) return null;
 		var comp = go.GetComponent<T>();
 		
-		if (comp != null)
-			return comp;
+		if (comp != null) return comp;
 		
 		Transform t = go.transform.parent;
 		while (t != null && comp == null)
 		{
 			comp = t.gameObject.GetComponent<T>();
 			t = t.parent;
+            if (t != null) Debug.Log("t != null");
+            if (comp == null) Debug.Log("comp == null");
 		}
 		return comp;
 	}
+
 	// Update is called once per frame
 	void Update () {
 	}
