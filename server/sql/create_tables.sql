@@ -25,6 +25,8 @@ CREATE TABLE user(
     poof_count int DEFAULT 5,
     experience int NOT NULL,
     headquarters_level int not NULL,
+    hq_pos_x int not NULL,
+    hq_pos_y int not NULL,
     level int,
     PRIMARY KEY (user_id)
 );

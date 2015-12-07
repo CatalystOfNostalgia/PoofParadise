@@ -5,6 +5,10 @@ client/poof_game/[Oo]bj/
 client/poof_game/[Bb]uild/
 sysinfo.txt
 *.stackdump
+*Thumbs.db*
+*Thumbs.db
+Thumbs.db
+
 
 # Visual studios generated
 [Ee]xported[Oo]bj/
@@ -32,3 +36,4 @@ client/sysinfo.txt
 # Ignore IDE stuff
 server/.idea
 client/poof_game/assets/Buttons for UI.meta
+*.db
