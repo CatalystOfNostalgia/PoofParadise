@@ -113,6 +113,7 @@ public class BuildingPanel : GamePanel {
         Image image = go.AddComponent<Image>();
         CanvasRenderer cr = go.AddComponent<CanvasRenderer>();
         RectTransform rt = go.AddComponent<RectTransform>();
+        ButtonDragScript bds = go.AddComponent<ButtonDragScript>();
 
         // Attach a text object to the button
         GameObject textObject = new GameObject("Text");
@@ -120,6 +121,7 @@ public class BuildingPanel : GamePanel {
         textObject.transform.SetParent(go.transform);
         text.text = b.name;
         text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        text.alignment = TextAnchor.UpperCenter;
 
         // Set the name and parent of the game object
         go.transform.SetParent(this.transform.Find(path));
@@ -133,7 +135,7 @@ public class BuildingPanel : GamePanel {
         image.sprite = sr.sprite;
 
         button.transform.position = position;
-        button.gameObject.AddComponent<ButtonDragScript>().building = b;
+        bds.building = b;
         return button;
     }
 
