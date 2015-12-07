@@ -115,7 +115,7 @@ public class BuildingPanel : GamePanel {
         //button.GetComponentInChildren<Text>().text = b.name;
         button.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 120);// Set(i * 100 + 50, 50, 140, 120);
         button.transform.position = position; //;
-        button.gameObject.AddComponent<ButtonDragScript>().ID = b.ID-1; // because building's ID starts at 1, but array starts at 0
+        button.gameObject.AddComponent<ButtonDragScript>().building = b;
         return button;
     }
 

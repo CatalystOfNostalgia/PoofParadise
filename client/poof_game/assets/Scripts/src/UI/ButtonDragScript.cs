@@ -9,7 +9,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	private GameObject draggingIcon;
 	private RectTransform draggingPlane;
 	GameObject buildingModalPanel;
-    public int ID { get; set; }
+    public Building building { get; set; }
 
 	public void OnBeginDrag (PointerEventData eventData){
 		//Canvas canvas = GetComponent<Canvas>();
@@ -61,7 +61,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	}
 
 	public void OnEndDrag (PointerEventData eventData){
-		BuildingManager.buildingManager.makeNewBuilding(ID);
+		BuildingManager.buildingManager.makeNewBuilding(building);
 		if (draggingIcon != null) {
 			Destroy(draggingIcon);
 		}

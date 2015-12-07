@@ -56,9 +56,9 @@ public class BuildingManager : Manager {
 	 * 3. decrement resource
 	 * 4. build
 	 */
-	public void makeNewBuilding (int buttonNum){
+	public void makeNewBuilding (Building building){
 		buildingMode = true;
-        target = PrefabManager.prefabManager.resourceBuildings[buttonNum];
+        target = building;
 	}
 
 	public bool isOccupied (){
