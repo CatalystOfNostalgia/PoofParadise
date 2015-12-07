@@ -132,8 +132,12 @@ public class SaveState : Manager {
 		jsonPlayerData += "\"fireElements\": \"" + fireEle + "\", ";
 		jsonPlayerData += "\"waterElements\": \"" + waterEle + "\", ";
 		jsonPlayerData += "\"earthElements\": \"" + earthEle + "\", ";
-		jsonPlayerData += "\"airElements\": \"" + airEle + "\", ";
-		jsonPlayerData += "\"resource_buildings\": [ ";
+        jsonPlayerData += "\"airElements\": \"" + airEle + "\", ";
+
+        jsonPlayerData += "\"headquarters_level\": \"" + hqLevel + "\", ";
+        jsonPlayerData += "\"hq_pos_x\": \"" + hqPosX + "\", ";
+        jsonPlayerData += "\"hq_pos_y\": \"" + hqPosY + "\", ";
+        jsonPlayerData += "\"resource_buildings\": [ ";
 		
 		foreach ( KeyValuePair<Tuple, Building> entry in buildings) {
 			jsonPlayerData += "{ ";
