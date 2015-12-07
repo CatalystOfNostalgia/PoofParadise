@@ -161,10 +161,10 @@ public class SaveState : Manager {
 		userExperience = data ["experience"].AsInt;
 		hqLevel = data ["headquarters_level"].AsInt;
 		//change this back 
-		fire = 20;//data ["fire"].AsInt;
-		water = 20;//data ["water"].AsInt;
-		earth = 20;//data ["earth"].AsInt;
-		air = 20;//data ["air"].AsInt;
+		fire = data ["fire"].AsInt;
+		water = data ["water"].AsInt;
+		earth = data ["earth"].AsInt;
+		air = data ["air"].AsInt;
 		maxFire = data ["max_fire"].AsInt;
 		maxWater = data ["max_water"].AsInt;
 		maxEarth = data ["max_earth"].AsInt;
