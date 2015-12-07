@@ -38,6 +38,8 @@ public class SaveState : Manager {
 	//TODO do we actually need separate dictionaries for the different building type?
 	public Dictionary<Tuple, Building> buildings { get; set; }
 
+    public BuildingInformationManager buildingInformationManager;
+
 
 	//resource collection fields // currently unused
 	public int firetreeRes { get; set; }
@@ -60,19 +62,7 @@ public class SaveState : Manager {
 		}
 
 		state.buildings = new Dictionary<Tuple, Building>();
-
-	/*	
-		// set the fields until we can load
-		state.fire = 0;
-
-		fireEle = 2;
-		earthEle = 2;
-		waterEle = 2;
-		airEle = 2;
-		poofCount = 3;
-<<<<<<< HEAD
-        */
-		
+        buildingInformationManager = new BuildingInformationManager();
 		woolyBeans = 0;
 	}
 

@@ -5,19 +5,17 @@ using System.Collections.Generic;
 /// A hardcoded class of the building information
 /// which includes the id, cost of buildings
 /// </summary>
-public class BuildingInformationManager : MonoBehaviour {
-
-    public static BuildingInformationManager buildingInformationManager;
+public class BuildingInformationManager {
 
     private Dictionary<string, ResourceBuildingInformation> resourceBuildingInformationDict;
     private Dictionary<string, DecorationBuildingInformation> decorativeBuildingInformationDict;
-    // Use this for initialization
-    void Start ()
+    public BuildingInformationManager ()
     {
         resourceBuildingInformationDict = new Dictionary<string, ResourceBuildingInformation>();
         decorativeBuildingInformationDict = new Dictionary<string, DecorationBuildingInformation>();
 
         addResourceBuildingInfo();
+        addDecorativeBuildingInfo();
 	}
 	
     private void addResourceBuildingInfo()
