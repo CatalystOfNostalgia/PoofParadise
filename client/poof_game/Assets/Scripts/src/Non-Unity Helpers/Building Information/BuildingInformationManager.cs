@@ -49,6 +49,7 @@ public class BuildingInformationManager {
         return null;
     }
 
+    //ugh i really should have used builder pattern
     private void addResourceBuildingInfo()
     {
         resourceBuildingInformationDict.Add("Fire Tree Lvl 1", new ResourceBuildingInformation(1, 50, 0, 0, 0, 1, 5, 0, 0, 0));
@@ -66,6 +67,9 @@ public class BuildingInformationManager {
 
     private void addDecorativeBuildingInfo()
     {
-        
+        DecorationBuildingInformationDict.Add("Geode", new DecorationBuildingInformation(1, 0, 100, 0, 0, 1, 2));
+        DecorationBuildingInformationDict.Add("Volcano", new DecorationBuildingInformation(2, 100, 0, 0, 0, 1, 2));
+        DecorationBuildingInformationDict.Add("Waterfall", new DecorationBuildingInformation(3, 0, 0, 100, 0, 2, 4));
+        DecorationBuildingInformationDict.Add("Wind Organ", new DecorationBuildingInformation(4, 0, 0, 0, 100, 2, 4));
     }
 }
