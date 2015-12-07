@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using System;
 
 public class PrefabManager : Manager {
 
@@ -53,16 +54,19 @@ public class PrefabManager : Manager {
     }
 
     /**
-     * Sets the ID of the building prefabs
+     * Sets the ID of the building prefabs from the database
+     * Sorts the building list with the ID
      */
+
     private void SetIDs()
     {
-        int i = 0;
+        // sets the ID of the buildings with the ID from the database
         foreach(Building b in resourceBuildings)
         {
-            b.ID = i;
-            i++; 
+            b.ID = SaveState.state.buildingInformationManager.getResourceBuildingInformation(b.buildingName).ID;
         }
+
+        Array.Sort(resourceBuildings, new BuildingIDComparator());
     }
 
     /**
