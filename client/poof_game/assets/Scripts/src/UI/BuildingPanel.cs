@@ -87,11 +87,19 @@ public class BuildingPanel : GamePanel {
     public Button[] AddButtonsToPanel(Building[] buildings, string path)
     {
         List<Button> list = new List<Button>();
+        List<Vector3> temp = new List<Vector3>();
+        foreach (Transform t in transform.GetChild(0).GetChild(0))
+        {
+            temp.Add(t.transform.position);
+        }
+        Vector3[] vecs = temp.ToArray();
+
+
         // If we are adding buttons to the decorative building panel
         for (int i = 0; i < buildings.Length; i++)
         {
             // TODO: place buttons under the building info assets
-            list.Add(MakeButton(path, new Vector3(i * 100 + this.transform.position.x - (buildings.Length * 100 / 2), 100), buildings[i]));
+            list.Add(MakeButton(path, vecs[i], buildings[i]));
         }
         return list.ToArray();
     }
