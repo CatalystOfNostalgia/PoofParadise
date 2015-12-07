@@ -58,7 +58,11 @@ public class TileScript : Manager {
             SaveState.state.residenceBuildings.Count == 0) {
 			// Hopefully HQ building lv1 is at index 0
 			SaveState.state.hq = PrefabManager.prefabManager.headQuarterBuildings[0];
+            SaveState.state.hqLocation = new Tuple((int)(gridX / 2 + .5), (int)(gridY / 2 + .5));
 		}
+
+        BuildingManager.buildingManager.PlaceBuilding(SaveState.state.hq, GetTile (SaveState.state.hqLocation));
+
 		foreach (KeyValuePair<Tuple, ResourceBuilding> entry in SaveState.state.resourceBuildings) 
 		{
 			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));

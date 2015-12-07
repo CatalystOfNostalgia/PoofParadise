@@ -44,6 +44,7 @@ public class SaveState : Manager {
 	public Dictionary<Tuple, DecorativeBuilding> decorativeBuildings { get; set; }
 	public Dictionary<Tuple, ResidenceBuilding> residenceBuildings { get; set; }
     public HeadQuarterBuilding hq { get; set; }
+    public Tuple hqLocation { get; set; }
 
 	//resource collection fields
 	public int firetreeRes { get; set; }
