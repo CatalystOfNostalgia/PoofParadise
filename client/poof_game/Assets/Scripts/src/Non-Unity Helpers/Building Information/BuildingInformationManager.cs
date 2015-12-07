@@ -32,6 +32,7 @@ public class BuildingInformationManager {
         {
             return info;
         }
+        Debug.Log("[BuildingInformationManager] Could not find the Resource Building with the key: " + key);
         return null;
     }
 
@@ -42,6 +43,7 @@ public class BuildingInformationManager {
         {
             return info;
         }
+        Debug.Log("[BuildingInformationManager] Could not find the Decoration Building with the key: " + key);
         return null;
     }
 
