@@ -8,7 +8,7 @@ public class ResourceBuildingInformation : BuildingInformation{
     private int waterGenerationRate;
     private int airGenerationRate;
 
-    public ResourceBuildingInformation(int ID, int fireCost, int earthCost, int waterCost, int airCost, int fireGenerationRate, int earthGenerationRate, int waterGenerationRate, int airGenerationRate) : base(ID, fireCost, earthCost, waterCost, airCost)
+    public ResourceBuildingInformation(int ID, int fireCost, int earthCost, int waterCost, int airCost, int levelRequirement, int fireGenerationRate, int earthGenerationRate, int waterGenerationRate, int airGenerationRate) : base(ID, fireCost, earthCost, waterCost, airCost, levelRequirement)
     {
         this.fireGenerationRate = fireGenerationRate;
         this.earthGenerationRate = earthGenerationRate;

@@ -5,7 +5,7 @@ public class DecorationBuildingInformation : BuildingInformation {
 
     private int poofAttractionRate;
 
-    public DecorationBuildingInformation(int ID, int fireCost, int earthCost, int waterCost, int airCost, int poofAttractionRate) : base(ID, fireCost, earthCost, waterCost, airCost)
+    public DecorationBuildingInformation(int ID, int fireCost, int earthCost, int waterCost, int airCost, int levelRequirement, int poofAttractionRate) : base(ID, fireCost, earthCost, waterCost, airCost, int levelRequirement)
     {
         this.poofAttractionRate = poofAttractionRate;
     }
