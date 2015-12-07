@@ -15,6 +15,8 @@ public class SaveState : Manager {
 	public int userLevel { get; set; }
 	public int userExperience { get; set; }
 	public int hqLevel { get; set; }
+    public int hqPosX { get; set; }
+    public int hqPosY { get; set; }
 	public int poofCount { get; set; }
 	// List game state variables here
 
@@ -198,5 +200,12 @@ public class SaveState : Manager {
 		//TODO foreach loop for decorative building
 		foreach (JSONNode building in loadedDecorativeBuildings) {
 		}
+
+        hqLevel = data["headquarters_level"].AsInt;
+        hqPosX = data["hq_pos_x"].AsInt;
+        hqPosY = data["hq_pos_y"].AsInt;
+        Debug.Log("hqLevel is: " + hqLevel);
+        //since array start at 0, lv 1-> index 0, lv 2 -> index 1
+        buildings.Add(new Tuple(hqPosX, hqPosY), PrefabManager.prefabManager.headQuarterBuildings[hqLevel-1]);
 	}
 }
