@@ -67,8 +67,7 @@ public class BuildingInformationManager {
 
     private void addDecorativeBuildingInfo()
     {
-        //DecorationBuildingInformationDict.Add("Geode", new DecorationBuildingInformation(1, 0, 100, 0, 0, 1, 2));
-        DecorationBuildingInformationDict.Add("Poof Residence", new DecorationBuildingInformation(1, 0, 100, 0, 0, 1, 2));
+        DecorationBuildingInformationDict.Add("Geode", new DecorationBuildingInformation(1, 0, 100, 0, 0, 1, 2));
         DecorationBuildingInformationDict.Add("Volcano", new DecorationBuildingInformation(2, 100, 0, 0, 0, 1, 2));
         DecorationBuildingInformationDict.Add("Waterfall", new DecorationBuildingInformation(3, 0, 0, 100, 0, 2, 4));
         DecorationBuildingInformationDict.Add("Wind Organ", new DecorationBuildingInformation(4, 0, 0, 0, 100, 2, 4));
