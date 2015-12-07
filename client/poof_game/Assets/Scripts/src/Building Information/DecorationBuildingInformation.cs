@@ -7,5 +7,5 @@ public class DecorationBuildingInformation : BuildingInformation {
         this.PoofAttractionRate = poofAttractionRate;
     }
 
-    public int PoofAttractionRate { get; set; }
+    public int PoofAttractionRate { get;}
 }
