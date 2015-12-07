@@ -51,14 +51,23 @@ public class BuildingManager : Manager {
     }
 
     /**
+     * This overload does nothing right now
+     * TODO: Make this do something
+     */ 
+    public void dragNewBuilding (int buildingNum, Vector3 cursor){
+		buildingMode = true;
+        target = PrefabManager.prefabManager.resourceBuildings[buildingNum];
+	}
+
+	/**
 	 * 1. check building cost
 	 * 2. see if user has enough resource to cover the cost
 	 * 3. decrement resource
 	 * 4. build
 	 */
-    public void dragNewBuilding (int buildingNum, Vector3 cursor){
+	public void makeNewBuilding (int buttonNum){
 		buildingMode = true;
-        target = PrefabManager.prefabManager.resourceBuildings[buildingNum];
+        target = PrefabManager.prefabManager.resourceBuildings[buttonNum];
 	}
 
 	public bool isOccupied (){
