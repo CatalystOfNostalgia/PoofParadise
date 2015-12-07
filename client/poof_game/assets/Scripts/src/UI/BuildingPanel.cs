@@ -1,5 +1,6 @@
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEditor;
 using System.Collections.Generic;
 
 /**.
@@ -20,11 +21,7 @@ public class BuildingPanel : GamePanel {
 
     private enum panel : int { DECORATIVE, RESOURCE };
     private panel activePanel; 
-
-    public Button prefab;
-	
-	public Button exit;
-	
+		
 	/**
      * Generates references based on children
      */
@@ -107,15 +104,24 @@ public class BuildingPanel : GamePanel {
 
     public Button MakeButton(string path, Vector3 position, Building b)
     {
+        // Build new game object and attach components
+        GameObject go = new GameObject();
+        Button button = go.AddComponent<Button>();
+        Image image = go.AddComponent<Image>();
+        CanvasRenderer cr = go.AddComponent<CanvasRenderer>();
+        RectTransform rt = go.AddComponent<RectTransform>();
+
+        go.transform.SetParent(this.transform.Find(path));
+        go.name = b.name;
+
+        // Rect Transform stuff
+        button.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 120);
+
+        // Image component stuff
         SpriteRenderer sr = b.GetComponent<SpriteRenderer>();
-        Button button = (Button)Instantiate(prefab);
-        button.transform.SetParent(this.transform.Find(path));
-        button.image.sprite = sr.sprite;
-        button.image.color = Color.white;
-        button.name = b.name;
-        //button.GetComponentInChildren<Text>().text = b.name;
-        button.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 120);// Set(i * 100 + 50, 50, 140, 120);
-        button.transform.position = position; //;
+        image.sprite = sr.sprite;
+
+        button.transform.position = position;
         button.gameObject.AddComponent<ButtonDragScript>().building = b;
         return button;
     }
