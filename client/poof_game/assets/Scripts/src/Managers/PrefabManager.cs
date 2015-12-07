@@ -63,10 +63,12 @@ public class PrefabManager : Manager {
         // sets the ID of the buildings with the ID from the database
         foreach(Building b in resourceBuildings)
         {
-            b.ID = SaveState.state.buildingInformationManager.getResourceBuildingInformation(b.buildingName).ID;
+            b.ID = SaveState.state.buildingInformationManager.getResourceBuildingInformation(b.name).ID;
+            Debug.Log(string.Format("[PrefabManager] {0} has the ID: {1}", b.name, b.ID));
         }
 
         Array.Sort(resourceBuildings, new BuildingIDComparator());
+        Debug.Log(string.Format("[PrefabManager] the sorted resource building array is: {0}", string.Join(",", resourceBuildings.Select(x=> x.ToString()).ToArray()))); // magic array logging in one line
     }
 
     /**
