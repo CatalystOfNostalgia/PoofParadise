@@ -74,6 +74,7 @@ CREATE TABLE user_decorative_building(
 
 CREATE TABLE decorative_building_info(
     building_info_id int NOT NULL AUTO_INCREMENT,
+	level int NOT NULL,
     name VARCHAR(100) NULL,
     size int NULL,
     next_building_id int NULL,
