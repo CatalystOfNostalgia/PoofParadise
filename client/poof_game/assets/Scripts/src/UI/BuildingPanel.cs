@@ -110,19 +110,38 @@ public class BuildingPanel : GamePanel {
         button.gameObject.AddComponent<ButtonDragScript>().ID = b.ID-1; // because building's ID starts at 1, but array starts at 0
         return button;
     }
-	
-    /**
-     * Dynamically creates buttons
-     * path - supplies the path the the parent for the buttons
-     */
-	public Button[] CreateButtons(Building[] buildingList, ref int index, string path)
+
+    /// <summary>
+    /// Dynamically creates buttons
+    /// path - supplies the path the the parent for the buttons
+    /// 
+    /// TODO
+    /// Call this when the user upgrades the hq so that the building menu is refreshed
+    /// </summary>
+    /// <param name="buildingList"></param>
+    /// <param name="index"></param>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    public Button[] CreateButtons(Building[] buildingList, ref int index, string path)
     {
        
         List<Building> list = new List<Building>();
         int i;
-        for (i = index; i < buildingList.Length && i < index + 4; i++)
+        for (i = index; i < buildingList.Length && list.Count<4; i++) //i < index + 4 not sure what this does
         {
-            list.Add(buildingList[i]);
+            // Checking if the user can build the building or not
+            ResourceBuildingInformation info;
+            int levelRequirement = int.MaxValue;
+            // SaveState is never initialized from the Demo Scene, you must start from Login Scene
+            if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(buildingList[i].name, out info))
+            {
+                levelRequirement = info.LevelRequirement;
+            }
+            if (SaveState.state.hqLevel >= levelRequirement)
+            {
+                list.Add(buildingList[i]);
+                Debug.Log(string.Format("[BuildingPanel] just added {0} to the list", buildingList[i]));
+            }
         }
         index = i;
         return AddButtonsToPanel(list.ToArray(), path);
