@@ -128,7 +128,7 @@ public class BuildingPanel : GamePanel {
         go.name = b.name;
 
         // Rect Transform stuff
-        button.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 120);
+        button.GetComponent<RectTransform>().sizeDelta = new Vector2(90, 70);
 
         // Image component stuff
         SpriteRenderer sr = b.GetComponent<SpriteRenderer>();
