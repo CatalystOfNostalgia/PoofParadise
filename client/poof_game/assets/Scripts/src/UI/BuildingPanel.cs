@@ -99,7 +99,7 @@ public class BuildingPanel : GamePanel {
         for (int i = 0; i < buildings.Length; i++)
         {
             Button b = MakeButton(path, go[i].transform.position, buildings[i]);
-            b.transform.SetParent(go[i].transform);
+            //b.transform.SetParent(go[i].transform);
             list.Add(b);
         }
         return list.ToArray();
