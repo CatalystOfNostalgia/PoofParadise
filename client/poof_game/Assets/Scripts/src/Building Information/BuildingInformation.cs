@@ -5,10 +5,19 @@ using System.Collections;
 /// 
 /// Object holding information about the base building
 /// </summary>
-public class BuildingInformation{
-    public int ID { get; set; }
-    public int FireCost { get; set; }
-    public int EarthCost { get; set; }
-    public int WaterCost { get; set; }
-    public int AirCost { get; set; }
+public abstract class BuildingInformation{
+    public int ID { get;}
+    public int FireCost { get;}
+    public int EarthCost { get;}
+    public int WaterCost { get;}
+    public int AirCost { get;}
+
+    public BuildingInformation(int ID, int fireCost, int earthCost, int waterCost, int airCost)
+    {
+        this.ID = ID;
+        this.FireCost = fireCost;
+        this.EarthCost = earthCost;
+        this.WaterCost = waterCost;
+        this.AirCost = airCost;
+    }
 }
