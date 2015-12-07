@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+
 /**
  * The TileScript is a static, one-of-a-kind singleton object that serves as the
  * game grid from which all other game functions are derived
@@ -43,7 +44,7 @@ public class TileScript : Manager {
      */
     public void BuildGameGrid()
     {
-        GenerateTiles(PrefabManager.prefabManager.tiles, transform.position, gridY, gridX);
+		GenerateTiles(PrefabManager.prefabManager.tiles, PrefabManager.prefabManager.borders, transform.position, gridY, gridX);
         GiveNeighbors();
     }
 
@@ -52,9 +53,13 @@ public class TileScript : Manager {
 	 */
 	public void PopulateGameGrid()
 	{
-		foreach (KeyValuePair<Tuple, Building> entry in SaveState.state.resourceBuildings) 
+		if (SaveState.state.buildings.Count == 0) {
+			// Hopefully HQ building lv1 is at index 0
+			SaveState.state.buildings.Add(new Tuple((int)(gridX/2 + .5),(int)(gridY/2 + .5)), PrefabManager.prefabManager.headQuarterBuildings[0]);
+			Debug.Log("The user is a virgin");
+		}
+		foreach (KeyValuePair<Tuple, Building> entry in SaveState.state.buildings) 
 		{
-
 			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));
 		}
 	}
@@ -62,7 +67,7 @@ public class TileScript : Manager {
     /**
      * A method used for building the game grid
      */
-    private void GenerateTiles(Tile[] tile, Vector3 orig, int width, int height)
+	private void GenerateTiles(Tile[] tile, GameObject[] borders, Vector3 orig, int width, int height)
     {
         // Create a grid object to attach all of the tiles
         GameObject grid = new GameObject();
@@ -84,6 +89,30 @@ public class TileScript : Manager {
                 tilesGenerated++;
             }
         }
+
+		// All these magic numbers have to do with making sure the border is the correct distance away from the tiles. 
+		int borderGenerated = 0;
+		for (int i = 0; i < gridY*0.8; i++)
+		{
+			for (int j = 0; j < gridX*0.8; j++)
+			{
+				bool clear = true;
+				Vector3 location = orig + new Vector3(2.56f*(i + j - 9), 1.7f*(j - i), -2);
+				foreach (Tile t in tiles){
+					if( Mathf.Abs(t.transform.position.x - location.x )<1 & Mathf.Abs(t.transform.position.y - location.y)<2.2  ){
+						clear = false;
+					}
+				}
+				if (clear){
+					GameObject myTile = Instantiate(borders[(i + j) % borders.Length], location, Quaternion.identity) as GameObject;
+					myTile.transform.parent = grid.transform; // Make tile a child of the grid object
+
+					borderGenerated++;
+				}
+			}
+		}
+
+
     }
 
     /**
@@ -191,6 +220,7 @@ public class TileScript : Manager {
      */
     public Tile GetTile(Tuple index)
     {
+
         foreach(Tile test in tiles)
         {
             // Implement equals in tuple

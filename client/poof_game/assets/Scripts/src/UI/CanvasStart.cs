@@ -10,10 +10,10 @@ public class CanvasStart : MonoBehaviour {
 
         BuildUI();
 
-		Button jsonButton = this.transform.FindChild ("Test Panel(Clone)/Test JSON").gameObject.GetComponent<Button>();
+		//Button jsonButton = this.transform.FindChild ("Test Panel(Clone)/Test JSON").gameObject.GetComponent<Button>();
 
-		jsonButton.onClick.RemoveAllListeners ();
-		jsonButton.onClick.AddListener (() => SaveState.state.PullFromServer()); 
+		//jsonButton.onClick.RemoveAllListeners ();
+		//jsonButton.onClick.AddListener (() => SaveState.state.PullFromServer("ted1", "password")); 
 
         GameObject modelPanel = this.transform.FindChild("Model Panel(Clone)").gameObject;
 
@@ -40,8 +40,25 @@ public class CanvasStart : MonoBehaviour {
         {
             Destroy(this);
         }
+        /**
+		GameObject microMenu = this.transform.FindChild("Microtransaction Menu(Clone)").gameObject;
+		
+		if (MicrotransactionPanel.mp == null)
+		{
+			DontDestroyOnLoad(microMenu);
+			MicrotransactionPanel.mp = microMenu.GetComponent<MicrotransactionPanel>();
+		}
+		
+		else if (MicrotransactionPanel.mp != microMenu)
+		{
+			Destroy(this);
+		}*/
 
-		GameObject buildingPanel = this.transform.FindChild("Building Panel(Clone)").gameObject;
+		GameObject buildingPanel = this.transform.Find("Building Panel(Clone)").gameObject;
+        if (buildingPanel == null)
+        {
+            Debug.Log("Building Panel is null");
+        }
 
 		if (BuildingPanel.buildingPanel == null)
 		{
@@ -53,6 +70,20 @@ public class CanvasStart : MonoBehaviour {
 		{
 			Destroy(this);
 		}
+
+        /**
+		GameObject leaderPanel = this.transform.FindChild("Leader Panel(Clone)").gameObject;
+		
+		if (LeaderPanel.leaderPanel == null)
+		{
+			DontDestroyOnLoad(leaderPanel);
+			LeaderPanel.leaderPanel = leaderPanel.GetComponent<LeaderPanel>();
+		}
+		
+		else if (LeaderPanel.leaderPanel != leaderPanel)
+		{
+			Destroy(this);
+		}*/
     }
 
     /**

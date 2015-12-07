@@ -30,7 +30,7 @@ public class GameStart : MonoBehaviour {
 	}
 
 	void OnApplicationQuit(){
-		SaveState.state.PushToServer();
+		//SaveState.state.PushToServer();
 		Debug.Log("Save ON QUITTING!!!");
 	}
 
@@ -46,16 +46,26 @@ public class GameStart : MonoBehaviour {
         {
             yield return null;
         }
-
+    
+        Debug.Log("scene is ready");
         // Build canvas
         Instantiate(PrefabManager.prefabManager.canvas, new Vector3(0, 0, 0), Quaternion.identity);
 
         // build and populate the game grid
         TileScript.grid.BuildGameGrid();
+        
+		try{
+			SaveState.state.loadJSON(SceneState.state.userInfo);
+		}
+		catch(System.NullReferenceException e){
+			Debug.Log("[GameStart] User did not log in");
+			Debug.Log(e);
+		}
+        TileScript.grid.PopulateGameGrid();
 
         // Generate all poofs/elemari
         GameManager.gameManager.SpawnPoofs();
-		Debug.Log ("scene is ready");
+		Debug.Log ("scene is generated");
     }
 
     /**
@@ -95,11 +105,11 @@ public class GameStart : MonoBehaviour {
     public void TestJSON()
     {
 
-		SaveState.state.PullFromServer ();
+		//SaveState.state.PullFromServer ("ted1", "password");
         TileScript.grid.PopulateGameGrid ();
 
 		//testing saving game
-		SaveState.state.PushToServer ();
+		//SaveState.state.PushToServer ();
 
 
     }
