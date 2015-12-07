@@ -11,6 +11,8 @@ public class SaveState : Manager {
 	public static SaveState state;
 
 	// player data
+    public string username { get; set; }
+    public string userPassword { get; set; }
 	public int userID { get; set; }
 	public int userLevel { get; set; }
 	public int userExperience { get; set; }
@@ -115,6 +117,7 @@ public class SaveState : Manager {
 		
 		
 		// TODO Send JSON to server
+        StartCoroutine(GetHTTP.toSave(buildingJSON));
 	}
 	
 	// turns the save data into a JSON String
@@ -122,6 +125,14 @@ public class SaveState : Manager {
 		
 		String jsonPlayerData = "{ ";
 		
+		jsonPlayerData += "\"name\": \"" + "timothy" + "\", ";
+		jsonPlayerData += "\"email\": \"" + "timothy@yo.com" + "\", ";
+		jsonPlayerData += "\"level\": \"" + "1" + "\", ";
+		jsonPlayerData += "\"user_id\": \"" + userID  + "\", ";
+		jsonPlayerData += "\"username\": \"" + username + "\", ";
+		jsonPlayerData += "\"password\": \"" + userPassword + "\", ";
+		jsonPlayerData += "\"experience\": \"" + userExperience + "\", ";
+		jsonPlayerData += "\"hq_level\": \"" + hqLevel  + "\", ";
 		jsonPlayerData += "\"fire\": \"" + fire + "\", ";
 		jsonPlayerData += "\"air\": \"" + air + "\", ";
 		jsonPlayerData += "\"water\": \"" + water + "\", ";
@@ -138,9 +149,11 @@ public class SaveState : Manager {
 		
 		foreach ( KeyValuePair<Tuple, Building> entry in buildings) {
 			jsonPlayerData += "{ ";
+			jsonPlayerData += "\"id\": \"" + entry.Value.ID + "\", ";
 			jsonPlayerData += "\"x_coordinate\": \"" + entry.Key.x + "\", ";
 			jsonPlayerData += "\"y_coordinate\": \"" + entry.Key.y + "\", ";
-			jsonPlayerData += "\"size\": \"" + entry.Value.size + "\" ";
+			jsonPlayerData += "\"size\": \"" + entry.Value.size + "\", ";
+            jsonPlayerData += "\"new\": \"" + entry.Value.created + "\" ";
 			jsonPlayerData += "},";
 		}
 		
@@ -166,6 +179,8 @@ public class SaveState : Manager {
 		userID = data ["user_id"].AsInt;
 		userLevel = data ["level"].AsInt;
 		userExperience = data ["experience"].AsInt;
+        userPassword = data ["password"];
+        username = data ["username"];
 		hqLevel = data ["headquarters_level"].AsInt;
 		fire = data ["fire"].AsInt;
 		water = data ["water"].AsInt;

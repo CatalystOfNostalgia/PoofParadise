@@ -74,6 +74,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
             try:
                 parsed_json = json.loads(response_json)
             except:
+                print response_json
                 print('could not parse json')
                 data = {'error' : 'Could not parse JSON'}
                 return 
@@ -102,7 +103,8 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
                     self.send_response(400)
                     data = {'error' : 'Missing json items'}
                     self.wfile.write(json.dumps(data))
-                    print('failed saving')
+                    print response_json
+                    print('failed saving: missing json items')
 
             # adding a friend connection
             elif re.match('/friends', self.path):
@@ -288,7 +290,8 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 # starting the server
 print('http server is starting...')
 port_number = 51234
-server_address = ('129.22.150.55', port_number)
+#server_address = ('129.22.150.55', port_number)
+server_address = ('localhost', port_number)
 httpd = HTTPServer(server_address, GraveHubHTTPRequestHandler)
 print('http server is running on 127.0.0.1:{value}'.format(value=port_number))
 httpd.serve_forever()
