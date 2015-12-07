@@ -35,9 +35,9 @@ public class BuildingInformationManager {
         return null;
     }
 
-    public ResourceBuildingInformation getDecorativeBuildingInformation(string key)
+    public DecorationBuildingInformation getDecorativeBuildingInformation(string key)
     {
-        ResourceBuildingInformation info;
+        DecorationBuildingInformation info;
         if (decorativeBuildingInformationDict.TryGetValue(key, out info))
         {
             return info;
