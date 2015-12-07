@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System; 
 
 public class BuildingOptionPanel : GamePanel {
 
@@ -71,8 +72,23 @@ public class BuildingOptionPanel : GamePanel {
 	}**/
 	/**removes only decorative building**/
 	private void removeBuilding()
-	{
-		Destroy(this.transform.GetComponentInParent<Building> ().gameObject);
+	{ 
+	    int Id = this.transform.GetComponentInParent<Building> ().ID; 
+		int lengthX = TileScript.grid.gridX;
+		int lengthY = TileScript.grid.gridY ;
+		int x, y;
+		if (Id == 0) {
+			x = 0;
+			y = 0;
+		} 
+		else {
+			x = lengthX % Id;
+			y = lengthY % Id - 1; 
+		}
+		Tuple position = new Tuple (x, y);
+		bool remove = SaveState.state.buildings.Remove(position);
+		Destroy (this.transform.GetComponentInParent<Building> ().gameObject);
+
 	}
     private void SetBuilding()
     {
