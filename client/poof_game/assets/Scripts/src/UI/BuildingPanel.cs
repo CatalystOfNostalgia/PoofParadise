@@ -12,7 +12,14 @@ public class BuildingPanel : GamePanel {
 	// A static reference to this object
 	public static BuildingPanel buildingPanel;
 	
-	private Button[] buttons;
+	private Button[] resourceButtons;
+    private Button[] decorativeButtons;
+
+    private int resourceIndex;
+    private int decorativeIndex;
+
+    private enum panel : int { DECORATIVE, RESOURCE };
+    private panel activePanel; 
 
     public Button prefab;
 	
@@ -30,55 +37,94 @@ public class BuildingPanel : GamePanel {
 		else if (buildingPanel != this) {
 			Destroy(gameObject);
 		}
-        buttons = CreateButtons();
+        decorativeIndex = 0;
+        resourceIndex = 0;
+        activePanel = panel.DECORATIVE;
+        SwitchPanels();
+        resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, ref resourceIndex, "Resource Building Panel/Buttons");
+        decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildigs, ref decorativeIndex, "Decorative Building Panel/Buttons");
 		GeneratePanel();
 	}
-	
-	/**
+
+    public void SwitchPanels()
+    {
+        // Turn off current panel
+        this.transform.GetChild((int)activePanel).gameObject.SetActive(false);
+
+        // Set activePanel
+        if (activePanel == panel.RESOURCE)
+        {
+            activePanel = panel.DECORATIVE;
+        }
+        else
+        {
+            activePanel = panel.RESOURCE;
+        }
+
+        // Turn on current panel
+        this.transform.GetChild((int)activePanel).gameObject.SetActive(true);
+    }
+
+    /**
      * Adds functionality to all of the buttons on the panel
      */
-	override public void GeneratePanel(){
-		foreach (Button b in buttons)
+    override public void GeneratePanel(){
+		foreach (Button b in resourceButtons)
 		{
 			b.onClick.RemoveAllListeners();
 			b.onClick.AddListener(TogglePanel);
 		}
-
-		/**FindAndModifyUIElement("Fire Tree Button", buttons, () => BuildingManager.buildingManager.PlaceBuilding("Fire Tree Button"));
-		
-		FindAndModifyUIElement("Pond Button", buttons, () => BuildingManager.buildingManager.PlaceBuilding("Pond Button"));
-		
-		FindAndModifyUIElement("Cave Button", buttons, () => BuildingManager.buildingManager.PlaceBuilding("Cave Button"));
-		
-		FindAndModifyUIElement("Windmill Button", buttons, () => BuildingManager.buildingManager.PlaceBuilding("Windmill Button"));**/
-		
+        foreach (Button b in decorativeButtons)
+        {
+            b.onClick.RemoveAllListeners();
+            b.onClick.AddListener(TogglePanel);
+        }
 	}
+
+    /**
+     * Generates buttons per panel
+     */
+    public Button[] AddButtonsToPanel(Building[] buildings, string path)
+    {
+        List<Button> list = new List<Button>();
+        // If we are adding buttons to the decorative building panel
+        for (int i = 0; i < buildings.Length; i++)
+        {
+            // TODO: place buttons under the building info assets
+            list.Add(MakeButton(path, new Vector3(i * 100 + this.transform.position.x - (buildings.Length * 100 / 2), 100), buildings[i]));
+        }
+        return list.ToArray();
+    }
+
+    public Button MakeButton(string path, Vector3 position, Building b)
+    {
+        SpriteRenderer sr = b.GetComponent<SpriteRenderer>();
+        Button button = (Button)Instantiate(prefab);
+        button.transform.SetParent(this.transform.Find(path));
+        button.image.sprite = sr.sprite;
+        button.image.color = Color.white;
+        button.name = b.name;
+        //button.GetComponentInChildren<Text>().text = b.name;
+        button.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 120);// Set(i * 100 + 50, 50, 140, 120);
+        button.transform.position = position; //;
+        button.gameObject.AddComponent<ButtonDragScript>().ID = b.ID;
+        return button;
+    }
 	
     /**
      * Dynamically creates buttons
+     * path - supplies the path the the parent for the buttons
      */
-	public Button[] CreateButtons()
+	public Button[] CreateButtons(Building[] buildingList, ref int index, string path)
     {
-        List<Button> list = new List<Button>();
-        int i = 0;
-        foreach (Building b in PrefabManager.prefabManager.resourceBuildings)
+       
+        List<Building> list = new List<Building>();
+        int i;
+        for (i = index; i < buildingList.Length && i < index + 4; i++)
         {
-            // Filters out buildings that are anything but level 1
-            //if (b.name.Contains("1"))
-           // {
-                SpriteRenderer sr = b.GetComponent<SpriteRenderer>();
-                Button button = (Button)Instantiate(prefab);
-                button.transform.SetParent(this.transform.Find("Dialogue Panel/Buttons"));
-                button.image.sprite = sr.sprite;
-                button.image.color = Color.white;
-                button.name = b.name;
-                button.GetComponentInChildren<Text>().text = b.name;
-                button.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 120);// Set(i * 100 + 50, 50, 140, 120);
-                button.transform.position = new Vector3(i * 100 + this.transform.position.x - (PrefabManager.prefabManager.resourceBuildings.Length*100/2), 100);
-                button.gameObject.AddComponent<ButtonDragScript>().ID = b.ID;
-           // }
-            i++;
+            list.Add(buildingList[i]);
         }
-        return list.ToArray();
+        index = i;
+        return AddButtonsToPanel(list.ToArray(), path);
     }
 }

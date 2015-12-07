@@ -24,4 +24,11 @@ class UserResourceBuilding(Base):
     position_x = Column(Integer, nullable=False)
     position_y = Column(Integer, nullable=False)
 
+class UserResidenceBuilding(Base):
+    __tablename__ = 'user_residence_building'
 
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, nullable=False)
+    building_info_id = Column(Integer, nullable=False)
+    position_x = Column(Integer, nullable=False)
+    position_y = Column(Integer, nullable=False)
