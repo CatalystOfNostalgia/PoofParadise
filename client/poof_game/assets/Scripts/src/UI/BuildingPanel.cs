@@ -102,6 +102,9 @@ public class BuildingPanel : GamePanel {
         return list.ToArray();
     }
 
+    /**
+     * Generates a button
+     */
     public Button MakeButton(string path, Vector3 position, Building b)
     {
         // Build new game object and attach components
@@ -111,6 +114,14 @@ public class BuildingPanel : GamePanel {
         CanvasRenderer cr = go.AddComponent<CanvasRenderer>();
         RectTransform rt = go.AddComponent<RectTransform>();
 
+        // Attach a text object to the button
+        GameObject textObject = new GameObject("Text");
+        Text text = textObject.AddComponent<Text>();
+        textObject.transform.SetParent(go.transform);
+        text.text = b.name;
+        text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+
+        // Set the name and parent of the game object
         go.transform.SetParent(this.transform.Find(path));
         go.name = b.name;
 
