@@ -1,5 +1,6 @@
 ﻿using UnityEngine.UI;
 using System;
+using UnityEngine;
 
 /**
  * A class to deal with resources
@@ -47,11 +48,10 @@ public class ResourceIncrementer : GamePanel
     /**
      * A helper method for handling various types of resources
      */
-/**
+
     private void ManageSlider(int add, ref int current, int max, Slider s)
     {
-        Debug.Log(SaveState.state.fire);
-
+    	s.maxValue = max;
         // If the slider is not filled yet
         if (current <= max)
         {
@@ -75,6 +75,7 @@ public class ResourceIncrementer : GamePanel
         switch (type) {
             case ResourceBuilding.ResourceType.fire:
                 dummy = SaveState.state.fire;
+                Debug.Log(SaveState.state.maxFire);
                 ManageSlider(amount, ref dummy, SaveState.state.maxFire, GetSliderByName("Fire Slider"));
                 SaveState.state.fire = dummy;
                 break;
@@ -85,7 +86,7 @@ public class ResourceIncrementer : GamePanel
 			    break;
 		    case ResourceBuilding.ResourceType.air:
                 dummy = SaveState.state.air;
-                ManageSlider(amount, ref dummy, SaveState.state.maxAir, GetSliderByName("Air Slider"));
+                ManageSlider(amount, ref dummy, SaveState.state.maxAir, GetSliderByName("Wind Slider"));
                 SaveState.state.air = dummy;
 			    break;
 		    case ResourceBuilding.ResourceType.earth:
@@ -99,5 +100,5 @@ public class ResourceIncrementer : GamePanel
 		}
 
 	}
-*/
+
 }

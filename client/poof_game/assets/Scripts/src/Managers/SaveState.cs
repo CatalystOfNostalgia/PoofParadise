@@ -39,7 +39,7 @@ public class SaveState : Manager {
 	public Dictionary<Tuple, Building> buildings { get; set; }
 
 
-	//resource collection fields
+	//resource collection fields // currently unused
 	public int firetreeRes { get; set; }
 	public int windmillRes { get; set; }
 	public int pondRes { get; set; }
