@@ -123,6 +123,14 @@ public class BuildingPanel : GamePanel {
         text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
         text.alignment = TextAnchor.UpperCenter;
 
+        // Attach a cost object to the object
+        GameObject costObject = new GameObject("Cost");
+        Text textCost = costObject.AddComponent<Text>();
+        textCost.transform.SetParent(go.transform);
+        textCost.text = b.fireCost + "\n" + b.waterCost + "\n" + b.airCost + "\n" + b.earthCost;
+        textCost.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        textCost.alignment = TextAnchor.LowerCenter;
+
         // Set the name and parent of the game object
         go.transform.SetParent(this.transform.Find(path));
         go.name = b.name;
