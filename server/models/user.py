@@ -17,6 +17,8 @@ class User(Base):
     headquarters_level = Column(Integer, default = 1)
     level = Column(Integer, default = 1)
     headquarters_level = Column(Integer, default = 1)
+    hq_pos_x = Column(Integer, default=8)
+    hq_pos_y = Column(Integer, default=8)
     experience = Column(Integer, default = 0)
     fire = Column(Integer, default = 0)
     air = Column(Integer, default = 0)
