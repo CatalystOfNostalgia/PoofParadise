@@ -103,7 +103,7 @@ public class PrefabManager : Manager {
      *
      * Deprecated -> Use if you wish to generate your own prefabs
      */
-    private void GenerateSpriteList(Object[] objs, Sprite[] outList)
+    private void GenerateSpriteList(object[] objs, Sprite[] outList)
     {
         for (int i = 0; i < objs.Length; i++)
         {
