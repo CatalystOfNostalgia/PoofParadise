@@ -20,34 +20,6 @@ public class BuildingInformationManager {
 
     public Dictionary<string, ResourceBuildingInformation> ResourceBuildingInformationDict { get { return resourceBuildingInformationDict; } }
     public Dictionary<string, DecorationBuildingInformation> DecorationBuildingInformationDict { get { return decorativeBuildingInformationDict; } }
-    /// <summary>
-    /// 
-    /// gets the resource building information
-    /// returns null if not found
-    /// </summary>
-    /// <param name="key"></param>
-    /// <returns></returns>
-    public ResourceBuildingInformation getResourceBuildingInformation (string key)
-    {
-        ResourceBuildingInformation info;
-        if (resourceBuildingInformationDict.TryGetValue(key, out info))
-        {
-            return info;
-        }
-        Debug.Log("[BuildingInformationManager] Could not find the Resource Building with the key: " + key);
-        return null;
-    }
-
-    public DecorationBuildingInformation getDecorativeBuildingInformation(string key)
-    {
-        DecorationBuildingInformation info;
-        if (decorativeBuildingInformationDict.TryGetValue(key, out info))
-        {
-            return info;
-        }
-        Debug.Log("[BuildingInformationManager] Could not find the Decoration Building with the key: " + key);
-        return null;
-    }
 
     //ugh i really should have used builder pattern
     private void addResourceBuildingInfo()
@@ -67,8 +39,7 @@ public class BuildingInformationManager {
 
     private void addDecorativeBuildingInfo()
     {
-        //DecorationBuildingInformationDict.Add("Geode", new DecorationBuildingInformation(1, 0, 100, 0, 0, 1, 2));
-        DecorationBuildingInformationDict.Add("Poof Residence", new DecorationBuildingInformation(1, 0, 100, 0, 0, 1, 2));
+        DecorationBuildingInformationDict.Add("Geode", new DecorationBuildingInformation(1, 0, 100, 0, 0, 1, 2));
         DecorationBuildingInformationDict.Add("Volcano", new DecorationBuildingInformation(2, 100, 0, 0, 0, 1, 2));
         DecorationBuildingInformationDict.Add("Waterfall", new DecorationBuildingInformation(3, 0, 0, 100, 0, 2, 4));
         DecorationBuildingInformationDict.Add("Wind Organ", new DecorationBuildingInformation(4, 0, 0, 0, 100, 2, 4));
