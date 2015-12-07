@@ -73,6 +73,9 @@ public class TileScript : Manager {
 			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));
 		}
 		foreach (KeyValuePair<Tuple, ResidenceBuilding> entry in SaveState.state.residenceBuildings) 
+		{
+			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));
+		}
 	}
 
     /**

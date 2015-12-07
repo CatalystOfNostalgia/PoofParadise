@@ -42,7 +42,7 @@ public class BuildingPanel : GamePanel {
         activePanel = panel.DECORATIVE;
         SwitchPanels();
         resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, ref resourceIndex, "Resource Building Panel/Buttons");
-        decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildigs, ref decorativeIndex, "Decorative Building Panel/Buttons");
+        decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildings, ref decorativeIndex, "Decorative Building Panel/Buttons");
 		GeneratePanel();
 	}
 

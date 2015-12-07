@@ -229,10 +229,10 @@ public class SaveState : Manager {
 			decorativeBuildings.Add(new Tuple(x, y), newBuilding);
 		}
 
-        hqPosX = data["hq_pos_x"].AsInt;
-        hqPosY = data["hq_pos_y"].AsInt;
+        hqLocation.x = data["hq_pos_x"].AsInt;
+        hqLocation.y = data["hq_pos_y"].AsInt;
         Debug.Log("hqLevel is: " + hqLevel);
         //since array start at 0, lv 1-> index 0, lv 2 -> index 1
-        buildings.Add(new Tuple(hqPosX, hqPosY), PrefabManager.prefabManager.headQuarterBuildings[hqLevel-1]);
+        // buildings.Add(new Tuple(hqPosX, hqPosY), PrefabManager.prefabManager.headQuarterBuildings[hqLevel-1]);
 	}
 }
