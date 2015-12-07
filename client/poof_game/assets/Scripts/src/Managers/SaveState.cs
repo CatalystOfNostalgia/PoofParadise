@@ -205,7 +205,6 @@ public class SaveState : Manager {
 		foreach (JSONNode building in loadedDecorativeBuildings) {
 		}
 
-        hqLevel = data["headquarters_level"].AsInt;
         hqPosX = data["hq_pos_x"].AsInt;
         hqPosY = data["hq_pos_y"].AsInt;
         Debug.Log("hqLevel is: " + hqLevel);
