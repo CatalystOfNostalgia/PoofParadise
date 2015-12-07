@@ -40,8 +40,10 @@ public class SaveState : Manager {
     public int maxPoofs { get; set; }
 
 	// buildings
-	//TODO do we actually need separate dictionaries for the different building type?
-	public Dictionary<Tuple, Building> buildings { get; set; }
+	public Dictionary<Tuple, ResourceBuilding> resourceBuildings { get; set; }
+	public Dictionary<Tuple, DecorativeBuilding> decorativeBuildings { get; set; }
+	public Dictionary<Tuple, ResidenceBuilding> residenceBuildings { get; set; }
+    public HeadQuarterBuilding hq { get; set; }
 
 	//resource collection fields
 	public int firetreeRes { get; set; }
@@ -64,19 +66,9 @@ public class SaveState : Manager {
 			Destroy(gameObject);
 		}
 
-		state.buildings = new Dictionary<Tuple, Building>();
-
-	/*	
-		// set the fields until we can load
-		state.fire = 0;
-
-		fireEle = 2;
-		earthEle = 2;
-		waterEle = 2;
-		airEle = 2;
-		poofCount = 3;
-<<<<<<< HEAD
-        */
+		state.resourceBuildings = new Dictionary<Tuple, ResourceBuilding>();
+		state.decorativeBuildings = new Dictionary<Tuple, DecorativeBuilding>();
+		state.residenceBuildings = new Dictionary<Tuple, ResidenceBuilding>();
 		
 		woolyBeans = 0;
 	}
@@ -147,7 +139,7 @@ public class SaveState : Manager {
 		jsonPlayerData += "\"airElements\": \"" + airEle + "\", ";
 		jsonPlayerData += "\"resource_buildings\": [ ";
 		
-		foreach ( KeyValuePair<Tuple, Building> entry in buildings) {
+		foreach ( KeyValuePair<Tuple, ResourceBuilding> entry in resourceBuildings) {
 			jsonPlayerData += "{ ";
 			jsonPlayerData += "\"id\": \"" + entry.Value.ID + "\", ";
 			jsonPlayerData += "\"x_coordinate\": \"" + entry.Key.x + "\", ";
@@ -209,12 +201,23 @@ public class SaveState : Manager {
             if (PrefabManager.prefabManager == null) {
                 Debug.Log("prefab manager");
             }
-			Building newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
+			ResourceBuilding newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
 
-			buildings.Add(new Tuple(x, y), newBuilding);
+			resourceBuildings.Add(new Tuple(x, y), newBuilding);
 		}
-		//TODO foreach loop for decorative building
+
 		foreach (JSONNode building in loadedDecorativeBuildings) {
+			int x = building["position_x"].AsInt;
+			int y = building["position_y"].AsInt;
+
+            // Retrieves a building from the resource buildings list
+            Debug.Log("index: " + building["building_info_id"].AsInt);
+            if (PrefabManager.prefabManager == null) {
+                Debug.Log("prefab manager");
+            }
+			DecorativeBuilding newBuilding = PrefabManager.prefabManager.decorativeBuildings[building["building_info_id"].AsInt];
+
+			decorativeBuildings.Add(new Tuple(x, y), newBuilding);
 		}
 	}
 }

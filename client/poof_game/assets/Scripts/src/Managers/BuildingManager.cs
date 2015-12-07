@@ -102,8 +102,21 @@ public class BuildingManager : Manager {
                 newBuilding.transform.SetParent(buildings.transform);
 
                 // TODO this feels pretty iffy
-                if (!SaveState.state.buildings.ContainsKey (tile.index)) {
-                    SaveState.state.buildings.Add (tile.index, newBuilding);
+                if ( !isTileTaken(tile.index)) {
+
+                    if (newBuilding.GetType() == typeof(DecorativeBuilding)) {
+                        DecorativeBuilding decBuilding = (DecorativeBuilding)newBuilding;
+                        SaveState.state.decorativeBuildings.Add (tile.index, decBuilding);
+
+                    } else if (newBuilding.GetType() == typeof(ResourceBuilding)) {
+                        ResourceBuilding resBuilding = (ResourceBuilding)newBuilding;
+                        SaveState.state.resourceBuildings.Add (tile.index, resBuilding);
+
+                    } else if (newBuilding.GetType() == typeof(ResidenceBuilding)) {
+                        ResidenceBuilding resBuilding = (ResidenceBuilding)newBuilding;
+                        SaveState.state.residenceBuildings.Add (tile.index, resBuilding);
+                    }
+
                 }
 
                 GameManager.gameManager.SpawnPoofs();
@@ -115,8 +128,9 @@ public class BuildingManager : Manager {
      * TODO: Give description
      */
 	private bool isTileTaken(Tuple t){
-		return SaveState.state.buildings.ContainsKey (t);
-
+		return (SaveState.state.resourceBuildings.ContainsKey (t) ||
+		       SaveState.state.decorativeBuildings.ContainsKey (t) ||
+		       SaveState.state.residenceBuildings.ContainsKey (t));
 	}
 
 	/**

@@ -131,22 +131,16 @@ public class GameManager : Manager {
         int maxPoofs = 0;
         int generatedPoofs = 0;
 
-        foreach ( KeyValuePair<Tuple, Building> entry in SaveState.state.buildings) {
-            
-            if (entry.Value.GetType() == typeof(DecorativeBuilding)) {
-                DecorativeBuilding decBuilding = (DecorativeBuilding)entry.Value;
-                generatedPoofs += decBuilding.generatedPoofs;
-            }
+        foreach ( KeyValuePair<Tuple, DecorativeBuilding> entry in SaveState.state.decorativeBuildings) {
+            generatedPoofs += entry.Value.generatedPoofs;
+        }
 
-            if (entry.Value.GetType() == typeof(ResidenceBuilding)) {
-                ResidenceBuilding resBuilding = (ResidenceBuilding)entry.Value;
-                maxPoofs += resBuilding.poofsAllowed;
-            }
+        foreach ( KeyValuePair<Tuple, ResidenceBuilding> entry in SaveState.state.residenceBuildings) {
+            maxPoofs += entry.Value.poofsAllowed;
 
         }
 
         if (generatedPoofs > maxPoofs) { generatedPoofs = maxPoofs; }
-
         return generatedPoofs;
     }
 

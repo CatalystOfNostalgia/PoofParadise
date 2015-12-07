@@ -11,6 +11,9 @@ def create_account( name, email, username, password ):
     models.session.add(new_user)
     models.session.commit()
 
+
+    # create an HQ for the user
+
 # returns the user given a username and password
 def log_in( username, password ):
     try:

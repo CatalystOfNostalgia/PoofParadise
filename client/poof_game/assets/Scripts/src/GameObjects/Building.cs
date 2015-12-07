@@ -6,7 +6,7 @@ public abstract class Building : MonoBehaviour {
 
     private bool selected { get; set; }
     private bool placed { get; set; }
-    public bool created { get; set; }
+    public bool created;
 
     // Tracks the state of the building as a button
     public int ID { get; set; }

@@ -53,12 +53,21 @@ public class TileScript : Manager {
 	 */
 	public void PopulateGameGrid()
 	{
-		if (SaveState.state.buildings.Count == 0) {
+		if (SaveState.state.resourceBuildings.Count == 0 &&
+            SaveState.state.decorativeBuildings.Count == 0 &&
+            SaveState.state.residenceBuildings.Count == 0) {
 			// Hopefully HQ building lv1 is at index 0
-			SaveState.state.buildings.Add(new Tuple((int)(gridX/2 + .5),(int)(gridY/2 + .5)), PrefabManager.prefabManager.headQuarterBuildings[0]);
-			Debug.Log("The user is a virgin");
+			SaveState.state.hq = PrefabManager.prefabManager.headQuarterBuildings[0];
 		}
-		foreach (KeyValuePair<Tuple, Building> entry in SaveState.state.buildings) 
+		foreach (KeyValuePair<Tuple, ResourceBuilding> entry in SaveState.state.resourceBuildings) 
+		{
+			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));
+		}
+		foreach (KeyValuePair<Tuple, DecorativeBuilding> entry in SaveState.state.decorativeBuildings) 
+		{
+			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));
+		}
+		foreach (KeyValuePair<Tuple, ResidenceBuilding> entry in SaveState.state.residenceBuildings) 
 		{
 			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));
 		}

@@ -9,7 +9,7 @@ public class PrefabManager : Manager {
 
     // Below are lists of prefabs for use by the entire game
     public ResourceBuilding[] resourceBuildings { get; set; }
-    public DecorativeBuilding[] decorativeBuildigs { get; set; }
+    public DecorativeBuilding[] decorativeBuildings { get; set; }
 	public HeadQuarterBuilding[] headQuarterBuildings { get; set; }
     public Tile[] tiles { get; set; }
 	public GameObject[] borders { get; set; }
@@ -42,7 +42,7 @@ public class PrefabManager : Manager {
     private void GeneratePrefabLists()
     {
         resourceBuildings = Resources.LoadAll("Prefabs/Buildings/Resource Buildings", typeof(ResourceBuilding)).Cast<ResourceBuilding>().ToArray();
-        decorativeBuildigs = Resources.LoadAll("Prefabs/Buildings/Decorative Buildings", typeof(DecorativeBuilding)).Cast<DecorativeBuilding>().ToArray();
+        decorativeBuildings = Resources.LoadAll("Prefabs/Buildings/Decorative Buildings", typeof(DecorativeBuilding)).Cast<DecorativeBuilding>().ToArray();
 		headQuarterBuildings = Resources.LoadAll ("Prefabs/Buildings/Headquarters", typeof(HeadQuarterBuilding)).Cast<HeadQuarterBuilding> ().ToArray ();
         tiles = Resources.LoadAll("Prefabs/Grid/Tile", typeof(Tile)).Cast<Tile>().ToArray();
 		borders = Resources.LoadAll("Prefabs/Grid/border", typeof(GameObject)).Cast<GameObject>().ToArray();
