@@ -95,6 +95,7 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
                 # update the data and send a success response
                 if all (item in parsed_json for item in (required_items)):
 
+                    print response_json
                     self.save(parsed_json)
 
                 # if the required elements are not present send an error message

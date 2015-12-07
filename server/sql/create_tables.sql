@@ -7,7 +7,7 @@ USE gravehub;
 CREATE TABLE user(
     user_id int NOT NULL AUTO_INCREMENT,
     name varchar(100) NOT NULL,
-    email varchar(100) NOT NULL UNIQUE,
+    email varchar(100) NOT NULL,
     username varchar(100) NOT NULL UNIQUE,
     password varchar(100),
     fire int DEFAULT 0,

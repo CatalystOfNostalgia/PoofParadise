@@ -195,9 +195,13 @@ public class SaveState : Manager {
 		loadedResourceBuildings = data ["resource_buildings"].AsArray;
 		loadedDecorativeBuildings = data ["decorative_buildings"].AsArray;
 
+        Debug.Log("count: " + loadedResourceBuildings.Count);
+
 		foreach (JSONNode building in loadedResourceBuildings) {
 			int x = building["position_x"].AsInt;
 			int y = building["position_y"].AsInt;
+			Debug.Log("x: " + building["position_x"].AsInt);
+			Debug.Log("y: " + building["position_y"].AsInt);
 
             // Retrieves a building from the resource buildings list
             Debug.Log("index: " + building["building_info_id"].AsInt);
