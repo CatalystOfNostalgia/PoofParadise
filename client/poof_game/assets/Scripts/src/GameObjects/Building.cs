@@ -101,4 +101,19 @@ public abstract class Building : MonoBehaviour {
             this.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
+
+    public override bool Equals(object o)
+    {
+        if (! this.GetType().Equals( o.GetType()))
+        {
+            return false;
+        }
+
+        return this.ID == (o as Building).ID;
+    }
+
+    public override int GetHashCode()
+    {
+        return ID.GetHashCode() ^ this.GetType().GetHashCode();
+    }
 }
