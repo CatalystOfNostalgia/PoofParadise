@@ -8,7 +8,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 429984}
-  - 114: {fileID: 11449922}
   - 212: {fileID: 21250098}
   - 95: {fileID: 9575856}
   - 61: {fileID: 6180798}
@@ -61,18 +60,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11449922
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 179592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aac2ef994354c4a7281732601f41c142, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generatedPoofs: 0
 --- !u!212 &21250098
 SpriteRenderer:
   m_ObjectHideFlags: 1
