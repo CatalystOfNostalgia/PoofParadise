@@ -7,14 +7,19 @@ using UnityEngine;
  */
 public class ResourceIncrementer : GamePanel
 {
-	// singleton object
+	// Singleton object
 	public static ResourceIncrementer incrementer;
 
+    // List of interactive objects on this panel
     private Slider[] sliders;
     private Text[] counters;
 	
+    /**
+     * Overrides the start function provided by GamePanel
+     */
 	override public void Start() {
-		// create the singleton
+
+		// Create the singleton
 		if (incrementer == null) {
 			DontDestroyOnLoad(gameObject);
 			incrementer = this;
@@ -23,11 +28,13 @@ public class ResourceIncrementer : GamePanel
 		}
 
         sliders = RetrieveSliderList("Sliders");
-        //counters = RetrieveTextList("Texts");
         counters = GetComponentsInChildren<Text>();
-        Debug.Log("We have " + counters.Length + " counters.");
 	}
 
+    /**
+     * Overrides the Generate Panel function provided
+     * by GamePanel
+     */
     public override void GeneratePanel()
     {
         throw new NotImplementedException();
@@ -48,6 +55,9 @@ public class ResourceIncrementer : GamePanel
         return null;
     }
 
+    /**
+     * Retrieves text field by name
+     */
     private Text GetTextByName(string name) {
         foreach (Text t in counters)
         {
@@ -62,7 +72,6 @@ public class ResourceIncrementer : GamePanel
     /**
      * A helper method for handling various types of resources
      */
-
     private bool ManageSlider(int add, ref int current, int max, Slider s)
     {
     	s.maxValue = max;
@@ -90,7 +99,9 @@ public class ResourceIncrementer : GamePanel
         }
     }
     
-    //copypasta code for now. make it more modular later
+    /**
+     * Copypasta code for now. make it more modular later
+     */
     public bool ResourceGain (int amount, ResourceBuilding.ResourceType type) {
         int dummy;
         bool pay;
