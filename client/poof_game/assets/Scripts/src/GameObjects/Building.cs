@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
 
+/**
+ * Building serves as an abstract MonoBehavior which 
+ * can be extended for each type of building
+ * Basic building functionality is implemented here
+ */
 public abstract class Building : MonoBehaviour {
 
     private bool selected { get; set; }

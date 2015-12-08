@@ -8,7 +8,6 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	public bool dragOnSurfaces = true;
 	private GameObject draggingIcon;
 	private RectTransform draggingPlane;
-	GameObject buildingModalPanel;
     public Building building { get; set; }
 
 	public void OnBeginDrag (PointerEventData eventData){

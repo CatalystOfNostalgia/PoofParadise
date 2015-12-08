@@ -78,7 +78,7 @@ public class ResourceIncrementer : GamePanel
         }
         else if (current + add < 0)
         {
-            current = current; // Do nothing
+            // Do nothing
             return false;
         }
 

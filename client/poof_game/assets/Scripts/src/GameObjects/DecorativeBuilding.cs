@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/**
+ * The Decorative Building MonoBehavior extends Building
+ * It is a specific type of building which attracts poofs
+ * to the user's paradise
+ */
 public class DecorativeBuilding : Building {
 
 	// Fields
 	public int poofGenerationRate;
 
-	protected virtual void Start()
+	protected override void Awake()
 	{
         base.Awake();
         
