@@ -267,9 +267,10 @@ def create_decorative_building ( building, user_id, ids ):
     models.session.add(new_building)
     models.session.commit() 
 
-    new_id = models.session.query(func.max(models.UserDecorativeBuilding.id)).one().id
+    new_id = models.session.query(func.max(models.UserDecorativeBuilding.id)).one()[0]
 
     ids.append(new_id)
+    return ids
 
 # creates a resource building in the database
 def create_resource_building ( building, user_id, ids ):
@@ -283,9 +284,10 @@ def create_resource_building ( building, user_id, ids ):
     models.session.add(new_building)
     models.session.commit() 
 
-    new_id = models.session.query(func.max(models.UserResourceBuilding.id)).one().id
+    new_id = models.session.query(func.max(models.UserResourceBuilding.id)).one()[0]
 
     ids.append(new_id)
+    return ids
 
 # turns a building into a dictionary
 def dict_buildings( buildings ):

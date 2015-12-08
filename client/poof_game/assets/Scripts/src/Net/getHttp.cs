@@ -39,7 +39,7 @@ public class GetHTTP : MonoBehaviour {
     }
 
     //save to server
-    public static IEnumerator toSave(String jsonStuff){
+    public static IEnumerator toSave(String jsonStuff, Action<String> callback){
 
         String url = server + "/save";
         byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonStuff);
@@ -54,6 +54,7 @@ public class GetHTTP : MonoBehaviour {
 
         Debug.Log ("got request");
         Debug.Log (request.text);
+        callback(request.text);
     }
 
 

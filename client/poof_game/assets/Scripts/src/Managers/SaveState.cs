@@ -112,8 +112,13 @@ public class SaveState : Manager {
 		
 		
 		// TODO Send JSON to server
-        StartCoroutine(GetHTTP.toSave(buildingJSON));
+        StartCoroutine(GetHTTP.toSave(buildingJSON, updateBuildings));
 	}
+
+    // updates the saved building with their new IDs
+    private void updateBuildings(string response) {
+
+    }
 	
 	// turns the save data into a JSON String
 	public String jsonify() {
