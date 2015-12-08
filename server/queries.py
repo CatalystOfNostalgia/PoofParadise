@@ -40,8 +40,8 @@ def save_user_info( user ):
     updated_user.password = user['password']
     updated_user.experience = user['experience']
     updated_user.headquarters_level = user['hq_level']
-    update_user.hq_pos_x = user['hq_pos_x']
-    update_user.hq_pos_y = user['hq_pos_y']
+    updated_user.hq_pos_x = user['hq_pos_x']
+    updated_user.hq_pos_y = user['hq_pos_y']
     models.session.commit()
 
 # returns the user given a username
@@ -188,25 +188,29 @@ def get_decorative_building_info( building_info_id ):
 # saves the users buildings returns the building if a building cannot be found
 def save_building_info ( resource_buildings, decorative_buildings, user_id ):
     
+    ids = []
+
     # resource buildings
     for building in resource_buildings:
         if building['new'] == 'True':
-            create_resource_building(building, user_id)
+            ids = create_resource_building(building, user_id, ids)
             success = True
         else:
             success = update_resource_building(building, user_id)
         if not success:
-            return building
+            return []
 
     # decorative buildings  
     for building in decorative_buildings:
         if building['new'] == 'True':
-            create_decorative_building(building, user_id)
+            ids = create_decorative_building(building, user_id, ids)
             success = True
         else:
             success = update_decorative_building(building)
         if not success:
-            return building
+            return []
+
+    return ids;
 
 # updates an existing building in the database if the building cannot be found
 # returns False
@@ -248,7 +252,7 @@ def update_decorative_building ( building ):
         return False
 
 # creates a decorative building in the database
-def create_decorative_building ( building, user_id ):
+def create_decorative_building ( building, user_id, ids ):
 
     new_building = models.UserDecorativeBuilding( \
         user_id = user_id, \
@@ -260,8 +264,12 @@ def create_decorative_building ( building, user_id ):
     models.session.add(new_building)
     models.session.commit() 
 
+    new_id = models.session.query(models.UserDecorativeBuilding).order_by(models.UserResourceBuilding.id).one().id
+
+    ids.append(new_id)
+
 # creates a resource building in the database
-def create_resource_building ( building, user_id ):
+def create_resource_building ( building, user_id, ids ):
 
     new_building = models.UserResourceBuilding( \
         user_id = user_id, \
@@ -271,6 +279,10 @@ def create_resource_building ( building, user_id ):
 
     models.session.add(new_building)
     models.session.commit() 
+
+    new_id = models.session.query(models.UserResourceBuilding).order_by(models.UserResourceBuilding.id).one().id
+
+    ids.append(new_id)
 
 # turns a building into a dictionary
 def dict_buildings( buildings ):
