@@ -37,11 +37,11 @@ public abstract class Building : MonoBehaviour {
         Vector3 pos = new Vector3(transform.position.x + .7f, transform.position.y + 1, transform.position.z);
 		options = (Canvas) Instantiate (PrefabManager.prefabManager.buildingOptionCanvas, pos, Quaternion.identity);
         options.transform.SetParent(this.transform);
-        this.name = this.name.Replace("(Clone)", "");
+        //this.name = this.name.Replace("(Clone)", "");
 
         DecorationBuildingInformation dbi;
         ResourceBuildingInformation rbi;
-        if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(this.name, out dbi))
+        if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(this.name.Replace("(Clone)", ""), out dbi))
         {
             // Set resource cost
             fireCost = dbi.FireCost;
@@ -50,18 +50,18 @@ public abstract class Building : MonoBehaviour {
             airCost = dbi.AirCost;
 
             // Spend allocated resources
-            ResourceIncrementer.incrementer.ResourceGain(fireCost, ResourceBuilding.ResourceType.fire);
+            PayForBuilding();
         }
-        else if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(this.name, out rbi))
+        else if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(this.name.Replace("(Clone)", ""), out rbi))
         {
             // Set resource cost
-            //fireCost = dbi.FireCost;
-            //waterCost = dbi.WaterCost;
-            //earthCost = dbi.EarthCost;
-            //airCost = dbi.AirCost;
+            fireCost = rbi.FireCost;
+            waterCost = rbi.WaterCost;
+            earthCost = rbi.EarthCost;
+            airCost = rbi.AirCost;
 
             // Spend allocated resources
-            //ResourceIncrementer.incrementer.ResourceGain(fireCost, ResourceBuilding.ResourceType.fire);
+            PayForBuilding();
         }
         else
         {
@@ -75,6 +75,17 @@ public abstract class Building : MonoBehaviour {
         canDrag = false;
         showOptions = false;
         size = 1;
+    }
+
+    /**
+     * Pays for the building based on the cost of the building
+     */
+    private void PayForBuilding()
+    {
+        ResourceIncrementer.incrementer.ResourceGain(-fireCost, ResourceBuilding.ResourceType.fire);
+        ResourceIncrementer.incrementer.ResourceGain(-waterCost, ResourceBuilding.ResourceType.water);
+        ResourceIncrementer.incrementer.ResourceGain(-earthCost, ResourceBuilding.ResourceType.earth);
+        ResourceIncrementer.incrementer.ResourceGain(-airCost, ResourceBuilding.ResourceType.air);
     }
 
     /**
