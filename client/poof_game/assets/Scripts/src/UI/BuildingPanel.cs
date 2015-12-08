@@ -76,6 +76,12 @@ public class BuildingPanel : GamePanel {
                 Destroy(button.gameObject);
             }
         }
+
+        // Clear out arrays
+        resourceButtons = null;
+        decorativeButtons = null;
+
+        // Rebuild them
         resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, "Resource Building Panel/Buttons");
         decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildigs, "Decorative Building Panel/Buttons");
 
@@ -124,8 +130,6 @@ public class BuildingPanel : GamePanel {
         GameObject go = new GameObject();
         Button button = go.AddComponent<Button>();
         Image image = go.AddComponent<Image>();
-        CanvasRenderer cr = go.AddComponent<CanvasRenderer>();
-        RectTransform rt = go.AddComponent<RectTransform>();
         ButtonDragScript bds = go.AddComponent<ButtonDragScript>();
 
         // Attach a text object to the button

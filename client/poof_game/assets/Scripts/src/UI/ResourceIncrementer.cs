@@ -108,7 +108,6 @@ public class ResourceIncrementer : GamePanel
         switch (type) {
             case ResourceBuilding.ResourceType.fire:
                 dummy = SaveState.state.fire;
-                Debug.Log(SaveState.state.maxFire);
                 pay = ManageSlider(amount, ref dummy, SaveState.state.maxFire, GetSliderByName("Fire Slider"));
                 GetTextByName("FireCount").text = "" + dummy;
                 SaveState.state.fire = dummy;
