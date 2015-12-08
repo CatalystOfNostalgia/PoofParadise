@@ -37,8 +37,13 @@ public abstract class Building : MonoBehaviour {
         Vector3 pos = new Vector3(transform.position.x + .7f, transform.position.y + 1, transform.position.z);
 		options = (Canvas) Instantiate (PrefabManager.prefabManager.buildingOptionCanvas, pos, Quaternion.identity);
         options.transform.SetParent(this.transform);
-        //this.name = this.name.Replace("(Clone)", "");
 
+        /**
+         * This section will surely fail once we implement saving and loading fully.
+         * Everytime this building is 'built' we will deduct the cost from the users
+         * available resources. As a result, loading the game may cost the user
+         * a large amount of resources
+         */
         DecorationBuildingInformation dbi;
         ResourceBuildingInformation rbi;
         if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(this.name.Replace("(Clone)", ""), out dbi))
@@ -51,6 +56,7 @@ public abstract class Building : MonoBehaviour {
 
             // Spend allocated resources
             PayForBuilding();
+            Debug.Log(string.Format("{0} was paid for", this.name));
         }
         else if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(this.name.Replace("(Clone)", ""), out rbi))
         {
@@ -62,6 +68,7 @@ public abstract class Building : MonoBehaviour {
 
             // Spend allocated resources
             PayForBuilding();
+            Debug.Log(string.Format("{0} was paid for", this.name));
         }
         else
         {
