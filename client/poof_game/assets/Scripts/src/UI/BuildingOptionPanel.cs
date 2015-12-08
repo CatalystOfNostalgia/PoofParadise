@@ -72,8 +72,9 @@ public class BuildingOptionPanel : GamePanel {
 	}**/
 	/**removes only decorative building**/
 	private void removeBuilding()
-	{ 
-	    int Id = this.transform.GetComponentInParent<Building> ().ID; 
+	{
+        Building b = this.transform.GetComponentInParent<Building>();
+        int Id = b.ID; 
 		int lengthX = TileScript.grid.gridX;
 		int lengthY = TileScript.grid.gridY ;
 		int x, y;
@@ -88,8 +89,10 @@ public class BuildingOptionPanel : GamePanel {
 		Tuple position = new Tuple (x, y);
 		bool remove = SaveState.state.buildings.Remove(position);
 		Destroy (this.transform.GetComponentInParent<Building> ().gameObject);
+        BuildingPanel.buildingPanel.alreadyPlacedDownBuildings.Remove(b.name.Substring(0, b.name.Length - "(Clone)".Length));
+        BuildingPanel.buildingPanel.GeneratePanel();
+    }
 
-	}
     private void SetBuilding()
     {
         building = this.transform.GetComponentInParent<Building>();
