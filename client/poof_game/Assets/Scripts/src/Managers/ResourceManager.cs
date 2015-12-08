@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/**
+ * Handles resource usage?
+ */
 public class ResourceManager : Manager {
 	
 	// Static reference to this script to make it accessible from anywhere
@@ -9,14 +11,14 @@ public class ResourceManager : Manager {
 	// Reference to the buildings within the scene because fuck doing this right
 	private GameObject buildings;
 	
-	// physical amount that resource collection buildings create on a per tick basis
-	//		used as a base for resource gain calculations; modify this to speed up or slow down the process overall
+	// The physical amount that resource collection buildings create on a per tick basis
+	// used as a base for resource gain calculations; modify this to speed up or slow down the process overall
 	public int rTick = 5;
 	
-	// delay number for resource collection; lower number => faster collection
+	// Delay number for resource collection; lower number => faster collection
 	public float tickDelay = 10f;
 	
-	// base for resource cap D:
+	// Base for resource cap D:
 	public int resourceCapBase = 100;
 	
 	/* modifiers for the different levels of resource collection buildings,
@@ -27,7 +29,9 @@ public class ResourceManager : Manager {
 	*/
 	public int[] levelModifiers = {1, 2, 3}; // assuming there's only 3 levels of buildings
 	
-	// Initializes the script as a singleton object
+	/**
+     * Overrides the start functionality of a manager
+     */
 	override public void Start() {
 		
 		if (rm == null) {
@@ -40,12 +44,13 @@ public class ResourceManager : Manager {
 		buildings = GameObject.Find("Buildings");
 	}
 	
-	/* Retrieves the resource values from SaveState and pushes them into an array
-		Index 0: Fire
-		Index 1: Air
-		Index 2: Water
-		Index 3: Earth
-	*/
+	/**
+     * Retrieves the resource values from SaveState and pushes them into an array
+     * Index 0: Fire
+     * Index 1: Air
+     * Index 2: Water
+     * Index 3: Earth
+     */
 	public int[] getResourceAmounts () {
 		int[] toReturn = new int[4];
 		toReturn[0] = SaveState.state.fire;
@@ -55,10 +60,11 @@ public class ResourceManager : Manager {
 		return toReturn;
 	}
 	
-	/* Spends a certain amount of a given resource, return value determines if subtraction was successful
-			type refers to which type of resource you are spending
-			amount obviously refers to the amount you are withdrawing
-	*/
+	/**
+     * Spends a certain amount of a given resource, return value determines if subtraction was successful
+     * type refers to which type of resource you are spending
+     * amount obviously refers to the amount you are withdrawing
+	 */
 	public bool spendResource (ResourceBuilding.ResourceType type, int amount) {
 		switch(type) {
 			case ResourceBuilding.ResourceType.fire:
@@ -95,10 +101,11 @@ public class ResourceManager : Manager {
 		}
 	}
 	
-	/* Updates the resource bar with new amount of resources on a given clock tick
-			resources that are gained are based on the current level and amount of resource buildings you own
-			max resource cap determined by SaveState
-	*/
+	/**
+     * Updates the resource bar with new amount of resources on a given clock tick
+     * resources that are gained are based on the current level and amount of resource buildings you own
+     * max resource cap determined by SaveState
+	 */
 	public void resourceTick () {
 		checkResourceCap();
 		int[] resourceGains = getResourceGains();
@@ -110,8 +117,10 @@ public class ResourceManager : Manager {
 		
 	}
 	
-	// Hard coded check to make sure the resource cap is consistently up to date
-	// 	Cap is based on the hq level, currently the base * level
+	/**
+     * Hard coded check to make sure the resource cap is consistently up to date
+	 * Cap is based on the hq level, currently the base * level
+     */
 	private void checkResourceCap () {
 		SaveState.state.maxFire = resourceCapBase * (SaveState.state.hqLevel + 1);
 		SaveState.state.maxAir = resourceCapBase * (SaveState.state.hqLevel + 1);
@@ -119,8 +128,10 @@ public class ResourceManager : Manager {
 		SaveState.state.maxEarth = resourceCapBase * (SaveState.state.hqLevel + 1);
 	}
 	
-	// Consults SaveState to retrieve how many of each resource building there is and of what level,
-	//		to determine how much resources are gathered.
+	/**
+     * Consults SaveState to retrieve how many of each resource building there is and of what level,
+	 * to determine how much resources are gathered.
+     */
 	private int[] getResourceGains () {
 		int[] toReturn = new int[4];
 		for (int i = 0; i < buildings.transform.childCount; i++) {
