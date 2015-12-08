@@ -37,6 +37,7 @@ public abstract class Building : MonoBehaviour {
         Vector3 pos = new Vector3(transform.position.x + .7f, transform.position.y + 1, transform.position.z);
 		options = (Canvas) Instantiate (PrefabManager.prefabManager.buildingOptionCanvas, pos, Quaternion.identity);
         options.transform.SetParent(this.transform);
+        this.name = this.name.Replace("(Clone)", "");
 
         DecorationBuildingInformation dbi;
         ResourceBuildingInformation rbi;
@@ -54,17 +55,18 @@ public abstract class Building : MonoBehaviour {
         else if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(this.name, out rbi))
         {
             // Set resource cost
-            fireCost = dbi.FireCost;
-            waterCost = dbi.WaterCost;
-            earthCost = dbi.EarthCost;
-            airCost = dbi.AirCost;
+            //fireCost = dbi.FireCost;
+            //waterCost = dbi.WaterCost;
+            //earthCost = dbi.EarthCost;
+            //airCost = dbi.AirCost;
 
             // Spend allocated resources
-            ResourceIncrementer.incrementer.ResourceGain(fireCost, ResourceBuilding.ResourceType.fire);
+            //ResourceIncrementer.incrementer.ResourceGain(fireCost, ResourceBuilding.ResourceType.fire);
         }
         else
         {
-            Debug.LogError("Failed to spend resources on this building");
+            Debug.LogError(string.Format("Failed to spend resources on {0}", this.name));
+            
         }
 
         created = false;
