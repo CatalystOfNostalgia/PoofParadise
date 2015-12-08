@@ -38,6 +38,35 @@ public abstract class Building : MonoBehaviour {
 		options = (Canvas) Instantiate (PrefabManager.prefabManager.buildingOptionCanvas, pos, Quaternion.identity);
         options.transform.SetParent(this.transform);
 
+        DecorationBuildingInformation dbi;
+        ResourceBuildingInformation rbi;
+        if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(this.name, out dbi))
+        {
+            // Set resource cost
+            fireCost = dbi.FireCost;
+            waterCost = dbi.WaterCost;
+            earthCost = dbi.EarthCost;
+            airCost = dbi.AirCost;
+
+            // Spend allocated resources
+            ResourceIncrementer.incrementer.ResourceGain(fireCost, ResourceBuilding.ResourceType.fire);
+        }
+        else if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(this.name, out rbi))
+        {
+            // Set resource cost
+            fireCost = dbi.FireCost;
+            waterCost = dbi.WaterCost;
+            earthCost = dbi.EarthCost;
+            airCost = dbi.AirCost;
+
+            // Spend allocated resources
+            ResourceIncrementer.incrementer.ResourceGain(fireCost, ResourceBuilding.ResourceType.fire);
+        }
+        else
+        {
+            Debug.LogError("Failed to spend resources on this building");
+        }
+
         created = false;
         selected = true;
         placed = false;
