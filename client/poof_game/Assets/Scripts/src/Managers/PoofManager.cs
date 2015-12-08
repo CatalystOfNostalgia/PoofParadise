@@ -2,12 +2,20 @@
 using System.Collections;
 
 public class PoofManager : MonoBehaviour {
-
+    public static PoofManager poofManager;
     public int poofGenerationRate { get; set; }
 	// Use this for initialization
 	void Start () {
-	
-	}
+        if (poofManager == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            poofManager = this;
+        }
+        else if (poofManager != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
