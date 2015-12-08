@@ -61,10 +61,6 @@ public class BuildingManager : Manager {
         target = building;
 	}
 
-	public bool isOccupied (){
-		return false;
-	}
-
 	/**
      * Places a building on the currently selected tile
      */
@@ -109,7 +105,6 @@ public class BuildingManager : Manager {
      */
 	private bool isTileTaken(Tuple t){
 		return SaveState.state.buildings.ContainsKey (t);
-
 	}
 
 	/**
@@ -134,11 +129,9 @@ public class BuildingManager : Manager {
 		if (buildingMode) {
 			buildingMode = false;
 			if (!target) {
-				Debug.Log ("no target");
+				Debug.Log ("No target");
 			}
 			PlaceBuilding(target);
-			Debug.Log ("building mode set to false");
 		}
-
 	}
 }
