@@ -277,6 +277,8 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
                                            decorative_buildings, \
                                            user_id\
                                           )
+
+        print "building ids: " + str(building_ids)
         if building_ids.count > 0 :
             data = {'message' : 'Save successful!'} 
             self.send_response(200)

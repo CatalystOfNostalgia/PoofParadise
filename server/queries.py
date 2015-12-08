@@ -267,7 +267,7 @@ def create_decorative_building ( building, user_id, ids ):
     models.session.add(new_building)
     models.session.commit() 
 
-    new_id = models.session.query(models.UserDecorativeBuilding).order_by(models.UserResourceBuilding.id).one().id
+    new_id = models.session.query(func.max(models.UserDecorativeBuilding.id)).one().id
 
     ids.append(new_id)
 
@@ -283,7 +283,7 @@ def create_resource_building ( building, user_id, ids ):
     models.session.add(new_building)
     models.session.commit() 
 
-    new_id = models.session.query(func.max(UserResourceBuilding.id)).one().id
+    new_id = models.session.query(func.max(models.UserResourceBuilding.id)).one().id
 
     ids.append(new_id)
 

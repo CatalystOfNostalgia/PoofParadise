@@ -30,7 +30,7 @@ public class Tile : MonoBehaviour {
 
     public Building PlaceBuilding(Building newbuilding) 
     {
-        if (isVacant && newbuilding.PayForBuilding()) {
+        if (isVacant && (!newbuilding.created || newbuilding.PayForBuilding())) {
 
             building = Instantiate (newbuilding, 
                                     new Vector3(this.transform.position.x, 
