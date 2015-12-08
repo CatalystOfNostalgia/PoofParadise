@@ -34,7 +34,7 @@ public class MovementScript : MonoBehaviour {
 	private CharacterScript cs;
 	private PoofScript ps;
 
-	private float transitionTiming = 0f;
+	private float transitionTiming = 0.334f;
 	
 	void Start () {
 	
@@ -52,6 +52,9 @@ public class MovementScript : MonoBehaviour {
 		//Debug.Log(targetPos);
 		
 		animator = this.GetComponent<Animator>();
+		if (animator != null) {
+			animator.SetInteger ("Direction", 10);
+		}
 	}
 	
 	public void initializePoof() {
@@ -64,16 +67,16 @@ public class MovementScript : MonoBehaviour {
 		pcp = this.GetComponent<PassiveMoverCharacters>();
 
 		if(cs.type == CharacterScript.Element.Wind){
-			transitionTiming = 1.917f;
-		}
-		if(cs.type == CharacterScript.Element.Water){
-			transitionTiming = 2.167f;
-		}
-		if(cs.type == CharacterScript.Element.Earth){
 			transitionTiming = 2.0f;
 		}
+		if(cs.type == CharacterScript.Element.Water){
+			transitionTiming = 2.1f;
+		}
+		if(cs.type == CharacterScript.Element.Earth){
+			transitionTiming = 0.8f;
+		}
 		if(cs.type == CharacterScript.Element.Fire){
-			transitionTiming = 0.917f;
+			transitionTiming = 1.0f;
 		}
 	}
 	
@@ -112,25 +115,6 @@ public class MovementScript : MonoBehaviour {
 	}
 	
 	private void continueMoving() {
-		if (animator != null)
-		{
-			if (currentPos.x - targetPos.x > 0 && currentPos.y - targetPos.y > 0)
-			{
-				animator.SetInteger("Direction", 0);
-			}
-			if (currentPos.x - targetPos.x < 0 && currentPos.y - targetPos.y > 0)
-			{
-				animator.SetInteger("Direction", 1);
-			}
-			if (currentPos.x - targetPos.x < 0 && currentPos.y - targetPos.y < 0)
-			{
-				animator.SetInteger("Direction", 2);
-			}
-			if (currentPos.x - targetPos.x > 0 && currentPos.y - targetPos.y < 0)
-			{
-				animator.SetInteger("Direction", 3);
-			}
-		}
 		lerperoni();
 	}
 	
@@ -155,9 +139,32 @@ public class MovementScript : MonoBehaviour {
 					ps.onTile = targetObj;
 				getInputs();
 				continueMoving();
+				turnAnimation();
 			}
 			else
 				stopMoving();
+		}
+	}
+
+	public void turnAnimation(){
+		if (animator != null)
+		{
+			if (currentPos.x - targetPos.x > 0 && currentPos.y - targetPos.y > 0)
+			{
+				animator.SetInteger("Direction", 0);
+			}
+			if (currentPos.x - targetPos.x < 0 && currentPos.y - targetPos.y > 0)
+			{
+				animator.SetInteger("Direction", 1);
+			}
+			if (currentPos.x - targetPos.x < 0 && currentPos.y - targetPos.y < 0)
+			{
+				animator.SetInteger("Direction", 2);
+			}
+			if (currentPos.x - targetPos.x > 0 && currentPos.y - targetPos.y < 0)
+			{
+				animator.SetInteger("Direction", 3);
+			}
 		}
 	}
 	
@@ -165,13 +172,12 @@ public class MovementScript : MonoBehaviour {
 	private void stopMoving() {
 
 		if (animator != null) {
-			//Debug.Log("stopping to move");
-			animator.SetInteger("Direction", 4);
-			Invoke("animatorChange", transitionTiming);
+			animator.SetInteger("Direction", 5);
+			Invoke("animatorChange", transitionTiming);			
 		}
 		if (isMoving) {
 			currentPos = targetPos;
-			isMoving = false;
+			Invoke("finishMoving", 2f);	
 			priorityInput = false;
 			input = false;
 			progressAccum = 0;
@@ -193,14 +199,14 @@ public class MovementScript : MonoBehaviour {
 	
 	// Only sets the isMoving flag to true, and also determines if the movement is a priority input
 	private void startMoving() {
-		Invoke("animatorChange", 1.917f);
+		Invoke("animatorStart", transitionTiming);
 		isMoving = true;
 		if (priorityInput)
 			priorityComplete = false;
-		
-        if (animator != null)
+
+		if (animator != null)
         {
-			Invoke("animatorChange", transitionTiming);
+			animator.SetInteger("Direction", 10);
             if (currentPos.x - targetPos.x > 0 && currentPos.y - targetPos.y > 0)
             {
                 animator.SetInteger("Direction", 0);
@@ -232,15 +238,34 @@ public class MovementScript : MonoBehaviour {
 		//Debug.Log("Transition");
 		animator.SetInteger("Direction", 4);
 	}
+
+	public void animatorStart() {
+		animator.SetInteger("Direction", 4);
+	}
+
+	public void animatorReset() {
+		animator.SetInteger("Direction", 10);
+	}
+
+	public void finishMoving() {
+		//the characters need a slight pause once they stop moving to make sure all the animations finish. 
+		isMoving = false;
+	}
 	
 	// Method that Enqueues an input direction; should be utilized by the passive mover script
 	public void receivePassiveInputs(Tile toTile) {
 		// Needs to parse the toTile into a set of adjacent tiles that can be travelled consecutively
+
 		object[] toAdd = parseTileInput(toTile);
-		
-		for (int i = 0; i < toAdd.Length; i++) {
-			movementQueue.Enqueue(toAdd[i]);
+
+		if (toAdd.Length > 0) {
+			for (int i = 0; i < toAdd.Length; i++) {
+				movementQueue.Enqueue (toAdd [i]);
+			}
+		} else {
+			movementQueue.Clear();
 		}
+
 	}
 	
 	// Method that Enqueues player inputs and interrupts current passive inputs
@@ -278,41 +303,48 @@ public class MovementScript : MonoBehaviour {
 			int h = getHorizontalDistance(cs.onTile, toTile);
 			int v = getVerticalDistance(cs.onTile, toTile);
 			Tile nextTile = cs.onTile;
-			
-			if (h > 0) {
-				for (int i = h; i >= 0; i--) {
-					if (nextTile != null) {
-						nextTile = nextTile.rightTile;
-						toReturn.Add(nextTile);
+
+			if ( h == 0 && v ==0){
+				//toReturn.Add(nextTile);
+			}
+			else{			
+				if (h > 0) {
+					for (int i = h; i > 0; i--) {
+						if (nextTile != null) {
+							nextTile = nextTile.downTile;
+							toReturn.Add(nextTile);
+						}
+					}
+				}
+				else if (h < 0){
+					for (int i = h; i < 0; i++) {
+						if (nextTile != null) {
+							nextTile = nextTile.upTile;
+
+							toReturn.Add(nextTile);
+						}
+					}
+				}
+				
+				if (v > 0) {
+					for (int i = v; i > 0; i--) {
+						if (nextTile != null) {
+							nextTile = nextTile.rightTile;
+							toReturn.Add(nextTile);
+						}
+					}
+				}
+				else if (v < 0){
+					for (int i = v; i < 0; i++) {
+						if (nextTile != null) {
+							nextTile = nextTile.leftTile;
+
+							toReturn.Add(nextTile);
+						}
 					}
 				}
 			}
-			else {
-				for (int i = h; i <= 0; i++) {
-					if (nextTile != null) {
-						nextTile = nextTile.leftTile;
-						toReturn.Add(nextTile);
-					}
-				}
-			}
-			
-			if (v > 0) {
-				for (int i = v; i >= 0; i--) {
-					if (nextTile != null) {
-						nextTile = nextTile.upTile;
-						toReturn.Add(nextTile);
-					}
-				}
-			}
-			else {
-				for (int i = v; i <= 0; i++) {
-					if (nextTile != null) {
-						nextTile = nextTile.downTile;
-						toReturn.Add(nextTile);
-					}
-				}
-			}
-			
+
 			return toReturn.ToArray();
 		}
 		else {
@@ -320,36 +352,43 @@ public class MovementScript : MonoBehaviour {
 			int v = getVerticalDistance(ps.onTile, toTile);
 			Tile nextTile = ps.onTile;
 			
-			if (h > 0) {
-				for (int i = h; i >= 0; i--) {
-					if (nextTile != null) {
-						nextTile = nextTile.rightTile;
-						toReturn.Add(nextTile);
+			if ( h == 0 && v ==0){
+				//toReturn.Add(nextTile);
+			}
+			else{			
+				if (h > 0) {
+					for (int i = h; i > 0; i--) {
+						if (nextTile != null) {
+							nextTile = nextTile.downTile;
+							toReturn.Add(nextTile);
+						}
 					}
 				}
-			}
-			else {
-				for (int i = h; i <= 0; i++) {
-					if (nextTile != null) {
-						nextTile = nextTile.leftTile;
-						toReturn.Add(nextTile);
+				else if (h < 0){
+					for (int i = h; i < 0; i++) {
+						if (nextTile != null) {
+							nextTile = nextTile.upTile;
+							
+							toReturn.Add(nextTile);
+						}
 					}
 				}
-			}
-			
-			if (v > 0) {
-				for (int i = v; i >= 0; i--) {
-					if (nextTile != null) {
-						nextTile = nextTile.upTile;
-						toReturn.Add(nextTile);
+				
+				if (v > 0) {
+					for (int i = v; i > 0; i--) {
+						if (nextTile != null) {
+							nextTile = nextTile.rightTile;
+							toReturn.Add(nextTile);
+						}
 					}
 				}
-			}
-			else {
-				for (int i = v; i <= 0; i++) {
-					if (nextTile != null) {
-						nextTile = nextTile.downTile;
-						toReturn.Add(nextTile);
+				else if (v < 0){
+					for (int i = v; i < 0; i++) {
+						if (nextTile != null) {
+							nextTile = nextTile.leftTile;
+							
+							toReturn.Add(nextTile);
+						}
 					}
 				}
 			}
