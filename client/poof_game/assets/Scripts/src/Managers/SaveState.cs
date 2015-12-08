@@ -18,6 +18,7 @@ public class SaveState : Manager {
     public int hqPosX { get; set; }
     public int hqPosY { get; set; }
 	public int poofCount { get; set; }
+    public int poofLimit { get; set; }
 	// List game state variables here
 
 	// resources
@@ -66,6 +67,7 @@ public class SaveState : Manager {
 		state.buildings = new Dictionary<Tuple, Building>();
         buildingInformationManager = new BuildingInformationManager();
 		woolyBeans = 0;
+        poofLimit = 0;
 	}
 
 	
