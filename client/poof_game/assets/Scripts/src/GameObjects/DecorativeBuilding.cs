@@ -4,7 +4,7 @@ using System.Collections;
 public class DecorativeBuilding : Building {
 
 	// Fields
-	public int generatedPoofs;
+	public int poofGenerationRate;
 
 	
 	private bool selected { get; set; }
