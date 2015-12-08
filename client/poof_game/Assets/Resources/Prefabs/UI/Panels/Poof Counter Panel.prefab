@@ -26,7 +26,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22462824}
   - 222: {fileID: 22214876}
-  - 114: {fileID: 11468722}
+  - 114: {fileID: 11420566}
   m_Layer: 5
   m_Name: Poof Counter Panel
   m_TagString: Untagged
@@ -79,6 +79,17 @@ Transform:
   - {fileID: 22478894}
   m_Father: {fileID: 22462824}
   m_RootOrder: 0
+--- !u!114 &11420566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42ea0bc4db1916344ad198e32358d48e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11442042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -106,17 +117,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11468722
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 149338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e1b074ccf6d8704b97eeeeb6022ce35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11482680
 MonoBehaviour:
   m_ObjectHideFlags: 1
