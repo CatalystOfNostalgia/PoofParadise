@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using System;
 
 public class PrefabManager : Manager {
 
@@ -53,16 +54,34 @@ public class PrefabManager : Manager {
     }
 
     /**
-     * Sets the ID of the building prefabs
+     * Sets the ID of the building prefabs from the database
+     * Sorts the building list with the ID
      */
+
     private void SetIDs()
     {
-        int i = 0;
+        // sets the ID of the buildings with the ID from the database
         foreach(Building b in resourceBuildings)
         {
-            b.ID = i;
-            i++; 
+            ResourceBuildingInformation info;
+            if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(b.name, out info))
+            {
+                b.ID = info.ID;
+            }
         }
+        Array.Sort(resourceBuildings, new BuildingIDComparator());
+        //Debug.Log(string.Format("[PrefabManager] the sorted resource building array is: {0}", string.Join(",", resourceBuildings.Select(x=> x.ToString()).ToArray()))); // magic array logging in one line
+
+        foreach(Building b in decorativeBuildings)
+        {
+            DecorationBuildingInformation info;
+            if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(b.name,out info))
+            {
+                b.ID = info.ID;
+                (b as DecorativeBuilding).poofGenerationRate = info.PoofAttractionRate;
+            }
+        }
+        Array.Sort(decorativeBuildings, new BuildingIDComparator());
     }
 
     /**
@@ -99,7 +118,7 @@ public class PrefabManager : Manager {
      *
      * Deprecated -> Use if you wish to generate your own prefabs
      */
-    private void GenerateSpriteList(Object[] objs, Sprite[] outList)
+    private void GenerateSpriteList(object[] objs, Sprite[] outList)
     {
         for (int i = 0; i < objs.Length; i++)
         {

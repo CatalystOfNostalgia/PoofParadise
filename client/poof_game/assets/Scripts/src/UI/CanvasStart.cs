@@ -54,22 +54,39 @@ public class CanvasStart : MonoBehaviour {
 			Destroy(this);
 		}*/
 
-		GameObject buildingPanel = this.transform.Find("Building Panel(Clone)").gameObject;
+        GameObject buildingPanel = this.transform.Find("Building Panel(Clone)").gameObject;
         if (buildingPanel == null)
         {
             Debug.Log("Building Panel is null");
         }
 
-		if (BuildingPanel.buildingPanel == null)
-		{
-			DontDestroyOnLoad(modelPanel);
-			BuildingPanel.buildingPanel = buildingPanel.GetComponent<BuildingPanel>();
-		}
-		
-		else if (BuildingPanel.buildingPanel != buildingPanel)
-		{
-			Destroy(this);
-		}
+        if (BuildingPanel.buildingPanel == null)
+        {
+            DontDestroyOnLoad(modelPanel);
+            BuildingPanel.buildingPanel = buildingPanel.GetComponent<BuildingPanel>();
+        }
+
+        else if (BuildingPanel.buildingPanel != buildingPanel)
+        {
+            Destroy(this);
+        }
+
+        GameObject poofCounterPanel = this.transform.Find("Building Panel(Clone)").gameObject;
+        if (poofCounterPanel == null)
+        {
+            Debug.Log("Building Panel is null");
+        }
+
+        if (PoofCounterPanel.poofCounterPanel == null)
+        {
+            DontDestroyOnLoad(modelPanel);
+            PoofCounterPanel.poofCounterPanel = poofCounterPanel.GetComponent<PoofCounterPanel>();
+        }
+
+        else if (PoofCounterPanel.poofCounterPanel != poofCounterPanel)
+        {
+            Destroy(this);
+        }
 
         /**
 		GameObject leaderPanel = this.transform.FindChild("Leader Panel(Clone)").gameObject;

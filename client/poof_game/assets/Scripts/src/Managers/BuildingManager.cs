@@ -50,24 +50,15 @@ public class BuildingManager : Manager {
 
     }
 
-    /**
-     * This overload does nothing right now
-     * TODO: Make this do something
-     */ 
-    public void dragNewBuilding (int buildingNum, Vector3 cursor){
-		buildingMode = true;
-        target = PrefabManager.prefabManager.resourceBuildings[buildingNum];
-	}
-
 	/**
 	 * 1. check building cost
 	 * 2. see if user has enough resource to cover the cost
 	 * 3. decrement resource
 	 * 4. build
 	 */
-	public void makeNewBuilding (int buttonNum){
+	public void makeNewBuilding (Building building){
 		buildingMode = true;
-        target = PrefabManager.prefabManager.resourceBuildings[buttonNum];
+        target = building;
 	}
 
 	public bool isOccupied (){
@@ -96,28 +87,28 @@ public class BuildingManager : Manager {
 
                 if (newBuilding != null) {
 
-                newBuilding.created = true;
-                
-                // Sets the new building's parent to our convenience object
-                newBuilding.transform.SetParent(buildings.transform);
+                    newBuilding.created = true;
+                    
+                    // Sets the new building's parent to our convenience object
+                    newBuilding.transform.SetParent(buildings.transform);
 
-                // TODO this feels pretty iffy
-                if ( !isTileTaken(tile.index)) {
+                    // TODO this feels pretty iffy
+                    if ( !isTileTaken(tile.index)) {
 
-                    if (newBuilding.GetType() == typeof(DecorativeBuilding)) {
-                        DecorativeBuilding decBuilding = (DecorativeBuilding)newBuilding;
-                        SaveState.state.decorativeBuildings.Add (tile.index, decBuilding);
+                        if (newBuilding.GetType() == typeof(DecorativeBuilding)) {
+                            DecorativeBuilding decBuilding = (DecorativeBuilding)newBuilding;
+                            SaveState.state.decorativeBuildings.Add (tile.index, decBuilding);
 
-                    } else if (newBuilding.GetType() == typeof(ResourceBuilding)) {
-                        ResourceBuilding resBuilding = (ResourceBuilding)newBuilding;
-                        SaveState.state.resourceBuildings.Add (tile.index, resBuilding);
+                        } else if (newBuilding.GetType() == typeof(ResourceBuilding)) {
+                            ResourceBuilding resBuilding = (ResourceBuilding)newBuilding;
+                            SaveState.state.resourceBuildings.Add (tile.index, resBuilding);
 
-                    } else if (newBuilding.GetType() == typeof(ResidenceBuilding)) {
-                        ResidenceBuilding resBuilding = (ResidenceBuilding)newBuilding;
-                        SaveState.state.residenceBuildings.Add (tile.index, resBuilding);
+                        } else if (newBuilding.GetType() == typeof(ResidenceBuilding)) {
+                            ResidenceBuilding resBuilding = (ResidenceBuilding)newBuilding;
+                            SaveState.state.residenceBuildings.Add (tile.index, resBuilding);
+                        }
+
                     }
-
-                }
 
                 GameManager.gameManager.SpawnPoofs();
             }

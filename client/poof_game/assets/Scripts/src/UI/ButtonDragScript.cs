@@ -9,7 +9,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	private GameObject draggingIcon;
 	private RectTransform draggingPlane;
 	GameObject buildingModalPanel;
-    public int ID { get; set; }
+    public Building building { get; set; }
 
 	public void OnBeginDrag (PointerEventData eventData){
 		//Canvas canvas = GetComponent<Canvas>();
@@ -44,12 +44,6 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		
 		setDraggedPosition(eventData);
 
-		//find the modal panel
-		buildingModalPanel = FindInParents<BringToFront> (gameObject).gameObject;//searching for BringToFront because that's what modal panel has
-		//hide the modal panel renderer
-		foreach (CanvasRenderer renderer in buildingModalPanel.GetComponentsInChildren<CanvasRenderer>()) {
-			renderer.Clear();
-		}
 	}
 
 	public void OnDrag (PointerEventData eventData){
@@ -67,12 +61,11 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	}
 
 	public void OnEndDrag (PointerEventData eventData){
-		BuildingManager.buildingManager.makeNewBuilding(ID);
+		BuildingManager.buildingManager.makeNewBuilding(building);
 		if (draggingIcon != null) {
 			Destroy(draggingIcon);
 		}
 		BuildingPanel.buildingPanel.windowState = false;
-		buildingModalPanel.SetActive (false);
 	}
 
 	static public T FindInParents<T>(GameObject go) where T : Component

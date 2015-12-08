@@ -3,23 +3,22 @@ using UnityEngine;
 
 
 public class PoofCounterPanel : GamePanel {
-	public int poofCount;
-	
+    public static PoofCounterPanel poofCounterPanel;
+    private Text poofCounterText;
+
 	override public void Start()
 	{
-		poofCount = 0;
+        poofCounterText = GetComponentInChildren<Transform>().GetComponentInChildren<Image>().GetComponentInChildren<Text>();
 		GeneratePanel();
 	}
 	
 	override public void GeneratePanel(){
+        poofCounterText.text = string.Format("{0}/{1}", SaveState.state.poofCount, SaveState.state.poofLimit);
+	}
 
-		updateBeanCount ();
-	}
-	
-	public void updateBeanCount() {
-		if (poofCount != SaveState.state.poofCount) {
-			this.GetComponentInChildren<Text> ().text = "" + SaveState.state.poofCount;
-		}
-		poofCount = SaveState.state.poofCount;
-	}
+    void Update()
+    {
+        Debug.Log("[PoofCounterPanel] Updated the panel");
+        GeneratePanel();
+    }
 }

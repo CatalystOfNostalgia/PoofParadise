@@ -18,6 +18,9 @@ public class SaveState : Manager {
 	public int userExperience { get; set; }
 	public int hqLevel { get; set; }
 	public int poofCount { get; set; }
+    public int poofLimit { get; set; }
+
+	// List game state variables here
 
 	// resources
 	public int fire { get; set; }
@@ -42,6 +45,7 @@ public class SaveState : Manager {
     public HeadQuarterBuilding hq { get; set; }
     public Tuple hqLocation { get; set; }
 
+    public BuildingInformationManager buildingInformationManager;
 
 	//resource collection fields // currently unused
 	public int firetreeRes { get; set; }
@@ -67,7 +71,9 @@ public class SaveState : Manager {
 		state.decorativeBuildings = new Dictionary<Tuple, DecorativeBuilding>();
 		state.residenceBuildings = new Dictionary<Tuple, ResidenceBuilding>();
 		
+        buildingInformationManager = new BuildingInformationManager();
 		woolyBeans = 0;
+        poofLimit = 0;
 	}
 
 	
@@ -177,6 +183,7 @@ public class SaveState : Manager {
         userPassword = data ["password"];
         username = data ["username"];
 		hqLevel = data ["headquarters_level"].AsInt;
+		//change this back 
 		fire = data ["fire"].AsInt;
 		water = data ["water"].AsInt;
 		earth = data ["earth"].AsInt;
@@ -227,8 +234,7 @@ public class SaveState : Manager {
 			decorativeBuildings.Add(new Tuple(x, y), newBuilding);
 		}
 
-        hqLocation.x = data["hq_pos_x"].AsInt;
-        hqLocation.y = data["hq_pos_y"].AsInt;
+        hqLocation = new Tuple(data["hq_pos_x"].AsInt, data["hq_pos_y"].AsInt);
         Debug.Log("hqLevel is: " + hqLevel);
         //since array start at 0, lv 1-> index 0, lv 2 -> index 1
         hq = PrefabManager.prefabManager.headQuarterBuildings[hqLevel-1];

@@ -6,4 +6,9 @@ public class ResidenceBuilding : Building {
     // Fields
     public int poofsAllowed;
 
+    // Each new poof residence bumps the limit by 2
+    protected override void Awake()
+    {
+        SaveState.state.poofLimit += 2;
+    }
 }
