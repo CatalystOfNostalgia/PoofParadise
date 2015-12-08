@@ -48,6 +48,7 @@ GameObject:
   - 114: {fileID: 11432182}
   - 114: {fileID: 11481954}
   - 114: {fileID: 11403796}
+  - 114: {fileID: 11490220}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Grid
@@ -532,6 +533,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ecb0968d5b2c004a8fea7e2d8288745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11490220
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc023bef404cff043a23569da2e43c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &100100000

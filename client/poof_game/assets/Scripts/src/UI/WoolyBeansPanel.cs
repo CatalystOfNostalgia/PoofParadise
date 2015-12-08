@@ -8,9 +8,6 @@ public class WoolyBeansPanel : GamePanel {
 	
 	override public void Start()
 	{
-		float xpos = Screen.width - 64;
-		float ypos = Screen.height - 32;
-		this.transform.position = new Vector2(xpos, ypos);
 		b = this.GetComponentInChildren<Button>();
 		GeneratePanel();
 	}
