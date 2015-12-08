@@ -117,7 +117,9 @@ public class SaveState : Manager {
 
     // updates the saved building with their new IDs
     private void updateBuildings(string response) {
-
+        
+        JSONNode data = JSON.parse(response);
+        
     }
 	
 	// turns the save data into a JSON String

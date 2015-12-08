@@ -95,7 +95,6 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
                 # update the data and send a success response
                 if all (item in parsed_json for item in (required_items)):
 
-                    print response_json
                     self.save(parsed_json)
 
                 # if the required elements are not present send an error message
@@ -278,17 +277,21 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
                                            user_id\
                                           )
 
+        data = {}
+
         print "building ids: " + str(building_ids)
         if building_ids.count > 0 :
-            data = {'message' : 'Save successful!'} 
             self.send_response(200)
+            data['message'] = 'Save successful'
+            data['building_ids'] = building_ids
+            self.wfile.write(json.dumps(data))
             print(parsed_json['username'] + ' saved')
         else:
             data = {"error" : 'cannot find a building'}
+            self.wfile.write(json.dumps(data))
             print('cannot find building')
 
         print(json.dumps(data));
-        self.wfile.write(json.dumps(data))
 
 # starting the server
 print('http server is starting...')
