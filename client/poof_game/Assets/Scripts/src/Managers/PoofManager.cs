@@ -36,6 +36,7 @@ public class PoofManager : MonoBehaviour {
         for (int i = 0; i<poofsToSpawnCount; i++)
         {
             GameManager.gameManager.SpawnPoof(GameManager.gameManager.poofPrefab, currentLocation, new System.Collections.Generic.List<GameObject>());
+            SaveState.state.poofCount++;
             Debug.Log("[PoofManager] Spawned a poof");
         }
     }
