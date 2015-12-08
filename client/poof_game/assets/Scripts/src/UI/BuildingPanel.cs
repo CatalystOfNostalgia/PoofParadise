@@ -38,8 +38,6 @@ public class BuildingPanel : GamePanel {
         resourceIndex = 0;
         activePanel = panel.DECORATIVE;
         SwitchPanels();
-        resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, ref resourceIndex, "Resource Building Panel/Buttons");
-        decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildigs, ref decorativeIndex, "Decorative Building Panel/Buttons");
 		GeneratePanel();
 	}
 
@@ -66,7 +64,9 @@ public class BuildingPanel : GamePanel {
      * Adds functionality to all of the buttons on the panel
      */
     override public void GeneratePanel(){
-		foreach (Button b in resourceButtons)
+        resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, ref resourceIndex, "Resource Building Panel/Buttons");
+        decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildigs, ref decorativeIndex, "Decorative Building Panel/Buttons");
+        foreach (Button b in resourceButtons)
 		{
 			b.onClick.RemoveAllListeners();
 			b.onClick.AddListener(TogglePanel);
