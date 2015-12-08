@@ -90,10 +90,17 @@ public abstract class Building : MonoBehaviour {
     private void PayForBuilding()
     {
         Debug.Log("Fire cost for this building is " + fireCost);
-        ResourceIncrementer.incrementer.ResourceGain(-fireCost, ResourceBuilding.ResourceType.fire);
-        ResourceIncrementer.incrementer.ResourceGain(-waterCost, ResourceBuilding.ResourceType.water);
-        ResourceIncrementer.incrementer.ResourceGain(-earthCost, ResourceBuilding.ResourceType.earth);
-        ResourceIncrementer.incrementer.ResourceGain(-airCost, ResourceBuilding.ResourceType.air);
+        if (ResourceIncrementer.incrementer.ResourceGain(-fireCost, ResourceBuilding.ResourceType.fire) &&
+            ResourceIncrementer.incrementer.ResourceGain(-waterCost, ResourceBuilding.ResourceType.water) &&
+            ResourceIncrementer.incrementer.ResourceGain(-earthCost, ResourceBuilding.ResourceType.earth) &&
+            ResourceIncrementer.incrementer.ResourceGain(-airCost, ResourceBuilding.ResourceType.air))
+        {
+            Debug.Log("Successfully purchased building");
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     /**
