@@ -4,7 +4,6 @@ using System.Collections;
 public class PoofManager : MonoBehaviour {
 
     public static PoofManager poofManager;
-    public int poofGenerationRate { get; set; }
 
 	// Use this for initialization
 	void Start () {
@@ -18,12 +17,24 @@ public class PoofManager : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-        //periodically roll a dice based on poof generation rate to spawn a poof
-        // could base it off of how many poofs exist vs. how many poofs we alreayd have
-        // like Delta poof * poofRate?
-        Debug.Log(string.Format("[PoofManager] I can generate {0} per time", poofGenerationRate));
-	}
+
+    public void beamDownPoof(int poofRate)
+    {
+        beamDownPoof(GameManager.gameManager.GetRandomSpawnPoint(), poofRate);
+    }
+
+    public void beamDownPoof(Tuple currentLocation, int poofRate)
+    {
+        //need this check or poofsToSpawnCount might become greater than poofRate (e.g. 2- (-3) = 5)
+        if (SaveState.state.poofCount + poofRate >= SaveState.state.poofLimit)
+        {
+            return;
+        }
+        int poofsAvailable = SaveState.state.poofLimit - SaveState.state.poofCount;
+        int poofsToSpawnCount = poofRate > poofsAvailable ? poofRate-poofsAvailable : poofRate;
+        for (int i = 0; i<poofsToSpawnCount; i++)
+        {
+            GameManager.gameManager.SpawnPoof(GameManager.gameManager.poofPrefab, currentLocation, new System.Collections.Generic.List<GameObject>());
+        }
+    }
 }

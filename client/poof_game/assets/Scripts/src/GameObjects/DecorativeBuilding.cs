@@ -37,8 +37,7 @@ public class DecorativeBuilding : Building {
 		canDrag = false;
 		showOptions = false;
 		size = 1;
-
-        PoofManager.poofManager.poofGenerationRate += poofGenerationRate;
+        PoofManager.poofManager.beamDownPoof(poofGenerationRate);
 	}
 	
 	/**
