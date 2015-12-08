@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using System;
 using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
+/**
+ * An object which oversees the state of the entire game
+ * The server interfaces with this object directly
+ */
 public class SaveState : Manager {
             
 	// Allows the scene to access this object without searching for it
 	public static SaveState state;
 
-	// player data
+	// Player data
 	public int userID { get; set; }
 	public int userLevel { get; set; }
 	public int userExperience { get; set; }
@@ -19,9 +22,8 @@ public class SaveState : Manager {
     public int hqPosY { get; set; }
 	public int poofCount { get; set; }
     public int poofLimit { get; set; }
-	// List game state variables here
 
-	// resources
+	// Resources
 	public int fire { get; set; }
 	public int air { get; set; }
 	public int water { get; set; }
@@ -31,27 +33,28 @@ public class SaveState : Manager {
 	public int maxWater { get; set; }
 	public int maxEarth { get; set; }
 
-	// elemari
+	// Elemari
 	public int fireEle { get; set; }
 	public int waterEle { get; set; }
 	public int earthEle { get; set; }
 	public int airEle { get; set; }
 
-	// buildings
+	// Buildings
 	//TODO do we actually need separate dictionaries for the different building type?
 	public Dictionary<Tuple, Building> buildings { get; set; }
 
     public BuildingInformationManager buildingInformationManager;
 
 
-	//resource collection fields // currently unused
+	// Resource collection fields // currently unused
 	public int firetreeRes { get; set; }
 	public int windmillRes { get; set; }
 	public int pondRes { get; set; }
 	public int caveRes { get; set; }
 	
-	// wooly beans?
+	// The monotized in-game resource
 	public int woolyBeans { get; set; }
+
 	/**
 	 * Produces a singleton on awake
 	 */
