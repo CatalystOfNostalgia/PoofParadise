@@ -44,37 +44,7 @@ public abstract class Building : MonoBehaviour {
          * available resources. As a result, loading the game may cost the user
          * a large amount of resources
          */
-        DecorationBuildingInformation dbi;
-        ResourceBuildingInformation rbi;
-        if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(this.name.Replace("(Clone)", ""), out dbi))
-        {
-            // Set resource cost
-            fireCost = dbi.FireCost;
-            waterCost = dbi.WaterCost;
-            earthCost = dbi.EarthCost;
-            airCost = dbi.AirCost;
-
-            // Spend allocated resources
-            PayForBuilding();
-            Debug.Log(string.Format("{0} was paid for", this.name));
-        }
-        else if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(this.name.Replace("(Clone)", ""), out rbi))
-        {
-            // Set resource cost
-            fireCost = rbi.FireCost;
-            waterCost = rbi.WaterCost;
-            earthCost = rbi.EarthCost;
-            airCost = rbi.AirCost;
-
-            // Spend allocated resources
-            PayForBuilding();
-            Debug.Log(string.Format("{0} was paid for", this.name));
-        }
-        else
-        {
-            Debug.LogError(string.Format("Failed to spend resources on {0}", this.name));
-            
-        }
+        
 
         created = false;
         selected = true;
@@ -87,8 +57,40 @@ public abstract class Building : MonoBehaviour {
     /**
      * Pays for the building based on the cost of the building
      */
-    private void PayForBuilding()
+    public bool PayForBuilding()
     {
+        DecorationBuildingInformation dbi;
+        ResourceBuildingInformation rbi;
+        if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(this.name.Replace("(Clone)", ""), out dbi))
+        {
+            // Set resource cost
+            fireCost = dbi.FireCost;
+            waterCost = dbi.WaterCost;
+            earthCost = dbi.EarthCost;
+            airCost = dbi.AirCost;
+
+            // Spend allocated resources
+            //PayForBuilding();
+            //Debug.Log(string.Format("{0} was paid for", this.name));
+        }
+        else if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(this.name.Replace("(Clone)", ""), out rbi))
+        {
+            // Set resource cost
+            fireCost = rbi.FireCost;
+            waterCost = rbi.WaterCost;
+            earthCost = rbi.EarthCost;
+            airCost = rbi.AirCost;
+
+            // Spend allocated resources
+            //PayForBuilding();
+            //Debug.Log(string.Format("{0} was paid for", this.name));
+        }
+        else
+        {
+            // Must be headquarters
+            //Debug.LogError(string.Format("Failed to spend resources on {0}", this.name));
+            return true;
+        }
         Debug.Log("Fire cost for this building is " + fireCost);
         if (ResourceIncrementer.incrementer.ResourceGain(-fireCost, ResourceBuilding.ResourceType.fire) &&
             ResourceIncrementer.incrementer.ResourceGain(-waterCost, ResourceBuilding.ResourceType.water) &&
@@ -96,23 +98,11 @@ public abstract class Building : MonoBehaviour {
             ResourceIncrementer.incrementer.ResourceGain(-airCost, ResourceBuilding.ResourceType.air))
         {
             Debug.Log("Successfully purchased building");
+            return true;
         }
         else
         {
-            Tuple key = null;
-            foreach (Tile t in TileScript.grid.tiles)
-            {
-                if (t.building != null)
-                {
-                    Debug.Log("Tile is not empty at ID:" + t.id);
-                    if (t.building.Equals(this))
-                    {
-                        key = t.index;
-                    }
-                }
-            } 
-            // SaveState.state.buildings.Remove(key);
-            Destroy(this.gameObject);
+            return false;
         }
     }
 
