@@ -27,7 +27,7 @@ public abstract class Building : MonoBehaviour {
     public bool canDrag { get; set; }
     public bool showOptions { get; set; }
 
-    private Canvas options;
+    public Canvas options { get; set; }
 
     // Use this for initialization
     protected virtual void Awake()

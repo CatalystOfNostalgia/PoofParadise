@@ -9,6 +9,7 @@ public class BuildingInformationManager {
 
     private Dictionary<string, ResourceBuildingInformation> resourceBuildingInformationDict;
     private Dictionary<string, DecorationBuildingInformation> decorativeBuildingInformationDict;
+
     public BuildingInformationManager ()
     {
         resourceBuildingInformationDict = new Dictionary<string, ResourceBuildingInformation>();
