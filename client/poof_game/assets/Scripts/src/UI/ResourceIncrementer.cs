@@ -11,6 +11,7 @@ public class ResourceIncrementer : GamePanel
 	public static ResourceIncrementer incrementer;
 
     private Slider[] sliders;
+    private Text[] counters;
 	
 	override public void Start() {
 		// create the singleton
@@ -22,6 +23,7 @@ public class ResourceIncrementer : GamePanel
 		}
 
         sliders = RetrieveSliderList("Sliders");
+        counters = RetrieveTextList("Texts");
 	}
 
     public override void GeneratePanel()
@@ -44,6 +46,16 @@ public class ResourceIncrementer : GamePanel
         return null;
     }
 
+    private Text GetTextByName(string name) {
+        foreach (Text t in counters)
+        {
+            if (t.name == name)
+            {
+                return t;
+            }
+        }
+        return null;
+    }
 
     /**
      * A helper method for handling various types of resources
@@ -68,6 +80,25 @@ public class ResourceIncrementer : GamePanel
             current = max;
         }
     }
+
+    private void ManageText(int add, ref int current, int max, Text t)
+    {
+        // If the slider is not filled yet
+        if (current <= max)
+        {
+            // increment element
+            current = current + add;
+
+            // Reassign slider
+            t.text = "" + current;
+        }
+
+        // Otherwise, hold the state
+        else
+        {
+            current = max;
+        }
+    }
     
     //copypasta code for now. make it more modular later
     public void ResourceGain (int amount, ResourceBuilding.ResourceType type) {
@@ -77,6 +108,7 @@ public class ResourceIncrementer : GamePanel
                 dummy = SaveState.state.fire;
                 Debug.Log(SaveState.state.maxFire);
                 ManageSlider(amount, ref dummy, SaveState.state.maxFire, GetSliderByName("Fire Slider"));
+                ManageText(amount, ref dummy, SaveState.state.maxFire, GetTextByName("FireCount"));
                 SaveState.state.fire = dummy;
                 break;
 		    case ResourceBuilding.ResourceType.water:
