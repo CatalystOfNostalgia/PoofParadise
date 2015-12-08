@@ -38,6 +38,7 @@ public class DecorativeBuilding : Building {
 		showOptions = false;
 		size = 1;
         PoofManager.poofManager.beamDownPoof(poofGenerationRate);
+        Debug.Log("[DecorativeBuilding] Beam down poof");
 	}
 	
 	/**

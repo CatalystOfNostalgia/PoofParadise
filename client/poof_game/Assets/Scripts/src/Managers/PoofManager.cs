@@ -28,6 +28,7 @@ public class PoofManager : MonoBehaviour {
         //need this check or poofsToSpawnCount might become greater than poofRate (e.g. 2- (-3) = 5)
         if (SaveState.state.poofCount + poofRate >= SaveState.state.poofLimit)
         {
+            Debug.Log("[PoofManager] Too many poofs");
             return;
         }
         int poofsAvailable = SaveState.state.poofLimit - SaveState.state.poofCount;
@@ -35,6 +36,7 @@ public class PoofManager : MonoBehaviour {
         for (int i = 0; i<poofsToSpawnCount; i++)
         {
             GameManager.gameManager.SpawnPoof(GameManager.gameManager.poofPrefab, currentLocation, new System.Collections.Generic.List<GameObject>());
+            Debug.Log("[PoofManager] Spawned a poof");
         }
     }
 }
