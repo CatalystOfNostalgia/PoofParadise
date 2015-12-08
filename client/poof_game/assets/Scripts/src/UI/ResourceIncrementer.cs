@@ -23,7 +23,9 @@ public class ResourceIncrementer : GamePanel
 		}
 
         sliders = RetrieveSliderList("Sliders");
-        counters = RetrieveTextList("Texts");
+        //counters = RetrieveTextList("Texts");
+        counters = GetComponentsInChildren<Text>();
+        Debug.Log("We have " + counters.Length + " counters.");
 	}
 
     public override void GeneratePanel()
@@ -114,16 +116,19 @@ public class ResourceIncrementer : GamePanel
 		    case ResourceBuilding.ResourceType.water:
                 dummy = SaveState.state.water;
                 ManageSlider(amount, ref dummy, SaveState.state.maxWater, GetSliderByName("Water Slider"));
+                ManageText(amount, ref dummy, SaveState.state.maxWater, GetTextByName("WaterCount"));
                 SaveState.state.water = dummy;
 			    break;
 		    case ResourceBuilding.ResourceType.air:
                 dummy = SaveState.state.air;
                 ManageSlider(amount, ref dummy, SaveState.state.maxAir, GetSliderByName("Wind Slider"));
+                ManageText(amount, ref dummy, SaveState.state.maxAir, GetTextByName("AirCount"));
                 SaveState.state.air = dummy;
 			    break;
 		    case ResourceBuilding.ResourceType.earth:
                 dummy = SaveState.state.earth;
                 ManageSlider(amount, ref dummy, SaveState.state.maxEarth, GetSliderByName("Earth Slider"));
+                ManageText(amount, ref dummy, SaveState.state.maxEarth, GetTextByName("EarthCount"));
                 SaveState.state.earth = dummy;
 			    break;
 		    default:
