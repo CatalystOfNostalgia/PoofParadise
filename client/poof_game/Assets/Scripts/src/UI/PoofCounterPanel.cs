@@ -18,6 +18,7 @@ public class PoofCounterPanel : GamePanel {
 
     void Update()
     {
+        Debug.Log("[PoofCounterPanel] Updated the panel");
         GeneratePanel();
     }
 }
