@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/**
+ * An abstract managers object
+ * from which all managers can be related
+ */
 public abstract class Manager : MonoBehaviour {
 
     /**
