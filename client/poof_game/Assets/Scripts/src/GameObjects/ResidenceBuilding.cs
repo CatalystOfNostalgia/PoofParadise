@@ -14,5 +14,6 @@ public class ResidenceBuilding : Building {
     {
         base.Awake();
         SaveState.state.poofLimit += 2;
+        PoofCounterPanel.poofCounterPanel.GeneratePanel();
     }
 }

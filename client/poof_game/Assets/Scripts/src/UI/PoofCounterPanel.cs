@@ -3,6 +3,7 @@ using UnityEngine;
 
 
 public class PoofCounterPanel : GamePanel {
+
     public static PoofCounterPanel poofCounterPanel;
     private Text poofCounterText;
 
@@ -20,6 +21,6 @@ public class PoofCounterPanel : GamePanel {
     {
         // DO NOT DO THIS -> Basically freezes the game
         // Instead: Find out who updates poofcount anc call Generate Panel from there
-        GeneratePanel();
+        // GeneratePanel();
     }
 }

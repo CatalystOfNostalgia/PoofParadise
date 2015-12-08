@@ -59,7 +59,7 @@ public class CanvasStart : MonoBehaviour {
             Destroy(this);
         }
 
-        GameObject poofCounterPanel = this.transform.Find("Building Panel(Clone)").gameObject;
+        GameObject poofCounterPanel = this.transform.Find("Poof Counter Panel(Clone)").gameObject;
         if (poofCounterPanel == null)
         {
             Debug.LogError("[CanvasStart] Poof Counter Panel is null");

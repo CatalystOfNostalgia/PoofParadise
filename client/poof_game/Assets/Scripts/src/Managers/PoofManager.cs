@@ -53,6 +53,7 @@ public class PoofManager : MonoBehaviour {
         {
             GameManager.gameManager.SpawnPoof(GameManager.gameManager.poofPrefab, currentLocation, new System.Collections.Generic.List<GameObject>());
             SaveState.state.poofCount++;
+            PoofCounterPanel.poofCounterPanel.GeneratePanel();
             poofAttractionRating--;
             Debug.Log("[PoofManager] Spawned a poof");
         }
