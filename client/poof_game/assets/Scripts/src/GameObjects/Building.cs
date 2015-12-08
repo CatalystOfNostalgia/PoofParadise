@@ -32,19 +32,9 @@ public abstract class Building : MonoBehaviour {
     // Use this for initialization
     protected virtual void Awake()
     {
-        //gameObject.AddComponent<ButtonDragScript>();
-        //gameObject.AddComponent<BoxCollider2D>();
         Vector3 pos = new Vector3(transform.position.x + .7f, transform.position.y + 1, transform.position.z);
 		options = (Canvas) Instantiate (PrefabManager.prefabManager.buildingOptionCanvas, pos, Quaternion.identity);
         options.transform.SetParent(this.transform);
-
-        /**
-         * This section will surely fail once we implement saving and loading fully.
-         * Everytime this building is 'built' we will deduct the cost from the users
-         * available resources. As a result, loading the game may cost the user
-         * a large amount of resources
-         */
-        
 
         created = false;
         selected = true;
@@ -59,6 +49,7 @@ public abstract class Building : MonoBehaviour {
      */
     public bool PayForBuilding()
     {
+        // Pulls the cost of this building from Building Information Manager
         DecorationBuildingInformation dbi;
         ResourceBuildingInformation rbi;
         if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(this.name.Replace("(Clone)", ""), out dbi))
@@ -68,10 +59,6 @@ public abstract class Building : MonoBehaviour {
             waterCost = dbi.WaterCost;
             earthCost = dbi.EarthCost;
             airCost = dbi.AirCost;
-
-            // Spend allocated resources
-            //PayForBuilding();
-            //Debug.Log(string.Format("{0} was paid for", this.name));
         }
         else if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(this.name.Replace("(Clone)", ""), out rbi))
         {
@@ -80,18 +67,13 @@ public abstract class Building : MonoBehaviour {
             waterCost = rbi.WaterCost;
             earthCost = rbi.EarthCost;
             airCost = rbi.AirCost;
-
-            // Spend allocated resources
-            //PayForBuilding();
-            //Debug.Log(string.Format("{0} was paid for", this.name));
         }
         else
         {
-            // Must be headquarters
-            //Debug.LogError(string.Format("Failed to spend resources on {0}", this.name));
             return true;
         }
-        Debug.Log("Fire cost for this building is " + fireCost);
+
+        // Attempts to purchases the building -> Errors may result for buildings with multiple costs
         if (ResourceIncrementer.incrementer.ResourceGain(-fireCost, ResourceBuilding.ResourceType.fire) &&
             ResourceIncrementer.incrementer.ResourceGain(-waterCost, ResourceBuilding.ResourceType.water) &&
             ResourceIncrementer.incrementer.ResourceGain(-earthCost, ResourceBuilding.ResourceType.earth) &&
@@ -108,20 +90,18 @@ public abstract class Building : MonoBehaviour {
 
     /**
      * On click functionality for building
+     * Pulls open the building option panel
      */
     void OnMouseDown()
     {
-        /// bring up the building option panel
-        /// which includes 1. move building. 2. upgrade building. 3. remove building. 4. info on leaf
-        /// 
-        /// 
         showOptions = !showOptions;
         options.gameObject.SetActive(showOptions);
-		//
     }
 
     /**
      * Handles building drag behavior
+     * Allows buildings to be dragged
+     * TODO: Fix this functionality
      */
     void OnMouseDrag()
     {
@@ -133,6 +113,9 @@ public abstract class Building : MonoBehaviour {
         }
     }
 
+    /**
+     * Provides comparison functionality for buildings
+     */
     public override bool Equals(object o)
     {
         if (! this.GetType().Equals( o.GetType()))
@@ -143,6 +126,9 @@ public abstract class Building : MonoBehaviour {
         return this.ID == (o as Building).ID;
     }
 
+    /**
+     * Provides hashcode functionality for buildings
+     */
     public override int GetHashCode()
     {
         return ID.GetHashCode() ^ this.GetType().GetHashCode();
