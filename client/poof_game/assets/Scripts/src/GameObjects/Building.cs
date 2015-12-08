@@ -99,6 +99,19 @@ public abstract class Building : MonoBehaviour {
         }
         else
         {
+            Tuple key = null;
+            foreach (Tile t in TileScript.grid.tiles)
+            {
+                if (t.building != null)
+                {
+                    Debug.Log("Tile is not empty at ID:" + t.id);
+                    if (t.building.Equals(this))
+                    {
+                        key = t.index;
+                    }
+                }
+            } 
+            // SaveState.state.buildings.Remove(key);
             Destroy(this.gameObject);
         }
     }
