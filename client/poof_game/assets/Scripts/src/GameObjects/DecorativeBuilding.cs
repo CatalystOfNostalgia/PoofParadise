@@ -12,9 +12,7 @@ public class DecorativeBuilding : Building {
 
 	protected override void Awake()
 	{
-        base.Awake();
-        
+        base.Awake();        
         PoofManager.poofManager.beamDownPoof(poofGenerationRate);
-        Debug.Log("[DecorativeBuilding] Beam down poof");
 	}
 }

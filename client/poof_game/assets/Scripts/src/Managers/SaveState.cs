@@ -102,12 +102,8 @@ public class SaveState : Manager {
 	/**
 	 * Pushes player data to server
 	 */
-	public void PushToServer() {
-		
-		Debug.Log ("data.ToJSON");
+	public void PushToServer() {		
 		string buildingJSON = this.jsonify();
-		
-		
 		// TODO Send JSON to server
 	}
 	
@@ -189,22 +185,21 @@ public class SaveState : Manager {
 			int y = building["position_y"].AsInt;
 
             // Retrieves a building from the resource buildings list
-            Debug.Log("index: " + building["building_info_id"].AsInt);
             if (PrefabManager.prefabManager == null) {
-                Debug.Log("prefab manager");
+                Debug.LogError("[SaveState] Prefab manager is null");
             }
 			Building newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
 
 			buildings.Add(new Tuple(x, y), newBuilding);
 		}
-		//TODO foreach loop for decorative building
+		// TODO foreach loop for decorative building
 		foreach (JSONNode building in loadedDecorativeBuildings) {
 		}
 
         hqPosX = data["hq_pos_x"].AsInt;
         hqPosY = data["hq_pos_y"].AsInt;
-        Debug.Log("hqLevel is: " + hqLevel);
-        //since array start at 0, lv 1-> index 0, lv 2 -> index 1
+
+        // Since array start at 0, lv 1-> index 0, lv 2 -> index 1
         buildings.Add(new Tuple(hqPosX, hqPosY), PrefabManager.prefabManager.headQuarterBuildings[hqLevel-1]);
 	}
 }

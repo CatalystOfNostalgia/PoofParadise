@@ -86,17 +86,22 @@ public class SoundManager : Manager {
      */
 	public void playSong(string songName){
 		AudioSource song;
-		if (playDict.TryGetValue (songName, out song) && !changingSong) {
-			Debug.Log("SoundManager: now playing " + songName);
-			changingSong = true;
-			stopSong ();
-			currentSong = song;
-			currentSong.Play ();
-			currentSongPlayed = true;
-			changingSong = false;
-		} else {
-			Debug.Log ("SoundManager: The key " + songName + " was not found in the dictionary");
-		}
+        // Play the song if it exists
+        if (playDict.TryGetValue(songName, out song) && !changingSong)
+        {
+            changingSong = true;
+            stopSong();
+            currentSong = song;
+            currentSong.Play();
+            currentSongPlayed = true;
+            changingSong = false;
+        }
+
+        // Otherwise, report the error
+        else
+        {
+            Debug.LogError("[SoundManager] The key " + songName + " was not found in the dictionary");
+        }
 	}
 
     /**

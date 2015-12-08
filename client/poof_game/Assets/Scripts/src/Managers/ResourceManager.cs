@@ -96,7 +96,7 @@ public class ResourceManager : Manager {
 					return true;
 				}
 		default:
-				Debug.Log("ResourceManager => spendResource: Illegal resource type");
+				Debug.LogError("ResourceManager => spendResource: Illegal resource type");
 				return false;
 		}
 	}
@@ -109,7 +109,6 @@ public class ResourceManager : Manager {
 	public void resourceTick () {
 		checkResourceCap();
 		int[] resourceGains = getResourceGains();
-		Debug.Log (resourceGains[0] + ", " + resourceGains[1] + ", " + resourceGains[2] + ", " + resourceGains[3]);
 		ResourceIncrementer.incrementer.ResourceGain(resourceGains[0], ResourceBuilding.ResourceType.fire);
 		ResourceIncrementer.incrementer.ResourceGain(resourceGains[1], ResourceBuilding.ResourceType.air);
 		ResourceIncrementer.incrementer.ResourceGain(resourceGains[2], ResourceBuilding.ResourceType.water);

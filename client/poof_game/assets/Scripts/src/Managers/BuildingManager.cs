@@ -74,16 +74,22 @@ public class BuildingManager : Manager {
      */
 	public void PlaceBuilding (Building prefab, Tile tile) {
 
+        // Exit if supplied tile is null
 		if (tile == null) {
-			Debug.Log ("tile is null");
+            Debug.LogError("Cannot place building because tile is null");
+            return;
 		}
 
 		Building newBuilding = tile.PlaceBuilding (prefab);
+        
+        // Exit if new building is null
         if (newBuilding == null)
         {
+            // Insert functionality if the user cannot afford the building
             Debug.Log("You cannot afford this building");
             return;
         }
+
         newBuilding.created = true;
         
         // Sets the new building's parent to our convenience object

@@ -80,11 +80,12 @@ public abstract class Building : MonoBehaviour {
         if (ResourceIncrementer.incrementer.ResourceGain(-fireCost, ResourceBuilding.ResourceType.fire) &&
             ResourceIncrementer.incrementer.ResourceGain(-waterCost, ResourceBuilding.ResourceType.water) &&
             ResourceIncrementer.incrementer.ResourceGain(-earthCost, ResourceBuilding.ResourceType.earth) &&
-            ResourceIncrementer.incrementer.ResourceGain(-airCost, ResourceBuilding.ResourceType.air))
-        {
-            Debug.Log("Successfully purchased building");
+            ResourceIncrementer.incrementer.ResourceGain(-airCost, ResourceBuilding.ResourceType.air)) {
+
             return true;
         }
+
+        // Otherwise, fail to purchase building
         else
         {
             return false;

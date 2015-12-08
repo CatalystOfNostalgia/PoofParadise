@@ -74,7 +74,6 @@ public class PrefabManager : Manager {
             }
         }
         Array.Sort(resourceBuildings, new BuildingIDComparator());
-        //Debug.Log(string.Format("[PrefabManager] the sorted resource building array is: {0}", string.Join(",", resourceBuildings.Select(x=> x.ToString()).ToArray()))); // magic array logging in one line
 
         foreach(Building b in decorativeBuildigs)
         {
