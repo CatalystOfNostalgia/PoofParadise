@@ -17,9 +17,6 @@ public class BuildingPanel : GamePanel {
 	private Button[] resourceButtons;
     private Button[] decorativeButtons;
 
-    private int resourceIndex;
-    private int decorativeIndex;
-
     private enum panel : int { DECORATIVE, RESOURCE };
     private panel activePanel; 
 		
@@ -36,8 +33,6 @@ public class BuildingPanel : GamePanel {
 			Destroy(gameObject);
 		}
         alreadyPlacedDownBuildings = new List<string>();
-        decorativeIndex = 0;
-        resourceIndex = 0;
         activePanel = panel.DECORATIVE;
         SwitchPanels();
 		GeneratePanel();
@@ -66,8 +61,23 @@ public class BuildingPanel : GamePanel {
      * Adds functionality to all of the buttons on the panel
      */
     override public void GeneratePanel(){
-        resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, ref resourceIndex, "Resource Building Panel/Buttons");
-        decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildigs, ref decorativeIndex, "Decorative Building Panel/Buttons");
+        if (resourceButtons != null)
+        {
+            foreach(Button button in resourceButtons)
+            {
+                Destroy(button.gameObject);
+            }
+        }
+        if (decorativeButtons != null)
+        {
+            foreach(Button button in decorativeButtons)
+            {
+                Destroy(button.gameObject);
+            }
+        }
+        resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, "Resource Building Panel/Buttons");
+        decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildigs, "Decorative Building Panel/Buttons");
+
         foreach (Button b in resourceButtons)
 		{
 			b.onClick.RemoveAllListeners();
@@ -79,15 +89,6 @@ public class BuildingPanel : GamePanel {
             b.onClick.AddListener(TogglePanel);
         }
 	}
-
-    new public void TogglePanel()
-    {
-        if (windowState)
-        {
-            GeneratePanel();
-        }
-        base.TogglePanel();
-    }
 
     /**
      * Generates buttons per panel
@@ -180,12 +181,12 @@ public class BuildingPanel : GamePanel {
     /// <param name="index"></param>
     /// <param name="path"></param>
     /// <returns></returns>
-    public Button[] CreateButtons(Building[] buildingList, ref int index, string path)
+    public Button[] CreateButtons(Building[] buildingList, string path)
     {
        
         List<Building> list = new List<Building>();
         int i;
-        for (i = index; i < buildingList.Length && list.Count<4; i++) //i < index + 4 not sure what this does
+        for (i = 0; i < buildingList.Length && list.Count<4; i++) //i < index + 4 not sure what this does
         {
             // Checking if the user can build the building or not
             ResourceBuildingInformation resourceBuildingInfo;
@@ -200,7 +201,6 @@ public class BuildingPanel : GamePanel {
                 DecorationBuildingLevelCheck(buildingList, list, i, decorationBuildingInfo);
             }
         }
-        index = i;
         return AddButtonsToPanel(list.ToArray(), path);
     }
 
@@ -208,7 +208,7 @@ public class BuildingPanel : GamePanel {
     {
         int levelRequirement = resourceBuildingInfo.LevelRequirement;
         Debug.Log("[BuildingPanel] alreadyPlacedDownBuilding : " + string.Join(",", alreadyPlacedDownBuildings.ToArray()));
-        if (levelRequirement == 1 && !alreadyPlacedDownBuildings.Contains(buildingList[i].name))
+        if (levelRequirement == 1 && (! alreadyPlacedDownBuildings.Contains(buildingList[i].name)))
         {
             list.Add(buildingList[i]);
             Debug.Log(string.Format("[BuildingPanel] just added {0} to the list", buildingList[i]));

@@ -92,6 +92,7 @@ public class BuildingManager : Manager {
 		if (!SaveState.state.buildings.ContainsKey (tile.index)) {
 			SaveState.state.buildings.Add (tile.index, newBuilding);
             BuildingPanel.buildingPanel.alreadyPlacedDownBuildings.Add(prefab.name);
+            BuildingPanel.buildingPanel.GeneratePanel();
 		}
 	}
 
