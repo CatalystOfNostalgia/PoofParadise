@@ -223,7 +223,7 @@ public class MovementScript : MonoBehaviour {
         }
         else
         {
-			//Debug.Log("Congratulations, this character doesn't have a animation");
+			Debug.LogError("[MovementScript] Congratulations, this character doesn't have a animation");
         }
 
 		isMoving = true;
@@ -232,7 +232,6 @@ public class MovementScript : MonoBehaviour {
 	}
 	
 	public void animatorChange() {
-		//Debug.Log("Transition");
 		animator.SetInteger("Direction", 4);
 	}
 

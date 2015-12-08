@@ -207,11 +207,9 @@ public class BuildingPanel : GamePanel {
     private void ResourceBuildingLevelCheck(Building[] buildingList, List<Building> list, int i, ResourceBuildingInformation resourceBuildingInfo)
     {
         int levelRequirement = resourceBuildingInfo.LevelRequirement;
-        Debug.Log("[BuildingPanel] alreadyPlacedDownBuilding : " + string.Join(",", alreadyPlacedDownBuildings.ToArray()));
         if (levelRequirement == 1 && (! alreadyPlacedDownBuildings.Contains(buildingList[i].name)))
         {
             list.Add(buildingList[i]);
-            Debug.Log(string.Format("[BuildingPanel] just added {0} to the list", buildingList[i]));
         }
     }
 
@@ -224,7 +222,6 @@ public class BuildingPanel : GamePanel {
         if (SaveState.state.hqLevel >= levelRequirement)
         {
             list.Add(buildingList[i]);
-            Debug.Log(string.Format("[BuildingPanel] just added {0} to the list", buildingList[i]));
         }
     }
 }

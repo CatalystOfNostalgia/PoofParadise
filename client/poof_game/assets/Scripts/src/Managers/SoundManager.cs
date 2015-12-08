@@ -129,9 +129,9 @@ public class SoundManager : Manager {
 				return;
 			}
 		}
-		//this means all of the songs are disabled
+		// This means all of the songs are disabled
 		allSongsDisabled = true;
-		Debug.Log ("SoundManager: All music are disabled");
+		Debug.Log ("[SoundManager] All music is disabled");
 	}
 
     /**
@@ -148,9 +148,9 @@ public class SoundManager : Manager {
 				return;
 			}
 		}
-		//this means all of the songs are disabled
+		// This means all of the songs are disabled
 		allSongsDisabled = true;
-		Debug.Log ("SoundManager: All music are disabled");
+		Debug.Log ("[SoundManager] All music are disabled");
 	}
 
     /**

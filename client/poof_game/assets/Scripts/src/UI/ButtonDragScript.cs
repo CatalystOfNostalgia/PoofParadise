@@ -19,7 +19,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	public void OnBeginDrag (PointerEventData eventData){
 		Canvas canvas = FindInParents<Canvas> (gameObject);
 		if (canvas == null) {
-			Debug.Log ("ButtonDragScript: could not find canvas");
+			Debug.LogError ("[ButtonDragScript] Could not find canvas");
 			return;
 		}
 		

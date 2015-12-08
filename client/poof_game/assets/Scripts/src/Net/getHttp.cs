@@ -39,7 +39,6 @@ public class GetHTTP : MonoBehaviour {
 
         yield return request;
 
-        Debug.Log(request.text);
         callback(getHttpBody(request.text));
     }
 
@@ -58,9 +57,6 @@ public class GetHTTP : MonoBehaviour {
         WWW request = new WWW(url, jsonBytes, headers);
 
         yield return request;
-
-        Debug.Log ("got request");
-        Debug.Log (request.text);
     }
 
     /**
@@ -97,10 +93,7 @@ public class GetHTTP : MonoBehaviour {
 
         yield return request;
 
-        Debug.Log(request.text);
-
         callback(getHttpBody(request.text));
-
     }
 
     /**
@@ -130,18 +123,13 @@ public class GetHTTP : MonoBehaviour {
      */
     private static IEnumerator WaitForRequest(WWW www)
     {
-
-        Debug.Log ("waiting for request");
-
         yield return www;
-
-        Debug.Log ("got response");
 
         // Check for errors
         if (www.error == null) {
-            Debug.Log("WWW Ok!: " + www.text);
+            Debug.Log("[getHttp] WWW Ok!: " + www.text);
         } else {
-            Debug.Log("WWW Error: "+ www.error);
+            Debug.LogError("[getHttp] WWW Error: "+ www.error);
         }    
     }
 }
