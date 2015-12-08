@@ -5,6 +5,7 @@ using UnityEngine;
 public class PoofCounterPanel : GamePanel {
 	public int poofCount;
 	
+    public static PoofCounterPanel poofCounterPanel;
 	override public void Start()
 	{
 		poofCount = 0;
