@@ -2,6 +2,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using System.Linq;
 
 /**.
  * This menu should
@@ -12,7 +13,7 @@ public class BuildingPanel : GamePanel {
 	
 	// A static reference to this object
 	public static BuildingPanel buildingPanel;
-	
+	public List<string> alreadyPlacedDownBuildings { get; set; }
 	private Button[] resourceButtons;
     private Button[] decorativeButtons;
 
@@ -34,6 +35,7 @@ public class BuildingPanel : GamePanel {
 		else if (buildingPanel != this) {
 			Destroy(gameObject);
 		}
+        alreadyPlacedDownBuildings = new List<string>();
         decorativeIndex = 0;
         resourceIndex = 0;
         activePanel = panel.DECORATIVE;
@@ -77,6 +79,15 @@ public class BuildingPanel : GamePanel {
             b.onClick.AddListener(TogglePanel);
         }
 	}
+
+    new public void TogglePanel()
+    {
+        if (windowState)
+        {
+            GeneratePanel();
+        }
+        base.TogglePanel();
+    }
 
     /**
      * Generates buttons per panel
@@ -196,7 +207,8 @@ public class BuildingPanel : GamePanel {
     private void ResourceBuildingLevelCheck(Building[] buildingList, List<Building> list, int i, ResourceBuildingInformation resourceBuildingInfo)
     {
         int levelRequirement = resourceBuildingInfo.LevelRequirement;
-        if (levelRequirement == 1)
+        Debug.Log("[BuildingPanel] alreadyPlacedDownBuilding : " + string.Join(",", alreadyPlacedDownBuildings.ToArray()));
+        if (levelRequirement == 1 && !alreadyPlacedDownBuildings.Contains(buildingList[i].name))
         {
             list.Add(buildingList[i]);
             Debug.Log(string.Format("[BuildingPanel] just added {0} to the list", buildingList[i]));
