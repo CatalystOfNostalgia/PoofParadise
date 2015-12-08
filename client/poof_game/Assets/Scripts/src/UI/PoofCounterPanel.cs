@@ -8,7 +8,7 @@ public class PoofCounterPanel : GamePanel {
 
 	override public void Start()
 	{
-        poofCounterText = RetrieveTextList("Buttons/PoofCounter")[0];
+        poofCounterText = GetComponentInChildren<Transform>().GetComponentInChildren<Image>().GetComponentInChildren<Text>();
 		GeneratePanel();
 	}
 	
