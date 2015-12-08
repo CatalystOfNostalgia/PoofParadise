@@ -26,11 +26,12 @@ public class PoofManager : MonoBehaviour {
     public void beamDownPoof(Tuple currentLocation, int poofRate)
     {
         //need this check or poofsToSpawnCount might become greater than poofRate (e.g. 2- (-3) = 5)
-        if (SaveState.state.poofCount + poofRate >= SaveState.state.poofLimit)
+        if (SaveState.state.poofCount >= SaveState.state.poofLimit)
         {
             Debug.Log("[PoofManager] Too many poofs");
             return;
         }
+
         int poofsAvailable = SaveState.state.poofLimit - SaveState.state.poofCount;
         int poofsToSpawnCount = poofRate > poofsAvailable ? poofRate-poofsAvailable : poofRate;
         for (int i = 0; i<poofsToSpawnCount; i++)
