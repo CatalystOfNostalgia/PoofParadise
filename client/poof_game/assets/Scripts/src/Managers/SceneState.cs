@@ -1,4 +1,3 @@
-using UnityEngine;
 using System;
 
 /**
@@ -13,6 +12,10 @@ public class SceneState : Manager {
 
     public String userInfo { get; set; }
 
+    /**
+     * Overrides the start functionality
+     * provided by manager
+     */
     public override void Start() {
 
         if (state == null) {
