@@ -1,23 +1,33 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System; 
 
+/**
+ * The GamePanel which is attached to each 
+ * building
+ * Features include delete, drag, upgrade, and info
+ */
 public class BuildingOptionPanel : GamePanel {
 
-	//move, upgrade, remove, info
+	// Move, upgrade, remove, info
 	private Button[] buttons;
     private Building building;
 
-	//lets make the menu set inactive when you press outside
+	// TODO Make the menu set inactive when you press outside
 
-	// Use this for initialization
+	/**
+     * Overrides the start functionality 
+     * provided by GamePanel
+     */
 	override public void Start () {
 		buttons = RetrieveButtonList ("Buttons");
         SetBuilding();
 		GeneratePanel ();
 	}
 
+    /**
+     * Overrides the GeneratePanel functionality
+     * provided bu GamePanel
+     */
 	override public void GeneratePanel(){
 		FindAndModifyUIElement("Move Button", buttons, ()=> Move());
 		FindAndModifyUIElement("Upgrade Button", buttons, ()=> upgradeBuilding ());
@@ -25,7 +35,9 @@ public class BuildingOptionPanel : GamePanel {
 		FindAndModifyUIElement("Info Button", buttons, ()=> Debug.Log("Info button is pressed"));
 	}
 
-	/**helper method that finds the building**/
+	/**
+     * A helper method that finds the building
+     */
 	public Building getNewBuilding(ResourceBuilding[] list, string find){
 		for (int i=0; i<=list.Length; i++) {
 			if(list[i].name == find){
@@ -34,7 +46,10 @@ public class BuildingOptionPanel : GamePanel {
 		}
 		return null;
 	}
-	//upgrades building to level 2 resource building 
+
+    /**
+     * Upgrades building to level 2 resource building 
+     */
 	private void upgradeBuilding()
 	{
 		ResourceBuilding[] resourceBuildings = PrefabManager.prefabManager.resourceBuildings;
@@ -66,7 +81,12 @@ public class BuildingOptionPanel : GamePanel {
 			}
 		} 
 	}
-	/**removes only decorative building**/
+
+	/**
+     * Removes only decorative building
+     * TODO: Move this functionality to building
+     * This would allow us to special case as needed
+     */
 	private void removeBuilding()
 	{
         Building b = this.transform.GetComponentInParent<Building>();
@@ -89,6 +109,9 @@ public class BuildingOptionPanel : GamePanel {
         BuildingPanel.buildingPanel.GeneratePanel();
     }
 
+    /**
+     * Sets the building reference for this panel
+     */
     private void SetBuilding()
     {
         building = this.transform.GetComponentInParent<Building>();
@@ -101,6 +124,5 @@ public class BuildingOptionPanel : GamePanel {
     {
         building.canDrag = true;
         this.gameObject.SetActive(false);
-        //TogglePanel();
     }
 }
