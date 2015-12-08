@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 2735c84b87edfb44ca52aa0faf928a63
-timeCreated: 1448217317
+timeCreated: 1449519024
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -68,6 +68,8 @@ TextureImporter:
     21300122: Animations_Poof_40x40_61
     21300124: Animations_Poof_40x40_62
     21300126: Animations_Poof_40x40_63
+    21300128: Animations_Poof_40x40_64
+    21300130: Animations_Poof_40x40_65
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -120,8 +122,8 @@ TextureImporter:
         y: 600
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_1
       rect:
@@ -130,8 +132,8 @@ TextureImporter:
         y: 600
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_2
       rect:
@@ -140,8 +142,8 @@ TextureImporter:
         y: 600
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_3
       rect:
@@ -150,8 +152,8 @@ TextureImporter:
         y: 600
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_4
       rect:
@@ -160,8 +162,8 @@ TextureImporter:
         y: 560
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_5
       rect:
@@ -170,8 +172,8 @@ TextureImporter:
         y: 560
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_6
       rect:
@@ -180,8 +182,8 @@ TextureImporter:
         y: 560
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_7
       rect:
@@ -190,8 +192,8 @@ TextureImporter:
         y: 560
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_8
       rect:
@@ -200,8 +202,8 @@ TextureImporter:
         y: 520
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_9
       rect:
@@ -210,8 +212,8 @@ TextureImporter:
         y: 520
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_10
       rect:
@@ -220,8 +222,8 @@ TextureImporter:
         y: 520
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_11
       rect:
@@ -230,8 +232,8 @@ TextureImporter:
         y: 520
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_12
       rect:
@@ -240,8 +242,8 @@ TextureImporter:
         y: 480
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_13
       rect:
@@ -250,8 +252,8 @@ TextureImporter:
         y: 480
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_14
       rect:
@@ -260,8 +262,8 @@ TextureImporter:
         y: 480
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_15
       rect:
@@ -270,8 +272,8 @@ TextureImporter:
         y: 480
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_16
       rect:
@@ -280,8 +282,8 @@ TextureImporter:
         y: 440
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_17
       rect:
@@ -290,8 +292,8 @@ TextureImporter:
         y: 440
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_18
       rect:
@@ -300,8 +302,8 @@ TextureImporter:
         y: 440
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_19
       rect:
@@ -310,8 +312,8 @@ TextureImporter:
         y: 440
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_20
       rect:
@@ -320,8 +322,8 @@ TextureImporter:
         y: 400
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_21
       rect:
@@ -330,8 +332,8 @@ TextureImporter:
         y: 400
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_22
       rect:
@@ -340,8 +342,8 @@ TextureImporter:
         y: 400
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_23
       rect:
@@ -350,8 +352,8 @@ TextureImporter:
         y: 400
         width: 40
         height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_24
       rect:
@@ -361,7 +363,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_25
       rect:
@@ -371,7 +373,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_26
       rect:
@@ -381,7 +383,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_27
       rect:
@@ -391,7 +393,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_28
       rect:
@@ -401,7 +403,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_29
       rect:
@@ -411,7 +413,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_30
       rect:
@@ -421,7 +423,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_31
       rect:
@@ -431,7 +433,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_32
       rect:
@@ -441,7 +443,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_33
       rect:
@@ -451,7 +453,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_34
       rect:
@@ -461,7 +463,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_35
       rect:
@@ -471,7 +473,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_36
       rect:
@@ -481,7 +483,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_37
       rect:
@@ -491,7 +493,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_38
       rect:
@@ -501,7 +503,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_39
       rect:
@@ -511,7 +513,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_40
       rect:
@@ -521,7 +523,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_41
       rect:
@@ -531,7 +533,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_42
       rect:
@@ -541,7 +543,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_43
       rect:
@@ -551,7 +553,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_44
       rect:
@@ -561,7 +563,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_45
       rect:
@@ -571,7 +573,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_46
       rect:
@@ -581,7 +583,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_47
       rect:
@@ -591,7 +593,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_48
       rect:
@@ -601,7 +603,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_49
       rect:
@@ -611,7 +613,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_50
       rect:
@@ -621,7 +623,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_51
       rect:
@@ -631,7 +633,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_52
       rect:
@@ -641,7 +643,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_53
       rect:
@@ -651,7 +653,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_54
       rect:
@@ -661,7 +663,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_55
       rect:
@@ -671,7 +673,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_56
       rect:
@@ -681,7 +683,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_57
       rect:
@@ -691,7 +693,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_58
       rect:
@@ -701,7 +703,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_59
       rect:
@@ -711,7 +713,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_60
       rect:
@@ -721,7 +723,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_61
       rect:
@@ -731,7 +733,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_62
       rect:
@@ -741,7 +743,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animations_Poof_40x40_63
       rect:
@@ -751,7 +753,27 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animations_Poof_40x40_64
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 460
+        width: 160
+        height: 180
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animations_Poof_40x40_65
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 397
+        width: 160
+        height: 109
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
