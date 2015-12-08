@@ -122,13 +122,32 @@ public class BuildingPanel : GamePanel {
         text.text = b.name;
         text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
         text.alignment = TextAnchor.UpperCenter;
+        text.color = Color.black;
+
+        // Attach a cost object to the object
+        GameObject costObject = new GameObject("Cost");
+        Text textCost = costObject.AddComponent<Text>();
+        textCost.transform.SetParent(go.transform);
+        ResourceBuildingInformation rbi;
+        DecorationBuildingInformation dbi;
+        if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(b.name, out rbi))
+        {
+            textCost.text = rbi.FireCost + "F," + rbi.WaterCost + "W," + rbi.AirCost + "A," + rbi.EarthCost + "E";
+        }
+        else if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(b.name, out dbi))
+        {
+            textCost.text = dbi.FireCost + "F," + dbi.WaterCost + "W," + dbi.AirCost + "A," + dbi.EarthCost + "E";
+        }
+        textCost.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        textCost.alignment = TextAnchor.LowerCenter;
+        textCost.color = Color.black;
 
         // Set the name and parent of the game object
         go.transform.SetParent(this.transform.Find(path));
         go.name = b.name;
 
         // Rect Transform stuff
-        button.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 120);
+        button.GetComponent<RectTransform>().sizeDelta = new Vector2(90, 70);
 
         // Image component stuff
         SpriteRenderer sr = b.GetComponent<SpriteRenderer>();
@@ -177,7 +196,7 @@ public class BuildingPanel : GamePanel {
     private void ResourceBuildingLevelCheck(Building[] buildingList, List<Building> list, int i, ResourceBuildingInformation resourceBuildingInfo)
     {
         int levelRequirement = resourceBuildingInfo.LevelRequirement;
-        if (SaveState.state.hqLevel >= levelRequirement)
+        if (levelRequirement == 1)
         {
             list.Add(buildingList[i]);
             Debug.Log(string.Format("[BuildingPanel] just added {0} to the list", buildingList[i]));
