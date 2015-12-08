@@ -128,7 +128,16 @@ public class BuildingPanel : GamePanel {
         GameObject costObject = new GameObject("Cost");
         Text textCost = costObject.AddComponent<Text>();
         textCost.transform.SetParent(go.transform);
-        textCost.text = b.fireCost + "F," + b.waterCost + "W," + b.airCost + "A," + b.earthCost + "E";
+        ResourceBuildingInformation rbi;
+        DecorationBuildingInformation dbi;
+        if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(b.name, out rbi))
+        {
+            textCost.text = rbi.FireCost + "F," + rbi.WaterCost + "W," + rbi.AirCost + "A," + rbi.EarthCost + "E";
+        }
+        else if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(b.name, out dbi))
+        {
+            textCost.text = dbi.FireCost + "F," + dbi.WaterCost + "W," + dbi.AirCost + "A," + dbi.EarthCost + "E";
+        }
         textCost.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
         textCost.alignment = TextAnchor.LowerCenter;
         textCost.color = Color.black;
