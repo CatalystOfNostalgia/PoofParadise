@@ -1,4 +1,5 @@
 import models
+from sqlalchemy import func
 
 # creates a new entry in the user table of the database
 def create_account( name, email, username, password ):
@@ -158,6 +159,8 @@ def get_residence_building_info(building_info_id):
 # gets the building info of a resource building
 def get_resource_building_info( building_info_id ):
 
+    print "resource building id: " +  str(building_info_id)
+
     building_info = models.session.query(models.ResourceBuildingInfo).filter( \
                     models.ResourceBuildingInfo.building_info_id == \
                                                 building_info_id).one()
@@ -280,7 +283,7 @@ def create_resource_building ( building, user_id, ids ):
     models.session.add(new_building)
     models.session.commit() 
 
-    new_id = models.session.query(models.UserResourceBuilding).order_by(models.UserResourceBuilding.id).one().id
+    new_id = models.session.query(func.max(UserResourceBuilding.id)).one().id
 
     ids.append(new_id)
 
