@@ -160,6 +160,7 @@ public class SaveState : Manager {
 		userLevel = data ["level"].AsInt;
 		userExperience = data ["experience"].AsInt;
 		hqLevel = data ["headquarters_level"].AsInt;
+		//change this back 
 		fire = data ["fire"].AsInt;
 		water = data ["water"].AsInt;
 		earth = data ["earth"].AsInt;
