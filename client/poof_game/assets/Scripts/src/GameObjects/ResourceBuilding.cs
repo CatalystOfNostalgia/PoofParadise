@@ -1,6 +1,4 @@
-﻿using System;
-
-/**
+﻿/**
  * The Resource Building MonoBehavior extends Building
  * It is a specific type of building which generates resources
  * for the user to spend on decorations that can draw more
