@@ -4,6 +4,10 @@ using System.Collections;
 public class PoofManager : MonoBehaviour {
 
     public static PoofManager poofManager;
+    /// Poof Attraction Rating is how much Poofs want to come to your land
+    /// It goes up with decorative building
+    /// It goes down with more poofs
+    private int poofAttractionRating;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +20,7 @@ public class PoofManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+        poofAttractionRating = 0;
     }
 
     public void beamDownPoof(int poofRate)
@@ -25,7 +30,7 @@ public class PoofManager : MonoBehaviour {
 
     public void beamDownPoof(Tuple currentLocation, int poofRate)
     {
-        //need this check or poofsToSpawnCount might become greater than poofRate (e.g. 2- (-3) = 5)
+        poofAttractionRating += poofRate;
         if (SaveState.state.poofCount >= SaveState.state.poofLimit)
         {
             Debug.Log("[PoofManager] Too many poofs");
@@ -33,11 +38,12 @@ public class PoofManager : MonoBehaviour {
         }
 
         int poofsAvailable = SaveState.state.poofLimit - SaveState.state.poofCount;
-        int poofsToSpawnCount = poofRate > poofsAvailable ? poofRate-poofsAvailable : poofRate;
+        int poofsToSpawnCount = poofAttractionRating > poofsAvailable ? poofsAvailable : poofAttractionRating;
         for (int i = 0; i<poofsToSpawnCount; i++)
         {
             GameManager.gameManager.SpawnPoof(GameManager.gameManager.poofPrefab, currentLocation, new System.Collections.Generic.List<GameObject>());
             SaveState.state.poofCount++;
+            poofAttractionRating--;
             Debug.Log("[PoofManager] Spawned a poof");
         }
     }
