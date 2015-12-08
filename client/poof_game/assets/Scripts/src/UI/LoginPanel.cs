@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 using SimpleJSON;
 
+/**
+ * TODO: Write a description
+ */
 public class LoginPanel : GamePanel {
 
     public static LoginPanel panel;
@@ -27,7 +29,7 @@ public class LoginPanel : GamePanel {
     }
 
     /**
-     * add functionality to the panel
+     * Add functionality to the panel
      */
     override public void GeneratePanel () {
 
@@ -49,7 +51,7 @@ public class LoginPanel : GamePanel {
     }
 
     /**
-     * verifies that the log in information is correct
+     * Verifies that the log in information is correct
      */
     public void verifyLogin(string response) {
 
@@ -82,7 +84,9 @@ public class LoginPanel : GamePanel {
 
     }
 
-    // to be called after the account is created in case of errors
+    /**
+     * To be called after the account is created in case of errors
+     */
     public void verifyAccount(string response) {
 
         Debug.Log(response);
@@ -96,7 +100,5 @@ public class LoginPanel : GamePanel {
         }
         MessagePanel.panel.TogglePanel();
         TogglePanel();
-
     }
-
 }

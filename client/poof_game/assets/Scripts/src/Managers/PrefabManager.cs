@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Linq;
-using UnityEngine.UI;
 using System;
 
+/**
+ * The prefab manager is a tool which pools together
+ * a list of prefabs to be used by the game
+ * All prefabs are generated from the Resources folder
+ */
 public class PrefabManager : Manager {
 
     // Static reference to this gameobject
