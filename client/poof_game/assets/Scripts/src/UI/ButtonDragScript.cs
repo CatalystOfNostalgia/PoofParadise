@@ -82,11 +82,18 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		BuildingPanel.buildingPanel.windowState = false;
 	}
 
-	static public T FindInParents<T>(GameObject go) where T : Component
+    /**
+     * A generic method which will return a gameobject of
+     * the type provided in the parent hierarchy if it exists
+     *
+     * Unity already supports this I believe
+     * this.transform.GetComponentInParent<T>()
+     */
+    static public T FindInParents<T>(GameObject go) where T : Component
 	{
 		if (go == null) return null;
 		var comp = go.GetComponent<T>();
-		
+
 		if (comp != null)
 			return comp;
 		
