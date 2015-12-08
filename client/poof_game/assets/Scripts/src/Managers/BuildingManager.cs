@@ -83,6 +83,11 @@ public class BuildingManager : Manager {
 		}
 
 		Building newBuilding = tile.PlaceBuilding (prefab);
+        if (newBuilding == null)
+        {
+            Debug.Log("You cannot afford this building");
+            return;
+        }
         newBuilding.created = true;
         
         // Sets the new building's parent to our convenience object

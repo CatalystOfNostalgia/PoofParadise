@@ -30,7 +30,7 @@ public abstract class Building : MonoBehaviour {
     private Canvas options;
 
     // Use this for initialization
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         //gameObject.AddComponent<ButtonDragScript>();
         //gameObject.AddComponent<BoxCollider2D>();
@@ -38,12 +38,72 @@ public abstract class Building : MonoBehaviour {
 		options = (Canvas) Instantiate (PrefabManager.prefabManager.buildingOptionCanvas, pos, Quaternion.identity);
         options.transform.SetParent(this.transform);
 
+        /**
+         * This section will surely fail once we implement saving and loading fully.
+         * Everytime this building is 'built' we will deduct the cost from the users
+         * available resources. As a result, loading the game may cost the user
+         * a large amount of resources
+         */
+        
+
         created = false;
         selected = true;
         placed = false;
         canDrag = false;
         showOptions = false;
         size = 1;
+    }
+
+    /**
+     * Pays for the building based on the cost of the building
+     */
+    public bool PayForBuilding()
+    {
+        DecorationBuildingInformation dbi;
+        ResourceBuildingInformation rbi;
+        if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(this.name.Replace("(Clone)", ""), out dbi))
+        {
+            // Set resource cost
+            fireCost = dbi.FireCost;
+            waterCost = dbi.WaterCost;
+            earthCost = dbi.EarthCost;
+            airCost = dbi.AirCost;
+
+            // Spend allocated resources
+            //PayForBuilding();
+            //Debug.Log(string.Format("{0} was paid for", this.name));
+        }
+        else if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(this.name.Replace("(Clone)", ""), out rbi))
+        {
+            // Set resource cost
+            fireCost = rbi.FireCost;
+            waterCost = rbi.WaterCost;
+            earthCost = rbi.EarthCost;
+            airCost = rbi.AirCost;
+
+            // Spend allocated resources
+            //PayForBuilding();
+            //Debug.Log(string.Format("{0} was paid for", this.name));
+        }
+        else
+        {
+            // Must be headquarters
+            //Debug.LogError(string.Format("Failed to spend resources on {0}", this.name));
+            return true;
+        }
+        Debug.Log("Fire cost for this building is " + fireCost);
+        if (ResourceIncrementer.incrementer.ResourceGain(-fireCost, ResourceBuilding.ResourceType.fire) &&
+            ResourceIncrementer.incrementer.ResourceGain(-waterCost, ResourceBuilding.ResourceType.water) &&
+            ResourceIncrementer.incrementer.ResourceGain(-earthCost, ResourceBuilding.ResourceType.earth) &&
+            ResourceIncrementer.incrementer.ResourceGain(-airCost, ResourceBuilding.ResourceType.air))
+        {
+            Debug.Log("Successfully purchased building");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /**
