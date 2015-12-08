@@ -6,7 +6,6 @@ public class DecorativeBuilding : Building {
 	// Fields
 	public int poofGenerationRate;
 
-	
 	private bool selected { get; set; }
 	private bool placed { get; set; }
 	public bool created { get; set; }
@@ -38,6 +37,8 @@ public class DecorativeBuilding : Building {
 		canDrag = false;
 		showOptions = false;
 		size = 1;
+
+        PoofManager.poofManager.poofGenerationRate += poofGenerationRate;
 	}
 	
 	/**
