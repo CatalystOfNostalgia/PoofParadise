@@ -36,14 +36,14 @@ public class BuildingInformationManager {
         resourceBuildingInformationDict.Add("Cave Lvl 1", new ResourceBuildingInformation(7, 0, 0, 0, 0, 1, 0, 5, 0, 0));
         resourceBuildingInformationDict.Add("Cave Lvl 2", new ResourceBuildingInformation(8, 0, 100, 0, 0, 2, 0, 10, 0, 0));
 
-        resourceBuildingInformationDict.Add("Poof Residence", new ResourceBuildingInformation(9, 100, 100, 100, 100, 1, 0, 0, 0, 0));
+        resourceBuildingInformationDict.Add("Poof Residence", new ResourceBuildingInformation(9, 50, 50, 50, 50, 1, 0, 0, 0, 0));
     }
 
     private void addDecorativeBuildingInfo()
     {
-        DecorationBuildingInformationDict.Add("Geode", new DecorationBuildingInformation(1, 0, 100, 0, 0, 1, 2));
-        DecorationBuildingInformationDict.Add("Volcano", new DecorationBuildingInformation(2, 100, 0, 0, 0, 1, 2));
-        DecorationBuildingInformationDict.Add("Waterfall", new DecorationBuildingInformation(3, 0, 0, 100, 0, 2, 4));
-        DecorationBuildingInformationDict.Add("Wind Organ", new DecorationBuildingInformation(4, 0, 0, 0, 100, 2, 4));
+        DecorationBuildingInformationDict.Add("Geode", new DecorationBuildingInformation(1, 0, 50, 0, 0, 1, 2));
+        DecorationBuildingInformationDict.Add("Volcano", new DecorationBuildingInformation(2, 50, 0, 0, 0, 1, 2));
+        DecorationBuildingInformationDict.Add("Waterfall", new DecorationBuildingInformation(3, 0, 0, 50, 0, 2, 4));
+        DecorationBuildingInformationDict.Add("Wind Organ", new DecorationBuildingInformation(4, 0, 0, 0, 50, 2, 4));
     }
 }
