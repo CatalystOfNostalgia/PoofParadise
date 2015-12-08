@@ -30,7 +30,7 @@ public abstract class Building : MonoBehaviour {
     private Canvas options;
 
     // Use this for initialization
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         //gameObject.AddComponent<ButtonDragScript>();
         //gameObject.AddComponent<BoxCollider2D>();
@@ -89,6 +89,7 @@ public abstract class Building : MonoBehaviour {
      */
     private void PayForBuilding()
     {
+        Debug.Log("Fire cost for this building is " + fireCost);
         ResourceIncrementer.incrementer.ResourceGain(-fireCost, ResourceBuilding.ResourceType.fire);
         ResourceIncrementer.incrementer.ResourceGain(-waterCost, ResourceBuilding.ResourceType.water);
         ResourceIncrementer.incrementer.ResourceGain(-earthCost, ResourceBuilding.ResourceType.earth);

@@ -110,25 +110,25 @@ public class ResourceIncrementer : GamePanel
                 dummy = SaveState.state.fire;
                 Debug.Log(SaveState.state.maxFire);
                 ManageSlider(amount, ref dummy, SaveState.state.maxFire, GetSliderByName("Fire Slider"));
-                ManageText(amount, ref dummy, SaveState.state.maxFire, GetTextByName("FireCount"));
+                GetTextByName("FireCount").text = "" + dummy;
                 SaveState.state.fire = dummy;
                 break;
 		    case ResourceBuilding.ResourceType.water:
                 dummy = SaveState.state.water;
                 ManageSlider(amount, ref dummy, SaveState.state.maxWater, GetSliderByName("Water Slider"));
-                ManageText(amount, ref dummy, SaveState.state.maxWater, GetTextByName("WaterCount"));
+                GetTextByName("WaterCount").text = "" + dummy;
                 SaveState.state.water = dummy;
 			    break;
 		    case ResourceBuilding.ResourceType.air:
                 dummy = SaveState.state.air;
                 ManageSlider(amount, ref dummy, SaveState.state.maxAir, GetSliderByName("Wind Slider"));
-                ManageText(amount, ref dummy, SaveState.state.maxAir, GetTextByName("AirCount"));
+                GetTextByName("AirCount").text = "" + dummy;
                 SaveState.state.air = dummy;
 			    break;
 		    case ResourceBuilding.ResourceType.earth:
                 dummy = SaveState.state.earth;
                 ManageSlider(amount, ref dummy, SaveState.state.maxEarth, GetSliderByName("Earth Slider"));
-                ManageText(amount, ref dummy, SaveState.state.maxEarth, GetTextByName("EarthCount"));
+                GetTextByName("EarthCount").text = "" + dummy;
                 SaveState.state.earth = dummy;
 			    break;
 		    default:
