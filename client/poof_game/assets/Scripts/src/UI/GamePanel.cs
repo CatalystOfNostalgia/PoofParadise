@@ -28,7 +28,7 @@ public abstract class GamePanel : MonoBehaviour {
         // Lets the user know that their button doesn't exist
         if (index == -1)
         {
-            Debug.LogError("FindAndModifyUIElement failed to find " + name + " in button list");
+            Debug.LogError("[GamePanel] FindAndModifyUIElement failed to find " + name + " in button list");
             return;
         }
 
@@ -50,7 +50,7 @@ public abstract class GamePanel : MonoBehaviour {
         // Lets the user know that their button doesn't exist
         if (index == -1)
         {
-            Debug.LogError("FindAndModifyUIElement failed to find " + name + " in button list");
+            Debug.LogError("[GamePanel] FindAndModifyUIElement failed to find " + name + " in button list");
             return;
         }
         list[index].onValueChanged.RemoveAllListeners();

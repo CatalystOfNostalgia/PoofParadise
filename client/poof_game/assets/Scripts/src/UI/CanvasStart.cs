@@ -44,7 +44,8 @@ public class CanvasStart : MonoBehaviour {
         GameObject buildingPanel = this.transform.Find("Building Panel(Clone)").gameObject;
         if (buildingPanel == null)
         {
-            Debug.Log("Building Panel is null");
+            Debug.LogError("[CanvasStart] Building Panel is null");
+            return;
         }
 
         if (BuildingPanel.buildingPanel == null)
@@ -61,7 +62,8 @@ public class CanvasStart : MonoBehaviour {
         GameObject poofCounterPanel = this.transform.Find("Building Panel(Clone)").gameObject;
         if (poofCounterPanel == null)
         {
-            Debug.Log("Building Panel is null");
+            Debug.LogError("[CanvasStart] Poof Counter Panel is null");
+            return;
         }
 
         if (PoofCounterPanel.poofCounterPanel == null)

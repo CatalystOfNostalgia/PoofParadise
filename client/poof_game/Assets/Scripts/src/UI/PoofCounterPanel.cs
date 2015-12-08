@@ -15,10 +15,11 @@ public class PoofCounterPanel : GamePanel {
 	override public void GeneratePanel(){
         poofCounterText.text = string.Format("{0}/{1}", SaveState.state.poofCount, SaveState.state.poofLimit);
 	}
-
+    
     void Update()
     {
-        Debug.Log("[PoofCounterPanel] Updated the panel");
+        // DO NOT DO THIS -> Basically freezes the game
+        // Instead: Find out who updates poofcount anc call Generate Panel from there
         GeneratePanel();
     }
 }

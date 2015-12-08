@@ -55,7 +55,6 @@ public class LoginPanel : GamePanel {
      */
     public void verifyLogin(string response) {
 
-        Debug.Log(response);
         JSONNode data = JSON.Parse(response);
 
         if (data["error"] == null) {
@@ -88,8 +87,6 @@ public class LoginPanel : GamePanel {
      * To be called after the account is created in case of errors
      */
     public void verifyAccount(string response) {
-
-        Debug.Log(response);
 
         JSONNode data = JSON.Parse(response);
 
