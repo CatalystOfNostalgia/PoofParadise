@@ -95,10 +95,13 @@ public class BuildingManager : Manager {
 
                         SaveState.state.addBuilding(tile.index, newBuilding);
 
+                        /* TODO Commented this out because I'm not sure what it
+                         * and it's generating an error
                         if (prefab.GetComponent<ResidenceBuilding>() == null)
                         {   
                             BuildingPanel.buildingPanel.alreadyPlacedDownBuildings.Add(prefab.name);
                         }
+                        */
 
                     }
 
