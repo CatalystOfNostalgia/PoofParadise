@@ -1,4 +1,5 @@
 import models
+from sqlalchemy.dialects import mysql
 from sqlalchemy import func
 
 # creates a new entry in the user table of the database
@@ -224,19 +225,18 @@ def update_resource_building ( building, user_id ):
     try:
 
         building_id = building['id']
-        print 'id: ' + building_id
+
         updated_building = models.session.query(models.UserResourceBuilding).filter( \
                            models.UserResourceBuilding.id == building_id).one()
 
-        updated_building.x_coordinate = building['x_coordinate']
-        updated_building.y_coordinate = building['y_coordinate']
+        updated_building.x_coordinate = building['position_x']
+        updated_building.y_coordinate = building['position_y']
 
         models.session.commit()
         return True
 
     except:
 
-        print building['id']
         rollback()
         return False
 
@@ -249,8 +249,8 @@ def update_decorative_building ( building ):
                            models.UserDecorativeBuilding.id == building['id']).one()
 
         updated_building.level = building['level']
-        updated_building.position_x = building['position_x']
-        updated_building.position_y = building['position_y']
+        updated_building.x_coordinate = building['position_x']
+        updated_building.y_coordinate = building['position_y']
 
         models.session.commit()
         return True
@@ -274,7 +274,7 @@ def create_decorative_building ( building, user_id, ids ):
 
     new_id = models.session.query(func.max(models.UserDecorativeBuilding.id)).one()[0]
 
-    ids.append(new_id - 1)
+    ids.append(new_id)
     return ids
 
 # creates a resource building in the database
