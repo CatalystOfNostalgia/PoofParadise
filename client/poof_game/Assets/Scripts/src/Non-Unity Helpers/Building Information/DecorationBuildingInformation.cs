@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-
+﻿/**
+ * Handles specific info related to Decorative Buildings
+ */
 public class DecorationBuildingInformation : BuildingInformation {
 
     private int poofAttractionRate;

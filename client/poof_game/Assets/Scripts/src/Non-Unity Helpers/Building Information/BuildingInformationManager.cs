@@ -1,14 +1,14 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-/// <summary>
-/// A hardcoded class of the building information
-/// which includes the id, cost of buildings
-/// </summary>
+﻿using System.Collections.Generic;
+
+/**
+ * A hardcoded class of the building information
+ * which includes the id, cost of buildings
+ */
 public class BuildingInformationManager {
 
     private Dictionary<string, ResourceBuildingInformation> resourceBuildingInformationDict;
     private Dictionary<string, DecorationBuildingInformation> decorativeBuildingInformationDict;
+
     public BuildingInformationManager ()
     {
         resourceBuildingInformationDict = new Dictionary<string, ResourceBuildingInformation>();

@@ -1,11 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
-
-/// <summary>
-/// 
-/// Object holding information about the base building
-/// </summary>
+﻿/**
+ * Object holding information about the base building
+ */
 public abstract class BuildingInformation{
+
     private int id;
     private int fireCost;
     private int earthCost;

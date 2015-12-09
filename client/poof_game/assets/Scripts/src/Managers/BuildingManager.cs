@@ -61,10 +61,6 @@ public class BuildingManager : Manager {
         target = building;
 	}
 
-	public bool isOccupied (){
-		return false;
-	}
-
 	/**
      * Places a building on the currently selected tile
      */
@@ -78,8 +74,10 @@ public class BuildingManager : Manager {
      */
 	public void PlaceBuilding (Building prefab, Tile tile) {
 
+        // Exit if supplied tile is null
 		if (tile == null) {
-			Debug.Log ("tile is null");
+            Debug.LogError("Cannot place building because tile is null");
+            return;
 		}
         else {
 
@@ -95,24 +93,22 @@ public class BuildingManager : Manager {
                     // TODO this feels pretty iffy
                     if ( !isTileTaken(tile.index)) {
 
-                        if (newBuilding.GetType() == typeof(DecorativeBuilding)) {
-                            DecorativeBuilding decBuilding = (DecorativeBuilding)newBuilding;
-                            SaveState.state.decorativeBuildings.Add (tile.index, decBuilding);
+                        SaveState.state.addBuilding(tile.index, newBuilding);
 
-                        } else if (newBuilding.GetType() == typeof(ResourceBuilding)) {
-                            ResourceBuilding resBuilding = (ResourceBuilding)newBuilding;
-                            SaveState.state.resourceBuildings.Add (tile.index, resBuilding);
-
-                        } else if (newBuilding.GetType() == typeof(ResidenceBuilding)) {
-                            ResidenceBuilding resBuilding = (ResidenceBuilding)newBuilding;
-                            SaveState.state.residenceBuildings.Add (tile.index, resBuilding);
+                        if (prefab.GetComponent<ResidenceBuilding>() == null)
+                        {   
+                            BuildingPanel.buildingPanel.alreadyPlacedDownBuildings.Add(prefab.name);
                         }
 
                     }
 
                 GameManager.gameManager.SpawnPoofs();
+            } else {
+                Debug.Log("You cannot afford this building");
+                return;
             }
         }
+
 	}
 
     /**
@@ -146,11 +142,9 @@ public class BuildingManager : Manager {
 		if (buildingMode) {
 			buildingMode = false;
 			if (!target) {
-				Debug.Log ("no target");
+				Debug.Log ("No target");
 			}
 			PlaceBuilding(target);
-			Debug.Log ("building mode set to false");
 		}
-
 	}
 }

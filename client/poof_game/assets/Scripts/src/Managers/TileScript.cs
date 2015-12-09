@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-
 /**
  * The TileScript is a static, one-of-a-kind singleton object that serves as the
  * game grid from which all other game functions are derived
  */
-
 public class TileScript : Manager {
 
     // Singleton variable so that only one grid variable is active per scene
@@ -234,7 +232,6 @@ public class TileScript : Manager {
      */
     public Tile GetTile(Tuple index)
     {
-
         foreach(Tile test in tiles)
         {
             // Implement equals in tuple

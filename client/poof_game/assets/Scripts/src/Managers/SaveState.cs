@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using System;
 using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
+/**
+ * An object which oversees the state of the entire game
+ * The server interfaces with this object directly
+ */
 public class SaveState : Manager {
             
 	// Allows the scene to access this object without searching for it
 	public static SaveState state;
 
-	// player data
+	// Player data
     public string username { get; set; }
     public string userPassword { get; set; }
 	public int userID { get; set; }
@@ -20,9 +23,7 @@ public class SaveState : Manager {
 	public int poofCount { get; set; }
     public int poofLimit { get; set; }
 
-	// List game state variables here
-
-	// resources
+	// Resources
 	public int fire { get; set; }
 	public int air { get; set; }
 	public int water { get; set; }
@@ -32,7 +33,7 @@ public class SaveState : Manager {
 	public int maxWater { get; set; }
 	public int maxEarth { get; set; }
 
-	// elemari
+	// Elemari
 	public int fireEle { get; set; }
 	public int waterEle { get; set; }
 	public int earthEle { get; set; }
@@ -53,8 +54,9 @@ public class SaveState : Manager {
 	public int pondRes { get; set; }
 	public int caveRes { get; set; }
 	
-	// wooly beans?
+	// The monotized in-game resource
 	public int woolyBeans { get; set; }
+
 	/**
 	 * Produces a singleton on awake
 	 */
@@ -105,11 +107,8 @@ public class SaveState : Manager {
 	/**
 	 * Pushes player data to server
 	 */
-	public void PushToServer() {
-		
+	public void PushToServer() {		
 		string buildingJSON = this.jsonify();
-		
-		
 		// TODO Send JSON to server
         StartCoroutine(GetHTTP.toSave(buildingJSON, updateBuildings));
 	}
@@ -148,6 +147,38 @@ public class SaveState : Manager {
                 }
             }
         }
+    }
+
+    // adds a building to the appropriate dictionary
+    public void addBuilding(Tuple t, Building b) {
+        
+        if (b.GetType() == typeof(DecorativeBuilding)) {
+            DecorativeBuilding decBuilding = (DecorativeBuilding)b;
+            SaveState.state.decorativeBuildings.Add (t, decBuilding);
+
+        } else if (b.GetType() == typeof(ResourceBuilding)) {
+            ResourceBuilding resBuilding = (ResourceBuilding)b;
+            SaveState.state.resourceBuildings.Add (t, resBuilding);
+
+        } else if (b.GetType() == typeof(ResidenceBuilding)) {
+            ResidenceBuilding resBuilding = (ResidenceBuilding)b;
+            SaveState.state.residenceBuildings.Add (t, resBuilding);
+        }
+
+    }
+
+    // removes a building from the dicts
+    public bool removeBuilding(Tuple t) {
+
+        if (decorativeBuildings.Remove(t) || 
+            resourceBuildings.Remove(t) ||
+            residenceBuildings.Remove(t)) {
+
+            return true;
+        }
+
+        return false;
+
     }
 	
 	// turns the save data into a JSON String
@@ -264,9 +295,8 @@ public class SaveState : Manager {
 			Debug.Log("y: " + building["position_y"].AsInt);
 
             // Retrieves a building from the resource buildings list
-            Debug.Log("index: " + building["building_info_id"].AsInt);
             if (PrefabManager.prefabManager == null) {
-                Debug.Log("prefab manager");
+                Debug.LogError("[SaveState] Prefab manager is null");
             }
 			ResourceBuilding newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
 

@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/**
+ * The initial object in the game
+ */
 public class GameStart : MonoBehaviour {
 
     public Manager manager { get; set; }
@@ -25,11 +28,16 @@ public class GameStart : MonoBehaviour {
 		InvokeRepeating ("autoSave", .1f, 1f);
     }
 
-	void autoSave () {
-	
+    /**
+     * Serves as the game's autosave functionality
+     */
+	private void autoSave () {
 		SaveState.state.PushToServer();	
 	}
 
+    /**
+     * Serves as the games final save on quit functionality
+     */
 	void OnApplicationQuit(){
 	    SaveState.state.PushToServer();
 		Debug.Log("Save ON QUITTING!!!");
@@ -48,25 +56,25 @@ public class GameStart : MonoBehaviour {
             yield return null;
         }
     
-        Debug.Log("scene is ready");
         // Build canvas
         Instantiate(PrefabManager.prefabManager.canvas, new Vector3(0, 0, 0), Quaternion.identity);
 
-        // build and populate the game grid
+        // Build and populate the game grid
         TileScript.grid.BuildGameGrid();
         
+        // Try to load the scene
 		try{
 			SaveState.state.loadJSON(SceneState.state.userInfo);
 		}
 		catch(System.NullReferenceException e){
-			Debug.Log("[GameStart] User did not log in");
+			Debug.LogError("[GameStart] User did not log in");
 			Debug.Log(e);
 		}
+
         TileScript.grid.PopulateGameGrid();
 
         // Generate all poofs/elemari
         GameManager.gameManager.SpawnPoofs();
-		Debug.Log ("scene is generated");
     }
 
     /**
@@ -98,20 +106,5 @@ public class GameStart : MonoBehaviour {
         managers[3] = BuildingManager.buildingManager;
         managers[4] = SoundManager.soundManager;
         managers[5] = PrefabManager.prefabManager;
-    }
-
-    /**
-     * Runs a pull from server and populates the grid
-     */
-    public void TestJSON()
-    {
-
-		//SaveState.state.PullFromServer ("ted1", "password");
-        TileScript.grid.PopulateGameGrid ();
-
-		//testing saving game
-		//SaveState.state.PushToServer ();
-
-
     }
 }
