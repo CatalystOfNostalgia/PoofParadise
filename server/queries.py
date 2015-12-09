@@ -228,7 +228,7 @@ def update_resource_building ( building, user_id ):
 
         updated_building = models.session.query(models.UserResourceBuilding).filter( \
                            models.UserResourceBuilding.id == building_id).one()
-
+        updated_building.level = building['level']
         updated_building.x_coordinate = building['position_x']
         updated_building.y_coordinate = building['position_y']
 
@@ -290,6 +290,7 @@ def create_resource_building ( building, user_id, ids ):
     new_building = models.UserResourceBuilding( \
         user_id = user_id, \
         building_info_id = building['building_info_id'], \
+        level = building['level'], \
         position_x = building['position_x'], \
         position_y = building['position_y'])
 

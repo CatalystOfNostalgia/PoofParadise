@@ -10,6 +10,7 @@ public abstract class Building : MonoBehaviour {
     // database management data
     public bool created;
     public int buildingInfoID;
+    public int level;
 
     // Tracks the state of the building as a button
     public int ID { get; set; }
@@ -49,6 +50,7 @@ public abstract class Building : MonoBehaviour {
          */
         
 
+        level = 1;
         selected = true;
         placed = false;
         canDrag = false;

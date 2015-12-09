@@ -183,6 +183,7 @@ public class SaveState : Manager {
 		foreach ( KeyValuePair<Tuple, ResourceBuilding> entry in resourceBuildings) {
 			jsonPlayerData += "{ ";
             jsonPlayerData += "\"building_info_id\": \"" + entry.Value.buildingInfoID + "\", ";
+            jsonPlayerData += "\"level\": \"" + entry.Value.level + "\", ";
 			jsonPlayerData += "\"id\": \"" + entry.Value.ID + "\", ";
 			jsonPlayerData += "\"position_x\": \"" + entry.Key.x + "\", ";
 			jsonPlayerData += "\"position_y\": \"" + entry.Key.y + "\", ";
@@ -200,6 +201,7 @@ public class SaveState : Manager {
 
 			jsonPlayerData += "{ ";
             jsonPlayerData += "\"building_info_id\": \"" + entry.Value.buildingInfoID + "\", ";
+            jsonPlayerData += "\"level\": \"" + entry.Value.level + "\", ";
 			jsonPlayerData += "\"id\": \"" + entry.Value.ID + "\", ";
 			jsonPlayerData += "\"position_x\": \"" + entry.Key.x + "\", ";
 			jsonPlayerData += "\"position_y\": \"" + entry.Key.y + "\", ";
