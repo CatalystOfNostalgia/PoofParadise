@@ -1,10 +1,8 @@
 using UnityEngine.UI;
 using UnityEngine;
-using UnityEditor;
 using System.Collections.Generic;
-using System.Linq;
 
-/**.
+/**
  * This menu should
  * 1) Allow users to place buildings on the grid
  * 2) Decorate buildings
@@ -38,6 +36,9 @@ public class BuildingPanel : GamePanel {
 		GeneratePanel();
 	}
 
+    /**
+     * A function for switching between the panels
+     */
     public void SwitchPanels()
     {
         // Turn off current panel
@@ -75,6 +76,12 @@ public class BuildingPanel : GamePanel {
                 Destroy(button.gameObject);
             }
         }
+
+        // Clear out arrays
+        resourceButtons = null;
+        decorativeButtons = null;
+
+        // Rebuild them
         resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, "Resource Building Panel/Buttons");
         decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildigs, "Decorative Building Panel/Buttons");
 
@@ -123,8 +130,6 @@ public class BuildingPanel : GamePanel {
         GameObject go = new GameObject();
         Button button = go.AddComponent<Button>();
         Image image = go.AddComponent<Image>();
-        CanvasRenderer cr = go.AddComponent<CanvasRenderer>();
-        RectTransform rt = go.AddComponent<RectTransform>();
         ButtonDragScript bds = go.AddComponent<ButtonDragScript>();
 
         // Attach a text object to the button
@@ -170,17 +175,12 @@ public class BuildingPanel : GamePanel {
         return button;
     }
 
-    /// <summary>
-    /// Dynamically creates buttons
-    /// path - supplies the path the the parent for the buttons
-    /// SaveState is never initialized from the Demo Scene, you must start from Login Scene
-    /// TODO
-    /// Call this when the user upgrades the hq so that the building menu is refreshed
-    /// </summary>
-    /// <param name="buildingList"></param>
-    /// <param name="index"></param>
-    /// <param name="path"></param>
-    /// <returns></returns>
+    /**
+     * Dynamically creates buttons
+     * path - supplies the path the the parent for the buttons
+     * SaveState is never initialized from the Demo Scene, you must start from Login Scene
+     * TODO: Call this when the user upgrades the hq so that the building menu is refreshed
+     */
     public Button[] CreateButtons(Building[] buildingList, string path)
     {
        
@@ -191,6 +191,7 @@ public class BuildingPanel : GamePanel {
             // Checking if the user can build the building or not
             ResourceBuildingInformation resourceBuildingInfo;
             DecorationBuildingInformation decorationBuildingInfo;
+
             // SaveState is never initialized from the Demo Scene, you must start from Login Scene
             if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(buildingList[i].name, out resourceBuildingInfo))
             {
@@ -204,24 +205,27 @@ public class BuildingPanel : GamePanel {
         return AddButtonsToPanel(list.ToArray(), path);
     }
 
+    /**
+     * A function which checks the level requirement of a building
+     */
     private void ResourceBuildingLevelCheck(Building[] buildingList, List<Building> list, int i, ResourceBuildingInformation resourceBuildingInfo)
     {
         int levelRequirement = resourceBuildingInfo.LevelRequirement;
-        Debug.Log("[BuildingPanel] alreadyPlacedDownBuilding : " + string.Join(",", alreadyPlacedDownBuildings.ToArray()));
         if (levelRequirement == 1 && (! alreadyPlacedDownBuildings.Contains(buildingList[i].name)))
         {
             list.Add(buildingList[i]);
-            Debug.Log(string.Format("[BuildingPanel] just added {0} to the list", buildingList[i]));
         }
     }
 
+    /**
+     * A function which checks the level requirement of a building
+     */
     private void DecorationBuildingLevelCheck(Building[] buildingList, List<Building> list, int i, DecorationBuildingInformation decorationBuildingInfo)
     {
         int levelRequirement = decorationBuildingInfo.LevelRequirement;
         if (SaveState.state.hqLevel >= levelRequirement)
         {
             list.Add(buildingList[i]);
-            Debug.Log(string.Format("[BuildingPanel] just added {0} to the list", buildingList[i]));
         }
     }
 }

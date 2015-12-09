@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Linq;
-using UnityEngine.UI;
 using System;
 
+/**
+ * The prefab manager is a tool which pools together
+ * a list of prefabs to be used by the game
+ * All prefabs are generated from the Resources folder
+ */
 public class PrefabManager : Manager {
 
     // Static reference to this gameobject
@@ -70,7 +74,6 @@ public class PrefabManager : Manager {
             }
         }
         Array.Sort(resourceBuildings, new BuildingIDComparator());
-        //Debug.Log(string.Format("[PrefabManager] the sorted resource building array is: {0}", string.Join(",", resourceBuildings.Select(x=> x.ToString()).ToArray()))); // magic array logging in one line
 
         foreach(Building b in decorativeBuildigs)
         {

@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using System;
 using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
+/**
+ * An object which oversees the state of the entire game
+ * The server interfaces with this object directly
+ */
 public class SaveState : Manager {
             
 	// Allows the scene to access this object without searching for it
 	public static SaveState state;
 
-	// player data
+	// Player data
 	public int userID { get; set; }
 	public int userLevel { get; set; }
 	public int userExperience { get; set; }
@@ -19,9 +22,8 @@ public class SaveState : Manager {
     public int hqPosY { get; set; }
 	public int poofCount { get; set; }
     public int poofLimit { get; set; }
-	// List game state variables here
 
-	// resources
+	// Resources
 	public int fire { get; set; }
 	public int air { get; set; }
 	public int water { get; set; }
@@ -31,27 +33,28 @@ public class SaveState : Manager {
 	public int maxWater { get; set; }
 	public int maxEarth { get; set; }
 
-	// elemari
+	// Elemari
 	public int fireEle { get; set; }
 	public int waterEle { get; set; }
 	public int earthEle { get; set; }
 	public int airEle { get; set; }
 
-	// buildings
+	// Buildings
 	//TODO do we actually need separate dictionaries for the different building type?
 	public Dictionary<Tuple, Building> buildings { get; set; }
 
     public BuildingInformationManager buildingInformationManager;
 
 
-	//resource collection fields // currently unused
+	// Resource collection fields // currently unused
 	public int firetreeRes { get; set; }
 	public int windmillRes { get; set; }
 	public int pondRes { get; set; }
 	public int caveRes { get; set; }
 	
-	// wooly beans?
+	// The monotized in-game resource
 	public int woolyBeans { get; set; }
+
 	/**
 	 * Produces a singleton on awake
 	 */
@@ -99,12 +102,8 @@ public class SaveState : Manager {
 	/**
 	 * Pushes player data to server
 	 */
-	public void PushToServer() {
-		
-		Debug.Log ("data.ToJSON");
+	public void PushToServer() {		
 		string buildingJSON = this.jsonify();
-		
-		
 		// TODO Send JSON to server
 	}
 	
@@ -186,22 +185,21 @@ public class SaveState : Manager {
 			int y = building["position_y"].AsInt;
 
             // Retrieves a building from the resource buildings list
-            Debug.Log("index: " + building["building_info_id"].AsInt);
             if (PrefabManager.prefabManager == null) {
-                Debug.Log("prefab manager");
+                Debug.LogError("[SaveState] Prefab manager is null");
             }
 			Building newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
 
 			buildings.Add(new Tuple(x, y), newBuilding);
 		}
-		//TODO foreach loop for decorative building
+		// TODO foreach loop for decorative building
 		foreach (JSONNode building in loadedDecorativeBuildings) {
 		}
 
         hqPosX = data["hq_pos_x"].AsInt;
         hqPosY = data["hq_pos_y"].AsInt;
-        Debug.Log("hqLevel is: " + hqLevel);
-        //since array start at 0, lv 1-> index 0, lv 2 -> index 1
+
+        // Since array start at 0, lv 1-> index 0, lv 2 -> index 1
         buildings.Add(new Tuple(hqPosX, hqPosY), PrefabManager.prefabManager.headQuarterBuildings[hqLevel-1]);
 	}
 }

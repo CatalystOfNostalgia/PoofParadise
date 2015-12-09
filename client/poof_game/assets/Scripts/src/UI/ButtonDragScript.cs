@@ -1,21 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Collections;
 
+/**
+ * A script which allows an object to be dragged around the scene
+ */
 public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
 	public bool dragOnSurfaces = true;
 	private GameObject draggingIcon;
 	private RectTransform draggingPlane;
-	GameObject buildingModalPanel;
     public Building building { get; set; }
 
+    /**
+     * Provides functionality for this object
+     * when a user begins to drag it
+     */
 	public void OnBeginDrag (PointerEventData eventData){
-		//Canvas canvas = GetComponent<Canvas>();
 		Canvas canvas = FindInParents<Canvas> (gameObject);
 		if (canvas == null) {
-			Debug.Log ("ButtonDragScript: could not find canvas");
+			Debug.LogError ("[ButtonDragScript] Could not find canvas");
 			return;
 		}
 		
@@ -29,12 +33,10 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		var image = draggingIcon.AddComponent<Image>();
 		// The icon will be under the cursor.
 		// We want it to be ignored by the event system.
-		//draggingIcon.AddComponent<IgnoreRaycast>();
 
 		image.sprite = GetComponent<Image>().sprite;
 
 		RectTransform rekt = GetComponent<RectTransform> ();
-		//image.SetNativeSize ();
 		image.rectTransform.sizeDelta = rekt.sizeDelta;
 		
 		if (dragOnSurfaces)
@@ -46,12 +48,20 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
 	}
 
+    /**
+     * Provides functionality for this object while
+     * it is being dragged
+     */
 	public void OnDrag (PointerEventData eventData){
 		if (draggingIcon != null) {
 			setDraggedPosition(eventData);
 		}
 	}
 
+    /**
+     * Establishes the position of this object
+     * based on the location of the mouse pointer
+     */
 	private void setDraggedPosition (PointerEventData eventData){
 		if (dragOnSurfaces && eventData.pointerEnter != null && eventData.pointerEnter.transform as RectTransform != null)
 			draggingPlane = eventData.pointerEnter.transform as RectTransform;
@@ -60,6 +70,10 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		rt.position = Input.mousePosition;
 	}
 
+    /**
+     * Establishes functionality for this object as
+     * a drag completes
+     */
 	public void OnEndDrag (PointerEventData eventData){
 		BuildingManager.buildingManager.makeNewBuilding(building);
 		if (draggingIcon != null) {
@@ -68,11 +82,18 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		BuildingPanel.buildingPanel.windowState = false;
 	}
 
-	static public T FindInParents<T>(GameObject go) where T : Component
+    /**
+     * A generic method which will return a gameobject of
+     * the type provided in the parent hierarchy if it exists
+     *
+     * Unity already supports this I believe
+     * this.transform.GetComponentInParent<T>()
+     */
+    static public T FindInParents<T>(GameObject go) where T : Component
 	{
 		if (go == null) return null;
 		var comp = go.GetComponent<T>();
-		
+
 		if (comp != null)
 			return comp;
 		
@@ -83,8 +104,5 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 			t = t.parent;
 		}
 		return comp;
-	}
-	// Update is called once per frame
-	void Update () {
 	}
 }

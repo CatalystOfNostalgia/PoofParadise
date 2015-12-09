@@ -47,9 +47,6 @@ public class MovementScript : MonoBehaviour {
 		movementQueue = new Queue();
 		currentPos = new Vector2(transform.position.x, transform.position.y);
 		targetPos = new Vector2();
-
-		//Debug.Log(currentPos);
-		//Debug.Log(targetPos);
 		
 		animator = this.GetComponent<Animator>();
 		if (animator != null) {
@@ -226,7 +223,7 @@ public class MovementScript : MonoBehaviour {
         }
         else
         {
-			//Debug.Log("Congratulations, this character doesn't have a animation");
+			Debug.LogError("[MovementScript] Congratulations, this character doesn't have a animation");
         }
 
 		isMoving = true;
@@ -235,7 +232,6 @@ public class MovementScript : MonoBehaviour {
 	}
 	
 	public void animatorChange() {
-		//Debug.Log("Transition");
 		animator.SetInteger("Direction", 4);
 	}
 

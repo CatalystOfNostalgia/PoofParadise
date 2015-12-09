@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-
+﻿/**
+ * An extension of building information specifically for Resource Buildings
+ */
 public class ResourceBuildingInformation : BuildingInformation{
 
     private int fireGenerationRate;

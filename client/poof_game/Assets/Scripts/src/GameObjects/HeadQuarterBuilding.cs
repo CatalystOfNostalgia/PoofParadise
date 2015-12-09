@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-
+﻿/**
+ * The Headquarters Building extends Buidling
+ * It serves as the headquarters for the game
+ */
 public class HeadQuarterBuilding : Building {
 
 	// TODO stuff hq building might need

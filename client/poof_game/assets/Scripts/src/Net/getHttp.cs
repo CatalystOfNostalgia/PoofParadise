@@ -4,12 +4,17 @@ using System.Collections.Generic;
 using System;
 using System.Text;
 
+/**
+ * TODO: Write a description for this class
+ */
 public class GetHTTP : MonoBehaviour {
 
     static String server = "http://129.22.150.55:51234";
     //static String server = "http://localhost:51234";
 
-    // create an account
+    /**
+     * Create an account
+     */
     public static IEnumerator createAccount(String name, 
                                             String username, 
                                             String password, 
@@ -34,11 +39,12 @@ public class GetHTTP : MonoBehaviour {
 
         yield return request;
 
-        Debug.Log(request.text);
         callback(getHttpBody(request.text));
     }
 
-    //save to server
+    /**
+     * Save to server
+     */
     public static IEnumerator toSave(String jsonStuff){
 
         String url = server + "/save";
@@ -51,12 +57,11 @@ public class GetHTTP : MonoBehaviour {
         WWW request = new WWW(url, jsonBytes, headers);
 
         yield return request;
-
-        Debug.Log ("got request");
-        Debug.Log (request.text);
     }
 
-
+    /**
+     * Add a friend
+     */
     void addFriend(Hashtable table){
         HTTP.Request theRequest = new HTTP.Request( "post", server + "/friends", table );
         theRequest.Send( ( request ) => {
@@ -71,7 +76,9 @@ public class GetHTTP : MonoBehaviour {
         });
     }
 
-    // Attempts to log into the site, returns the user info in a json string
+    /**
+     * Attempts to log into the site, returns the user info in a json string
+     */
     public static IEnumerator login(string inputUser, 
                                     string inputPass, 
                                     Action<string> callback){
@@ -86,14 +93,12 @@ public class GetHTTP : MonoBehaviour {
 
         yield return request;
 
-        Debug.Log(request.text);
-
         callback(getHttpBody(request.text));
-
     }
 
-
-    // this trims the headers from an http response
+    /**
+     * This trims the headers from an http response
+     */
     private static String getHttpBody(String response) {
 
         int count = 0;
@@ -113,22 +118,18 @@ public class GetHTTP : MonoBehaviour {
 
     }
 
+    /**
+     * TODO: Add a description
+     */
     private static IEnumerator WaitForRequest(WWW www)
     {
-
-        Debug.Log ("waiting for request");
-
         yield return www;
 
-        Debug.Log ("got response");
-
-        //check for errors
+        // Check for errors
         if (www.error == null) {
-            Debug.Log("WWW Ok!: " + www.text);
+            Debug.Log("[getHttp] WWW Ok!: " + www.text);
         } else {
-            Debug.Log("WWW Error: "+ www.error);
+            Debug.LogError("[getHttp] WWW Error: "+ www.error);
         }    
-        
-    }  
-
+    }
 }

@@ -185,7 +185,7 @@ namespace HTTP
                                 var ssl = ostream as SslStream;
                                 ssl.AuthenticateAsClient (uri.Host);
                             } catch (Exception e) {
-                                Debug.LogError ("Exception: " + e.Message);
+                                Debug.LogError ("[Request] Exception: " + e.Message);
                                 return;
                             }
                         }

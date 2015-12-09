@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/**
+ * TODO: Insert description
+ */
 public class PoofManager : MonoBehaviour {
 
     public static PoofManager poofManager;
@@ -9,7 +11,9 @@ public class PoofManager : MonoBehaviour {
     /// It goes down with more poofs
     private int poofAttractionRating;
 
-	// Use this for initialization
+	/**
+     * Use this for initialization
+     */
 	void Start () {
         if (poofManager == null)
         {
@@ -23,11 +27,17 @@ public class PoofManager : MonoBehaviour {
         poofAttractionRating = 0;
     }
 
+    /**
+     * TODO: Insert description
+     */
     public void beamDownPoof(int poofRate)
     {
         beamDownPoof(GameManager.gameManager.GetRandomSpawnPoint(), poofRate);
     }
 
+    /**
+     * TODO: Insert description
+     */
     public void beamDownPoof(Tuple currentLocation, int poofRate)
     {
         poofAttractionRating += poofRate;
@@ -43,6 +53,7 @@ public class PoofManager : MonoBehaviour {
         {
             GameManager.gameManager.SpawnPoof(GameManager.gameManager.poofPrefab, currentLocation, new System.Collections.Generic.List<GameObject>());
             SaveState.state.poofCount++;
+            PoofCounterPanel.poofCounterPanel.GeneratePanel();
             poofAttractionRating--;
             Debug.Log("[PoofManager] Spawned a poof");
         }
