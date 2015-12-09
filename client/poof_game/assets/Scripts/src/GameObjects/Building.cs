@@ -114,11 +114,14 @@ public abstract class Building : MonoBehaviour {
         if (canDrag)
         {
             Vector3 loc = BuildingManager.buildingManager.selectedTile.transform.position;
-            this.transform.position = new Vector3(loc.x, loc.y, loc.z - 1);
+            this.transform.position = new Vector3(loc.x, loc.y - .25f, loc.z - 1);
             this.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 
+    /**
+     * Handles the end drag state
+     */
     void OnMouseUp()
     {
         if (canDrag)
