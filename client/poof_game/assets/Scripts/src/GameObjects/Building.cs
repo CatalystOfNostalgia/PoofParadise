@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 /**
  * Building serves as an abstract MonoBehavior which 
  * can be extended for each type of building
  * Basic building functionality is implemented here
  */
+[RequireComponent(typeof(Physics2DRaycaster))]
 public abstract class Building : MonoBehaviour {
 
     private bool selected { get; set; }
@@ -117,25 +119,27 @@ public abstract class Building : MonoBehaviour {
         }
     }
 
+    void OnMouseUp()
+    {
+        if (canDrag)
+        {
+            canDrag = false;
+            SaveState.state.buildings.Add(BuildingManager.buildingManager.selectedTile.index, this);
+            BuildingManager.buildingManager.selectedTile.isVacant = false;
+            BuildingManager.buildingManager.selectedTile.leftTile.isVacant = false;
+            BuildingManager.buildingManager.selectedTile.downTile.isVacant = false;
+            BuildingManager.buildingManager.selectedTile.downLeftTile.isVacant = false;
+            this.GetComponent<BoxCollider2D>().enabled = true;
+        }
+    }
+
     /**
      * Serves as the function for deleting this building from the game
      */
     public virtual void DeleteBuilding()
     {
         bool remove = false;
-        Tuple key = null;
-        foreach (Tile t in TileScript.grid.tiles)
-        {
-            if (t.building != null && t.building.Equals(this))
-            {
-                key = t.index;
-                t.isVacant = true;
-
-                t.leftTile.isVacant = true;
-                t.downTile.isVacant = true;
-                t.downLeftTile.isVacant = true;
-            }
-        }
+        Tuple key = GetTupleFromGrid();
         remove = SaveState.state.buildings.Remove(key);
 
         if (remove)
@@ -154,6 +158,8 @@ public abstract class Building : MonoBehaviour {
     public virtual void MoveBuilding()
     {
         canDrag = true;
+        Tuple key = GetTupleFromGrid();
+        SaveState.state.buildings.Remove(key);
     }
 
     /**
@@ -175,5 +181,27 @@ public abstract class Building : MonoBehaviour {
     public override int GetHashCode()
     {
         return ID.GetHashCode() ^ this.GetType().GetHashCode();
+    }
+
+    /**
+     * Retrieves the tuple that this building is on
+     * then sets the tiles it was sitting on free
+     */
+    private Tuple GetTupleFromGrid()
+    {
+        Tuple key = null;
+        foreach (Tile t in TileScript.grid.tiles)
+        {
+            if (t.building != null && t.building.Equals(this))
+            {
+                key = t.index;
+                t.isVacant = true;
+
+                t.leftTile.isVacant = true;
+                t.downTile.isVacant = true;
+                t.downLeftTile.isVacant = true;
+            }
+        }
+        return key;
     }
 }

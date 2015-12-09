@@ -29,7 +29,7 @@ public class BuildingOptionPanel : GamePanel {
      * provided bu GamePanel
      */
 	override public void GeneratePanel(){
-		FindAndModifyUIElement("Move Button", buttons, ()=> Move());
+        FindAndModifyUIElement("Move Button", buttons, () => { building.MoveBuilding(); gameObject.SetActive(false); });
 		FindAndModifyUIElement("Upgrade Button", buttons, ()=> upgradeBuilding ());
 		FindAndModifyUIElement("Remove Button", buttons, ()=> building.DeleteBuilding());
 		FindAndModifyUIElement("Info Button", buttons, ()=> Debug.Log("Info button is pressed"));
@@ -88,14 +88,5 @@ public class BuildingOptionPanel : GamePanel {
     private void SetBuilding()
     {
         building = this.transform.GetComponentInParent<Building>();
-    }
-
-    /**
-     * Provides the move functionality for buildings
-     */
-    private void Move()
-    {
-        building.canDrag = true;
-        this.gameObject.SetActive(false);
     }
 }
