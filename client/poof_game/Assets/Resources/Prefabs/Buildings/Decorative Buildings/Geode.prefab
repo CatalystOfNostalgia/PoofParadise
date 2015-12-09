@@ -72,6 +72,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac2ef994354c4a7281732601f41c142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  created: 0
+  buildingInfoID: 1
+  level: 0
+  poofGenerationRate: 2
   generatedPoofs: 0
 --- !u!212 &21280186
 SpriteRenderer:
@@ -113,6 +117,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Size.y
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: buildingInfoID
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
