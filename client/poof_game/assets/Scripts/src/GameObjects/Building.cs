@@ -168,7 +168,13 @@ public abstract class Building : MonoBehaviour {
         this.GetComponent<BoxCollider2D>().enabled = true;
         canDrag = true;
         Tuple key = GetTupleFromGrid();
-        SaveState.state.buildings.Remove(key);
+        bool remove = SaveState.state.buildings.Remove(key);
+
+        if (!remove)
+        {
+            Debug.LogError("[Building] Unable to locate this building in the building dictionary");
+        }
+
         showOptions = !showOptions;
         options.gameObject.SetActive(showOptions);
     }
