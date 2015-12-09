@@ -104,6 +104,7 @@ public abstract class Building : MonoBehaviour {
         {
             showOptions = !showOptions;
             options.gameObject.SetActive(showOptions);
+            this.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 
@@ -144,6 +145,7 @@ public abstract class Building : MonoBehaviour {
      */
     public virtual void DeleteBuilding()
     {
+        this.GetComponent<BoxCollider2D>().enabled = true;
         bool remove = false;
         Tuple key = GetTupleFromGrid();
         remove = SaveState.state.buildings.Remove(key);
@@ -163,6 +165,7 @@ public abstract class Building : MonoBehaviour {
      */
     public virtual void MoveBuilding()
     {
+        this.GetComponent<BoxCollider2D>().enabled = true;
         canDrag = true;
         Tuple key = GetTupleFromGrid();
         SaveState.state.buildings.Remove(key);
