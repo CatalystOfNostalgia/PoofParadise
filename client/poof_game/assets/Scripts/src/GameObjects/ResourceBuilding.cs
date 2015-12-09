@@ -12,4 +12,11 @@ public class ResourceBuilding : Building {
 	public int collectionRate { get; set;}
 	public ResourceType type;
 
+    public override void DeleteBuilding()
+    {
+        base.DeleteBuilding();
+        BuildingPanel.buildingPanel.alreadyPlacedDownBuildings.Remove(this.name.Substring(0, this.name.Length - "(Clone)".Length));
+        BuildingPanel.buildingPanel.GeneratePanel();
+    }
+
 }

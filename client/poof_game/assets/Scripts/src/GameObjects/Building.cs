@@ -118,6 +118,35 @@ public abstract class Building : MonoBehaviour {
     }
 
     /**
+     * Serves as the function for deleting this building from the game
+     */
+    public virtual void DeleteBuilding()
+    {
+        Tuple key = null;
+        foreach (Tile t in TileScript.grid.tiles)
+        {
+            if (t.building != null && t.building.Equals(this))
+            {
+                key = t.index;
+                t.isVacant = true;
+                t.leftTile.isVacant = true;
+                t.downTile.isVacant = true;
+                t.downLeftTile.isVacant = true;
+            }
+        }
+        bool remove = SaveState.state.buildings.Remove(key);
+        
+        if (remove)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Debug.LogError("[Building] Unable to locate this building in the building dictionary");
+        }
+    }
+
+    /**
      * Provides comparison functionality for buildings
      */
     public override bool Equals(object o)
