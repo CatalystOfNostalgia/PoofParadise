@@ -236,7 +236,7 @@ def update_resource_building ( building, user_id ):
         return True
 
     except:
-
+        print 'could not find resource building'
         rollback()
         return False
 
@@ -245,8 +245,12 @@ def update_resource_building ( building, user_id ):
 def update_decorative_building ( building ):
 
     try:
+
+        building_id = building['id']
+        print 'id: ' + building_id
+
         updated_building = models.session.query(models.UserDecorativeBuilding).filter( \
-                           models.UserDecorativeBuilding.id == building['id']).one()
+                           models.UserDecorativeBuilding.id == building_id).one()
 
         updated_building.level = building['level']
         updated_building.x_coordinate = building['position_x']
@@ -255,7 +259,8 @@ def update_decorative_building ( building ):
         models.session.commit()
         return True
 
-    except:
+    except ValueError:
+        print 'could not find decorative building'
         rollback()
         return False
 
@@ -271,6 +276,8 @@ def create_decorative_building ( building, user_id, ids ):
 
     models.session.add(new_building)
     models.session.commit() 
+
+    print 'added decorative building'
 
     new_id = models.session.query(func.max(models.UserDecorativeBuilding.id)).one()[0]
 

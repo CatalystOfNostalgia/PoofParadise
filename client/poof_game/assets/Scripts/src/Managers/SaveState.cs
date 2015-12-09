@@ -119,6 +119,8 @@ public class SaveState : Manager {
 
         if (response.Length > 0) {
 
+            Debug.Log(response);
+
             JSONNode data = JSON.Parse(response);
 
             int i = 0;
@@ -188,12 +190,30 @@ public class SaveState : Manager {
             jsonPlayerData += "\"new\": \"" + entry.Value.created + "\" ";
 			jsonPlayerData += "},";
 		}
+
 		
 		jsonPlayerData = jsonPlayerData.TrimEnd (',');
-		
 		jsonPlayerData += "], ";
-		jsonPlayerData += "\"decorative_buildings\": []";
+
+		jsonPlayerData += "\"decorative_buildings\": [";
+		foreach ( KeyValuePair<Tuple, DecorativeBuilding> entry in decorativeBuildings) {
+
+			jsonPlayerData += "{ ";
+            jsonPlayerData += "\"building_info_id\": \"" + entry.Value.buildingInfoID + "\", ";
+			jsonPlayerData += "\"id\": \"" + entry.Value.ID + "\", ";
+			jsonPlayerData += "\"position_x\": \"" + entry.Key.x + "\", ";
+			jsonPlayerData += "\"position_y\": \"" + entry.Key.y + "\", ";
+			jsonPlayerData += "\"size\": \"" + entry.Value.size + "\", ";
+            jsonPlayerData += "\"new\": \"" + entry.Value.created + "\" ";
+			jsonPlayerData += "},";
+		}
+
+		jsonPlayerData = jsonPlayerData.TrimEnd (',');
+        jsonPlayerData += "]";
+
 		jsonPlayerData += "}";
+
+        Debug.Log(jsonPlayerData);
 		
 		return jsonPlayerData;
 		

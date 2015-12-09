@@ -99,6 +99,8 @@ public class BuildingManager : Manager {
                             DecorativeBuilding decBuilding = (DecorativeBuilding)newBuilding;
                             SaveState.state.decorativeBuildings.Add (tile.index, decBuilding);
 
+                            Debug.Log("created: " + decBuilding.created);
+
                         } else if (newBuilding.GetType() == typeof(ResourceBuilding)) {
                             ResourceBuilding resBuilding = (ResourceBuilding)newBuilding;
                             SaveState.state.resourceBuildings.Add (tile.index, resBuilding);
