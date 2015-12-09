@@ -272,6 +272,7 @@ public class SaveState : Manager {
 
             newBuilding.created = false;
             newBuilding.ID = building["id"].AsInt;
+            newBuilding.buildingInfoID = building["building_info_id"].AsInt;
 
 			resourceBuildings.Add(new Tuple(x, y), newBuilding);
 		}
@@ -287,8 +288,11 @@ public class SaveState : Manager {
             }
 			DecorativeBuilding newBuilding = PrefabManager.prefabManager.decorativeBuildings[building["building_info_id"].AsInt];
 
+            Debug.Log(newBuilding.name + " has info id of: " + building["building_info_id"].AsInt);
+
             newBuilding.created = false;
             newBuilding.ID = building["id"].AsInt;
+            newBuilding.buildingInfoID = building["building_info_id"].AsInt;
 
 			decorativeBuildings.Add(new Tuple(x, y), newBuilding);
 		}
