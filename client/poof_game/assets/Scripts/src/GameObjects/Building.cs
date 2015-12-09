@@ -100,8 +100,11 @@ public abstract class Building : MonoBehaviour {
      */
     void OnMouseDown()
     {
-        showOptions = !showOptions;
-        options.gameObject.SetActive(showOptions);
+        if (!canDrag)
+        {
+            showOptions = !showOptions;
+            options.gameObject.SetActive(showOptions);
+        }
     }
 
     /**
@@ -163,6 +166,8 @@ public abstract class Building : MonoBehaviour {
         canDrag = true;
         Tuple key = GetTupleFromGrid();
         SaveState.state.buildings.Remove(key);
+        showOptions = !showOptions;
+        options.gameObject.SetActive(showOptions);
     }
 
     /**

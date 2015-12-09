@@ -29,7 +29,7 @@ public class BuildingOptionPanel : GamePanel {
      * provided bu GamePanel
      */
 	override public void GeneratePanel(){
-        FindAndModifyUIElement("Move Button", buttons, () => { building.MoveBuilding(); gameObject.SetActive(false); });
+        FindAndModifyUIElement("Move Button", buttons, () => { building.MoveBuilding();});
 		FindAndModifyUIElement("Upgrade Button", buttons, ()=> upgradeBuilding ());
 		FindAndModifyUIElement("Remove Button", buttons, ()=> building.DeleteBuilding());
 		FindAndModifyUIElement("Info Button", buttons, ()=> Debug.Log("Info button is pressed"));
