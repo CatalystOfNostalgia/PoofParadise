@@ -80,8 +80,6 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 		{
 			comp = t.gameObject.GetComponent<T>();
 			t = t.parent;
-            if (t != null) Debug.Log("t != null");
-            if (comp == null) Debug.Log("comp == null");
 		}
 		return comp;
 	}

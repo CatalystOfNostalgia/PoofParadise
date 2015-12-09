@@ -35,7 +35,7 @@ public class GetHTTP : MonoBehaviour {
         yield return request;
 
         Debug.Log(request.text);
-        callback(getHttpBody(request.text));
+        callback(getHttpBody(request.text, 4));
     }
 
     //save to server
@@ -52,9 +52,7 @@ public class GetHTTP : MonoBehaviour {
 
         yield return request;
 
-        Debug.Log ("got request");
-        Debug.Log (request.text);
-        callback(request.text);
+        callback(getHttpBody(request.text, 2));
     }
 
 
@@ -89,20 +87,20 @@ public class GetHTTP : MonoBehaviour {
 
         Debug.Log(request.text);
 
-        callback(getHttpBody(request.text));
+        callback(getHttpBody(request.text, 4));
 
     }
 
 
     // this trims the headers from an http response
-    private static String getHttpBody(String response) {
+    private static String getHttpBody(String response, int headers) {
 
         int count = 0;
         String body = "";
         String[] full = response.Split ('\n');
 
         foreach (String line in full) {
-            if (count > 4) {
+            if (count > headers) {
                 body += line + "\n";
             }
             else {

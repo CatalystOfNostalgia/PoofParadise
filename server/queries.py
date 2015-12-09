@@ -191,27 +191,29 @@ def get_decorative_building_info( building_info_id ):
 # saves the users buildings returns the building if a building cannot be found
 def save_building_info ( resource_buildings, decorative_buildings, user_id ):
     
-    ids = []
+    ids = {}
+    ids['resource_buildings'] = []
+    ids['decorative_buildings'] = []
 
     # resource buildings
     for building in resource_buildings:
         if building['new'] == 'True':
-            ids = create_resource_building(building, user_id, ids)
+            ids['resource_buildings'] = create_resource_building(building, user_id, ids['resource_buildings'])
             success = True
         else:
             success = update_resource_building(building, user_id)
         if not success:
-            return []
+            return None
 
     # decorative buildings  
     for building in decorative_buildings:
         if building['new'] == 'True':
-            ids = create_decorative_building(building, user_id, ids)
+            ids['decorative_buildings'] = create_decorative_building(building, user_id, ids['decorative_buildings'])
             success = True
         else:
             success = update_decorative_building(building)
         if not success:
-            return []
+            return None
 
     return ids;
 
@@ -222,6 +224,7 @@ def update_resource_building ( building, user_id ):
     try:
 
         building_id = building['id']
+        print 'id: ' + building_id
         updated_building = models.session.query(models.UserResourceBuilding).filter( \
                            models.UserResourceBuilding.id == building_id).one()
 
@@ -232,6 +235,8 @@ def update_resource_building ( building, user_id ):
         return True
 
     except:
+
+        print building['id']
         rollback()
         return False
 
@@ -269,7 +274,7 @@ def create_decorative_building ( building, user_id, ids ):
 
     new_id = models.session.query(func.max(models.UserDecorativeBuilding.id)).one()[0]
 
-    ids.append(new_id)
+    ids.append(new_id - 1)
     return ids
 
 # creates a resource building in the database
@@ -286,7 +291,7 @@ def create_resource_building ( building, user_id, ids ):
 
     new_id = models.session.query(func.max(models.UserResourceBuilding.id)).one()[0]
 
-    ids.append(new_id)
+    ids.append(new_id - 1)
     return ids
 
 # turns a building into a dictionary

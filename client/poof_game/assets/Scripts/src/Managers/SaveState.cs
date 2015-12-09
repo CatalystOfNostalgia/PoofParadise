@@ -107,7 +107,6 @@ public class SaveState : Manager {
 	 */
 	public void PushToServer() {
 		
-		Debug.Log ("data.ToJSON");
 		string buildingJSON = this.jsonify();
 		
 		
@@ -117,9 +116,39 @@ public class SaveState : Manager {
 
     // updates the saved building with their new IDs
     private void updateBuildings(string response) {
-        
-        JSONNode data = JSON.parse(response);
-        
+
+        if (response.Length > 0) {
+
+            Debug.Log(response);
+
+            JSONNode data = JSON.Parse(response);
+
+            int i = 0;
+            JSONArray resourceIDs = data["building_ids"]["resource_buildings"].AsArray;
+            JSONArray decorativeIDs = data["building_ids"]["decorative_buildings"].AsArray;
+
+            foreach (KeyValuePair<Tuple, ResourceBuilding> b in resourceBuildings) {
+
+                if (b.Value.created) {
+                    Debug.Log("updated a building with id: " + b.Value.ID + "to ID: " + resourceIDs[i].AsInt);
+                    b.Value.ID = resourceIDs[i].AsInt; 
+                    b.Value.created = false;
+                    i++;
+                }
+            }
+
+            i = 0;
+
+            foreach (KeyValuePair<Tuple, DecorativeBuilding> b in decorativeBuildings) {
+
+                if (b.Value.created) {
+                    b.Value.ID = decorativeIDs[i].AsInt;
+                    b.Value.created = false;
+                    i++;
+                    Debug.Log("updated a building");
+                }
+            }
+        }
     }
 	
 	// turns the save data into a JSON String

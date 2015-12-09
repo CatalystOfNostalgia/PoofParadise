@@ -28,15 +28,6 @@ public class GameStart : MonoBehaviour {
 	void autoSave () {
 	
 		SaveState.state.PushToServer();	
-        foreach (KeyValuePair<Tuple, ResourceBuilding> entry in SaveState.state.resourceBuildings) {
-            entry.Value.created = false;
-        }
-        foreach (KeyValuePair<Tuple, DecorativeBuilding> entry in SaveState.state.decorativeBuildings) {
-            entry.Value.created = false;
-        }
-        foreach (KeyValuePair<Tuple, ResidenceBuilding> entry in SaveState.state.residenceBuildings) {
-            entry.Value.created = false;
-        }
 	}
 
 	void OnApplicationQuit(){

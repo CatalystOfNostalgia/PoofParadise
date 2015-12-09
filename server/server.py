@@ -266,7 +266,9 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
     # saves the users info and building data
     def save(self, parsed_json):
-        
+
+        self.wfile.write('jello')
+
         resource_buildings = parsed_json['resource_buildings']
         decorative_buildings = parsed_json['decorative_buildings']
         user_id = parsed_json['user_id']
@@ -279,19 +281,19 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 
         data = {}
 
-        print "building ids: " + str(building_ids)
-        if building_ids.count > 0 :
-            self.send_response(200)
+        if building_ids != None :
             data['message'] = 'Save successful'
             data['building_ids'] = building_ids
+            self.send_response(200)
             self.wfile.write(json.dumps(data))
-            print(parsed_json['username'] + ' saved')
+            print(json.dumps(data));
+            print(parsed_json['username'] + ' saved\n')
         else:
-            data = {"error" : 'cannot find a building'}
+            data['error'] = 'cannot find building'
+            self.send_response(400)
             self.wfile.write(json.dumps(data))
             print('cannot find building')
 
-        print(json.dumps(data));
 
 # starting the server
 print('http server is starting...')
