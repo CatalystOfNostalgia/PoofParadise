@@ -122,6 +122,7 @@ public abstract class Building : MonoBehaviour {
      */
     public virtual void DeleteBuilding()
     {
+        bool remove = false;
         Tuple key = null;
         foreach (Tile t in TileScript.grid.tiles)
         {
@@ -129,13 +130,14 @@ public abstract class Building : MonoBehaviour {
             {
                 key = t.index;
                 t.isVacant = true;
+
                 t.leftTile.isVacant = true;
                 t.downTile.isVacant = true;
                 t.downLeftTile.isVacant = true;
             }
         }
-        bool remove = SaveState.state.buildings.Remove(key);
-        
+        remove = SaveState.state.buildings.Remove(key);
+
         if (remove)
         {
             Destroy(this.gameObject);
@@ -164,7 +166,7 @@ public abstract class Building : MonoBehaviour {
             return false;
         }
 
-        return this.ID == (o as Building).ID;
+        return this.name == (o as Building).name;//this.ID == (o as Building).ID;
     }
 
     /**
