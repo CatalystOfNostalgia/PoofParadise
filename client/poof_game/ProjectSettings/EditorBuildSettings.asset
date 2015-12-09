@@ -7,5 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: assets/Scenes/StartScreen.unity
-  - enabled: 1
+  - enabled: 0
     path: assets/Scenes/Demo_scene.unity
+  - enabled: 1
+    path: assets/Scenes/DemoScene.unity
