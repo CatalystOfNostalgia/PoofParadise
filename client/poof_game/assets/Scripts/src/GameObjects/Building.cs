@@ -147,6 +147,14 @@ public abstract class Building : MonoBehaviour {
     }
 
     /**
+     * Provides the movement functionality for this building
+     */
+    public virtual void MoveBuilding()
+    {
+        canDrag = true;
+    }
+
+    /**
      * Provides comparison functionality for buildings
      */
     public override bool Equals(object o)

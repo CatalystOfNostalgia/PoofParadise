@@ -12,6 +12,10 @@ public class ResourceBuilding : Building {
 	public int collectionRate { get; set;}
 	public ResourceType type;
 
+    /**
+     * Allows buildings to be re-added to
+     * building menu when deleted
+     */
     public override void DeleteBuilding()
     {
         base.DeleteBuilding();
