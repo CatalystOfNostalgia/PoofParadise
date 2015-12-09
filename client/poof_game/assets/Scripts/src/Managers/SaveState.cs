@@ -139,6 +139,7 @@ public class SaveState : Manager {
             i = 0;
 
             foreach (KeyValuePair<Tuple, DecorativeBuilding> b in decorativeBuildings) {
+                Debug.Log("decorative buildings");
 
                 if (b.Value.created) {
                     b.Value.ID = decorativeIDs[i].AsInt;
@@ -270,6 +271,7 @@ public class SaveState : Manager {
 			ResourceBuilding newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
 
             newBuilding.created = false;
+            newBuilding.ID = building["id"].AsInt;
 
 			resourceBuildings.Add(new Tuple(x, y), newBuilding);
 		}
@@ -286,12 +288,12 @@ public class SaveState : Manager {
 			DecorativeBuilding newBuilding = PrefabManager.prefabManager.decorativeBuildings[building["building_info_id"].AsInt];
 
             newBuilding.created = false;
+            newBuilding.ID = building["id"].AsInt;
 
 			decorativeBuildings.Add(new Tuple(x, y), newBuilding);
 		}
 
         hqLocation = new Tuple(data["hq_pos_x"].AsInt, data["hq_pos_y"].AsInt);
-        Debug.Log("hqLevel is: " + hqLevel);
         //since array start at 0, lv 1-> index 0, lv 2 -> index 1
         hq = PrefabManager.prefabManager.headQuarterBuildings[hqLevel-1];
 	}
