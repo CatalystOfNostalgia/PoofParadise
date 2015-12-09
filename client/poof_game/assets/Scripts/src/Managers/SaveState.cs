@@ -119,8 +119,6 @@ public class SaveState : Manager {
 
         if (response.Length > 0) {
 
-            Debug.Log(response);
-
             JSONNode data = JSON.Parse(response);
 
             int i = 0;
@@ -130,7 +128,6 @@ public class SaveState : Manager {
             foreach (KeyValuePair<Tuple, ResourceBuilding> b in resourceBuildings) {
 
                 if (b.Value.created) {
-                    Debug.Log("updated a building with id: " + b.Value.ID + "to ID: " + resourceIDs[i].AsInt);
                     b.Value.ID = resourceIDs[i].AsInt; 
                     b.Value.created = false;
                     i++;
@@ -145,7 +142,6 @@ public class SaveState : Manager {
                     b.Value.ID = decorativeIDs[i].AsInt;
                     b.Value.created = false;
                     i++;
-                    Debug.Log("updated a building");
                 }
             }
         }
@@ -198,8 +194,6 @@ public class SaveState : Manager {
 		jsonPlayerData += "], ";
 		jsonPlayerData += "\"decorative_buildings\": []";
 		jsonPlayerData += "}";
-		
-        Debug.Log(jsonPlayerData);
 		
 		return jsonPlayerData;
 		
