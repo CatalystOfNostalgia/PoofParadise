@@ -166,7 +166,7 @@ public abstract class Building : MonoBehaviour {
             return false;
         }
 
-        return this.name == (o as Building).name;//this.ID == (o as Building).ID;
+        return this.name == (o as Building).name;
     }
 
     /**
