@@ -1,5 +1,4 @@
 ﻿using UnityEngine.UI;
-using UnityEngine;
 
 /**
  * The wooly bean panel which displays the total number of 

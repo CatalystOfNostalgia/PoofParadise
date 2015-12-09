@@ -80,6 +80,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 			Destroy(draggingIcon);
 		}
 		BuildingPanel.buildingPanel.windowState = false;
+        BuildingPanel.buildingPanel.gameObject.SetActive(false);
 	}
 
     /**

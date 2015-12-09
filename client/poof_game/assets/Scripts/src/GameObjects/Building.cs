@@ -212,6 +212,7 @@ public abstract class Building : MonoBehaviour {
         {
             if (t.building != null && t.building.Equals(this))
             {
+                // Store this key and remove any memory of the building from the tiles
                 key = t.index;
                 t.isVacant = true;
                 t.leftTile.isVacant = true;
