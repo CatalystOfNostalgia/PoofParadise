@@ -100,7 +100,6 @@ public class BuildingManager : Manager {
                         if (prefab.GetComponent<ResidenceBuilding>() == null)
                         {   
 
-                            Debug.Log("placing building: " + prefab.name);
                             alreadyPlacedDownBuildings.Add(prefab.name);
                         }
 
