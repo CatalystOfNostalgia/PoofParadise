@@ -203,9 +203,7 @@ public class SoundManager : Manager {
 	public void playSoundEffect (string name){
 		AudioClip clip;
 		if (effectDict.TryGetValue (name, out clip)) {
-			soundEffectSource.clip = clip;
-			soundEffectSource.Play();
-			//soundEffectSource.PlayOneShot(clip, soundVolume * masterVolume);
+			soundEffectSource.PlayOneShot(clip, soundVolume * masterVolume);
 		}
 	}
 
