@@ -323,6 +323,62 @@ def dict_friends( friendships, userdd ):
         add_friends = {}
         add_friends['friend1_id'] = friend1_id
 
+# get info from the static tables
+def get_static_info():
+
+    return_info = {}
+
+    info_resource = {}
+    info_decorative = {}
+    info_residence = {}
+
+    resource_info = models.session.query(ResourceBuildingInfo).all()
+    decorative_info = models.session.query(DecorativeBuildingInfo).all()
+    residence_info = models.session.query(ResidenceUpgrade).all()
+
+    for info in resource_info:
+        current_resource = {}
+        current_resource['info_id'] = info.building_info_id
+        current_resource['experience_gain'] = info.experience_gain
+        current_resource['level'] = info.level
+        current_resource['size'] = info.size
+        current_resource['prod_rate'] = info.production_rate
+        current_resource['prod_type'] = info.production_type
+        current_resource['fire_cost'] = info.resource_cost_fire
+        current_resource['water_cost'] = info.resource_cost_water
+        current_resource['earth_cost'] = info.resource_cost_earth
+        current_resource['air_cost'] = info.resource_cost_air
+        info_resource[info.name] = current_resource
+
+    for info in decorative_info:
+        current_resource = {}
+        current_resource['info_id'] = info.building_info_id
+        current_resource['size'] = info.size
+        current_resource['experience_gain'] = info.experience_gain
+        current_resource['fire_cost'] = info.resource_cost_fire
+        current_resource['water_cost'] = info.resource_cost_water
+        current_resource['earth_cost'] = info.resource_cost_earth
+        current_resource['air_cost'] = info.resource_cost_air
+        current_resource['poofs_generated'] = info.poofs_generated
+        info_decorative[info.name] = current_resource
+
+    for info in residence_info:
+        current_resource = {}
+        current_resource['info_id'] = info.level
+        current_resource['fire_cost'] = info.resource_cost_fire
+        current_resource['water_cost'] = info.resource_cost_water
+        current_resource['earth_cost'] = info.resource_cost_earth
+        current_resource['air_cost'] = info.resource_cost_air
+        current_resource['poof_cap'] = info.poofs_cap
+        current_resource['experience_gain'] = info.experience_gain
+        info_decorative[info.name] = current_resource
+
+    return_info['resource'] = info_resource
+    return_info['decorative'] = info_decorative
+    return_info['residence'] = info_residence
+
+    return return_info
+
 # rollsback the sqlalchemy session. Use if there is an exception
 def rollback():
     models.session.rollback()

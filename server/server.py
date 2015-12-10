@@ -24,7 +24,6 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
             self.getFriends(parameters)
 
         # looking for a specific user
-
         elif re.match('/users/.*', self.path):
 
             self.send_header('Content-type', 'text-html')
@@ -43,6 +42,12 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write('user homepage')
 
+        # get static info
+        elif re.match('.*/static$', self.path):
+            
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            queries.get_static_info()
 
         # homepage
         elif re.match('/$', self.path):
