@@ -192,7 +192,7 @@ public abstract class Building : MonoBehaviour {
     /**
      * Upgrades building to level 2 resource building 
      */
-    public void UpgradeBuilding()
+    public virtual void UpgradeBuilding()
     {
 
         if (name.Contains("Lvl 1") /*&& SaveState.state.hqLevel == 2*/)
