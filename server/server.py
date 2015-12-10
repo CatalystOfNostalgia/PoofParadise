@@ -47,7 +47,8 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
             
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            queries.get_static_info()
+            static_info = queries.get_static_info()
+            print json.dumps(static_info)
 
         # homepage
         elif re.match('/$', self.path):
