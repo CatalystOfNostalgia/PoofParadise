@@ -177,7 +177,7 @@ public abstract class Building : MonoBehaviour {
         this.GetComponent<BoxCollider2D>().enabled = true;
         canDrag = true;
         Tuple key = GetTupleFromGrid();
-        bool remove = SaveState.state.removeBuildings.Remove(key);
+        bool remove = SaveState.state.removeBuilding(key);
 
         if (!remove)
         {
