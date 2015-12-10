@@ -60,7 +60,7 @@ public abstract class Building : MonoBehaviour {
 
 	public void constructionAnimation(){
 		animator.SetInteger("Construction", 1);
-		Invoke("constructionFinish", 10f);
+		Invoke("constructionFinish", 5f);
 	}
 
 	public void constructionFinish(){

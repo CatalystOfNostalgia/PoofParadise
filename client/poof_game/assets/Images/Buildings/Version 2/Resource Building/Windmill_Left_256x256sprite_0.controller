@@ -34,7 +34,7 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
+  - m_ConditionMode: 6
     m_ConditionEvent: Construction
     m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
@@ -46,10 +46,10 @@ AnimatorStateTransition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
+  m_HasExitTime: 0
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 4
+  m_OrderedInterruption: 0
   m_CanTransitionToSelf: 1
 --- !u!1101 &110167508
 AnimatorStateTransition:
@@ -95,9 +95,9 @@ AnimatorStateTransition:
   m_TransitionOffset: 0
   m_ExitTime: 0
   m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 4
+  m_OrderedInterruption: 0
   m_CanTransitionToSelf: 1
 --- !u!1102 &110231146
 AnimatorState:
@@ -160,7 +160,7 @@ AnimatorStateMachine:
     m_Position: {x: 168, y: 36, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110291782}
-    m_Position: {x: 480, y: 24, z: 0}
+    m_Position: {x: 432, y: 72, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
