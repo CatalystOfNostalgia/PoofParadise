@@ -36,7 +36,7 @@ public class BuildingInformationManager {
         resourceBuildingInformationDict.Add("Cave Lvl 1", new ResourceBuildingInformation(7, 0, 0, 0, 0, 1, 0, 5, 0, 0));
         resourceBuildingInformationDict.Add("Cave Lvl 2", new ResourceBuildingInformation(8, 0, 100, 0, 0, 2, 0, 10, 0, 0));
 
-        resourceBuildingInformationDict.Add("Poof Residence", new ResourceBuildingInformation(9, 50, 50, 50, 50, 1, 0, 0, 0, 0));
+        resourceBuildingInformationDict.Add("Poof Residence", new ResourceBuildingInformation(9, 25, 25, 25, 25, 1, 0, 0, 0, 0));
     }
 
     private void addDecorativeBuildingInfo()
