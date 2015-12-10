@@ -67,7 +67,7 @@ public class BuildingManager : Manager {
      * Places a building on the currently selected tile
      */
 	public void PlaceBuilding(Building prefab) {
-
+		SoundManager.soundManager.playSoundEffect("EarthBuildingTruncated");
 		PlaceBuilding (prefab, selectedTile, true);
 	}
 	
@@ -82,9 +82,7 @@ public class BuildingManager : Manager {
             return;
 		}
         else {
-
             prefab.created = created;
-
             Building newBuilding = tile.PlaceBuilding (prefab);
 
                 if (newBuilding != null) {

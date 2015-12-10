@@ -18,10 +18,20 @@ public class ResourceBuilding : Building {
      */
     public override void DeleteBuilding()
     {
-
         base.DeleteBuilding();
         BuildingManager.buildingManager.alreadyPlacedDownBuildings.Remove(this.name.Substring(0, this.name.Length - "(Clone)".Length));
         BuildingPanel.buildingPanel.GeneratePanel();
+    }
+
+    /**
+     * Overrides t
+     */
+    public override void UpgradeBuilding()
+    {
+        if (name.Contains("Lvl 1") && SaveState.state.hqLevel == 2)
+        {
+            base.UpgradeBuilding();
+        }
     }
 
 }
