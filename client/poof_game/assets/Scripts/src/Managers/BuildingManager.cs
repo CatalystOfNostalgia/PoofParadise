@@ -17,6 +17,7 @@ public class BuildingManager : Manager {
 	Dictionary<Tuple, Building> existingBuildingDict;
 
 	// The dictionary containing buildings on the grid
+	public List<string> alreadyPlacedDownBuildings { get; set; }
 	public static BuildingManager buildingManager;
 
     // Does a thing
@@ -43,6 +44,7 @@ public class BuildingManager : Manager {
             Destroy(gameObject);
         }
 
+        alreadyPlacedDownBuildings = new List<string>();
         buildings = new GameObject();
         buildings.name = "Buildings";
         buildingTypeDict = new Dictionary<string, Building>();
@@ -95,13 +97,11 @@ public class BuildingManager : Manager {
 
                         SaveState.state.addBuilding(tile.index, newBuilding);
 
-                        /* TODO Commented this out because I'm not sure what it
-                         * and it's generating an error
                         if (prefab.GetComponent<ResidenceBuilding>() == null)
                         {   
-                            BuildingPanel.buildingPanel.alreadyPlacedDownBuildings.Add(prefab.name);
+                            Debug.Log("addeding building: " + prefab.name);
+                            alreadyPlacedDownBuildings.Add(prefab.name);
                         }
-                        */
 
                     }
 

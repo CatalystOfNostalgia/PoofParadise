@@ -44,6 +44,10 @@ def save_user_info( user ):
     updated_user.headquarters_level = user['hq_level']
     updated_user.hq_pos_x = user['hq_pos_x']
     updated_user.hq_pos_y = user['hq_pos_y']
+    updated_user.fire = user['fire']
+    updated_user.water = user['water']
+    updated_user.earth = user['earth']
+    updated_user.air = user['air']
     models.session.commit()
 
 # returns the user given a username
@@ -160,8 +164,6 @@ def get_residence_building_info(building_info_id):
 # gets the building info of a resource building
 def get_resource_building_info( building_info_id ):
 
-    print "resource building id: " +  str(building_info_id)
-
     building_info = models.session.query(models.ResourceBuildingInfo).filter( \
                     models.ResourceBuildingInfo.building_info_id == \
                                                 building_info_id).one()
@@ -259,7 +261,7 @@ def update_decorative_building ( building ):
         models.session.commit()
         return True
 
-    except ValueError:
+    except:
         print 'could not find decorative building'
         rollback()
         return False

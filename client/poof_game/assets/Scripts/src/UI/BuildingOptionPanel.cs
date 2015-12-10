@@ -101,7 +101,7 @@ public class BuildingOptionPanel : GamePanel {
 		Tuple position = new Tuple (x, y);
 		bool remove = SaveState.state.decorativeBuildings.Remove(position);
 		Destroy (this.transform.GetComponentInParent<Building> ().gameObject);
-        BuildingPanel.buildingPanel.alreadyPlacedDownBuildings.Remove(b.name.Substring(0, b.name.Length - "(Clone)".Length));
+        BuildingManager.buildingManager.alreadyPlacedDownBuildings.Remove(b.name.Substring(0, b.name.Length - "(Clone)".Length));
         BuildingPanel.buildingPanel.GeneratePanel();
     }
 

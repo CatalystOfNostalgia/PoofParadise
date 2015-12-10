@@ -46,6 +46,7 @@ public class Tile : MonoBehaviour {
             if ( downTile != null ) { downTile.isVacant = false; }
             if ( downLeftTile != null ) { downLeftTile.isVacant = false; }
 
+
             return building;
         }
 
@@ -90,12 +91,14 @@ public class Tile : MonoBehaviour {
         GetComponent<Renderer>().material.color = startColor;
 
         // if the new selected tile is already set the we don't want to set it to null
+        /*
         if (BuildingManager.buildingManager.selectedTile == null || 
             !this.index.Equals(BuildingManager.buildingManager.selectedTile.index)) {
 
         } else {
             BuildingManager.buildingManager.selectedTile = null;
         }
+        */
 
     }
 

@@ -11,7 +11,6 @@ public class BuildingPanel : GamePanel {
 	
 	// A static reference to this object
 	public static BuildingPanel buildingPanel;
-	public List<string> alreadyPlacedDownBuildings { get; set; }
 	private Button[] resourceButtons;
     private Button[] decorativeButtons;
 
@@ -30,7 +29,6 @@ public class BuildingPanel : GamePanel {
 		else if (buildingPanel != this) {
 			Destroy(gameObject);
 		}
-        alreadyPlacedDownBuildings = new List<string>();
         activePanel = panel.DECORATIVE;
         SwitchPanels();
         resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, "Resource Building Panel/Buttons");
@@ -195,6 +193,7 @@ public class BuildingPanel : GamePanel {
             DecorationBuildingInformation decorationBuildingInfo;
 
             // SaveState is never initialized from the Demo Scene, you must start from Login Scene
+            Debug.Log("I made it!");
             if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(buildingList[i].name, out resourceBuildingInfo))
             {
                 ResourceBuildingLevelCheck(buildingList, list, i, resourceBuildingInfo);
@@ -213,8 +212,9 @@ public class BuildingPanel : GamePanel {
     private void ResourceBuildingLevelCheck(Building[] buildingList, List<Building> list, int i, ResourceBuildingInformation resourceBuildingInfo)
     {
         int levelRequirement = resourceBuildingInfo.LevelRequirement;
-        if (levelRequirement == 1 && (! alreadyPlacedDownBuildings.Contains(buildingList[i].name)))
+        if (levelRequirement == 1 && (! BuildingManager.buildingManager.alreadyPlacedDownBuildings.Contains(buildingList[i].name)))
         {
+            Debug.Log("list does not contain: " + buildingList[i].name);
             list.Add(buildingList[i]);
         }
     }
