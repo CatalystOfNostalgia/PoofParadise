@@ -13,6 +13,8 @@ public class SoundManager : Manager {
     // Fields
 	public Dictionary<string, AudioSource> playDict{ get; set;}
 	public AudioSource[] playlist { get; set;}
+	public AudioClip[] soundEffects {get; set;}
+
 	public bool[] preferredPlaylist { get; set; }
 	public AudioSource currentSong { get; set;}
 	private bool currentSongPlayed;
@@ -77,7 +79,11 @@ public class SoundManager : Manager {
      * TODO: Pull songs from directory and generate tracklist
      */
     public AudioSource[] getAvailableMusic(){
-		return this.GetComponentsInChildren<AudioSource> ();
+		return Resources.LoadAll ("Sound/bgm/");
+	}
+
+	public AudioClip[] getAvailableEffects(){
+		return Resources.LoadAll ("Sound/Effects/");
 	}
 
     /**
@@ -193,6 +199,7 @@ public class SoundManager : Manager {
 			return;
 		}
 		currentSong.volume = masterVolume * musicVolume;
+
 		if (!currentSong.isPlaying) {
 			//didn't start the song yet
 			if (!currentSongPlayed){
