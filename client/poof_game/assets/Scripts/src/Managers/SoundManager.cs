@@ -207,6 +207,14 @@ public class SoundManager : Manager {
 		}
 	}
 
+	public void playConstruction (){
+		playSoundEffect("EarthBuildingTruncated");
+	}
+
+	public void playButtonHigh (){
+		playSoundEffect ("button_high");
+	}
+
 	/**
      * Update is called once per frame
      */
