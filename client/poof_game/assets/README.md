@@ -6,9 +6,9 @@ Images:
 
 Contains all images and animations for all the sprites in the game.
 
-Prefabs:
+Resources:
 
-Contains all prefabs as works in progress -> Final prefabs need to be moved to the resources folder.
+Contains all data that developers may wish to dynamically instantiate in the game. See PrefabManager.cs for more information.
 
 Scenes:
 

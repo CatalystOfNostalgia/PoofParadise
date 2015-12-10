@@ -59,7 +59,7 @@ public class LoginPanel : GamePanel {
 
         if (data["error"] == null) {
             SceneState.state.userInfo = response;
-            Application.LoadLevel("Demo_scene");
+            Application.LoadLevel("DemoScene");
         } else {
             MessagePanel.panel.texts[0].text = data["error"];
             MessagePanel.panel.TogglePanel();

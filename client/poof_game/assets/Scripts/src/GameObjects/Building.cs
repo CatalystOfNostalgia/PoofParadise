@@ -110,6 +110,7 @@ public abstract class Building : MonoBehaviour {
         {
             showOptions = !showOptions;
             options.gameObject.SetActive(showOptions);
+            this.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 
@@ -143,6 +144,7 @@ public abstract class Building : MonoBehaviour {
             BuildingManager.buildingManager.selectedTile.leftTile.isVacant = false;
             BuildingManager.buildingManager.selectedTile.downTile.isVacant = false;
             BuildingManager.buildingManager.selectedTile.downLeftTile.isVacant = false;
+            BuildingManager.buildingManager.selectedTile.building = this;
             this.GetComponent<BoxCollider2D>().enabled = true;
         }
     }
@@ -152,6 +154,7 @@ public abstract class Building : MonoBehaviour {
      */
     public virtual void DeleteBuilding()
     {
+        this.GetComponent<BoxCollider2D>().enabled = true;
         bool remove = false;
         Tuple key = GetTupleFromGrid();
         remove = SaveState.state.removeBuilding(key);
@@ -162,7 +165,7 @@ public abstract class Building : MonoBehaviour {
         }
         else
         {
-            Debug.LogError("[Building] Unable to locate this building in the building dictionary");
+            Debug.LogError(string.Format("[Building] Unable to locate {0} at {1} in the building dictionary", this.name, key));
         }
     }
 
@@ -171,9 +174,15 @@ public abstract class Building : MonoBehaviour {
      */
     public virtual void MoveBuilding()
     {
+        this.GetComponent<BoxCollider2D>().enabled = true;
         canDrag = true;
         Tuple key = GetTupleFromGrid();
-        SaveState.state.removeBuilding(key);
+        bool remove = SaveState.state.removeBuildings.Remove(key);
+
+        if (!remove)
+        {
+            Debug.LogError(string.Format("[Building] Unable to locate {0} at {1} in the building dictionary", this.name, key));
+        }
         showOptions = !showOptions;
         options.gameObject.SetActive(showOptions);
     }
@@ -210,12 +219,13 @@ public abstract class Building : MonoBehaviour {
         {
             if (t.building != null && t.building.Equals(this))
             {
+                // Store this key and remove any memory of the building from the tiles
                 key = t.index;
                 t.isVacant = true;
-
                 t.leftTile.isVacant = true;
                 t.downTile.isVacant = true;
                 t.downLeftTile.isVacant = true;
+                t.building = null;
             }
         }
         return key;
