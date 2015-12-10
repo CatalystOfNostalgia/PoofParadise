@@ -15,9 +15,10 @@ public class HeadQuarterBuilding : Building {
     /**
      * Overrides the delete building call for headquarters
      */
-    public override void DeleteBuilding()
+    public override bool DeleteBuilding()
     {
         Destroy(this.gameObject);
+        return true;
     }
 
     /**
@@ -48,9 +49,13 @@ public class HeadQuarterBuilding : Building {
     /**
      * Overrides the upgrade building feature of headquarters
      */
-    public override void UpgradeBuilding()
+    public override bool UpgradeBuilding()
     {
-        base.UpgradeBuilding();
-        SaveState.state.hqLevel++;
+        bool test = base.UpgradeBuilding();
+        if (test)
+        {
+            SaveState.state.hqLevel++;
+        }
+        return test;
     }
 }

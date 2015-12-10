@@ -87,7 +87,7 @@ public class BuildingManager : Manager {
 
                 if (newBuilding != null) {
 					if(created){
-						newBuilding.constructionAnimation ();
+						newBuilding.ConstructionAnimation ();
 					}
 
                     // Sets the new building's parent to our convenience object
