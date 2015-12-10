@@ -68,13 +68,13 @@ public class BuildingManager : Manager {
      */
 	public void PlaceBuilding(Building prefab) {
 
-		PlaceBuilding (prefab, selectedTile);
+		PlaceBuilding (prefab, selectedTile, true);
 	}
 	
 	/**
      * Places a building on the given tile
      */
-	public void PlaceBuilding (Building prefab, Tile tile) {
+	public void PlaceBuilding (Building prefab, Tile tile, bool created) {
 
         // Exit if supplied tile is null
 		if (tile == null) {
@@ -83,12 +83,13 @@ public class BuildingManager : Manager {
 		}
         else {
 
+            prefab.created = created;
+
             Building newBuilding = tile.PlaceBuilding (prefab);
 
                 if (newBuilding != null) {
 
-                    newBuilding.created = true;
-                    
+
                     // Sets the new building's parent to our convenience object
                     newBuilding.transform.SetParent(buildings.transform);
 

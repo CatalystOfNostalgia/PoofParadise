@@ -60,6 +60,8 @@ public abstract class Building : MonoBehaviour {
      */
     public bool PayForBuilding()
     {
+
+        Debug.Log("paying for a building");
         // Pulls the cost of this building from Building Information Manager
         DecorationBuildingInformation dbi;
         ResourceBuildingInformation rbi;

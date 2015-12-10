@@ -30,6 +30,8 @@ public class Tile : MonoBehaviour {
 
     public Building PlaceBuilding(Building newbuilding) 
     {
+
+        Debug.Log("created: " + newbuilding.created);
         if (isVacant && (!newbuilding.created || newbuilding.PayForBuilding())) {
 
             building = Instantiate (newbuilding, 
