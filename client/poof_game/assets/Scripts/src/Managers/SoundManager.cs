@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using System;
+using System.Linq;
 
 /**
  * A manager that deals with music
@@ -14,6 +16,7 @@ public class SoundManager : Manager {
 	public Dictionary<string, AudioSource> playDict{ get; set;}
 	public AudioSource[] playlist { get; set;}
 	public AudioClip[] soundEffects {get; set;}
+	public Dictionary<string, AudioClip> effectDict {get;set;}
 
 	public bool[] preferredPlaylist { get; set; }
 	public AudioSource currentSong { get; set;}
@@ -38,7 +41,6 @@ public class SoundManager : Manager {
      */
     override public void Start()
     {
-
         // Converts SoundManager into a singleton
         if (soundManager == null)
         {
@@ -54,6 +56,8 @@ public class SoundManager : Manager {
 
         //in the future, load user's music preference
         playlist = getAvailableMusic();
+		soundEffects = getAvailableEffects ();
+
         preferredPlaylist = new bool[playlist.Length];
         for (int i = 0; i < preferredPlaylist.Length; i++)
         {
@@ -64,6 +68,12 @@ public class SoundManager : Manager {
         {
             playDict.Add(music.name, music);
         }
+		effectDict = new Dictionary<string, AudioClip> ();
+		foreach (AudioClip clip in soundEffects) 
+		{
+			Debug.Log(string.Format("clip's name is: {0}", clip.name));
+			effectDict.Add(clip.name, clip);
+		}
         masterVolume = 1f;
         musicVolume = 1f;
         soundVolume = 1f;
@@ -79,11 +89,11 @@ public class SoundManager : Manager {
      * TODO: Pull songs from directory and generate tracklist
      */
     public AudioSource[] getAvailableMusic(){
-		return Resources.LoadAll ("Sound/bgm/");
+		return this.GetComponentsInChildren<AudioSource> ();
 	}
 
 	public AudioClip[] getAvailableEffects(){
-		return Resources.LoadAll ("Sound/Effects/");
+		return Resources.LoadAll ("Sound/Effects", typeof(AudioClip)).Cast<AudioClip> ().ToArray ();
 	}
 
     /**
