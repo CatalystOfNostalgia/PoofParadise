@@ -39,7 +39,6 @@ public class GetHTTP : MonoBehaviour {
 
         yield return request;
 
-        Debug.Log(request.text);
         callback(getHttpBody(request.text, 4));
     }
 
@@ -95,8 +94,6 @@ public class GetHTTP : MonoBehaviour {
         WWW request = new WWW(url);
 
         yield return request;
-
-        Debug.Log(request.text);
 
         callback(getHttpBody(request.text, 4));
 

@@ -33,7 +33,6 @@ public class BuildingPanel : GamePanel {
         SwitchPanels();
         resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, "Resource Building Panel/Buttons");
         decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildings, "Decorative Building Panel/Buttons");
-		GeneratePanel();
 	}
 
     /**
@@ -193,7 +192,6 @@ public class BuildingPanel : GamePanel {
             DecorationBuildingInformation decorationBuildingInfo;
 
             // SaveState is never initialized from the Demo Scene, you must start from Login Scene
-            Debug.Log("I made it!");
             if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(buildingList[i].name, out resourceBuildingInfo))
             {
                 ResourceBuildingLevelCheck(buildingList, list, i, resourceBuildingInfo);
@@ -214,7 +212,6 @@ public class BuildingPanel : GamePanel {
         int levelRequirement = resourceBuildingInfo.LevelRequirement;
         if (levelRequirement == 1 && (! BuildingManager.buildingManager.alreadyPlacedDownBuildings.Contains(buildingList[i].name)))
         {
-            Debug.Log("list does not contain: " + buildingList[i].name);
             list.Add(buildingList[i]);
         }
     }
