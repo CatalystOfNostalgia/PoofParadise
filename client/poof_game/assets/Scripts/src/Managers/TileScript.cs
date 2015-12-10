@@ -60,19 +60,19 @@ public class TileScript : Manager {
             SaveState.state.hq.created = false;
 		}
 
-        BuildingManager.buildingManager.PlaceBuilding(SaveState.state.hq, GetTile (SaveState.state.hqLocation));
+        BuildingManager.buildingManager.PlaceBuilding(SaveState.state.hq, GetTile (SaveState.state.hqLocation), false);
 
 		foreach (KeyValuePair<Tuple, ResourceBuilding> entry in SaveState.state.resourceBuildings) 
 		{
-			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));
+			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key), false);
 		}
 		foreach (KeyValuePair<Tuple, DecorativeBuilding> entry in SaveState.state.decorativeBuildings) 
 		{
-			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));
+			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key), false);
 		}
 		foreach (KeyValuePair<Tuple, ResidenceBuilding> entry in SaveState.state.residenceBuildings) 
 		{
-			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key));
+			BuildingManager.buildingManager.PlaceBuilding(entry.Value, GetTile (entry.Key), false);
 		}
 	}
 
