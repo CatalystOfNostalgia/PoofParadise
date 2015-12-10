@@ -38,6 +38,7 @@ public abstract class Building : MonoBehaviour {
     public bool showOptions { get; set; }
 
     public Canvas options { get; set; }
+	private Animator animator;
 
     // Use this for initialization
     protected virtual void Awake()
@@ -53,7 +54,24 @@ public abstract class Building : MonoBehaviour {
         canDrag = false;
         showOptions = false;
         size = 1;
+
+		animator = this.GetComponent<Animator>();
+		//animator.SetInteger("Construction", 1);
+		//Invoke("constructionFinish", 5f);
+
     }
+
+	public void constructionAnimation(){
+		Debug.Log ("(((((");
+		//animator = this.GetComponent<Animator>();
+		animator.SetInteger("Construction", 1);
+		Debug.Log (")))))");
+		Invoke("constructionFinish", 5f);
+	}
+
+	public void constructionFinish(){
+		animator.SetInteger("Construction", 0);
+	}
 
     /**
      * Pays for the building based on the cost of the building
@@ -124,7 +142,7 @@ public abstract class Building : MonoBehaviour {
         if (canDrag)
         {
             Vector3 loc = BuildingManager.buildingManager.selectedTile.transform.position;
-            this.transform.position = new Vector3(loc.x, loc.y - .25f, loc.z - 1);
+			this.transform.position = new Vector3(loc.x, loc.y - .25f, loc.y - .25f);
             this.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
