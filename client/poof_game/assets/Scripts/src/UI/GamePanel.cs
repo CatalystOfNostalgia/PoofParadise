@@ -142,6 +142,7 @@ public abstract class GamePanel : MonoBehaviour {
      */
     public void TogglePanel()
     {
+		SoundManager.soundManager.playButtonHigh ();
         windowState = !windowState;
         this.gameObject.SetActive(windowState);
     }
