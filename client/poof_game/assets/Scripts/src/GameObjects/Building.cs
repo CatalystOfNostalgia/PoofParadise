@@ -37,8 +37,11 @@ public abstract class Building : MonoBehaviour {
     public bool showOptions { get; set; }
 
     public Canvas options { get; set; }
+	private Animator animator;
 
-    // Use this for initialization
+    /**
+     * Use this for initialization
+     */
     protected virtual void Awake()
     {
         Vector3 pos = new Vector3(transform.position.x + .7f, transform.position.y + 1, transform.position.z);
@@ -52,7 +55,24 @@ public abstract class Building : MonoBehaviour {
         canDrag = false;
         showOptions = false;
         size = 1;
+
+		animator = this.GetComponent<Animator>();
     }
+
+    /**
+     * TODO: Add description
+     */
+	public void ConstructionAnimation(){
+		animator.SetInteger("Construction", 1);
+		Invoke("ConstructionFinish", 2.5f);
+	}
+
+    /**
+     * TODO: Add description
+     */
+	public void ConstructionFinish(){
+		animator.SetInteger("Construction", 0);
+	}
 
     /**
      * Pays for the building based on the cost of the building
@@ -60,7 +80,6 @@ public abstract class Building : MonoBehaviour {
     public bool PayForBuilding()
     {
 
-        Debug.Log("paying for a building");
         // Pulls the cost of this building from Building Information Manager
         DecorationBuildingInformation dbi;
         ResourceBuildingInformation rbi;
@@ -125,7 +144,7 @@ public abstract class Building : MonoBehaviour {
         if (canDrag)
         {
             Vector3 loc = BuildingManager.buildingManager.selectedTile.transform.position;
-            this.transform.position = new Vector3(loc.x, loc.y - .25f, loc.z - 1);
+			this.transform.position = new Vector3(loc.x, loc.y - .25f, loc.y - .25f);
             this.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
@@ -153,7 +172,7 @@ public abstract class Building : MonoBehaviour {
     /**
      * Serves as the function for deleting this building from the game
      */
-    public virtual void DeleteBuilding()
+    public virtual bool DeleteBuilding()
     {
         this.GetComponent<BoxCollider2D>().enabled = true;
         bool remove = false;
@@ -163,10 +182,12 @@ public abstract class Building : MonoBehaviour {
         if (remove)
         {
             Destroy(this.gameObject);
+            return true;
         }
         else
         {
             Debug.LogError(string.Format("[Building] Unable to locate {0} at {1} in the building dictionary", this.name, key));
+            return false;
         }
     }
 
@@ -191,7 +212,7 @@ public abstract class Building : MonoBehaviour {
     /**
      * Upgrades building to level 2 resource building 
      */
-    public virtual void UpgradeBuilding(){
+    public virtual bool UpgradeBuilding(){
         Building upgrade = null;
         string newName = this.name.Replace("Lvl 1(Clone)", "Lvl 2");
         foreach (Building b in PrefabManager.prefabManager.buildings)
@@ -206,6 +227,7 @@ public abstract class Building : MonoBehaviour {
         if (upgrade == null)
         {
             Debug.LogError(string.Format("{0} does not exist", newName));
+            return false;
         }
         else
         {
@@ -215,6 +237,7 @@ public abstract class Building : MonoBehaviour {
             SaveState.state.air = SaveState.state.air - this.airCost;
             SaveState.state.fire = SaveState.state.fire - this.fireCost;
             this.DeleteBuilding();
+            return true;
         }
     }
 

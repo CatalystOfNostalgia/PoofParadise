@@ -86,10 +86,13 @@ public class BuildingManager : Manager {
             Building newBuilding = tile.PlaceBuilding (prefab);
 
                 if (newBuilding != null) {
-
+					if(created){
+						newBuilding.ConstructionAnimation ();
+					}
 
                     // Sets the new building's parent to our convenience object
                     newBuilding.transform.SetParent(buildings.transform);
+					
 
                     // TODO this feels pretty iffy
                     if ( !isTileTaken(tile.index)) {
