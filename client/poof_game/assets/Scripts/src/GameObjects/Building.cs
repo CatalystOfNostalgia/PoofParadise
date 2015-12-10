@@ -188,6 +188,41 @@ public abstract class Building : MonoBehaviour {
     }
 
     /**
+     * Upgrades building to level 2 resource building 
+     */
+    public void UpgradeBuilding()
+    {
+        ResourceBuilding[] resourceBuildings = PrefabManager.prefabManager.resourceBuildings;
+        if (name.Contains("Lvl 1") && SaveState.state.hqLevel == 2)
+        {
+            Building upgrade = null;
+            string newName = this.name.Replace("Lvl 1", "Lvl 2");
+            foreach(Building b in PrefabManager.prefabManager.buildings)
+            {
+                if(b.name == newName)
+                {
+                    upgrade = b;
+                }
+            }
+
+            // If upgrade does not exist
+            if (upgrade == null)
+            {
+                Debug.LogError(string.Format("{0} does not exist", newName));
+            }
+            else
+            {
+                BuildingManager.buildingManager.makeNewBuilding(upgrade);
+                this.DeleteBuilding();
+                SaveState.state.earth = SaveState.state.earth - this.earthCost;
+                SaveState.state.water = SaveState.state.water - this.waterCost;
+                SaveState.state.air = SaveState.state.air - this.airCost;
+                SaveState.state.fire = SaveState.state.fire - this.fireCost;
+            }
+        }
+    }
+
+    /**
      * Provides comparison functionality for buildings
      */
     public override bool Equals(object o)
