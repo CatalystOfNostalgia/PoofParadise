@@ -80,7 +80,7 @@ public class BuildingManager : Manager {
             return;
 		}
         else {
-
+			SoundManager.soundManager.playSoundEffect("EarthBuildingTruncated");
             Building newBuilding = tile.PlaceBuilding (prefab);
 
                 if (newBuilding != null) {

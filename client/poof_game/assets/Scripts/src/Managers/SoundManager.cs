@@ -17,6 +17,7 @@ public class SoundManager : Manager {
 	public AudioSource[] playlist { get; set;}
 	public AudioClip[] soundEffects {get; set;}
 	public Dictionary<string, AudioClip> effectDict {get;set;}
+	private AudioSource soundEffectSource;
 
 	public bool[] preferredPlaylist { get; set; }
 	public AudioSource currentSong { get; set;}
@@ -57,6 +58,8 @@ public class SoundManager : Manager {
         //in the future, load user's music preference
         playlist = getAvailableMusic();
 		soundEffects = getAvailableEffects ();
+		soundEffectSource = gameObject.AddComponent (typeof(AudioSource)) as AudioSource;
+
 
         preferredPlaylist = new bool[playlist.Length];
         for (int i = 0; i < preferredPlaylist.Length; i++)
@@ -196,7 +199,16 @@ public class SoundManager : Manager {
 		}
 		return -1;
 	}
-	
+
+	public void playSoundEffect (string name){
+		AudioClip clip;
+		if (effectDict.TryGetValue (name, out clip)) {
+			soundEffectSource.clip = clip;
+			soundEffectSource.Play();
+			//soundEffectSource.PlayOneShot(clip, soundVolume * masterVolume);
+		}
+	}
+
 	/**
      * Update is called once per frame
      */
