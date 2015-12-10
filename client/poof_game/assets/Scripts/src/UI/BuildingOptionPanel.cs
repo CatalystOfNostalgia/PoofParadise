@@ -82,6 +82,7 @@ public class BuildingOptionPanel : GamePanel {
 		} 
 	}
 
+<<<<<<< HEAD
 	/**removes only decorative building**/
 	private void removeBuilding()
 	{
@@ -105,6 +106,8 @@ public class BuildingOptionPanel : GamePanel {
         BuildingPanel.buildingPanel.GeneratePanel();
     }
 
+=======
+>>>>>>> 776178fe6d6bb5db0cbbf78480e0cc5e12dff522
     /**
      * Sets the building reference for this panel
      */

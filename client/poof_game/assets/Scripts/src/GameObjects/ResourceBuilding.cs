@@ -20,7 +20,8 @@ public class ResourceBuilding : Building {
     /**public override void DeleteBuilding()
     {
 
-        BuildingPanel.buildingPanel.alreadyPlacedDownBuildings.Remove(this.name.Substring(0, this.name.Length - "(Clone)".Length));
+        base.DeleteBuilding();
+        BuildingManager.buildingManager.alreadyPlacedDownBuildings.Remove(this.name.Substring(0, this.name.Length - "(Clone)".Length));
         BuildingPanel.buildingPanel.GeneratePanel();
     }**/
 
