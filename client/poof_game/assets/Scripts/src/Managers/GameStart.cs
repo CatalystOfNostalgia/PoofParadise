@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /**
  * The initial object in the game
@@ -24,7 +25,7 @@ public class GameStart : MonoBehaviour {
         // Be careful! Anything after this coroutine will run 
         // before coroutine finishes
 
-		InvokeRepeating ("autoSave", 2, 30F);
+		InvokeRepeating ("autoSave", .1f, 2f);
     }
 
     /**
@@ -38,7 +39,7 @@ public class GameStart : MonoBehaviour {
      * Serves as the games final save on quit functionality
      */
 	void OnApplicationQuit(){
-		//SaveState.state.PushToServer();
+	    SaveState.state.PushToServer();
 		Debug.Log("Save ON QUITTING!!!");
 	}
 

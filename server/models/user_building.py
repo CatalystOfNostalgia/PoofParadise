@@ -21,6 +21,7 @@ class UserResourceBuilding(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, nullable=False)
     building_info_id = Column(Integer, nullable=False)
+    level = Column(Integer, nullable=False, default=1)
     position_x = Column(Integer, nullable=False)
     position_y = Column(Integer, nullable=False)
 

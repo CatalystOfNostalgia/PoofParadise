@@ -56,7 +56,10 @@ public class GameManager : Manager {
         int waterTotal = SaveState.state.waterEle;
         int earthTotal = SaveState.state.earthEle;
         int airTotal = SaveState.state.airEle;
-        int poofTotal = SaveState.state.poofCount;
+        // int poofTotal = SaveState.state.poofCount;
+        
+        // calculate the total poofs
+        int poofTotal = CalculatePoofs();
 
         int fireLeft = fireTotal;
         int waterLeft = waterTotal;
@@ -116,6 +119,29 @@ public class GameManager : Manager {
         		poofLeft--;
         	}
         }
+    }
+
+    /**
+     * determines the total poofs and poofs generated
+     * returns the generated poofs
+     */
+    public int CalculatePoofs() 
+    {
+
+        int maxPoofs = 0;
+        int generatedPoofs = 0;
+
+        foreach ( KeyValuePair<Tuple, DecorativeBuilding> entry in SaveState.state.decorativeBuildings) {
+            generatedPoofs += entry.Value.generatedPoofs;
+        }
+
+        foreach ( KeyValuePair<Tuple, ResidenceBuilding> entry in SaveState.state.residenceBuildings) {
+            maxPoofs += entry.Value.poofsAllowed;
+
+        }
+
+        if (generatedPoofs > maxPoofs) { generatedPoofs = maxPoofs; }
+        return generatedPoofs;
     }
 
     /**

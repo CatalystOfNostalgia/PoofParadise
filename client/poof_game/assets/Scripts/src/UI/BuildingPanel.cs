@@ -33,6 +33,8 @@ public class BuildingPanel : GamePanel {
         alreadyPlacedDownBuildings = new List<string>();
         activePanel = panel.DECORATIVE;
         SwitchPanels();
+        resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, "Resource Building Panel/Buttons");
+        decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildings, "Decorative Building Panel/Buttons");
 		GeneratePanel();
 	}
 
@@ -83,7 +85,7 @@ public class BuildingPanel : GamePanel {
 
         // Rebuild them
         resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, "Resource Building Panel/Buttons");
-        decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildigs, "Decorative Building Panel/Buttons");
+        decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildings, "Decorative Building Panel/Buttons");
 
         foreach (Button b in resourceButtons)
 		{

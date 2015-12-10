@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 /**
  * Building serves as an abstract MonoBehavior which 
@@ -11,7 +12,11 @@ public abstract class Building : MonoBehaviour {
 
     private bool selected { get; set; }
     private bool placed { get; set; }
-    public bool created { get; set; }
+
+    // database management data
+    public bool created;
+    public int buildingInfoID;
+    public int level;
 
     // Tracks the state of the building as a button
     public int ID { get; set; }
@@ -41,7 +46,8 @@ public abstract class Building : MonoBehaviour {
 		options = (Canvas) Instantiate (PrefabManager.prefabManager.buildingOptionCanvas, pos, Quaternion.identity);
         options.transform.SetParent(this.transform);
 
-        created = false;
+        level = 1;
+        created = true;
         selected = true;
         placed = false;
         canDrag = false;
@@ -125,13 +131,15 @@ public abstract class Building : MonoBehaviour {
 
     /**
      * Handles the end drag state
+     * this could probably be done cleaner by calling place building instead of
+     * manually setting the tiles
      */
     void OnMouseUp()
     {
         if (canDrag)
         {
             canDrag = false;
-            SaveState.state.buildings.Add(BuildingManager.buildingManager.selectedTile.index, this);
+            SaveState.state.addBuilding(BuildingManager.buildingManager.selectedTile.index, this);
             BuildingManager.buildingManager.selectedTile.isVacant = false;
             BuildingManager.buildingManager.selectedTile.leftTile.isVacant = false;
             BuildingManager.buildingManager.selectedTile.downTile.isVacant = false;
@@ -149,7 +157,7 @@ public abstract class Building : MonoBehaviour {
         this.GetComponent<BoxCollider2D>().enabled = true;
         bool remove = false;
         Tuple key = GetTupleFromGrid();
-        remove = SaveState.state.buildings.Remove(key);
+        remove = SaveState.state.removeBuilding(key);
 
         if (remove)
         {
@@ -169,13 +177,12 @@ public abstract class Building : MonoBehaviour {
         this.GetComponent<BoxCollider2D>().enabled = true;
         canDrag = true;
         Tuple key = GetTupleFromGrid();
-        bool remove = SaveState.state.buildings.Remove(key);
+        bool remove = SaveState.state.removeBuildings.Remove(key);
 
         if (!remove)
         {
             Debug.LogError(string.Format("[Building] Unable to locate {0} at {1} in the building dictionary", this.name, key));
         }
-
         showOptions = !showOptions;
         options.gameObject.SetActive(showOptions);
     }

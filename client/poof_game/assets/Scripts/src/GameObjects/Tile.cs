@@ -30,7 +30,7 @@ public class Tile : MonoBehaviour {
 
     public Building PlaceBuilding(Building newbuilding) 
     {
-        if (isVacant && newbuilding.PayForBuilding()) {
+        if (isVacant && (!newbuilding.created || newbuilding.PayForBuilding())) {
 
             building = Instantiate (newbuilding, 
                                     new Vector3(this.transform.position.x, 
@@ -42,9 +42,9 @@ public class Tile : MonoBehaviour {
 
             // set tiles to filled
             isVacant = false;
-            leftTile.isVacant = false; 
-            downTile.isVacant = false;
-            downLeftTile.isVacant = false;
+            if ( leftTile != null ) { leftTile.isVacant = false; }
+            if ( downTile != null ) { downTile.isVacant = false; }
+            if ( downLeftTile != null ) { downLeftTile.isVacant = false; }
 
             return building;
         }
@@ -88,6 +88,15 @@ public class Tile : MonoBehaviour {
     private void OnMouseExit()
     {
         GetComponent<Renderer>().material.color = startColor;
+
+        // if the new selected tile is already set the we don't want to set it to null
+        if (BuildingManager.buildingManager.selectedTile == null || 
+            !this.index.Equals(BuildingManager.buildingManager.selectedTile.index)) {
+
+        } else {
+            BuildingManager.buildingManager.selectedTile = null;
+        }
+
     }
 
     /**

@@ -79,38 +79,48 @@ public class BuildingManager : Manager {
             Debug.LogError("Cannot place building because tile is null");
             return;
 		}
+        else {
 
-		Building newBuilding = tile.PlaceBuilding (prefab);
-        
-        // Exit if new building is null
-        if (newBuilding == null)
-        {
-            // Insert functionality if the user cannot afford the building
-            Debug.Log("You cannot afford this building");
-            return;
+            Building newBuilding = tile.PlaceBuilding (prefab);
+
+                if (newBuilding != null) {
+
+                    newBuilding.created = true;
+                    
+                    // Sets the new building's parent to our convenience object
+                    newBuilding.transform.SetParent(buildings.transform);
+
+                    // TODO this feels pretty iffy
+                    if ( !isTileTaken(tile.index)) {
+
+                        SaveState.state.addBuilding(tile.index, newBuilding);
+
+                        /* TODO Commented this out because I'm not sure what it
+                         * and it's generating an error
+                        if (prefab.GetComponent<ResidenceBuilding>() == null)
+                        {   
+                            BuildingPanel.buildingPanel.alreadyPlacedDownBuildings.Add(prefab.name);
+                        }
+                        */
+
+                    }
+
+                GameManager.gameManager.SpawnPoofs();
+            } else {
+                Debug.Log("You cannot afford this building");
+                return;
+            }
         }
 
-        newBuilding.created = true;
-        
-        // Sets the new building's parent to our convenience object
-        newBuilding.transform.SetParent(buildings.transform);
-
-		// TODO this feels pretty iffy
-		if (!SaveState.state.buildings.ContainsKey (tile.index)) {
-			SaveState.state.buildings.Add (tile.index, newBuilding);
-            if (prefab.GetComponent<ResidenceBuilding>() == null)
-            {
-                BuildingPanel.buildingPanel.alreadyPlacedDownBuildings.Add(prefab.name);
-            }
-            BuildingPanel.buildingPanel.GeneratePanel();
-		}
 	}
 
     /**
      * TODO: Give description
      */
 	private bool isTileTaken(Tuple t){
-		return SaveState.state.buildings.ContainsKey (t);
+		return (SaveState.state.resourceBuildings.ContainsKey (t) ||
+		       SaveState.state.decorativeBuildings.ContainsKey (t) ||
+		       SaveState.state.residenceBuildings.ContainsKey (t));
 	}
 
 	/**

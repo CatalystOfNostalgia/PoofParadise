@@ -94,6 +94,8 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	{
 		if (go == null) return null;
 		var comp = go.GetComponent<T>();
+		
+		if (comp != null) return comp;
 
 		if (comp != null)
 			return comp;

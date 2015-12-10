@@ -14,12 +14,12 @@ public class SaveState : Manager {
 	public static SaveState state;
 
 	// Player data
+    public string username { get; set; }
+    public string userPassword { get; set; }
 	public int userID { get; set; }
 	public int userLevel { get; set; }
 	public int userExperience { get; set; }
 	public int hqLevel { get; set; }
-    public int hqPosX { get; set; }
-    public int hqPosY { get; set; }
 	public int poofCount { get; set; }
     public int poofLimit { get; set; }
 
@@ -39,14 +39,16 @@ public class SaveState : Manager {
 	public int earthEle { get; set; }
 	public int airEle { get; set; }
 
-	// Buildings
-	//TODO do we actually need separate dictionaries for the different building type?
-	public Dictionary<Tuple, Building> buildings { get; set; }
+	// buildings
+	public Dictionary<Tuple, ResourceBuilding> resourceBuildings { get; set; }
+	public Dictionary<Tuple, DecorativeBuilding> decorativeBuildings { get; set; }
+	public Dictionary<Tuple, ResidenceBuilding> residenceBuildings { get; set; }
+    public HeadQuarterBuilding hq { get; set; }
+    public Tuple hqLocation { get; set; }
 
     public BuildingInformationManager buildingInformationManager;
 
-
-	// Resource collection fields // currently unused
+	//resource collection fields // currently unused
 	public int firetreeRes { get; set; }
 	public int windmillRes { get; set; }
 	public int pondRes { get; set; }
@@ -67,7 +69,10 @@ public class SaveState : Manager {
 			Destroy(gameObject);
 		}
 
-		state.buildings = new Dictionary<Tuple, Building>();
+		state.resourceBuildings = new Dictionary<Tuple, ResourceBuilding>();
+		state.decorativeBuildings = new Dictionary<Tuple, DecorativeBuilding>();
+		state.residenceBuildings = new Dictionary<Tuple, ResidenceBuilding>();
+		
         buildingInformationManager = new BuildingInformationManager();
 		woolyBeans = 0;
         poofLimit = 0;
@@ -105,13 +110,89 @@ public class SaveState : Manager {
 	public void PushToServer() {		
 		string buildingJSON = this.jsonify();
 		// TODO Send JSON to server
+        StartCoroutine(GetHTTP.toSave(buildingJSON, updateBuildings));
 	}
+
+    // updates the saved building with their new IDs
+    private void updateBuildings(string response) {
+
+        if (response.Length > 0) {
+
+            Debug.Log(response);
+
+            JSONNode data = JSON.Parse(response);
+
+            int i = 0;
+            JSONArray resourceIDs = data["building_ids"]["resource_buildings"].AsArray;
+            JSONArray decorativeIDs = data["building_ids"]["decorative_buildings"].AsArray;
+
+            foreach (KeyValuePair<Tuple, ResourceBuilding> b in resourceBuildings) {
+
+                if (b.Value.created) {
+                    b.Value.ID = resourceIDs[i].AsInt; 
+                    b.Value.created = false;
+                    i++;
+                }
+            }
+
+            i = 0;
+
+            foreach (KeyValuePair<Tuple, DecorativeBuilding> b in decorativeBuildings) {
+
+                if (b.Value.created) {
+                    b.Value.ID = decorativeIDs[i].AsInt;
+                    b.Value.created = false;
+                    i++;
+                }
+            }
+        }
+    }
+
+    // adds a building to the appropriate dictionary
+    public void addBuilding(Tuple t, Building b) {
+        
+        if (b.GetType() == typeof(DecorativeBuilding)) {
+            DecorativeBuilding decBuilding = (DecorativeBuilding)b;
+            SaveState.state.decorativeBuildings.Add (t, decBuilding);
+
+        } else if (b.GetType() == typeof(ResourceBuilding)) {
+            ResourceBuilding resBuilding = (ResourceBuilding)b;
+            SaveState.state.resourceBuildings.Add (t, resBuilding);
+
+        } else if (b.GetType() == typeof(ResidenceBuilding)) {
+            ResidenceBuilding resBuilding = (ResidenceBuilding)b;
+            SaveState.state.residenceBuildings.Add (t, resBuilding);
+        }
+
+    }
+
+    // removes a building from the dicts
+    public bool removeBuilding(Tuple t) {
+
+        if (decorativeBuildings.Remove(t) || 
+            resourceBuildings.Remove(t) ||
+            residenceBuildings.Remove(t)) {
+
+            return true;
+        }
+
+        return false;
+
+    }
 	
 	// turns the save data into a JSON String
 	public String jsonify() {
 		
 		String jsonPlayerData = "{ ";
 		
+		jsonPlayerData += "\"name\": \"" + "timothy" + "\", ";
+		jsonPlayerData += "\"email\": \"" + "timothy@yo.com" + "\", ";
+		jsonPlayerData += "\"level\": \"" + "1" + "\", ";
+		jsonPlayerData += "\"user_id\": \"" + userID  + "\", ";
+		jsonPlayerData += "\"username\": \"" + username + "\", ";
+		jsonPlayerData += "\"password\": \"" + userPassword + "\", ";
+		jsonPlayerData += "\"experience\": \"" + userExperience + "\", ";
+		jsonPlayerData += "\"hq_level\": \"" + hqLevel  + "\", ";
 		jsonPlayerData += "\"fire\": \"" + fire + "\", ";
 		jsonPlayerData += "\"air\": \"" + air + "\", ";
 		jsonPlayerData += "\"water\": \"" + water + "\", ";
@@ -126,25 +207,45 @@ public class SaveState : Manager {
         jsonPlayerData += "\"airElements\": \"" + airEle + "\", ";
 
         jsonPlayerData += "\"headquarters_level\": \"" + hqLevel + "\", ";
-        jsonPlayerData += "\"hq_pos_x\": \"" + hqPosX + "\", ";
-        jsonPlayerData += "\"hq_pos_y\": \"" + hqPosY + "\", ";
+        jsonPlayerData += "\"hq_pos_x\": \"" + hqLocation.x + "\", ";
+        jsonPlayerData += "\"hq_pos_y\": \"" + hqLocation.y + "\", ";
         jsonPlayerData += "\"resource_buildings\": [ ";
 		
-		foreach ( KeyValuePair<Tuple, Building> entry in buildings) {
+		foreach ( KeyValuePair<Tuple, ResourceBuilding> entry in resourceBuildings) {
 			jsonPlayerData += "{ ";
-			jsonPlayerData += "\"x_coordinate\": \"" + entry.Key.x + "\", ";
-			jsonPlayerData += "\"y_coordinate\": \"" + entry.Key.y + "\", ";
-			jsonPlayerData += "\"size\": \"" + entry.Value.size + "\" ";
+            jsonPlayerData += "\"building_info_id\": \"" + entry.Value.buildingInfoID + "\", ";
+            jsonPlayerData += "\"level\": \"" + entry.Value.level + "\", ";
+			jsonPlayerData += "\"id\": \"" + entry.Value.ID + "\", ";
+			jsonPlayerData += "\"position_x\": \"" + entry.Key.x + "\", ";
+			jsonPlayerData += "\"position_y\": \"" + entry.Key.y + "\", ";
+			jsonPlayerData += "\"size\": \"" + entry.Value.size + "\", ";
+            jsonPlayerData += "\"new\": \"" + entry.Value.created + "\" ";
 			jsonPlayerData += "},";
 		}
+
 		
 		jsonPlayerData = jsonPlayerData.TrimEnd (',');
-		
 		jsonPlayerData += "], ";
-		jsonPlayerData += "\"decorative_buildings\": []";
+
+		jsonPlayerData += "\"decorative_buildings\": [";
+		foreach ( KeyValuePair<Tuple, DecorativeBuilding> entry in decorativeBuildings) {
+
+			jsonPlayerData += "{ ";
+            jsonPlayerData += "\"building_info_id\": \"" + entry.Value.buildingInfoID + "\", ";
+            jsonPlayerData += "\"level\": \"" + entry.Value.level + "\", ";
+			jsonPlayerData += "\"id\": \"" + entry.Value.ID + "\", ";
+			jsonPlayerData += "\"position_x\": \"" + entry.Key.x + "\", ";
+			jsonPlayerData += "\"position_y\": \"" + entry.Key.y + "\", ";
+			jsonPlayerData += "\"size\": \"" + entry.Value.size + "\", ";
+            jsonPlayerData += "\"new\": \"" + entry.Value.created + "\" ";
+			jsonPlayerData += "},";
+		}
+
+		jsonPlayerData = jsonPlayerData.TrimEnd (',');
+        jsonPlayerData += "]";
+
 		jsonPlayerData += "}";
-		
-		
+
 		return jsonPlayerData;
 		
 	}
@@ -160,6 +261,8 @@ public class SaveState : Manager {
 		userID = data ["user_id"].AsInt;
 		userLevel = data ["level"].AsInt;
 		userExperience = data ["experience"].AsInt;
+        userPassword = data ["password"];
+        username = data ["username"];
 		hqLevel = data ["headquarters_level"].AsInt;
 		//change this back 
 		fire = data ["fire"].AsInt;
@@ -180,26 +283,49 @@ public class SaveState : Manager {
 		loadedResourceBuildings = data ["resource_buildings"].AsArray;
 		loadedDecorativeBuildings = data ["decorative_buildings"].AsArray;
 
+        Debug.Log("count: " + loadedResourceBuildings.Count);
+
 		foreach (JSONNode building in loadedResourceBuildings) {
 			int x = building["position_x"].AsInt;
 			int y = building["position_y"].AsInt;
+			Debug.Log("x: " + building["position_x"].AsInt);
+			Debug.Log("y: " + building["position_y"].AsInt);
 
             // Retrieves a building from the resource buildings list
             if (PrefabManager.prefabManager == null) {
                 Debug.LogError("[SaveState] Prefab manager is null");
             }
-			Building newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
+			ResourceBuilding newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
 
-			buildings.Add(new Tuple(x, y), newBuilding);
+            newBuilding.created = false;
+            newBuilding.ID = building["id"].AsInt;
+            newBuilding.buildingInfoID = building["building_info_id"].AsInt;
+
+			resourceBuildings.Add(new Tuple(x, y), newBuilding);
 		}
-		// TODO foreach loop for decorative building
+
 		foreach (JSONNode building in loadedDecorativeBuildings) {
+			int x = building["position_x"].AsInt;
+			int y = building["position_y"].AsInt;
+
+            // Retrieves a building from the resource buildings list
+            Debug.Log("index: " + building["building_info_id"].AsInt);
+            if (PrefabManager.prefabManager == null) {
+                Debug.Log("prefab manager");
+            }
+			DecorativeBuilding newBuilding = PrefabManager.prefabManager.decorativeBuildings[building["building_info_id"].AsInt];
+
+            Debug.Log(newBuilding.name + " has info id of: " + building["building_info_id"].AsInt);
+
+            newBuilding.created = false;
+            newBuilding.ID = building["id"].AsInt;
+            newBuilding.buildingInfoID = building["building_info_id"].AsInt;
+
+			decorativeBuildings.Add(new Tuple(x, y), newBuilding);
 		}
 
-        hqPosX = data["hq_pos_x"].AsInt;
-        hqPosY = data["hq_pos_y"].AsInt;
-
-        // Since array start at 0, lv 1-> index 0, lv 2 -> index 1
-        buildings.Add(new Tuple(hqPosX, hqPosY), PrefabManager.prefabManager.headQuarterBuildings[hqLevel-1]);
+        hqLocation = new Tuple(data["hq_pos_x"].AsInt, data["hq_pos_y"].AsInt);
+        //since array start at 0, lv 1-> index 0, lv 2 -> index 1
+        hq = PrefabManager.prefabManager.headQuarterBuildings[hqLevel-1];
 	}
 }

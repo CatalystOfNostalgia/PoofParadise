@@ -10,7 +10,7 @@ using System.Text;
 public class GetHTTP : MonoBehaviour {
 
     static String server = "http://129.22.150.55:51234";
-    //static String server = "http://localhost:51234";
+    //static String server = "http://:51234";
 
     /**
      * Create an account
@@ -39,13 +39,14 @@ public class GetHTTP : MonoBehaviour {
 
         yield return request;
 
-        callback(getHttpBody(request.text));
+        Debug.Log(request.text);
+        callback(getHttpBody(request.text, 4));
     }
 
     /**
      * Save to server
      */
-    public static IEnumerator toSave(String jsonStuff){
+    public static IEnumerator toSave(String jsonStuff, Action<String> callback){
 
         String url = server + "/save";
         byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonStuff);
@@ -57,6 +58,8 @@ public class GetHTTP : MonoBehaviour {
         WWW request = new WWW(url, jsonBytes, headers);
 
         yield return request;
+
+        callback(getHttpBody(request.text, 2));
     }
 
     /**
@@ -93,20 +96,24 @@ public class GetHTTP : MonoBehaviour {
 
         yield return request;
 
-        callback(getHttpBody(request.text));
+        Debug.Log(request.text);
+
+        callback(getHttpBody(request.text, 4));
+
     }
+
 
     /**
      * This trims the headers from an http response
      */
-    private static String getHttpBody(String response) {
+    private static String getHttpBody(String response, int headers) {
 
         int count = 0;
         String body = "";
         String[] full = response.Split ('\n');
 
         foreach (String line in full) {
-            if (count > 4) {
+            if (count > headers) {
                 body += line + "\n";
             }
             else {

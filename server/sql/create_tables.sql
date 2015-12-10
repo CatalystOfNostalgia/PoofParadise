@@ -7,7 +7,7 @@ USE gravehub;
 CREATE TABLE user(
     user_id int NOT NULL AUTO_INCREMENT,
     name varchar(100) NOT NULL,
-    email varchar(100) NOT NULL UNIQUE,
+    email varchar(100) NOT NULL,
     username varchar(100) NOT NULL UNIQUE,
     password varchar(100),
     fire int DEFAULT 0,
@@ -91,6 +91,7 @@ CREATE TABLE decorative_building_info(
 
 CREATE TABLE user_resource_building(
     id int NOT NULL AUTO_INCREMENT,
+    level int NOT NULL,
     user_id int NOT NULL,
     building_info_id int NOT NULL,
     position_x int NOT NULL,

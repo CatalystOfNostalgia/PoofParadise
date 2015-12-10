@@ -111,12 +111,12 @@ INSERT INTO decorative_building_info(
 INSERT INTO decorative_building_info(
 	level, name, size, next_building_id, resource_cost_fire, resource_cost_water, resource_cost_earth, resource_cost_air, poofs_generated, experience_gain
 ) VALUES (
-	2, "Waterfall", 2, null, 0,200,0,0,4,60
+	1, "Waterfall", 2, null, 0,200,0,0,4,60
 );
 
 -- Wind Organ
 INSERT INTO decorative_building_info(
 	level, name, size, next_building_id, resource_cost_fire, resource_cost_water, resource_cost_earth, resource_cost_air, poofs_generated, experience_gain
 ) VALUES (
-	2, "Wind Organ", 2, null, 0,0,0,200,4,60
+	1, "Wind Organ", 2, null, 0,0,0,200,4,60
 );

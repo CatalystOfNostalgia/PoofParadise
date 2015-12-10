@@ -1,4 +1,6 @@
 import models
+from sqlalchemy.dialects import mysql
+from sqlalchemy import func
 
 # creates a new entry in the user table of the database
 def create_account( name, email, username, password ):
@@ -10,6 +12,9 @@ def create_account( name, email, username, password ):
 
     models.session.add(new_user)
     models.session.commit()
+
+
+    # create an HQ for the user
 
 # returns the user given a username and password
 def log_in( username, password ):
@@ -77,8 +82,6 @@ def get_friends( user_id ):
         friend_username = find_user_from_id(friend_id).username
         new_friends[friend_username] = friend_id
         user_friends.append(new_friend)
-
-    print(user_friends)
 
     return user_friends
 
@@ -157,6 +160,8 @@ def get_residence_building_info(building_info_id):
 # gets the building info of a resource building
 def get_resource_building_info( building_info_id ):
 
+    print "resource building id: " +  str(building_info_id)
+
     building_info = models.session.query(models.ResourceBuildingInfo).filter( \
                     models.ResourceBuildingInfo.building_info_id == \
                                                 building_info_id).one()
@@ -187,23 +192,31 @@ def get_decorative_building_info( building_info_id ):
 # saves the users buildings returns the building if a building cannot be found
 def save_building_info ( resource_buildings, decorative_buildings, user_id ):
     
+    ids = {}
+    ids['resource_buildings'] = []
+    ids['decorative_buildings'] = []
+
     # resource buildings
     for building in resource_buildings:
         if building['new'] == 'True':
-            create_resource_building(building, user_id)
+            ids['resource_buildings'] = create_resource_building(building, user_id, ids['resource_buildings'])
+            success = True
         else:
             success = update_resource_building(building, user_id)
         if not success:
-            return building
+            return None
 
     # decorative buildings  
     for building in decorative_buildings:
         if building['new'] == 'True':
-            create_decorative_building(building, user_id)
+            ids['decorative_buildings'] = create_decorative_building(building, user_id, ids['decorative_buildings'])
+            success = True
         else:
             success = update_decorative_building(building)
         if not success:
-            return building
+            return None
+
+    return ids;
 
 # updates an existing building in the database if the building cannot be found
 # returns False
@@ -212,16 +225,18 @@ def update_resource_building ( building, user_id ):
     try:
 
         building_id = building['id']
+
         updated_building = models.session.query(models.UserResourceBuilding).filter( \
                            models.UserResourceBuilding.id == building_id).one()
-
-        updated_building.x_coordinate = building['x_coordinate']
-        updated_building.y_coordinate = building['y_coordinate']
+        updated_building.level = building['level']
+        updated_building.x_coordinate = building['position_x']
+        updated_building.y_coordinate = building['position_y']
 
         models.session.commit()
         return True
 
     except:
+        print 'could not find resource building'
         rollback()
         return False
 
@@ -230,22 +245,27 @@ def update_resource_building ( building, user_id ):
 def update_decorative_building ( building ):
 
     try:
+
+        building_id = building['id']
+        print 'id: ' + building_id
+
         updated_building = models.session.query(models.UserDecorativeBuilding).filter( \
-                           models.UserDecorativeBuilding.id == building['id']).one()
+                           models.UserDecorativeBuilding.id == building_id).one()
 
         updated_building.level = building['level']
-        updated_building.position_x = building['position_x']
-        updated_building.position_y = building['position_y']
+        updated_building.x_coordinate = building['position_x']
+        updated_building.y_coordinate = building['position_y']
 
         models.session.commit()
         return True
 
-    except:
+    except ValueError:
+        print 'could not find decorative building'
         rollback()
         return False
 
 # creates a decorative building in the database
-def create_decorative_building ( building, user_id ):
+def create_decorative_building ( building, user_id, ids ):
 
     new_building = models.UserDecorativeBuilding( \
         user_id = user_id, \
@@ -257,17 +277,30 @@ def create_decorative_building ( building, user_id ):
     models.session.add(new_building)
     models.session.commit() 
 
+    print 'added decorative building'
+
+    new_id = models.session.query(func.max(models.UserDecorativeBuilding.id)).one()[0]
+
+    ids.append(new_id)
+    return ids
+
 # creates a resource building in the database
-def create_resource_building ( building, user_id ):
+def create_resource_building ( building, user_id, ids ):
 
     new_building = models.UserResourceBuilding( \
         user_id = user_id, \
         building_info_id = building['building_info_id'], \
+        level = building['level'], \
         position_x = building['position_x'], \
         position_y = building['position_y'])
 
     models.session.add(new_building)
     models.session.commit() 
+
+    new_id = models.session.query(func.max(models.UserResourceBuilding.id)).one()[0]
+
+    ids.append(new_id - 1)
+    return ids
 
 # turns a building into a dictionary
 def dict_buildings( buildings ):

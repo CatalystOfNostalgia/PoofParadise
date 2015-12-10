@@ -5,7 +5,7 @@
 public class ResidenceBuilding : Building {
 
     // Fields
-    public int poofAllowed;
+    public int poofsAllowed;
 
     /**
      * Each new poof residence bumps the limit by 2

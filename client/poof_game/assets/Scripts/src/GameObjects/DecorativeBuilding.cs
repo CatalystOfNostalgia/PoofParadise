@@ -7,8 +7,9 @@
  */
 public class DecorativeBuilding : Building {
 
-	// Fields
-	public int poofGenerationRate;
+    // Fields
+    public int poofGenerationRate;
+    public int generatedPoofs;
 
 	protected override void Awake()
 	{
