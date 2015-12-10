@@ -138,7 +138,6 @@ public class SaveState : Manager {
             i = 0;
 
             foreach (KeyValuePair<Tuple, DecorativeBuilding> b in decorativeBuildings) {
-                Debug.Log("decorative buildings");
 
                 if (b.Value.created) {
                     b.Value.ID = decorativeIDs[i].AsInt;
@@ -247,8 +246,6 @@ public class SaveState : Manager {
 
 		jsonPlayerData += "}";
 
-        Debug.Log(jsonPlayerData);
-		
 		return jsonPlayerData;
 		
 	}
