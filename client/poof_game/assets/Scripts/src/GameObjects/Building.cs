@@ -56,17 +56,11 @@ public abstract class Building : MonoBehaviour {
         size = 1;
 
 		animator = this.GetComponent<Animator>();
-		//animator.SetInteger("Construction", 1);
-		//Invoke("constructionFinish", 5f);
-
     }
 
 	public void constructionAnimation(){
-		Debug.Log ("(((((");
-		//animator = this.GetComponent<Animator>();
 		animator.SetInteger("Construction", 1);
-		Debug.Log (")))))");
-		Invoke("constructionFinish", 5f);
+		Invoke("constructionFinish", 10f);
 	}
 
 	public void constructionFinish(){
