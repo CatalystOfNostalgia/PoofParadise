@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
 
 /**
  * Building serves as an abstract MonoBehavior which 
