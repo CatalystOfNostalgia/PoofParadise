@@ -37,8 +37,8 @@ def save_user_info( user ):
     updated_user.password = user['password']
     updated_user.experience = user['experience']
     updated_user.headquarters_level = user['hq_level']
-    update_user.hq_pos_x = user['hq_pos_x']
-    update_user.hq_pos_y = user['hq_pos_y']
+    updated_user.hq_pos_x = user['hq_pos_x']
+    updated_user.hq_pos_y = user['hq_pos_y']
     models.session.commit()
 
 # returns the user given a username
