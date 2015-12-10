@@ -44,4 +44,13 @@ public class HeadQuarterBuilding : Building {
         showOptions = !showOptions;
         options.gameObject.SetActive(showOptions);
     }
+
+    /**
+     * Overrides the upgrade building feature of headquarters
+     */
+    public override void UpgradeBuilding()
+    {
+        base.UpgradeBuilding();
+        SaveState.state.hqLevel++;
+    }
 }

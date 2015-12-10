@@ -23,4 +23,15 @@ public class ResourceBuilding : Building {
         BuildingPanel.buildingPanel.GeneratePanel();
     }
 
+    /**
+     * Overrides t
+     */
+    public override void UpgradeBuilding()
+    {
+        if (name.Contains("Lvl 1") && SaveState.state.hqLevel == 2)
+        {
+            base.UpgradeBuilding();
+        }
+    }
+
 }
