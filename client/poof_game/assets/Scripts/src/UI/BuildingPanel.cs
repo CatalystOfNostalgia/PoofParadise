@@ -33,7 +33,7 @@ public class BuildingPanel : GamePanel {
         SwitchPanels();
         resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, "Resource Building Panel/Buttons");
         decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildings, "Decorative Building Panel/Buttons");
-		GeneratePanel();
+		//GeneratePanel();
 	}
 
     /**
