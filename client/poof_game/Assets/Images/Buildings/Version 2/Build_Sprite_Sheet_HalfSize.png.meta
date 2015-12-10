@@ -1,0 +1,275 @@
+fileFormatVersion: 2
+guid: 75a20c10ed18fe64f9f04a7885d586eb
+timeCreated: 1449776781
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Build_Sprite_Sheet_HalfSize_0
+    21300002: Build_Sprite_Sheet_HalfSize_1
+    21300004: Build_Sprite_Sheet_HalfSize_2
+    21300006: Build_Sprite_Sheet_HalfSize_3
+    21300008: Build_Sprite_Sheet_HalfSize_4
+    21300010: Build_Sprite_Sheet_HalfSize_5
+    21300012: Build_Sprite_Sheet_HalfSize_6
+    21300014: Build_Sprite_Sheet_HalfSize_7
+    21300016: Build_Sprite_Sheet_HalfSize_8
+    21300018: Build_Sprite_Sheet_HalfSize_9
+    21300020: Build_Sprite_Sheet_HalfSize_10
+    21300022: Build_Sprite_Sheet_HalfSize_11
+    21300024: Build_Sprite_Sheet_HalfSize_12
+    21300026: Build_Sprite_Sheet_HalfSize_13
+    21300028: Build_Sprite_Sheet_HalfSize_14
+    21300030: Build_Sprite_Sheet_HalfSize_15
+    21300032: Build_Sprite_Sheet_HalfSize_16
+    21300034: Build_Sprite_Sheet_HalfSize_17
+    21300036: Build_Sprite_Sheet_HalfSize_18
+    21300038: Build_Sprite_Sheet_HalfSize_19
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 8192
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Build_Sprite_Sheet_HalfSize_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 699
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_1
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 699
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_2
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 699
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_3
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 699
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_4
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 699
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 466
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_6
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 466
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_7
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 466
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_8
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 466
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_9
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 466
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 233
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_11
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 233
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_12
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 233
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_13
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 233
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_14
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 233
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_16
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 0
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_17
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 0
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_18
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 0
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Build_Sprite_Sheet_HalfSize_19
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 0
+        width: 264
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

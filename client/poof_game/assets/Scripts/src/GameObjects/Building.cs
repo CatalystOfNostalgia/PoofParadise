@@ -38,6 +38,7 @@ public abstract class Building : MonoBehaviour {
     public bool showOptions { get; set; }
 
     public Canvas options { get; set; }
+	private Animator animator;
 
     // Use this for initialization
     protected virtual void Awake()
@@ -53,7 +54,18 @@ public abstract class Building : MonoBehaviour {
         canDrag = false;
         showOptions = false;
         size = 1;
+
+		animator = this.GetComponent<Animator>();
     }
+
+	public void constructionAnimation(){
+		animator.SetInteger("Construction", 1);
+		Invoke("constructionFinish", 5f);
+	}
+
+	public void constructionFinish(){
+		animator.SetInteger("Construction", 0);
+	}
 
     /**
      * Pays for the building based on the cost of the building
@@ -126,7 +138,7 @@ public abstract class Building : MonoBehaviour {
         if (canDrag)
         {
             Vector3 loc = BuildingManager.buildingManager.selectedTile.transform.position;
-            this.transform.position = new Vector3(loc.x, loc.y - .25f, loc.z - 1);
+			this.transform.position = new Vector3(loc.x, loc.y - .25f, loc.y - .25f);
             this.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
@@ -187,6 +199,36 @@ public abstract class Building : MonoBehaviour {
         }
         showOptions = !showOptions;
         options.gameObject.SetActive(showOptions);
+    }
+
+    /**
+     * Upgrades building to level 2 resource building 
+     */
+    public virtual void UpgradeBuilding(){
+        Building upgrade = null;
+        string newName = this.name.Replace("Lvl 1(Clone)", "Lvl 2");
+        foreach (Building b in PrefabManager.prefabManager.buildings)
+        {
+            if (b.name == newName)
+            {
+                upgrade = b;
+            }
+        }
+
+        // If upgrade does not exist
+        if (upgrade == null)
+        {
+            Debug.LogError(string.Format("{0} does not exist", newName));
+        }
+        else
+        {
+            Instantiate(upgrade);
+            SaveState.state.earth = SaveState.state.earth - this.earthCost;
+            SaveState.state.water = SaveState.state.water - this.waterCost;
+            SaveState.state.air = SaveState.state.air - this.airCost;
+            SaveState.state.fire = SaveState.state.fire - this.fireCost;
+            this.DeleteBuilding();
+        }
     }
 
     /**

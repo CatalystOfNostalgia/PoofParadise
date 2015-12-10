@@ -49,41 +49,6 @@ public class BuildingOptionPanel : GamePanel {
 	}
 
     /**
-     * Upgrades building to level 2 resource building 
-     */
-	private void upgradeBuilding()
-	{
-		ResourceBuilding[] resourceBuildings = PrefabManager.prefabManager.resourceBuildings;
-		string name = this.transform.GetComponentInParent<Building>().name;
-		if (name.Contains ("Lvl 1") && SaveState.state.hqLevel == 2) {
-			if (name.Contains ("Cave") && SaveState.state.earth >= 50) {
-				Building upgraded = getNewBuilding(resourceBuildings, "Cave Lvl 2");
-				BuildingManager.buildingManager.makeNewBuilding(upgraded);
-				building.DeleteBuilding();
-				SaveState.state.earth = SaveState.state.earth - 50;
-			}
-			if (name.Contains ("Fire") && SaveState.state.fire >= 50) {
-				Building upgraded = getNewBuilding(resourceBuildings, "Fire Tree Lvl 2");
-				BuildingManager.buildingManager.makeNewBuilding(upgraded);
-				building.DeleteBuilding();
-				SaveState.state.fire = SaveState.state.fire - 50;
-			}
-			if (name.Contains ("Pond") && SaveState.state.water >= 50) {
-				Building upgraded = getNewBuilding(resourceBuildings, "Pond Lvl 2");
-				BuildingManager.buildingManager.makeNewBuilding(upgraded);
-				building.DeleteBuilding();
-				SaveState.state.fire = SaveState.state.fire - 50;
-			}
-			if (name.Contains ("Windmill") && SaveState.state.air >= 50) {
-				Building upgraded = getNewBuilding(resourceBuildings, "Windmill Lvl 2");
-				BuildingManager.buildingManager.makeNewBuilding(upgraded);
-				building.DeleteBuilding();
-				SaveState.state.air = SaveState.state.air - 50;
-			}
-		} 
-	}
-
-    /**
      * Sets the building reference for this panel
      */
     private void SetBuilding()
