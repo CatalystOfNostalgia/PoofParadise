@@ -60,6 +60,8 @@ public abstract class Building : MonoBehaviour {
      */
     public bool PayForBuilding()
     {
+
+        Debug.Log("paying for a building");
         // Pulls the cost of this building from Building Information Manager
         DecorationBuildingInformation dbi;
         ResourceBuildingInformation rbi;
@@ -222,9 +224,9 @@ public abstract class Building : MonoBehaviour {
                 // Store this key and remove any memory of the building from the tiles
                 key = t.index;
                 t.isVacant = true;
-                t.leftTile.isVacant = true;
-                t.downTile.isVacant = true;
-                t.downLeftTile.isVacant = true;
+                if ( t.leftTile != null ) { t.leftTile.isVacant = true; }
+                if ( t.downTile != null ) { t.downTile.isVacant = true; }
+                if ( t.downLeftTile != null ) { t.downLeftTile.isVacant = true; }
                 t.building = null;
             }
         }
