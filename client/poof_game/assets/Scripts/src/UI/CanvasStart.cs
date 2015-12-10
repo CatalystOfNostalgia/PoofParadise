@@ -76,6 +76,24 @@ public class CanvasStart : MonoBehaviour {
         {
             Destroy(this);
         }
+
+		GameObject upgradePanel = this.transform.Find("Upgrade Panel(Clone)").gameObject;
+		if (upgradePanel == null)
+		{
+			Debug.LogError("[CanvasStart] Upgrade Panel is null");
+			return;
+		}
+		
+		if (UpgradePanel.upgradePanel == null)
+		{
+			DontDestroyOnLoad(modelPanel);
+			UpgradePanel.upgradePanel = upgradePanel.GetComponent<UpgradePanel>();
+		}
+		
+		else if (UpgradePanel.upgradePanel != upgradePanel)
+		{
+			Destroy(this);
+		}
     }
 
     /**

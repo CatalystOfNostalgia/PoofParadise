@@ -18,6 +18,7 @@ public class BuildingOptionPanel : GamePanel {
      * Overrides the start functionality 
      * provided by GamePanel
      */
+
 	override public void Start () {
 		buttons = RetrieveButtonList ("Buttons");
         SetBuilding();
@@ -30,7 +31,7 @@ public class BuildingOptionPanel : GamePanel {
      */
 	override public void GeneratePanel(){
         FindAndModifyUIElement("Move Button", buttons, () => { building.MoveBuilding();});
-		FindAndModifyUIElement("Upgrade Button", buttons, ()=> upgradeBuilding ());
+		FindAndModifyUIElement("Upgrade Button", buttons, ()=> UpgradePanel.upgradePanel.TogglePanel());
 		FindAndModifyUIElement("Remove Button", buttons, ()=> building.DeleteBuilding());
 		FindAndModifyUIElement("Info Button", buttons, ()=> Debug.Log("Info button is pressed"));
 	}
@@ -82,32 +83,6 @@ public class BuildingOptionPanel : GamePanel {
 		} 
 	}
 
-<<<<<<< HEAD
-	/**removes only decorative building**/
-	private void removeBuilding()
-	{
-        Building b = this.transform.GetComponentInParent<Building>();
-        /**int Id = b.ID; 
-		int lengthX = TileScript.grid.gridX;
-		int lengthY = TileScript.grid.gridY ;
-		int x, y;
-		if (Id == 0) {
-			x = 0;
-			y = 0;
-		} 
-		else {
-			x = lengthX % Id;
-			y = lengthY % Id - 1; 
-		}
-		Tuple position = new Tuple (x, y);
-		bool remove = SaveState.state.decorativeBuildings.Remove(position);**/
-		Destroy (this.transform.GetComponentInParent<Building> ().gameObject);
-       // BuildingPanel.buildingPanel.alreadyPlacedDownBuildings.Remove(b.name.Substring(0, b.name.Length - "(Clone)".Length));
-        BuildingPanel.buildingPanel.GeneratePanel();
-    }
-
-=======
->>>>>>> 776178fe6d6bb5db0cbbf78480e0cc5e12dff522
     /**
      * Sets the building reference for this panel
      */
