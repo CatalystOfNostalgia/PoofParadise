@@ -1,46 +1,33 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System;
 
 public class Toast : GamePanel {
 
     public static Toast toast;
-    public Texture2D backPanel;
+    public string title;
     public string message;
     private bool isActive;
     private int seconds;
 
     public override void Start()
     {
-        isActive = true;
-        Debug.Log("lonely toast");
+        makeToast("Not enough resources");
     }
 
-    void OnGUI()
+    public void makeToast(string title, string message)
     {
-        if (!isActive)
-        {
-            return;
-        }
-        GUILayout.Label("HELLLLOOOOO");
-        int x = Screen.width / 2;
-        int y = Screen.height / 2;
-        GUI.BeginGroup(new Rect(x, y, 200, 100));
-        GUI.Box(new Rect(x, y, 200, 100), backPanel);
-        GUI.BeginGroup(new Rect(x, y, 200, 100));
-        GUI.Label(new Rect(x, y, 200, 100), message);
-        GUI.EndGroup();
-        GUI.EndGroup();
-        Debug.Log("Toast made");
-        StartCoroutine(wait5());
-        //endMessage();
+        this.title = title;
+        this.message = message;
+        isActive = true;
+        this.seconds = 5;
+        TogglePanel();
     }
 
     public void makeToast (string message)
     {
-        this.message = message;
-        isActive = true;
-        this.seconds = 5;
+        makeToast("Warning", message);
     }
     
     public void makeToast (string message, int seconds)
@@ -64,4 +51,16 @@ public class Toast : GamePanel {
     {
         throw new NotImplementedException();
     }
-}
+    private Rect windowRect = new Rect(20, 20, 120, 50);
+
+    void OnGUI()
+    {
+        windowRect = GUI.Window(0, windowRect, WindowFunction, title);
+
+    }
+    void WindowFunction (int windowID) {
+        // Draw any Controls inside the window here
+        float y = 20;
+        GUI.Label(new Rect(5, y, windowRect.width, 20), message);
+    }
+    }

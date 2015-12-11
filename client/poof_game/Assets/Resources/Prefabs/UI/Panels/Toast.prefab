@@ -28,7 +28,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a106fb88616cb4a995b3e1a19aef9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backPanel: {fileID: 2800000, guid: 4cf442c9d1484594a983d286c204b171, type: 3}
+  title: 
   message: hello
 --- !u!222 &22284034
 CanvasRenderer:
