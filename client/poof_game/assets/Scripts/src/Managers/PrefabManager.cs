@@ -59,6 +59,7 @@ public class PrefabManager : Manager {
         panels = Resources.LoadAll("Prefabs/UI/Panels", typeof(CanvasRenderer)).Cast<CanvasRenderer>().ToArray();
 		canvas = (Canvas)Resources.Load("Prefabs/UI/Canvas", typeof(Canvas));
 		buildingOptionCanvas = (Canvas)Resources.Load ("Prefabs/UI/local Panels/Building Option Canvas", typeof(Canvas));
+        buildingInfo = (Image)Resources.Load("Prefabs/UI/local Panels/Building Info", typeof(Image));
     }
 
     /**
