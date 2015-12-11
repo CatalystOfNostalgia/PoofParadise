@@ -380,6 +380,27 @@ def get_static_info():
 
     return return_info
 
+# Deletes residence 
+def delete_residence(residence_ids):
+    for residence_id in residence_ids:
+        to_delete = models.session.query(models.UserResidenceBuilding).filter(models.UserResidenceBuilding.id == residence_id).one()
+        models.session.delete(to_delete)
+    models.session.commit()
+
+# Deletes resource buildings
+def delete_resource(resource_ids):
+    for resource_id in resource_ids:
+        to_delete = models.session.query(models.UserResourceBuilding).filter(models.UserResourceBuilding.id == resource_id).one()
+        models.session.delete(to_delete)
+    models.session.commit()
+
+# Delete decorative buildings
+def delete_decorative(decorative_ids):
+    for decorative_id in decorative_ids:
+        to_delete = models.session.query(models.UserDecorativeBuilding).filter(models.UserDecorativeBuilding.id == resource_id).one()
+        models.session.Delete(to_delete)
+    models.session.commit()
+
 # rollsback the sqlalchemy session. Use if there is an exception
 def rollback():
     models.session.rollback()
