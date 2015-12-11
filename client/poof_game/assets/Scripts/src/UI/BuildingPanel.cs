@@ -18,6 +18,7 @@ public class BuildingPanel : GamePanel {
     private panel activePanel;
     private int[,] buildingCostsResource;
     private int[,] buildingCostsDecorative;
+    private Image[] icons;
 
     /**
      * Generates references based on children
@@ -31,8 +32,6 @@ public class BuildingPanel : GamePanel {
 		else if (buildingPanel != this) {
 			Destroy(gameObject);
 		}
-        buildingCostsResource = new int[4,4];
-        buildingCostsDecorative = new int[4, 4];
         activePanel = panel.DECORATIVE;
         SwitchPanels();
 	}
@@ -77,6 +76,9 @@ public class BuildingPanel : GamePanel {
                 Destroy(button.gameObject);
             }
         }
+
+        buildingCostsResource = new int[4, 4];
+        buildingCostsDecorative = new int[4, 4];
 
         // Clear out arrays
         resourceButtons = null;
@@ -187,9 +189,12 @@ public class BuildingPanel : GamePanel {
     
     public void OnGUI()
     {
-        GUILayout.Label("100");
-
-        GUILayout.Label("200");
+        for (int i = 0; i<buildingCostsResource.GetLength(0); i++)
+        {
+            GUILayout.BeginArea(new Rect(20+30*i,120,320,60));
+            GUILayout.Label(""+buildingCostsResource[i, 0]);
+            GUILayout.EndArea();
+        }
 
     }
     /**
