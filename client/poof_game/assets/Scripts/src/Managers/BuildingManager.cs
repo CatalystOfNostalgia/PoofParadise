@@ -67,7 +67,6 @@ public class BuildingManager : Manager {
      * Places a building on the currently selected tile
      */
 	public void PlaceBuilding(Building prefab) {
-		SoundManager.soundManager.playSoundEffect("EarthBuildingTruncated");
 		PlaceBuilding (prefab, selectedTile, true);
 	}
 	
@@ -85,27 +84,27 @@ public class BuildingManager : Manager {
             prefab.created = created;
             Building newBuilding = tile.PlaceBuilding (prefab);
 
-                if (newBuilding != null) {
-					if(created){
-						newBuilding.ConstructionAnimation ();
-					}
+            if (newBuilding != null) {
+                if (created){
+                    newBuilding.ConstructionAnimation ();
+                    SoundManager.soundManager.playConstruction();
+                }
 
-                    // Sets the new building's parent to our convenience object
-                    newBuilding.transform.SetParent(buildings.transform);
-					
+                // Sets the new building's parent to our convenience object
+                newBuilding.transform.SetParent(buildings.transform);
 
-                    // TODO this feels pretty iffy
-                    if ( !isTileTaken(tile.index)) {
 
-                        SaveState.state.addBuilding(tile.index, newBuilding);
+                // TODO this feels pretty iffy
+                if ( !isTileTaken(tile.index)) {
 
-                        if (prefab.GetComponent<ResidenceBuilding>() == null)
-                        {   
+                    SaveState.state.addBuilding(tile.index, newBuilding);
 
-                            alreadyPlacedDownBuildings.Add(prefab.name);
-                        }
-
+                    if (prefab.GetComponent<ResidenceBuilding>() == null)
+                    {   
+                        alreadyPlacedDownBuildings.Add(prefab.name);
                     }
+
+                }
 
                 GameManager.gameManager.SpawnPoofs();
             } else {
