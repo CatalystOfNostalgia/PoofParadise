@@ -28,10 +28,12 @@ public class Tile : MonoBehaviour {
     // A private field for the color of this object
     private Color startColor;
 
+    /**
+     * Places building
+     */
     public Building PlaceBuilding(Building newbuilding) 
     {
 
-        Debug.Log("created: " + newbuilding.created);
         if (isVacant && (!newbuilding.created || newbuilding.PayForBuilding())) {
 
             building = Instantiate (newbuilding, 
