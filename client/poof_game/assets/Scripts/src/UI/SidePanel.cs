@@ -24,6 +24,7 @@ public class SidePanel : GamePanel {
 		FindAndModifyUIElement ("Leadership Button", buttons, () => LeaderPanel.leaderPanel.TogglePanel());
         // TODO: Setup functionality for achievement button
         FindAndModifyUIElement("Options Button", buttons, () => SettingsMenu.menu.TogglePanel());
+        FindAndModifyUIElement("Store Button", buttons, () => ShopPanel.shopPanel.TogglePanel());
     }
 
      private void buildBuildingPanel() {
