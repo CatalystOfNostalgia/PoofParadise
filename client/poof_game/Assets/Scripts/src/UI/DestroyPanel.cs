@@ -16,12 +16,16 @@ public class DestroyPanel : GamePanel {
 		buttons = RetrieveButtonList ("Buttons");
 		GeneratePanel ();
 	}
-	
-	public void getBuilding(Building target){
-		this.building = target;
-	}
+
 	override public void GeneratePanel(){
 		FindAndModifyUIElement ("Yes", buttons, ()=> building.DeleteBuilding());
 		FindAndModifyUIElement ("No", buttons, ()=> TogglePanel());
 	}
+
+    public void Show(Building target)
+    {
+        this.building = target;
+        GeneratePanel();
+        TogglePanel();
+    }
 }

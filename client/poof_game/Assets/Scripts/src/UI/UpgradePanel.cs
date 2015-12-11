@@ -15,13 +15,17 @@ public class UpgradePanel : BuildingOptionPanel{
 		buttons = RetrieveButtonList ("Buttons");
 		GeneratePanel ();
 	}
-	
-	public void getBuilding(Building target){
-		this.building = target;
-	}
+
 	override public void GeneratePanel(){
 		FindAndModifyUIElement ("Select Resources", buttons, ()=> building.UpgradeBuilding());
 		FindAndModifyUIElement ("Select Wooly Beans", buttons, ()=> Debug.Log("upgrade with wooly beans"));
 		FindAndModifyUIElement ("Exit", buttons, ()=> upgradePanel.TogglePanel());
 	}
+
+    public void Show(Building target)
+    {
+        this.building = target;
+        GeneratePanel();
+        TogglePanel();
+    }
 }
