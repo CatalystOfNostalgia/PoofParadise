@@ -2,6 +2,8 @@ using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using System.Collections;
 
 /**
  * This menu should
@@ -22,7 +24,6 @@ public class BuildingPanel : GamePanel {
     private Texture2D[] icons;
     private int buildingCostResourceCount;
     private int buildingCostDecorativeCount;
-
 
     /**
      * Generates references based on children
@@ -84,6 +85,7 @@ public class BuildingPanel : GamePanel {
         buildingCostsResource = new int[4, 4];
         buildingCostsDecorative = new int[4, 4];
         icons = Resources.LoadAll("Image/Icon", typeof(Texture2D)).Cast<Texture2D>().ToArray();//sort this shit to fire, water, air, earth
+        Array.Sort(icons, new ResourceTypeComparator());
         buildingCostResourceCount = 0;
         buildingCostDecorativeCount = 0;
 
