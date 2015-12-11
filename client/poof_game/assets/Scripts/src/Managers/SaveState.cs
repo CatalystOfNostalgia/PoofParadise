@@ -253,6 +253,8 @@ public class SaveState : Manager {
 	// This method populates the save data with data from a json string
 	public void loadJSON(String json){
 
+        Debug.Log(json);
+
 		JSONArray loadedResourceBuildings;
 		JSONArray loadedDecorativeBuildings;
 
@@ -295,7 +297,8 @@ public class SaveState : Manager {
             if (PrefabManager.prefabManager == null) {
                 Debug.LogError("[SaveState] Prefab manager is null");
             }
-			ResourceBuilding newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
+
+            ResourceBuilding newBuilding = PrefabManager.prefabManager.getResourceBuilding(building["building_info_id"].AsInt);
 
             newBuilding.created = false;
             newBuilding.ID = building["id"].AsInt;
@@ -313,7 +316,8 @@ public class SaveState : Manager {
             if (PrefabManager.prefabManager == null) {
                 Debug.Log("prefab manager");
             }
-			DecorativeBuilding newBuilding = PrefabManager.prefabManager.decorativeBuildings[building["building_info_id"].AsInt];
+
+            DecorativeBuilding newBuilding = PrefabManager.prefabManager.getDecorativeBuilding(building["building_info_id"].AsInt);
 
             Debug.Log(newBuilding.name + " has info id of: " + building["building_info_id"].AsInt);
 

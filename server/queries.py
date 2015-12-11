@@ -347,6 +347,7 @@ def get_static_info():
         current_resource['water_cost'] = info.resource_cost_water
         current_resource['earth_cost'] = info.resource_cost_earth
         current_resource['air_cost'] = info.resource_cost_air
+
         info_resource[info.name] = current_resource
 
     for info in decorative_info:
@@ -359,6 +360,7 @@ def get_static_info():
         current_resource['earth_cost'] = info.resource_cost_earth
         current_resource['air_cost'] = info.resource_cost_air
         current_resource['poofs_generated'] = info.poofs_generated
+
         info_decorative[info.name] = current_resource
 
     for info in residence_info:
@@ -369,6 +371,7 @@ def get_static_info():
         current_resource['air_cost'] = info.resource_cost_air
         current_resource['poof_cap'] = info.poof_cap
         current_resource['experience_gain'] = info.experience_gain
+
         info_decorative[info.level] = current_resource
 
     return_info['resource'] = info_resource

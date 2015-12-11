@@ -69,6 +69,7 @@ public class LoginPanel : GamePanel {
 
     /**
      * verify that the static info got back properly
+     * needs some more backend support before it works
      */
     public void verifyInfo(string response) {
         
