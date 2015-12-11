@@ -13,6 +13,7 @@ public class PrefabManager : Manager {
     public static PrefabManager prefabManager;
 
     // Below are lists of prefabs for use by the entire game
+    public Building[] buildings { get; set; }
     public ResourceBuilding[] resourceBuildings { get; set; }
     public DecorativeBuilding[] decorativeBuildings { get; set; }
 	public HeadQuarterBuilding[] headQuarterBuildings { get; set; }
@@ -46,6 +47,7 @@ public class PrefabManager : Manager {
      */
     private void GeneratePrefabLists()
     {
+        buildings = Resources.LoadAll("Prefabs/Buildings", typeof(Building)).Cast<Building>().ToArray();
         resourceBuildings = Resources.LoadAll("Prefabs/Buildings/Resource Buildings", typeof(ResourceBuilding)).Cast<ResourceBuilding>().ToArray();
         decorativeBuildings = Resources.LoadAll("Prefabs/Buildings/Decorative Buildings", typeof(DecorativeBuilding)).Cast<DecorativeBuilding>().ToArray();
 		headQuarterBuildings = Resources.LoadAll ("Prefabs/Buildings/Headquarters", typeof(HeadQuarterBuilding)).Cast<HeadQuarterBuilding> ().ToArray ();
@@ -84,7 +86,6 @@ public class PrefabManager : Manager {
             {
                 Debug.Log("setting " + b.name + " to id: " + info.ID);
                 b.ID = info.ID;
-                Debug.Log("set " + b.name + " to id: " + b.ID);
                 (b as DecorativeBuilding).poofGenerationRate = info.PoofAttractionRate;
             }
         }
@@ -104,7 +105,6 @@ public class PrefabManager : Manager {
         obj.name = name;
 
         obj.AddComponent<SpriteRenderer>();
-        //obj.GetComponent<SpriteRenderer>().sprite = resourceBuildingSprites[1];
 
         obj.AddComponent<ResourceBuilding>();
         Building ret = obj.transform.GetComponent<ResourceBuilding>();
