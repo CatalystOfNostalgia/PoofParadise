@@ -44,6 +44,7 @@ CREATE TABLE headquarters_upgrade(
 
 CREATE TABLE residence_upgrade(
     level int,
+    name varchar(100) NOT NULL,
     resource_cost_fire int NULL,
     resource_cost_water int NULL,
     resource_cost_earth int NULL,
@@ -53,7 +54,7 @@ CREATE TABLE residence_upgrade(
     PRIMARY KEY (level)
 );
 
-CREATE TABLE user_residence_buliding( 
+CREATE TABLE user_residence_building( 
     id int NOT NULL AUTO_INCREMENT,
     user_id int NOT NULL,
     building_info_id int NOT NULL,

@@ -59,12 +59,21 @@ public class LoginPanel : GamePanel {
 
         if (data["error"] == null) {
             SceneState.state.userInfo = response;
-            Application.LoadLevel("DemoScene");
+            StartCoroutine(GetHTTP.getBuildingInfo(verifyInfo));
         } else {
             MessagePanel.panel.texts[0].text = data["error"];
             MessagePanel.panel.TogglePanel();
             TogglePanel();
         }
+    }
+
+    /**
+     * verify that the static info got back properly
+     * needs some more backend support before it works
+     */
+    public void verifyInfo(string response) {
+        
+        Application.LoadLevel("DemoScene");
     }
 
     /**
