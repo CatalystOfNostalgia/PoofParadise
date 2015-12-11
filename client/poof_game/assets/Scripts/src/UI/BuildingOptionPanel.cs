@@ -34,7 +34,12 @@ public class BuildingOptionPanel : GamePanel{
 		FindAndModifyUIElement("Upgrade Button", buttons, ()=> UpgradePanel.upgradePanel.TogglePanel());
 		FindAndModifyUIElement("Remove Button", buttons, ()=> DestroyPanel.destroyPanel.TogglePanel());
 		FindAndModifyUIElement("Info Button", buttons, ()=> Debug.Log("Info button is pressed"));
+<<<<<<< HEAD
 	}	
+=======
+	}
+
+>>>>>>> d2fac759e835ea9263dda3998e7196c986bc16af
     /**
      * Sets the building reference for this panel
      */

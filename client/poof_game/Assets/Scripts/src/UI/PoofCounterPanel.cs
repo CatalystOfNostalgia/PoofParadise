@@ -16,6 +16,7 @@ public class PoofCounterPanel : GamePanel {
 	override public void Start()
 	{
         poofCounterText = GetComponentInChildren<Transform>().GetComponentInChildren<Image>().GetComponentInChildren<Text>();
+        poofCounterText.fontSize = 40;
 		GeneratePanel();
 	}
 	

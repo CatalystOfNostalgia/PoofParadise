@@ -24,7 +24,6 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
             self.getFriends(parameters)
 
         # looking for a specific user
-
         elif re.match('/users/.*', self.path):
 
             self.send_header('Content-type', 'text-html')
@@ -43,6 +42,12 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write('user homepage')
 
+        # get static info
+        elif re.match('.*/static$', self.path):
+            
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            static_info = queries.get_static_info()
 
         # homepage
         elif re.match('/$', self.path):
@@ -298,8 +303,8 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
 # starting the server
 print('http server is starting...')
 port_number = 51234
-#server_address = ('129.22.150.55', port_number)
-server_address = ('localhost', port_number)
+server_address = ('129.22.150.55', port_number)
+#server_address = ('localhost', port_number)
 httpd = HTTPServer(server_address, GraveHubHTTPRequestHandler)
 print('http server is running on 127.0.0.1:{value}'.format(value=port_number))
 httpd.serve_forever()

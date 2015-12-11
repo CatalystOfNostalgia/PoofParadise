@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 /**
  * Builds the canvas dynamically
@@ -77,6 +78,7 @@ public class CanvasStart : MonoBehaviour {
             Destroy(this);
         }
 
+<<<<<<< HEAD
 		GameObject upgradePanel = this.transform.Find("Upgrade Panel(Clone)").gameObject;
 		if (upgradePanel == null)
 		{
@@ -111,6 +113,18 @@ public class CanvasStart : MonoBehaviour {
 		{
 			Destroy(this);
 		}
+=======
+        GameObject shopPanel = this.transform.Find("Shop Panel(Clone)").gameObject;
+        if(ShopPanel.shopPanel == null)
+        {
+            DontDestroyOnLoad(shopPanel);
+            ShopPanel.shopPanel = shopPanel.GetComponent<ShopPanel>();
+        }
+        else if (ShopPanel.shopPanel != shopPanel)
+        {
+            Destroy(this);
+        }
+>>>>>>> d2fac759e835ea9263dda3998e7196c986bc16af
     }
 
     /**
@@ -121,6 +135,11 @@ public class CanvasStart : MonoBehaviour {
         foreach (CanvasRenderer cr in PrefabManager.prefabManager.panels)
         {
             CanvasRenderer temp = Instantiate(cr, cr.transform.position, Quaternion.identity) as CanvasRenderer;
+            Text[] texts = temp.GetComponentsInChildren<Text>();
+            foreach (Text t in texts)
+            {
+                t.font = (Font)Resources.Load("Font/Candara");
+            }
             temp.transform.SetParent(this.transform, false);
         }
     }

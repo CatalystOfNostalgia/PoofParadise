@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 /**
  * The prefab manager is a tool which pools together
@@ -23,6 +24,7 @@ public class PrefabManager : Manager {
     public CanvasRenderer[] panels { get; set; }
     public Canvas canvas { get; set; }
 	public Canvas buildingOptionCanvas { get; set; }
+	public Image buildingInfo { get; set; }
 
     // Use this for initialization
     override public void Start () {
@@ -57,7 +59,11 @@ public class PrefabManager : Manager {
         panels = Resources.LoadAll("Prefabs/UI/Panels", typeof(CanvasRenderer)).Cast<CanvasRenderer>().ToArray();
 		canvas = (Canvas)Resources.Load("Prefabs/UI/Canvas", typeof(Canvas));
 		buildingOptionCanvas = (Canvas)Resources.Load ("Prefabs/UI/local Panels/Building Option Canvas", typeof(Canvas));
+<<<<<<< HEAD
 
+=======
+        buildingInfo = (Image)Resources.Load("Prefabs/UI/local Panels/Building Info", typeof(Image));
+>>>>>>> d2fac759e835ea9263dda3998e7196c986bc16af
     }
 
     /**
@@ -84,7 +90,6 @@ public class PrefabManager : Manager {
             if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(b.name,out info))
             {
                 b.ID = info.ID;
-                Debug.Log("set " + b.name + " to id: " + b.ID);
                 (b as DecorativeBuilding).poofGenerationRate = info.PoofAttractionRate;
             }
         }
@@ -117,6 +122,34 @@ public class PrefabManager : Manager {
         Destroy(obj);
 
         return ret;
+    }
+
+    /**
+     * returns the appropriate resource building given the ID
+     */
+    public ResourceBuilding getResourceBuilding(int ID) {
+
+        foreach (ResourceBuilding b in resourceBuildings) {
+            if (b.ID == ID) {
+                return b;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * returns the appropriate decorative building given the ID
+     */
+    public DecorativeBuilding getDecorativeBuilding(int ID) {
+
+        foreach (DecorativeBuilding b in decorativeBuildings) {
+            if (b.ID == ID) {
+                return b;
+            }
+        }
+
+        return null;
     }
 
     /**

@@ -67,7 +67,7 @@ public class GameStart : MonoBehaviour {
 			SaveState.state.loadJSON(SceneState.state.userInfo);
 		}
 		catch(System.NullReferenceException e){
-			Debug.LogError("[GameStart] User did not log in");
+			Debug.LogError("[GameStart] No response from server");
 			Debug.Log(e);
 		}
 

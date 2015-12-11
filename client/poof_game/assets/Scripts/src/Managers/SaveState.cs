@@ -151,17 +151,24 @@ public class SaveState : Manager {
     // adds a building to the appropriate dictionary
     public void addBuilding(Tuple t, Building b) {
         
-        if (b.GetType() == typeof(DecorativeBuilding)) {
+        if (b.GetType() == typeof(HeadQuarterBuilding)) {
+            HeadQuarterBuilding head = (HeadQuarterBuilding) b ;
+            hq = head;
+            hqLocation.x = t.x;
+            hqLocation.y = t.y;
+            
+        }
+        else if (b.GetType() == typeof(DecorativeBuilding)) {
             DecorativeBuilding decBuilding = (DecorativeBuilding)b;
-            SaveState.state.decorativeBuildings.Add (t, decBuilding);
+            decorativeBuildings.Add (t, decBuilding);
 
         } else if (b.GetType() == typeof(ResourceBuilding)) {
             ResourceBuilding resBuilding = (ResourceBuilding)b;
-            SaveState.state.resourceBuildings.Add (t, resBuilding);
+            resourceBuildings.Add (t, resBuilding);
 
         } else if (b.GetType() == typeof(ResidenceBuilding)) {
             ResidenceBuilding resBuilding = (ResidenceBuilding)b;
-            SaveState.state.residenceBuildings.Add (t, resBuilding);
+            residenceBuildings.Add (t, resBuilding);
         }
 
     }
@@ -246,12 +253,16 @@ public class SaveState : Manager {
 
 		jsonPlayerData += "}";
 
+        Debug.Log(jsonPlayerData);
+
 		return jsonPlayerData;
 		
 	}
 
 	// This method populates the save data with data from a json string
 	public void loadJSON(String json){
+
+        Debug.Log(json);
 
 		JSONArray loadedResourceBuildings;
 		JSONArray loadedDecorativeBuildings;
@@ -283,19 +294,16 @@ public class SaveState : Manager {
 		loadedResourceBuildings = data ["resource_buildings"].AsArray;
 		loadedDecorativeBuildings = data ["decorative_buildings"].AsArray;
 
-        Debug.Log("count: " + loadedResourceBuildings.Count);
-
 		foreach (JSONNode building in loadedResourceBuildings) {
 			int x = building["position_x"].AsInt;
 			int y = building["position_y"].AsInt;
-			Debug.Log("x: " + building["position_x"].AsInt);
-			Debug.Log("y: " + building["position_y"].AsInt);
 
             // Retrieves a building from the resource buildings list
             if (PrefabManager.prefabManager == null) {
                 Debug.LogError("[SaveState] Prefab manager is null");
             }
-			ResourceBuilding newBuilding = PrefabManager.prefabManager.resourceBuildings[building["building_info_id"].AsInt];
+
+            ResourceBuilding newBuilding = PrefabManager.prefabManager.getResourceBuilding(building["building_info_id"].AsInt);
 
             newBuilding.created = false;
             newBuilding.ID = building["id"].AsInt;
@@ -313,7 +321,8 @@ public class SaveState : Manager {
             if (PrefabManager.prefabManager == null) {
                 Debug.Log("prefab manager");
             }
-			DecorativeBuilding newBuilding = PrefabManager.prefabManager.decorativeBuildings[building["building_info_id"].AsInt];
+
+            DecorativeBuilding newBuilding = PrefabManager.prefabManager.getDecorativeBuilding(building["building_info_id"].AsInt);
 
             Debug.Log(newBuilding.name + " has info id of: " + building["building_info_id"].AsInt);
 
@@ -327,5 +336,6 @@ public class SaveState : Manager {
         hqLocation = new Tuple(data["hq_pos_x"].AsInt, data["hq_pos_y"].AsInt);
         //since array start at 0, lv 1-> index 0, lv 2 -> index 1
         hq = PrefabManager.prefabManager.headQuarterBuildings[hqLevel-1];
+
 	}
 }
