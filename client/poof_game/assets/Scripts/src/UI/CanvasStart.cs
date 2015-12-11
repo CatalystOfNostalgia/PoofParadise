@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 /**
  * Builds the canvas dynamically
@@ -86,6 +87,11 @@ public class CanvasStart : MonoBehaviour {
         foreach (CanvasRenderer cr in PrefabManager.prefabManager.panels)
         {
             CanvasRenderer temp = Instantiate(cr, cr.transform.position, Quaternion.identity) as CanvasRenderer;
+            Text[] texts = temp.GetComponentsInChildren<Text>();
+            foreach (Text t in texts)
+            {
+                t.font = (Font)Resources.Load("Font/Candara");
+            }
             temp.transform.SetParent(this.transform, false);
         }
     }
