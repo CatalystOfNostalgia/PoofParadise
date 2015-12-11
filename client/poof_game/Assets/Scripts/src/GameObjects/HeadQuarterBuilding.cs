@@ -44,12 +44,15 @@ public class HeadQuarterBuilding : Building {
         {
             if (t.building != null && t.building.Equals(this))
             {
+
+                UnityEngine.Debug.Log("found the tile");
                 // Store this key and remove any memory of the building from the tiles
                 t.isVacant = true;
                 if (t.leftTile != null) { t.leftTile.isVacant = true; }
                 if (t.downTile != null) { t.downTile.isVacant = true; }
                 if (t.downLeftTile != null) { t.downLeftTile.isVacant = true; }
                 t.building = null;
+
             }
         }
 

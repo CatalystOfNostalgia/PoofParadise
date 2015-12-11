@@ -151,17 +151,24 @@ public class SaveState : Manager {
     // adds a building to the appropriate dictionary
     public void addBuilding(Tuple t, Building b) {
         
-        if (b.GetType() == typeof(DecorativeBuilding)) {
+        if (b.GetType() == typeof(HeadQuarterBuilding)) {
+            HeadQuarterBuilding head = (HeadQuarterBuilding) b ;
+            hq = head;
+            hqLocation.x = t.x;
+            hqLocation.y = t.y;
+            
+        }
+        else if (b.GetType() == typeof(DecorativeBuilding)) {
             DecorativeBuilding decBuilding = (DecorativeBuilding)b;
-            SaveState.state.decorativeBuildings.Add (t, decBuilding);
+            decorativeBuildings.Add (t, decBuilding);
 
         } else if (b.GetType() == typeof(ResourceBuilding)) {
             ResourceBuilding resBuilding = (ResourceBuilding)b;
-            SaveState.state.resourceBuildings.Add (t, resBuilding);
+            resourceBuildings.Add (t, resBuilding);
 
         } else if (b.GetType() == typeof(ResidenceBuilding)) {
             ResidenceBuilding resBuilding = (ResidenceBuilding)b;
-            SaveState.state.residenceBuildings.Add (t, resBuilding);
+            residenceBuildings.Add (t, resBuilding);
         }
 
     }
