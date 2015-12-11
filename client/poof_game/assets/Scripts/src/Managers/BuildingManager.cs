@@ -17,7 +17,6 @@ public class BuildingManager : Manager {
 	Dictionary<Tuple, Building> existingBuildingDict;
 
 	// The dictionary containing buildings on the grid
-	public List<string> alreadyPlacedDownBuildings { get; set; }
 	public static BuildingManager buildingManager;
 
     // Does a thing
@@ -44,7 +43,6 @@ public class BuildingManager : Manager {
             Destroy(gameObject);
         }
 
-        alreadyPlacedDownBuildings = new List<string>();
         buildings = new GameObject();
         buildings.name = "Buildings";
         buildingTypeDict = new Dictionary<string, Building>();
@@ -67,14 +65,14 @@ public class BuildingManager : Manager {
      * Places a building on the currently selected tile
      */
 	public void PlaceBuilding(Building prefab) {
-		SoundManager.soundManager.playSoundEffect("EarthBuildingTruncated");
-		PlaceBuilding (prefab, selectedTile, true);
+
+		PlaceBuilding (prefab, selectedTile);
 	}
 	
 	/**
      * Places a building on the given tile
      */
-	public void PlaceBuilding (Building prefab, Tile tile, bool created) {
+	public void PlaceBuilding (Building prefab, Tile tile) {
 
         // Exit if supplied tile is null
 		if (tile == null) {
@@ -82,28 +80,28 @@ public class BuildingManager : Manager {
             return;
 		}
         else {
-            prefab.created = created;
+
             Building newBuilding = tile.PlaceBuilding (prefab);
 
                 if (newBuilding != null) {
-					if(created){
-						newBuilding.ConstructionAnimation ();
-					}
 
+                    newBuilding.created = true;
+                    
                     // Sets the new building's parent to our convenience object
                     newBuilding.transform.SetParent(buildings.transform);
-					
 
                     // TODO this feels pretty iffy
                     if ( !isTileTaken(tile.index)) {
 
                         SaveState.state.addBuilding(tile.index, newBuilding);
 
+                        /* TODO Commented this out because I'm not sure what it
+                         * and it's generating an error
                         if (prefab.GetComponent<ResidenceBuilding>() == null)
                         {   
-
-                            alreadyPlacedDownBuildings.Add(prefab.name);
+                            BuildingPanel.buildingPanel.alreadyPlacedDownBuildings.Add(prefab.name);
                         }
+                        */
 
                     }
 

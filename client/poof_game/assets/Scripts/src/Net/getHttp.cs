@@ -10,7 +10,7 @@ using System.Text;
 public class GetHTTP : MonoBehaviour {
 
     static String server = "http://129.22.150.55:51234";
-    //static String server = "http://localhost:51234";
+    //static String server = "http://:51234";
 
     /**
      * Create an account
@@ -39,6 +39,7 @@ public class GetHTTP : MonoBehaviour {
 
         yield return request;
 
+        Debug.Log(request.text);
         callback(getHttpBody(request.text, 4));
     }
 
@@ -94,6 +95,8 @@ public class GetHTTP : MonoBehaviour {
         WWW request = new WWW(url);
 
         yield return request;
+
+        Debug.Log(request.text);
 
         callback(getHttpBody(request.text, 4));
 
