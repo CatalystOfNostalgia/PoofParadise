@@ -33,7 +33,7 @@ public class BuildingManager : Manager {
      */
     override public void Start()
     {
-
+        
         if (buildingManager == null)
         {
             DontDestroyOnLoad(gameObject);

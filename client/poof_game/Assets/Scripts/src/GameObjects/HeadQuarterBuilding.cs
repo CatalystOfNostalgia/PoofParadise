@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Diagnostics;
 
 /**
  * The Headquarters Building extends Buidling
@@ -17,8 +18,17 @@ public class HeadQuarterBuilding : Building {
      */
     public override bool DeleteBuilding()
     {
-        Destroy(this.gameObject);
-        return true;
+        // Used stack trace to determine who called this method
+        if (new StackTrace().GetFrame(1).GetMethod().Name == "UpgradeBuilding")
+        {
+            UnityEngine.Debug.Log("Upgrade called this");
+            Destroy(this.gameObject);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /**
