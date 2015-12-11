@@ -133,6 +133,7 @@ public class BuildingPanel : GamePanel {
 		Image buildingInfo = Instantiate (PrefabManager.prefabManager.buildingInfo);
 		buildingInfo.transform.SetParent (go.transform);
 		buildingInfo.rectTransform.localPosition = new Vector3 (0,40,0);
+
 		Text text = buildingInfo.GetComponentInChildren<Text> ();
         text.text = b.name;
         text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
@@ -143,7 +144,6 @@ public class BuildingPanel : GamePanel {
 		buildingInfo.transform.SetParent (go.transform);
 		buildingInfo.rectTransform.localPosition = new Vector3 (0,-40,0);
 		Text textCost = buildingInfo.GetComponentInChildren<Text> ();
-        textCost.transform.SetParent(go.transform);
         ResourceBuildingInformation rbi;
         DecorationBuildingInformation dbi;
         if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(b.name, out rbi))
