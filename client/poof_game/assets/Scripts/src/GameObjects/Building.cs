@@ -205,6 +205,7 @@ public abstract class Building : MonoBehaviour {
      * Upgrades building to level 2 resource building 
      */
     public virtual void UpgradeBuilding(){
+		UpgradePanel.upgradePanel.gameObject.SetActive (false);
         Building upgrade = null;
         string newName = this.name.Replace("Lvl 1(Clone)", "Lvl 2");
         foreach (Building b in PrefabManager.prefabManager.buildings)
