@@ -20,7 +20,7 @@ public class UpgradePanel : GamePanel{
 	override public void GeneratePanel(){
         buttons = RetrieveButtonList("Buttons");
         FindAndModifyUIElement ("Select Resources", buttons, ()=> UpgradeBuilding());
-		FindAndModifyUIElement ("Select Wooly Beans", buttons, ()=> Debug.Log("upgrade with wooly beans"));
+		FindAndModifyUIElement ("Select Wooly Beans", buttons, ()=> Toast.toast.makeToast("You do not have enough Wooly Beans"));
 		FindAndModifyUIElement ("Exit", buttons, ()=> TogglePanel());
 	}
 
