@@ -17,7 +17,7 @@ public class UpgradePanel : BuildingOptionPanel{
 	}
 
 	override public void GeneratePanel(){
-		FindAndModifyUIElement ("Select Resources", buttons, ()=> building.UpgradeBuilding());
+		FindAndModifyUIElement ("Select Resources", buttons, ()=> UpgradeBuilding());
 		FindAndModifyUIElement ("Select Wooly Beans", buttons, ()=> Debug.Log("upgrade with wooly beans"));
 		FindAndModifyUIElement ("Exit", buttons, ()=> upgradePanel.TogglePanel());
 	}
@@ -28,4 +28,11 @@ public class UpgradePanel : BuildingOptionPanel{
         GeneratePanel();
         TogglePanel();
     }
+
+    private void UpgradeBuilding()
+    {
+        building.UpgradeBuilding();
+        TogglePanel();
+    }
+
 }

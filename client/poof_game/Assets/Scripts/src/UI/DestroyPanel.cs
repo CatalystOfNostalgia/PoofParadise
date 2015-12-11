@@ -18,7 +18,7 @@ public class DestroyPanel : GamePanel {
 	}
 
 	override public void GeneratePanel(){
-		FindAndModifyUIElement ("Yes", buttons, ()=> building.DeleteBuilding());
+		FindAndModifyUIElement ("Yes", buttons, ()=> DestroyBuilding());
 		FindAndModifyUIElement ("No", buttons, ()=> TogglePanel());
 	}
 
@@ -26,6 +26,12 @@ public class DestroyPanel : GamePanel {
     {
         this.building = target;
         GeneratePanel();
+        TogglePanel();
+    }
+
+    private void DestroyBuilding()
+    {
+        building.DeleteBuilding();
         TogglePanel();
     }
 }
