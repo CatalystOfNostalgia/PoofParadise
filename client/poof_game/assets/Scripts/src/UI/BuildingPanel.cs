@@ -201,7 +201,7 @@ public class BuildingPanel : GamePanel {
             int x = (int)trans.position.x;
             int y = (int)trans.position.y;
             //GUILayout.BeginArea(new Rect(x, calculateScreenProportion(.95,Screen.height), 300, 60));
-            GUILayout.BeginArea(new Rect(calculateScreenProportion(.3, Screen.width)+ calculateScreenProportion(i, 200)
+            GUILayout.BeginArea(new Rect(calculateScreenProportion(.296, Screen.width)+ calculateScreenProportion(i, 200)
                 , Screen.height - 30, 225, 60));
             GUILayout.BeginHorizontal();
             int textWidth = 20;
