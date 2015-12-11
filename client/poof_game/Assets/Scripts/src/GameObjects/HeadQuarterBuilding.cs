@@ -28,6 +28,7 @@ public class HeadQuarterBuilding : Building {
         // If we didn't call upgrade, we shouldn't delete this
         else
         {
+            Toast.toast.makeToast("You cannot destroy your headquarter building");
             return false;
         }
     }
