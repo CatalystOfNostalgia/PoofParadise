@@ -80,7 +80,7 @@ public class BuildingPanel : GamePanel {
 
         buildingCostsResource = new int[4, 4];
         buildingCostsDecorative = new int[4, 4];
-        icons = Resources.LoadAll("Image/Icon", typeof(Texture2D)).Cast<Texture2D>().ToArray();
+        icons = Resources.LoadAll("Image/Icon", typeof(Texture2D)).Cast<Texture2D>().ToArray();//sort this shit to fire, water, air, earth
 
         // Clear out arrays
         resourceButtons = null;
@@ -189,14 +189,52 @@ public class BuildingPanel : GamePanel {
         return button;
     }
     
+    private int calculateScreenProportion(double rate, int screen)
+    {
+        return (int)(screen * rate);
+    }
     public void OnGUI()
     {
         for (int i = 0; i<buildingCostsResource.GetLength(0); i++)
         {
-            GUILayout.BeginArea(new Rect(20+30*i,120,320,60));
-            GUILayout.Label(""+buildingCostsResource[i, 0]);
-            GUILayout.Label(icons[i]);
+            RectTransform trans = gameObject.GetComponent<RectTransform>();
+            int x = (int)trans.position.x;
+            int y = (int)trans.position.y;
+            //GUILayout.BeginArea(new Rect(x, calculateScreenProportion(.95,Screen.height), 300, 60));
+            GUILayout.BeginArea(new Rect(calculateScreenProportion(.3, Screen.width)+ calculateScreenProportion(i, 200)
+                , Screen.height - 30, 225, 60));
+            GUILayout.BeginHorizontal();
+            int textWidth = 20;
+            int iconLength = 20;
+
+            GUILayout.Label(icons[0], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
+            GUILayout.Label("" + buildingCostsResource[i, 0], GUILayout.MaxWidth(textWidth));
+            GUILayout.Label(icons[1], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
+            GUILayout.Label("" + buildingCostsResource[i, 1], GUILayout.MaxWidth(textWidth));
+            GUILayout.Label(icons[2], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
+            GUILayout.Label("" + buildingCostsResource[i, 2], GUILayout.MaxWidth(textWidth));
+            GUILayout.Label(icons[3], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
+            GUILayout.Label("" + buildingCostsResource[i, 3], GUILayout.MaxWidth(textWidth));
+            
+            GUILayout.EndHorizontal();
             GUILayout.EndArea();
+            
+            /*
+            GUILayout.BeginHorizontal();
+            int textWidth = 30;
+            GUILayout.Label("" + buildingCostsDecorative[i, 0], GUILayout.MaxWidth(textWidth));
+            GUILayout.Label("" + buildingCostsDecorative[i, 1], GUILayout.MaxWidth(textWidth));
+            GUILayout.Label("" + buildingCostsDecorative[i, 2], GUILayout.MaxWidth(textWidth));
+            GUILayout.Label("" + buildingCostsDecorative[i, 3], GUILayout.MaxWidth(textWidth));
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            int iconLength = 30;
+            GUILayout.Label(icons[0], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
+            GUILayout.Label(icons[1], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
+            GUILayout.Label(icons[2], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
+            GUILayout.Label(icons[3], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
+            GUILayout.EndHorizontal();
+            GUILayout.EndArea();*/
         }
 
     }
