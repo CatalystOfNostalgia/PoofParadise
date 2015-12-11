@@ -275,7 +275,7 @@ public class BuildingPanel : GamePanel {
     private void ResourceBuildingLevelCheck(Building[] buildingList, List<Building> list, int i, ResourceBuildingInformation resourceBuildingInfo)
     {
         int levelRequirement = resourceBuildingInfo.LevelRequirement;
-        if (levelRequirement == 1 && (! BuildingManager.buildingManager.alreadyPlacedDownBuildings.Contains(SubstringBuilding(buildingList[i].name))))
+        if (levelRequirement == 1 && (! BuildingManager.buildingManager.alreadyPlacedDownBuildings.Contains(SubstringBuilding(buildingList[i].name))) || buildingList[i].name == "Poof Residence")
         {
             list.Add(buildingList[i]);
         }
