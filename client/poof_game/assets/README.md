@@ -1,17 +1,23 @@
-# Welcome to the Assets directory!
+Welcome to the Assets directory!
+
 The following subdirectories are contained in this directory:
 
-## Images
+Images:
+
 Contains all images and animations for all the sprites in the game.
 
-## Resources
+Resources:
+
 Contains all data that developers may wish to dynamically instantiate in the game. See PrefabManager.cs for more information.
 
-## Scenes
+Scenes:
+
 Contains all game scenes.
 
-## Scripts
+Scripts:
+
 Contains all of the scripts used by the game. Scripts are logically separated into subdirectories such as UI, Managers, and GameObjects.
 
-## Sound
+Sound:
+
 Contains all of the game audio such as music and sound effects.

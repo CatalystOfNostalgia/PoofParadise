@@ -11,6 +11,7 @@ public class BuildingPanel : GamePanel {
 	
 	// A static reference to this object
 	public static BuildingPanel buildingPanel;
+	public List<string> alreadyPlacedDownBuildings { get; set; }
 	private Button[] resourceButtons;
     private Button[] decorativeButtons;
 
@@ -29,8 +30,12 @@ public class BuildingPanel : GamePanel {
 		else if (buildingPanel != this) {
 			Destroy(gameObject);
 		}
+        alreadyPlacedDownBuildings = new List<string>();
         activePanel = panel.DECORATIVE;
         SwitchPanels();
+        resourceButtons = CreateButtons(PrefabManager.prefabManager.resourceBuildings, "Resource Building Panel/Buttons");
+        decorativeButtons = CreateButtons(PrefabManager.prefabManager.decorativeBuildings, "Decorative Building Panel/Buttons");
+		GeneratePanel();
 	}
 
     /**
@@ -208,7 +213,7 @@ public class BuildingPanel : GamePanel {
     private void ResourceBuildingLevelCheck(Building[] buildingList, List<Building> list, int i, ResourceBuildingInformation resourceBuildingInfo)
     {
         int levelRequirement = resourceBuildingInfo.LevelRequirement;
-        if (levelRequirement == 1 && (! BuildingManager.buildingManager.alreadyPlacedDownBuildings.Contains(buildingList[i].name)))
+        if (levelRequirement == 1 && (! alreadyPlacedDownBuildings.Contains(buildingList[i].name)))
         {
             list.Add(buildingList[i]);
         }
