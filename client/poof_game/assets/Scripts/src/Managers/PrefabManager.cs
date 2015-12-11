@@ -25,6 +25,7 @@ public class PrefabManager : Manager {
     public Canvas canvas { get; set; }
 	public Canvas buildingOptionCanvas { get; set; }
 	public Image buildingInfo { get; set; }
+    public Toast toast { get; set; }
 
     // Use this for initialization
     override public void Start () {
@@ -60,6 +61,7 @@ public class PrefabManager : Manager {
 		canvas = (Canvas)Resources.Load("Prefabs/UI/Canvas", typeof(Canvas));
 		buildingOptionCanvas = (Canvas)Resources.Load ("Prefabs/UI/local Panels/Building Option Canvas", typeof(Canvas));
         buildingInfo = (Image)Resources.Load("Prefabs/UI/local Panels/Building Info", typeof(Image));
+        toast = (Toast)Resources.Load("Prefabs/UI/Panels/Toast", typeof(Toast));
     }
 
     /**
