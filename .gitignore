@@ -37,3 +37,6 @@ client/sysinfo.txt
 server/.idea
 client/poof_game/assets/Buttons for UI.meta
 *.db
+
+# Ignore MAC stuff
+.DS_Store
