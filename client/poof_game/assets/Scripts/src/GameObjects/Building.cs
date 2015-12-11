@@ -233,6 +233,7 @@ public abstract class Building : MonoBehaviour {
         if (upgrade == null)
         {
             Debug.LogError(string.Format("{0} does not exist", newName));
+            Toast.toast.makeToast("Further upgrades do not exist");
             return false;
         }
         else
