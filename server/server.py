@@ -273,11 +273,13 @@ class GraveHubHTTPRequestHandler(BaseHTTPRequestHandler):
     def save(self, parsed_json):
 
         self.wfile.write('jello')
-
+        
         resource_buildings = parsed_json['resource_buildings']
         decorative_buildings = parsed_json['decorative_buildings']
         user_id = parsed_json['user_id']
-
+        queries.delete_residence(parsed_json['delete_residence'])
+        queries.delete_resource(parsed_json['delete_resource'])
+        queries.delete_decorative(parsed_json['delete_decorative'])
         queries.save_user_info(parsed_json)
         building_ids = queries.save_building_info(resource_buildings, \
                                            decorative_buildings, \
