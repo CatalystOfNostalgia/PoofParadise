@@ -8,8 +8,9 @@ public class Toast : GamePanel {
     public static Toast toast;
     public string title;
     public string message;
-    private bool isActive;
+    public bool isActive;
     private int seconds;
+    private Rect windowRect = new Rect(Screen.width/2 - 120, Screen.height/2 - 50, 120, 50);
 
     public override void Start()
     {
@@ -21,8 +22,7 @@ public class Toast : GamePanel {
         this.title = title;
         this.message = message;
         isActive = true;
-        this.seconds = 5;
-        TogglePanel();
+        this.seconds = 3;
     }
 
     public void makeToast (string message)
@@ -41,7 +41,7 @@ public class Toast : GamePanel {
         isActive = false;
     }
 
-    IEnumerator wait5()
+    IEnumerator waitForSeconds()
     {
         yield return new WaitForSeconds(seconds);
         endMessage();
@@ -51,11 +51,14 @@ public class Toast : GamePanel {
     {
         throw new NotImplementedException();
     }
-    private Rect windowRect = new Rect(20, 20, 120, 50);
 
     void OnGUI()
     {
-        windowRect = GUI.Window(0, windowRect, WindowFunction, title);
+        if (isActive)
+        {
+            windowRect = GUI.Window(0, windowRect, WindowFunction, title);
+            StartCoroutine(waitForSeconds());
+        }
 
     }
     void WindowFunction (int windowID) {
