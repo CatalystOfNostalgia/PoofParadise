@@ -14,8 +14,8 @@ public class UpgradePanel : BuildingOptionPanel{
 	override public void Start(){
 		buttons = RetrieveButtonList ("Buttons");
 		GeneratePanel ();
+		setFont ();
 	}
-	
 	public void getBuilding(Building target){
 		this.building = target;
 	}
@@ -23,5 +23,11 @@ public class UpgradePanel : BuildingOptionPanel{
 		FindAndModifyUIElement ("Select Resources", buttons, ()=> building.UpgradeBuilding());
 		FindAndModifyUIElement ("Select Wooly Beans", buttons, ()=> Debug.Log("upgrade with wooly beans"));
 		FindAndModifyUIElement ("Exit", buttons, ()=> upgradePanel.TogglePanel());
+	}
+	public void setFont(){
+		Text text = upgradePanel.GetComponentInChildren<Text>();
+		text.text = "Select an option to upgrade";
+		text.font = (Font)Resources.Load("Font/Candara");
+		text.color = Color.black;
 	}
 }

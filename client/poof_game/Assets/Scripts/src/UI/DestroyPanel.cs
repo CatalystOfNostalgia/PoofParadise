@@ -15,6 +15,7 @@ public class DestroyPanel : GamePanel {
 	override public void Start(){
 		buttons = RetrieveButtonList ("Buttons");
 		GeneratePanel ();
+		setFont ();
 	}
 	
 	public void getBuilding(Building target){
@@ -23,5 +24,12 @@ public class DestroyPanel : GamePanel {
 	override public void GeneratePanel(){
 		FindAndModifyUIElement ("Yes", buttons, ()=> building.DeleteBuilding());
 		FindAndModifyUIElement ("No", buttons, ()=> TogglePanel());
+	}
+	public void setFont(){
+		Text text = destroyPanel.GetComponentInChildren<Text>();
+		text.text = "Are you sure you want to destroy this building?";
+		text.font = (Font)Resources.Load("Font/Candara");
+		text.color = Color.black;
+		
 	}
 }
