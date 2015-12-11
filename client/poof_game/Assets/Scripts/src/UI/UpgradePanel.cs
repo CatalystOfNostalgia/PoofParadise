@@ -14,13 +14,14 @@ public class UpgradePanel : GamePanel{
 
 	override public void Start(){
 		GeneratePanel ();
+		setFont ();
 	}
-
+	
 	override public void GeneratePanel(){
         buttons = RetrieveButtonList("Buttons");
         FindAndModifyUIElement ("Select Resources", buttons, ()=> UpgradeBuilding());
 		FindAndModifyUIElement ("Select Wooly Beans", buttons, ()=> Debug.Log("upgrade with wooly beans"));
-		FindAndModifyUIElement ("Exit", buttons, ()=> upgradePanel.TogglePanel());
+		FindAndModifyUIElement ("Exit", buttons, ()=> TogglePanel());
 	}
 
     public void Show(Building target)
@@ -36,4 +37,10 @@ public class UpgradePanel : GamePanel{
         TogglePanel();
     }
 
+	public void setFont(){
+		Text text = upgradePanel.GetComponentInChildren<Text>();
+		text.text = "Select an option to upgrade";
+		text.font = (Font)Resources.Load("Font/Candara");
+		text.color = Color.black;
+	}
 }
