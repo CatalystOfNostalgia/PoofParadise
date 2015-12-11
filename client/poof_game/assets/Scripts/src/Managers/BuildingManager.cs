@@ -26,6 +26,8 @@ public class BuildingManager : Manager {
     // A convenience object for holding all instantiated buildings
     private GameObject buildings;
 
+    public GameObject Buildings { get { return buildings; } }
+
     /**
      * Initializes BuildingManager as a singleton
      *
