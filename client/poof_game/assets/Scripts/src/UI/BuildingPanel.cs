@@ -135,7 +135,7 @@ public class BuildingPanel : GamePanel {
 		buildingInfo.rectTransform.localPosition = new Vector3 (0,40,0);
 		Text text = buildingInfo.GetComponentInChildren<Text> ();
         text.text = b.name;
-        text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        text.font = (Font)Resources.Load("Font/Candara");
         text.color = Color.black;
 
         // Attach a cost object to the object
@@ -154,7 +154,7 @@ public class BuildingPanel : GamePanel {
         {
             textCost.text = dbi.FireCost + "F," + dbi.WaterCost + "W," + dbi.AirCost + "A," + dbi.EarthCost + "E";
         }
-        textCost.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        textCost.font = (Font)Resources.Load("Font/Candara");
         textCost.color = Color.black;
 
         // Set the name and parent of the game object
