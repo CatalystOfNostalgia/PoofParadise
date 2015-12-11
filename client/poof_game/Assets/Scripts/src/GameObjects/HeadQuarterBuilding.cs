@@ -25,6 +25,7 @@ public class HeadQuarterBuilding : Building {
             Destroy(this.gameObject);
             return true;
         }
+        // If we didn't call upgrade, we shouldn't delete this
         else
         {
             return false;
