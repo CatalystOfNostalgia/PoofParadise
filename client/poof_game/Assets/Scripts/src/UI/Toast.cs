@@ -14,7 +14,7 @@ public class Toast : GamePanel {
 
     public override void Start()
     {
-        makeToast("Not enough resources");
+        //makeToast("Not enough resources");
     }
 
     public void makeToast(string title, string message)
@@ -56,6 +56,7 @@ public class Toast : GamePanel {
     {
         if (isActive)
         {
+            windowRect = new Rect(Screen.width / 2 - 120, Screen.height / 2 - 50, 10+message.Length*8, 50);//8pixels per char
             windowRect = GUI.Window(0, windowRect, WindowFunction, title);
             StartCoroutine(waitForSeconds());
         }

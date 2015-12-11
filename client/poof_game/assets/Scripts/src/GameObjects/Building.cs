@@ -105,22 +105,24 @@ public abstract class Building : MonoBehaviour {
         }
 
         // Attempts to purchases the building -> Errors may result for buildings with multiple costs
-        if (ResourceIncrementer.incrementer.ResourceGain(-fireCost, ResourceBuilding.ResourceType.fire) &&
-            ResourceIncrementer.incrementer.ResourceGain(-waterCost, ResourceBuilding.ResourceType.water) &&
-            ResourceIncrementer.incrementer.ResourceGain(-earthCost, ResourceBuilding.ResourceType.earth) &&
-            ResourceIncrementer.incrementer.ResourceGain(-airCost, ResourceBuilding.ResourceType.air)) {
 
+        if (SaveState.state.fire >= fireCost && SaveState.state.water >= waterCost && SaveState.state.air >= airCost && SaveState.state.earth >= earthCost)
+        {
+            ResourceIncrementer.incrementer.ResourceGain(-fireCost, ResourceBuilding.ResourceType.fire);
+            ResourceIncrementer.incrementer.ResourceGain(-waterCost, ResourceBuilding.ResourceType.water);
+            ResourceIncrementer.incrementer.ResourceGain(-airCost, ResourceBuilding.ResourceType.air);
+            ResourceIncrementer.incrementer.ResourceGain(-earthCost, ResourceBuilding.ResourceType.earth);
             return true;
         }
-
         // Otherwise, fail to purchase building
         else
         {
             //Not enough minerals
-
+            Toast.toast.makeToast("Not enough resources");
             return false;
         }
     }
+    
 
     /**
      * On click functionality for building
