@@ -16,22 +16,28 @@ public class ResourceBuilding : Building {
      * Allows buildings to be re-added to
      * building menu when deleted
      */
-    public override void DeleteBuilding()
+    public override bool DeleteBuilding()
     {
-        base.DeleteBuilding();
-        BuildingManager.buildingManager.alreadyPlacedDownBuildings.Remove(this.name.Substring(0, this.name.Length - "(Clone)".Length));
-        BuildingPanel.buildingPanel.GeneratePanel();
+        bool test = base.DeleteBuilding();
+        if (test)
+        {
+            BuildingManager.buildingManager.alreadyPlacedDownBuildings.Remove(this.name.Substring(0, this.name.Length - "(Clone)".Length));
+            BuildingPanel.buildingPanel.GeneratePanel();
+        }
+        return test;
     }
 
     /**
      * Overrides t
      */
-    public override void UpgradeBuilding()
+    public override bool UpgradeBuilding()
     {
+        bool test = false;
         if (name.Contains("Lvl 1") && SaveState.state.hqLevel == 2)
         {
-            base.UpgradeBuilding();
+            test = base.UpgradeBuilding();
         }
+        return test;
     }
 
 }
