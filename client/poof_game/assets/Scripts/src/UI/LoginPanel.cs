@@ -55,11 +55,16 @@ public class LoginPanel : GamePanel {
      */
     public void verifyLogin(string response) {
 
+        Debug.Log(response);
+
+        if (response == null) {
+            Debug.LogError("[Login Panel] No response from server");
+        }
         JSONNode data = JSON.Parse(response);
 
         if (data["error"] == null) {
             SceneState.state.userInfo = response;
-            StartCoroutine(GetHTTP.getBuildingInfo(verifyInfo));
+            Application.LoadLevel("DemoScene");
         } else {
             MessagePanel.panel.texts[0].text = data["error"];
             MessagePanel.panel.TogglePanel();
