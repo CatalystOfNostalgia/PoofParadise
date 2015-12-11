@@ -148,7 +148,7 @@ public class BuildingPanel : GamePanel {
         DecorationBuildingInformation dbi;
         if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(b.name, out rbi))
         {
-            textCost.text = rbi.FireCost + "F," + rbi.WaterCost + "W," + rbi.AirCost + "A," + rbi.EarthCost + "E";
+            textCost.text = "<quad material=1 size=20 x=0.1 y=0.1 width=0.5 height=0.5/>"+rbi.FireCost + "F," + rbi.WaterCost + "W," + rbi.AirCost + "A," + rbi.EarthCost + "E";
         }
         else if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(b.name, out dbi))
         {
