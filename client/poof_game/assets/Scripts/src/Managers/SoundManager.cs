@@ -258,7 +258,7 @@ public class SoundManager : Manager {
 
     public void playAirSound()
     {
-        int rand = UnityEngine.Random.Range(0, 3);
+        int rand = UnityEngine.Random.Range(0, 2);
         Debug.Log("[SoundManager] RNG generated: " + rand);
         switch (rand)
         {
@@ -267,9 +267,6 @@ public class SoundManager : Manager {
                 break;
             case 1:
                 playSoundEffect("air2");
-                break;
-            case 2:
-                playSoundEffect("air3");
                 break;
             default:
                 Debug.Log("[SoundManager] RNG generated: " + rand);
@@ -300,7 +297,7 @@ public class SoundManager : Manager {
 
     public void playPoofSound()
     {
-        int rand = UnityEngine.Random.Range(0, 3);
+        int rand = UnityEngine.Random.Range(0, 2);
         Debug.Log("[SoundManager] RNG generated: " + rand);
         switch (rand)
         {
@@ -309,9 +306,6 @@ public class SoundManager : Manager {
                 break;
             case 1:
                 playSoundEffect("poof2");
-                break;
-            case 2:
-                playSoundEffect("poof3");
                 break;
             default:
                 Debug.Log("[SoundManager] RNG generated: " + rand);
