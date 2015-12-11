@@ -160,7 +160,6 @@ public class BuildingPanel : GamePanel {
             buildingCostsResource[index,1] = rbi.WaterCost;
             buildingCostsResource[index,2] = rbi.AirCost;
             buildingCostsResource[index,3] = rbi.EarthCost;
-            textCost.text = rbi.FireCost + "F," + rbi.WaterCost + "W," + rbi.AirCost + "A," + rbi.EarthCost + "E";
         }
         else if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(b.name, out dbi))
         {
@@ -168,7 +167,6 @@ public class BuildingPanel : GamePanel {
             buildingCostsDecorative[index, 1] = dbi.FireCost;
             buildingCostsDecorative[index, 2] = dbi.FireCost;
             buildingCostsDecorative[index, 3] = dbi.FireCost;
-            textCost.text = dbi.FireCost + "F," + dbi.WaterCost + "W," + dbi.AirCost + "A," + dbi.EarthCost + "E";
         }
         textCost.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
         textCost.color = Color.black;
@@ -195,37 +193,52 @@ public class BuildingPanel : GamePanel {
     }
     public void OnGUI()
     {
-        for (int i = 0; i<buildingCostsResource.GetLength(0); i++)
+        switch (activePanel)
         {
-            RectTransform trans = gameObject.GetComponent<RectTransform>();
-            int x = (int)trans.position.x;
-            int y = (int)trans.position.y;
-            GUILayout.BeginArea(new Rect(calculateScreenProportion(.296, Screen.width)+ calculateScreenProportion(i, 200)
-                , Screen.height - 30, 225, 60));
-            GUILayout.BeginHorizontal();
-            int textWidth = 20;
-            int iconLength = 20;
-
-            GUILayout.Label(icons[0], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
-            GUILayout.Label("" + buildingCostsResource[i, 0], GUILayout.MaxWidth(textWidth));
-            GUILayout.Label(icons[1], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
-            GUILayout.Label("" + buildingCostsResource[i, 1], GUILayout.MaxWidth(textWidth));
-            GUILayout.Label(icons[2], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
-            GUILayout.Label("" + buildingCostsResource[i, 2], GUILayout.MaxWidth(textWidth));
-            GUILayout.Label(icons[3], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
-            GUILayout.Label("" + buildingCostsResource[i, 3], GUILayout.MaxWidth(textWidth));
-            
-            GUILayout.EndHorizontal();
-            GUILayout.EndArea();
+            case panel.RESOURCE:
+                for (int i = 0; i < buildingCostsResource.GetLength(0); i++)
+                {
+                    drawCost(i, buildingCostsResource);
+                }
+                break;
+            case panel.DECORATIVE:
+                for (int i = 0; i < buildingCostsDecorative.GetLength(0); i++)
+                {
+                    drawCost(i, buildingCostsDecorative);
+                }
+                break;
+            default:
+                Debug.Log("[BuildingPanel] Illegal switch");
+                break;
         }
-
     }
+
+    private void drawCost(int i, int[,] costs)
+    {
+        GUILayout.BeginArea(new Rect(calculateScreenProportion(.296, Screen.width) + calculateScreenProportion(i, 200), Screen.height - 30, 225, 60));
+        GUILayout.BeginHorizontal();
+        int textWidth = 20;
+        int iconLength = 20;
+
+        GUILayout.Label(icons[0], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
+        GUILayout.Label("" + costs[i, 0], GUILayout.MaxWidth(textWidth));
+        GUILayout.Label(icons[1], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
+        GUILayout.Label("" + costs[i, 1], GUILayout.MaxWidth(textWidth));
+        GUILayout.Label(icons[2], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
+        GUILayout.Label("" + costs[i, 2], GUILayout.MaxWidth(textWidth));
+        GUILayout.Label(icons[3], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
+        GUILayout.Label("" + costs[i, 3], GUILayout.MaxWidth(textWidth));
+
+        GUILayout.EndHorizontal();
+        GUILayout.EndArea();
+    }
+
     /**
-     * Dynamically creates buttons
-     * path - supplies the path the the parent for the buttons
-     * SaveState is never initialized from the Demo Scene, you must start from Login Scene
-     * TODO: Call this when the user upgrades the hq so that the building menu is refreshed
-     */
+* Dynamically creates buttons
+* path - supplies the path the the parent for the buttons
+* SaveState is never initialized from the Demo Scene, you must start from Login Scene
+* TODO: Call this when the user upgrades the hq so that the building menu is refreshed
+*/
     public Button[] CreateButtons(Building[] buildingList, string path)
     {
        
