@@ -84,7 +84,6 @@ public class PrefabManager : Manager {
             DecorationBuildingInformation info;
             if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(b.name,out info))
             {
-                Debug.Log("setting " + b.name + " to id: " + info.ID);
                 b.ID = info.ID;
                 (b as DecorativeBuilding).poofGenerationRate = info.PoofAttractionRate;
             }

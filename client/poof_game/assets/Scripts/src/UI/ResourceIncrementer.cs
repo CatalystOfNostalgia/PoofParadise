@@ -29,7 +29,9 @@ public class ResourceIncrementer : GamePanel
 
         sliders = RetrieveSliderList("Sliders");
         counters = GetComponentsInChildren<Text>();
-        GeneratePanel();
+
+        Debug.Log("fire: " + SaveState.state.fire + " water: " + SaveState.state.water);
+        InitializeSliders();
 	}
 
     /**
@@ -38,17 +40,33 @@ public class ResourceIncrementer : GamePanel
      */
     public override void GeneratePanel()
     {
+        Debug.LogError ("DONT GENERATE THE RESOURCE INCREMENTER!!!!");
+    }
 
+    /**
+     * Initialzes the sliders on the panel
+     */
+    public void InitializeSliders()
+    {
+
+        Debug.Log("initializing resource incrementor");
         int pass;
 
         pass = SaveState.state.fire;
         ManageSlider(0, ref pass, SaveState.state.maxFire, GetSliderByName("Fire Slider"));
+        GetTextByName("FireCount").text = "" + pass;
         pass = SaveState.state.water;
+
         ManageSlider(0, ref pass, SaveState.state.maxWater, GetSliderByName("Water Slider"));
+        GetTextByName("WaterCount").text = "" + pass;
+
         pass = SaveState.state.earth;
         ManageSlider(0, ref pass, SaveState.state.maxEarth, GetSliderByName("Earth Slider"));
+        GetTextByName("EarthCount").text = "" + pass;
+
         pass = SaveState.state.air;
         ManageSlider(0, ref pass, SaveState.state.maxAir, GetSliderByName("Wind Slider"));
+        GetTextByName("AirCount").text = "" + pass;
     }
 
     /**
