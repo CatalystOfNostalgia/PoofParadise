@@ -15,6 +15,7 @@ public class WoolyBeansPanel : GamePanel {
 	override public void Start()
 	{
 		b = this.GetComponentInChildren<Button>();
+        b.GetComponentInChildren<Text>().fontSize = 40;
 		GeneratePanel();
 	}
 	

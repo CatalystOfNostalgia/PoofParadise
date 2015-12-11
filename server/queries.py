@@ -1,5 +1,4 @@
 import models
-from sqlalchemy.dialects import mysql
 from sqlalchemy import func
 
 # creates a new entry in the user table of the database
@@ -44,6 +43,10 @@ def save_user_info( user ):
     updated_user.headquarters_level = user['hq_level']
     updated_user.hq_pos_x = user['hq_pos_x']
     updated_user.hq_pos_y = user['hq_pos_y']
+    updated_user.fire = user['fire']
+    updated_user.water = user['water']
+    updated_user.earth = user['earth']
+    updated_user.air = user['air']
     models.session.commit()
 
 # returns the user given a username
@@ -160,8 +163,6 @@ def get_residence_building_info(building_info_id):
 # gets the building info of a resource building
 def get_resource_building_info( building_info_id ):
 
-    print "resource building id: " +  str(building_info_id)
-
     building_info = models.session.query(models.ResourceBuildingInfo).filter( \
                     models.ResourceBuildingInfo.building_info_id == \
                                                 building_info_id).one()
@@ -259,7 +260,7 @@ def update_decorative_building ( building ):
         models.session.commit()
         return True
 
-    except ValueError:
+    except:
         print 'could not find decorative building'
         rollback()
         return False
@@ -320,6 +321,64 @@ def dict_friends( friendships, userdd ):
     for friendship in friendships:
         add_friends = {}
         add_friends['friend1_id'] = friend1_id
+
+# get info from the static tables
+def get_static_info():
+
+    return_info = {}
+
+    info_resource = {}
+    info_decorative = {}
+    info_residence = {}
+
+    resource_info = models.session.query(models.ResourceBuildingInfo).all()
+    decorative_info = models.session.query(models.DecorativeBuildingInfo).all()
+    residence_info = models.session.query(models.ResidenceUpgrade).all()
+
+    for info in resource_info:
+        current_resource = {}
+        current_resource['info_id'] = info.building_info_id
+        current_resource['experience_gain'] = info.experience_gain
+        current_resource['level'] = info.level
+        current_resource['size'] = info.size
+        current_resource['prod_rate'] = info.production_rate
+        current_resource['prod_type'] = info.production_type
+        current_resource['fire_cost'] = info.resource_cost_fire
+        current_resource['water_cost'] = info.resource_cost_water
+        current_resource['earth_cost'] = info.resource_cost_earth
+        current_resource['air_cost'] = info.resource_cost_air
+
+        info_resource[info.name] = current_resource
+
+    for info in decorative_info:
+        current_resource = {}
+        current_resource['info_id'] = info.building_info_id
+        current_resource['size'] = info.size
+        current_resource['experience_gain'] = info.experience_gain
+        current_resource['fire_cost'] = info.resource_cost_fire
+        current_resource['water_cost'] = info.resource_cost_water
+        current_resource['earth_cost'] = info.resource_cost_earth
+        current_resource['air_cost'] = info.resource_cost_air
+        current_resource['poofs_generated'] = info.poofs_generated
+
+        info_decorative[info.name] = current_resource
+
+    for info in residence_info:
+        current_resource = {}
+        current_resource['fire_cost'] = info.resource_cost_fire
+        current_resource['water_cost'] = info.resource_cost_water
+        current_resource['earth_cost'] = info.resource_cost_earth
+        current_resource['air_cost'] = info.resource_cost_air
+        current_resource['poof_cap'] = info.poof_cap
+        current_resource['experience_gain'] = info.experience_gain
+
+        info_decorative[info.level] = current_resource
+
+    return_info['resource'] = info_resource
+    return_info['decorative'] = info_decorative
+    return_info['residence'] = info_residence
+
+    return return_info
 
 # rollsback the sqlalchemy session. Use if there is an exception
 def rollback():

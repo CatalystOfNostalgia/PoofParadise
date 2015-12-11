@@ -55,6 +55,11 @@ public class LoginPanel : GamePanel {
      */
     public void verifyLogin(string response) {
 
+        Debug.Log(response);
+
+        if (response == null) {
+            Debug.LogError("[Login Panel] No response from server");
+        }
         JSONNode data = JSON.Parse(response);
 
         if (data["error"] == null) {
@@ -65,6 +70,15 @@ public class LoginPanel : GamePanel {
             MessagePanel.panel.TogglePanel();
             TogglePanel();
         }
+    }
+
+    /**
+     * verify that the static info got back properly
+     * needs some more backend support before it works
+     */
+    public void verifyInfo(string response) {
+        
+        Application.LoadLevel("DemoScene");
     }
 
     /**

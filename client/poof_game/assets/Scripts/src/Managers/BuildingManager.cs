@@ -17,6 +17,7 @@ public class BuildingManager : Manager {
 	Dictionary<Tuple, Building> existingBuildingDict;
 
 	// The dictionary containing buildings on the grid
+	public List<string> alreadyPlacedDownBuildings { get; set; }
 	public static BuildingManager buildingManager;
 
     // Does a thing
@@ -25,6 +26,8 @@ public class BuildingManager : Manager {
     // A convenience object for holding all instantiated buildings
     private GameObject buildings;
 
+    public GameObject Buildings { get { return buildings; } }
+
     /**
      * Initializes BuildingManager as a singleton
      *
@@ -32,7 +35,7 @@ public class BuildingManager : Manager {
      */
     override public void Start()
     {
-
+        
         if (buildingManager == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -43,6 +46,7 @@ public class BuildingManager : Manager {
             Destroy(gameObject);
         }
 
+        alreadyPlacedDownBuildings = new List<string>();
         buildings = new GameObject();
         buildings.name = "Buildings";
         buildingTypeDict = new Dictionary<string, Building>();
@@ -65,14 +69,13 @@ public class BuildingManager : Manager {
      * Places a building on the currently selected tile
      */
 	public void PlaceBuilding(Building prefab) {
-
-		PlaceBuilding (prefab, selectedTile);
+		PlaceBuilding (prefab, selectedTile, true);
 	}
 	
 	/**
      * Places a building on the given tile
      */
-	public void PlaceBuilding (Building prefab, Tile tile) {
+	public void PlaceBuilding (Building prefab, Tile tile, bool created) {
 
         // Exit if supplied tile is null
 		if (tile == null) {
@@ -80,30 +83,30 @@ public class BuildingManager : Manager {
             return;
 		}
         else {
-
+            prefab.created = created;
             Building newBuilding = tile.PlaceBuilding (prefab);
 
-                if (newBuilding != null) {
+            if (newBuilding != null) {
+                if (created){
+                    newBuilding.ConstructionAnimation ();
+                    SoundManager.soundManager.playConstruction();
+                }
 
-                    newBuilding.created = true;
+                // Sets the new building's parent to our convenience object
+                newBuilding.transform.SetParent(buildings.transform);
+                alreadyPlacedDownBuildings.Add(BuildingPanel.SubstringBuilding(prefab.name));
+
+                // TODO this feels pretty iffy
+                if ( !isTileTaken(tile.index)) {
+
+                    SaveState.state.addBuilding(tile.index, newBuilding);
                     
-                    // Sets the new building's parent to our convenience object
-                    newBuilding.transform.SetParent(buildings.transform);
-
-                    // TODO this feels pretty iffy
-                    if ( !isTileTaken(tile.index)) {
-
-                        SaveState.state.addBuilding(tile.index, newBuilding);
-
-                        /* TODO Commented this out because I'm not sure what it
-                         * and it's generating an error
-                        if (prefab.GetComponent<ResidenceBuilding>() == null)
-                        {   
-                            BuildingPanel.buildingPanel.alreadyPlacedDownBuildings.Add(prefab.name);
-                        }
-                        */
-
+                    if (prefab.GetComponent<ResidenceBuilding>() == null)
+                    {   
+                        
                     }
+
+                }
 
                 GameManager.gameManager.SpawnPoofs();
             } else {

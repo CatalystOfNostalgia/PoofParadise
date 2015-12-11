@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 /**
  * The prefab manager is a tool which pools together
@@ -13,6 +14,7 @@ public class PrefabManager : Manager {
     public static PrefabManager prefabManager;
 
     // Below are lists of prefabs for use by the entire game
+    public Building[] buildings { get; set; }
     public ResourceBuilding[] resourceBuildings { get; set; }
     public DecorativeBuilding[] decorativeBuildings { get; set; }
 	public HeadQuarterBuilding[] headQuarterBuildings { get; set; }
@@ -22,6 +24,7 @@ public class PrefabManager : Manager {
     public CanvasRenderer[] panels { get; set; }
     public Canvas canvas { get; set; }
 	public Canvas buildingOptionCanvas { get; set; }
+	public Image buildingInfo { get; set; }
 
     // Use this for initialization
     override public void Start () {
@@ -46,6 +49,7 @@ public class PrefabManager : Manager {
      */
     private void GeneratePrefabLists()
     {
+        buildings = Resources.LoadAll("Prefabs/Buildings", typeof(Building)).Cast<Building>().ToArray();
         resourceBuildings = Resources.LoadAll("Prefabs/Buildings/Resource Buildings", typeof(ResourceBuilding)).Cast<ResourceBuilding>().ToArray();
         decorativeBuildings = Resources.LoadAll("Prefabs/Buildings/Decorative Buildings", typeof(DecorativeBuilding)).Cast<DecorativeBuilding>().ToArray();
 		headQuarterBuildings = Resources.LoadAll ("Prefabs/Buildings/Headquarters", typeof(HeadQuarterBuilding)).Cast<HeadQuarterBuilding> ().ToArray ();
@@ -55,6 +59,7 @@ public class PrefabManager : Manager {
         panels = Resources.LoadAll("Prefabs/UI/Panels", typeof(CanvasRenderer)).Cast<CanvasRenderer>().ToArray();
 		canvas = (Canvas)Resources.Load("Prefabs/UI/Canvas", typeof(Canvas));
 		buildingOptionCanvas = (Canvas)Resources.Load ("Prefabs/UI/local Panels/Building Option Canvas", typeof(Canvas));
+        buildingInfo = (Image)Resources.Load("Prefabs/UI/local Panels/Building Info", typeof(Image));
     }
 
     /**
@@ -81,7 +86,6 @@ public class PrefabManager : Manager {
             if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(b.name,out info))
             {
                 b.ID = info.ID;
-                Debug.Log("set " + b.name + " to id: " + b.ID);
                 (b as DecorativeBuilding).poofGenerationRate = info.PoofAttractionRate;
             }
         }
@@ -101,7 +105,6 @@ public class PrefabManager : Manager {
         obj.name = name;
 
         obj.AddComponent<SpriteRenderer>();
-        //obj.GetComponent<SpriteRenderer>().sprite = resourceBuildingSprites[1];
 
         obj.AddComponent<ResourceBuilding>();
         Building ret = obj.transform.GetComponent<ResourceBuilding>();
@@ -115,6 +118,34 @@ public class PrefabManager : Manager {
         Destroy(obj);
 
         return ret;
+    }
+
+    /**
+     * returns the appropriate resource building given the ID
+     */
+    public ResourceBuilding getResourceBuilding(int ID) {
+
+        foreach (ResourceBuilding b in resourceBuildings) {
+            if (b.ID == ID) {
+                return b;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * returns the appropriate decorative building given the ID
+     */
+    public DecorativeBuilding getDecorativeBuilding(int ID) {
+
+        foreach (DecorativeBuilding b in decorativeBuildings) {
+            if (b.ID == ID) {
+                return b;
+            }
+        }
+
+        return null;
     }
 
     /**

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
 
 /**
  * Building serves as an abstract MonoBehavior which 
@@ -38,8 +37,11 @@ public abstract class Building : MonoBehaviour {
     public bool showOptions { get; set; }
 
     public Canvas options { get; set; }
+	private Animator animator;
 
-    // Use this for initialization
+    /**
+     * Use this for initialization
+     */
     protected virtual void Awake()
     {
         Vector3 pos = new Vector3(transform.position.x + .7f, transform.position.y + 1, transform.position.z);
@@ -53,13 +55,31 @@ public abstract class Building : MonoBehaviour {
         canDrag = false;
         showOptions = false;
         size = 1;
+
+		animator = this.GetComponent<Animator>();
     }
+
+    /**
+     * TODO: Add description
+     */
+	public void ConstructionAnimation(){
+		animator.SetInteger("Construction", 1);
+		Invoke("ConstructionFinish", 2.5f);
+	}
+
+    /**
+     * TODO: Add description
+     */
+	public void ConstructionFinish(){
+		animator.SetInteger("Construction", 0);
+	}
 
     /**
      * Pays for the building based on the cost of the building
      */
     public bool PayForBuilding()
     {
+
         // Pulls the cost of this building from Building Information Manager
         DecorationBuildingInformation dbi;
         ResourceBuildingInformation rbi;
@@ -124,7 +144,7 @@ public abstract class Building : MonoBehaviour {
         if (canDrag)
         {
             Vector3 loc = BuildingManager.buildingManager.selectedTile.transform.position;
-            this.transform.position = new Vector3(loc.x, loc.y - .25f, loc.z - 1);
+			this.transform.position = new Vector3(loc.x, loc.y - .25f, loc.y - .25f);
             this.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
@@ -152,8 +172,9 @@ public abstract class Building : MonoBehaviour {
     /**
      * Serves as the function for deleting this building from the game
      */
-    public virtual void DeleteBuilding()
+    public virtual bool DeleteBuilding()
     {
+		DestroyPanel.destroyPanel.gameObject.SetActive (false);
         this.GetComponent<BoxCollider2D>().enabled = true;
         bool remove = false;
         Tuple key = GetTupleFromGrid();
@@ -162,10 +183,12 @@ public abstract class Building : MonoBehaviour {
         if (remove)
         {
             Destroy(this.gameObject);
+            return true;
         }
         else
         {
             Debug.LogError(string.Format("[Building] Unable to locate {0} at {1} in the building dictionary", this.name, key));
+            return false;
         }
     }
 
@@ -185,6 +208,53 @@ public abstract class Building : MonoBehaviour {
         }
         showOptions = !showOptions;
         options.gameObject.SetActive(showOptions);
+    }
+
+    /**
+     * Upgrades building to level 2 resource building 
+     */
+    public virtual bool UpgradeBuilding(){
+		UpgradePanel.upgradePanel.gameObject.SetActive (false);
+        Building upgrade = null;
+        string newName = this.name.Replace("Lvl 1(Clone)", "Lvl 2");
+        foreach (Building b in PrefabManager.prefabManager.buildings)
+        {
+            if (b.name == newName)
+            {
+                upgrade = b;
+            }
+        }
+
+        // If upgrade does not exist
+        if (upgrade == null)
+        {
+            Debug.LogError(string.Format("{0} does not exist", newName));
+            return false;
+        }
+        else
+        {
+            Tile temp = null;
+            foreach(Tile t in TileScript.grid.tiles)
+            {
+                if (t.building != null && t.building.Equals(this))
+                {
+                    temp = t;
+                }
+            }
+
+            Building upgraded = (Building)Instantiate(upgrade, 
+                        new Vector3(temp.transform.position.x, temp.transform.position.y - .25f, 1),
+                        Quaternion.identity);
+            upgraded.transform.parent = BuildingManager.buildingManager.Buildings.transform;
+            SaveState.state.earth = SaveState.state.earth - this.earthCost;
+            SaveState.state.water = SaveState.state.water - this.waterCost;
+            SaveState.state.air = SaveState.state.air - this.airCost;
+            SaveState.state.fire = SaveState.state.fire - this.fireCost;
+            this.DeleteBuilding();
+            BuildingManager.buildingManager.alreadyPlacedDownBuildings.Add(BuildingPanel.SubstringClonedBuilding(upgraded.name));
+            BuildingPanel.buildingPanel.GeneratePanel();
+            return true;
+        }
     }
 
     /**
@@ -222,9 +292,9 @@ public abstract class Building : MonoBehaviour {
                 // Store this key and remove any memory of the building from the tiles
                 key = t.index;
                 t.isVacant = true;
-                t.leftTile.isVacant = true;
-                t.downTile.isVacant = true;
-                t.downLeftTile.isVacant = true;
+                if ( t.leftTile != null ) { t.leftTile.isVacant = true; }
+                if ( t.downTile != null ) { t.downTile.isVacant = true; }
+                if ( t.downLeftTile != null ) { t.downLeftTile.isVacant = true; }
                 t.building = null;
             }
         }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.UI;
 
 /**
  * Builds the canvas dynamically
@@ -76,6 +77,51 @@ public class CanvasStart : MonoBehaviour {
         {
             Destroy(this);
         }
+		
+		GameObject upgradePanel = this.transform.Find("Upgrade Panel(Clone)").gameObject;
+		if (upgradePanel == null)
+		{
+			Debug.LogError("[CanvasStart] Upgrade Panel is null");
+			return;
+		}
+		
+		if (UpgradePanel.upgradePanel == null)
+		{
+			DontDestroyOnLoad(modelPanel);
+			UpgradePanel.upgradePanel = upgradePanel.GetComponent<UpgradePanel>();
+		}
+		
+		else if (UpgradePanel.upgradePanel != upgradePanel)
+		{
+			Destroy(this);
+		}
+		GameObject destroyPanel = this.transform.Find("Destroy Panel(Clone)").gameObject;
+		if (destroyPanel == null)
+		{
+			Debug.LogError("[CanvasStart] Upgrade Panel is null");
+			return;
+		}
+		
+		if (DestroyPanel.destroyPanel == null)
+		{
+			DontDestroyOnLoad(modelPanel);
+			DestroyPanel.destroyPanel = destroyPanel.GetComponent<DestroyPanel>();
+		}
+		
+		else if (DestroyPanel.destroyPanel != destroyPanel)
+		{
+			Destroy(this);
+		}
+        GameObject shopPanel = this.transform.Find("Shop Panel(Clone)").gameObject;
+        if(ShopPanel.shopPanel == null)
+        {
+            DontDestroyOnLoad(shopPanel);
+            ShopPanel.shopPanel = shopPanel.GetComponent<ShopPanel>();
+        }
+        else if (ShopPanel.shopPanel != shopPanel)
+        {
+            Destroy(this);
+        }
     }
 
     /**
@@ -86,6 +132,11 @@ public class CanvasStart : MonoBehaviour {
         foreach (CanvasRenderer cr in PrefabManager.prefabManager.panels)
         {
             CanvasRenderer temp = Instantiate(cr, cr.transform.position, Quaternion.identity) as CanvasRenderer;
+            Text[] texts = temp.GetComponentsInChildren<Text>();
+            foreach (Text t in texts)
+            {
+                t.font = (Font)Resources.Load("Font/Candara");
+            }
             temp.transform.SetParent(this.transform, false);
         }
     }

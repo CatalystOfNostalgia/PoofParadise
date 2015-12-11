@@ -31,4 +31,4 @@ class User(Base):
     air_ele = Column(Integer, default = 1)
     water_ele = Column(Integer, default = 1)
     earth_ele = Column(Integer, default = 1)
-    poof_count = Column(Integer, default = 5)
+    poof_count = Column(Integer, default = 0)
