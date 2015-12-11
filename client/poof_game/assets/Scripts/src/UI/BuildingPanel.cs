@@ -1,6 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 /**
  * This menu should
@@ -18,7 +19,7 @@ public class BuildingPanel : GamePanel {
     private panel activePanel;
     private int[,] buildingCostsResource;
     private int[,] buildingCostsDecorative;
-    private Image[] icons;
+    private Texture2D[] icons;
 
     /**
      * Generates references based on children
@@ -79,6 +80,7 @@ public class BuildingPanel : GamePanel {
 
         buildingCostsResource = new int[4, 4];
         buildingCostsDecorative = new int[4, 4];
+        icons = Resources.LoadAll("Image/Icon", typeof(Texture2D)).Cast<Texture2D>().ToArray();
 
         // Clear out arrays
         resourceButtons = null;
@@ -193,6 +195,7 @@ public class BuildingPanel : GamePanel {
         {
             GUILayout.BeginArea(new Rect(20+30*i,120,320,60));
             GUILayout.Label(""+buildingCostsResource[i, 0]);
+            GUILayout.Label(icons[i]);
             GUILayout.EndArea();
         }
 
