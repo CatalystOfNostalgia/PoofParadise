@@ -195,11 +195,6 @@ public class BuildingPanel : GamePanel {
         bds.building = b;
         return button;
     }
-    
-    private int calculateScreenProportion(double rate, int screen)
-    {
-        return (int)(screen * rate);
-    }
 
     public void OnGUI()
     {
@@ -225,7 +220,8 @@ public class BuildingPanel : GamePanel {
 
     private void drawCost(int i, int[,] costs)
     {
-        GUILayout.BeginArea(new Rect(calculateScreenProportion(.296, Screen.width) + calculateScreenProportion(i, 200), Screen.height - 30, 225, 60));
+        int buildPanelWidth = 1024;
+        GUILayout.BeginArea(new Rect((Screen.width-buildPanelWidth)/2 +125+ i*200, Screen.height - 30, 225, 60));
         GUILayout.BeginHorizontal();
         int textWidth = 20;
         int iconLength = 20;
