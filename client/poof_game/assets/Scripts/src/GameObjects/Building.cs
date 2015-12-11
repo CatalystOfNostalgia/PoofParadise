@@ -174,6 +174,7 @@ public abstract class Building : MonoBehaviour {
      */
     public virtual bool DeleteBuilding()
     {
+		DestroyPanel.destroyPanel.gameObject.SetActive (false);
         this.GetComponent<BoxCollider2D>().enabled = true;
         bool remove = false;
         Tuple key = GetTupleFromGrid();

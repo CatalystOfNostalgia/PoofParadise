@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 /**
@@ -77,8 +77,7 @@ public class CanvasStart : MonoBehaviour {
         {
             Destroy(this);
         }
-
-<<<<<<< HEAD
+		
 		GameObject upgradePanel = this.transform.Find("Upgrade Panel(Clone)").gameObject;
 		if (upgradePanel == null)
 		{
@@ -113,7 +112,6 @@ public class CanvasStart : MonoBehaviour {
 		{
 			Destroy(this);
 		}
-=======
         GameObject shopPanel = this.transform.Find("Shop Panel(Clone)").gameObject;
         if(ShopPanel.shopPanel == null)
         {
@@ -124,7 +122,6 @@ public class CanvasStart : MonoBehaviour {
         {
             Destroy(this);
         }
->>>>>>> d2fac759e835ea9263dda3998e7196c986bc16af
     }
 
     /**

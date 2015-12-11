@@ -6,7 +6,7 @@ using UnityEngine.UI;
  * building
  * Features include delete, drag, upgrade, and info
  */
-public class UpgradePanel : BuildingOptionPanel {
+public class UpgradePanel : BuildingOptionPanel{
 
 	public static UpgradePanel upgradePanel;
 	public Button[] buttons; 

@@ -12,19 +12,7 @@ public class ResourceBuilding : Building {
 	public int collectionRate { get; set;}
 	public ResourceType type;
 
-	/**This code is breaking delete**/
-    /**
-     * Allows buildings to be re-added to
-     * building menu when deleted
-     */
-<<<<<<< HEAD
-    /**public override void DeleteBuilding()
-    {
-        base.DeleteBuilding();
-        BuildingManager.buildingManager.alreadyPlacedDownBuildings.Remove(this.name.Substring(0, this.name.Length - "(Clone)".Length));
-        BuildingPanel.buildingPanel.GeneratePanel();
-    }**/
-=======
+
     public override bool DeleteBuilding()
     {
         bool test = base.DeleteBuilding();
@@ -35,7 +23,6 @@ public class ResourceBuilding : Building {
         }
         return test;
     }
->>>>>>> d2fac759e835ea9263dda3998e7196c986bc16af
 
     /**
      * Overrides t
