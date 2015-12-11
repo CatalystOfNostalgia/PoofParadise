@@ -383,6 +383,7 @@ def get_static_info():
 # Deletes residence 
 def delete_residence(residence_ids):
     for residence_id in residence_ids:
+        print 'residence id: ' + residence_id['id']
         to_delete = models.session.query(models.UserResidenceBuilding).filter(models.UserResidenceBuilding.id == residence_id['id']).one()
         models.session.delete(to_delete)
     models.session.commit()
@@ -390,6 +391,7 @@ def delete_residence(residence_ids):
 # Deletes resource buildings
 def delete_resource(resource_ids):
     for resource_id in resource_ids:
+        print 'resource id: ' + resource_id['id']
         to_delete = models.session.query(models.UserResourceBuilding).filter(models.UserResourceBuilding.id == resource_id['id']).one()
         models.session.delete(to_delete)
     models.session.commit()
@@ -397,6 +399,7 @@ def delete_resource(resource_ids):
 # Delete decorative buildings
 def delete_decorative(decorative_ids):
     for decorative_id in decorative_ids:
+        print 'decorative id: ' + decorative_id['id'] 
         to_delete = models.session.query(models.UserDecorativeBuilding).filter(models.UserDecorativeBuilding.id == resource_id['id']).one()
         models.session.Delete(to_delete)
     models.session.commit()
