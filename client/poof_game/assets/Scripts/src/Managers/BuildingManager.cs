@@ -94,7 +94,7 @@ public class BuildingManager : Manager {
 
                 // Sets the new building's parent to our convenience object
                 newBuilding.transform.SetParent(buildings.transform);
-                alreadyPlacedDownBuildings.Add(prefab.name);
+                alreadyPlacedDownBuildings.Add(BuildingPanel.SubstringBuilding(prefab.name));
 
                 // TODO this feels pretty iffy
                 if ( !isTileTaken(tile.index)) {

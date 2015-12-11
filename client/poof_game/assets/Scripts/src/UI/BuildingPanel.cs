@@ -275,7 +275,7 @@ public class BuildingPanel : GamePanel {
     private void ResourceBuildingLevelCheck(Building[] buildingList, List<Building> list, int i, ResourceBuildingInformation resourceBuildingInfo)
     {
         int levelRequirement = resourceBuildingInfo.LevelRequirement;
-        if (levelRequirement == 1 && (! BuildingManager.buildingManager.alreadyPlacedDownBuildings.Contains(buildingList[i].name)))
+        if (levelRequirement == 1 && (! BuildingManager.buildingManager.alreadyPlacedDownBuildings.Contains(SubstringBuilding(buildingList[i].name))))
         {
             list.Add(buildingList[i]);
         }
@@ -291,5 +291,14 @@ public class BuildingPanel : GamePanel {
         {
             list.Add(buildingList[i]);
         }
+    }
+
+    public static string SubstringBuilding (string name)
+    {
+        return name.Substring(0, name.Length - "Lvl 1".Length);
+    }
+    public static string SubstringClonedBuilding (string name)
+    {
+        return name.Substring(0, name.Length - "Lvl 1(Clone)".Length);
     }
 }

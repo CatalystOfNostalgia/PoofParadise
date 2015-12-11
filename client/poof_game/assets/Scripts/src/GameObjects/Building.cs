@@ -249,6 +249,8 @@ public abstract class Building : MonoBehaviour {
             SaveState.state.air = SaveState.state.air - this.airCost;
             SaveState.state.fire = SaveState.state.fire - this.fireCost;
             this.DeleteBuilding();
+            BuildingManager.buildingManager.alreadyPlacedDownBuildings.Add(BuildingPanel.SubstringClonedBuilding(upgraded.name));
+            BuildingPanel.buildingPanel.GeneratePanel();
             return true;
         }
     }
