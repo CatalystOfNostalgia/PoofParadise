@@ -164,9 +164,9 @@ public class BuildingPanel : GamePanel {
         else if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(b.name, out dbi))
         {
             buildingCostsDecorative[index, 0] = dbi.FireCost;
-            buildingCostsDecorative[index, 1] = dbi.FireCost;
-            buildingCostsDecorative[index, 2] = dbi.FireCost;
-            buildingCostsDecorative[index, 3] = dbi.FireCost;
+            buildingCostsDecorative[index, 1] = dbi.WaterCost;
+            buildingCostsDecorative[index, 2] = dbi.AirCost;
+            buildingCostsDecorative[index, 3] = dbi.EarthCost;
         }
         textCost.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
         textCost.color = Color.black;
