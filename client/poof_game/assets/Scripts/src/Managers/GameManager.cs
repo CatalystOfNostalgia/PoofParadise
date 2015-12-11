@@ -56,7 +56,6 @@ public class GameManager : Manager {
         int waterTotal = SaveState.state.waterEle;
         int earthTotal = SaveState.state.earthEle;
         int airTotal = SaveState.state.airEle;
-        // int poofTotal = SaveState.state.poofCount;
         
         // calculate the total poofs
         int poofTotal = CalculatePoofs();

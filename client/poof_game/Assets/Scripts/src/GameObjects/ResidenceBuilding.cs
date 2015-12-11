@@ -13,7 +13,7 @@ public class ResidenceBuilding : Building {
     protected override void Awake()
     {
         base.Awake();
-        SaveState.state.poofLimit += 2;
+        SaveState.state.poofLimit += 5;
         PoofCounterPanel.poofCounterPanel.GeneratePanel();
     }
 }
