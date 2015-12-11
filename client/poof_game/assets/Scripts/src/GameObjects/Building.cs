@@ -241,14 +241,17 @@ public abstract class Building : MonoBehaviour {
                 }
             }
 
-            Instantiate(upgrade, 
+            Building upgraded = (Building)Instantiate(upgrade, 
                         new Vector3(temp.transform.position.x, temp.transform.position.y - .25f, 1),
                         Quaternion.identity);
+            upgraded.transform.parent = BuildingManager.buildingManager.Buildings.transform;
             SaveState.state.earth = SaveState.state.earth - this.earthCost;
             SaveState.state.water = SaveState.state.water - this.waterCost;
             SaveState.state.air = SaveState.state.air - this.airCost;
             SaveState.state.fire = SaveState.state.fire - this.fireCost;
             this.DeleteBuilding();
+            BuildingManager.buildingManager.alreadyPlacedDownBuildings.Add(BuildingPanel.SubstringClonedBuilding(upgraded.name));
+            BuildingPanel.buildingPanel.GeneratePanel();
             return true;
         }
     }

@@ -30,7 +30,7 @@ public class ResourceBuilding : Building {
         bool test = base.DeleteBuilding();
         if (test)
         {
-            BuildingManager.buildingManager.alreadyPlacedDownBuildings.Remove(this.name.Substring(0, this.name.Length - "(Clone)".Length));
+            BuildingManager.buildingManager.alreadyPlacedDownBuildings.Remove(BuildingPanel.SubstringClonedBuilding(this.name));
             BuildingPanel.buildingPanel.GeneratePanel();
         }
         return test;
