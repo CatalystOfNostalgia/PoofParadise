@@ -21,7 +21,7 @@ public class BuildingOptionPanel : GamePanel{
 
 	override public void Start () {
 		buttons = RetrieveButtonList ("Buttons");
-        SetBuilding();
+        building = this.transform.GetComponentInParent<Building>();
 		GeneratePanel ();
 	}
 
@@ -31,17 +31,8 @@ public class BuildingOptionPanel : GamePanel{
      */
 	override public void GeneratePanel(){
         FindAndModifyUIElement("Move Button", buttons, () => { building.MoveBuilding();});
-		FindAndModifyUIElement("Upgrade Button", buttons, ()=> UpgradePanel.upgradePanel.TogglePanel());
-		FindAndModifyUIElement("Remove Button", buttons, ()=> DestroyPanel.destroyPanel.TogglePanel());
+		FindAndModifyUIElement("Upgrade Button", buttons, ()=> UpgradePanel.upgradePanel.Show(building));
+		FindAndModifyUIElement("Remove Button", buttons, ()=> DestroyPanel.destroyPanel.Show(building));
 		FindAndModifyUIElement("Info Button", buttons, ()=> Debug.Log("Info button is pressed"));
 	}	
-    /**
-     * Sets the building reference for this panel
-     */
-    private void SetBuilding()
-    {
-        building = this.transform.GetComponentInParent<Building>();
-		UpgradePanel.upgradePanel.getBuilding (building);
-		DestroyPanel.destroyPanel.getBuilding (building);
-    }
 }

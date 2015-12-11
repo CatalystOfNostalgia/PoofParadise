@@ -294,7 +294,11 @@ public class SaveState : Manager {
 		loadedResourceBuildings = data ["resource_buildings"].AsArray;
 		loadedDecorativeBuildings = data ["decorative_buildings"].AsArray;
 
-		foreach (JSONNode building in loadedResourceBuildings) {
+        hqLocation = new Tuple(data["hq_pos_x"].AsInt, data["hq_pos_y"].AsInt);
+        //since array start at 0, lv 1-> index 0, lv 2 -> index 1
+        hq = PrefabManager.prefabManager.headQuarterBuildings[hqLevel - 1];
+
+        foreach (JSONNode building in loadedResourceBuildings) {
 			int x = building["position_x"].AsInt;
 			int y = building["position_y"].AsInt;
 
@@ -332,10 +336,5 @@ public class SaveState : Manager {
 
 			decorativeBuildings.Add(new Tuple(x, y), newBuilding);
 		}
-
-        hqLocation = new Tuple(data["hq_pos_x"].AsInt, data["hq_pos_y"].AsInt);
-        //since array start at 0, lv 1-> index 0, lv 2 -> index 1
-        hq = PrefabManager.prefabManager.headQuarterBuildings[hqLevel-1];
-
 	}
 }

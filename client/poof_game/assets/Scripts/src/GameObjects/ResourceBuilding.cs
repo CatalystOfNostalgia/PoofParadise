@@ -34,6 +34,9 @@ public class ResourceBuilding : Building {
         {
             test = base.UpgradeBuilding();
         }
+        else{
+            Toast.toast.makeToast("You need higher HQ level");
+        }
         return test;
     }
 

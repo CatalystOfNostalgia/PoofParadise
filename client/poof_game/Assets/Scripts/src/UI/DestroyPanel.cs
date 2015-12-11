@@ -13,18 +13,29 @@ public class DestroyPanel : GamePanel {
 	public Building building;
 	
 	override public void Start(){
-		buttons = RetrieveButtonList ("Buttons");
 		GeneratePanel ();
 		setFont ();
 	}
-	
-	public void getBuilding(Building target){
-		this.building = target;
-	}
+
 	override public void GeneratePanel(){
-		FindAndModifyUIElement ("Yes", buttons, ()=> building.DeleteBuilding());
+        buttons = RetrieveButtonList("Buttons");
+        FindAndModifyUIElement ("Yes", buttons, ()=> DestroyBuilding());
 		FindAndModifyUIElement ("No", buttons, ()=> TogglePanel());
 	}
+
+    public void Show(Building target)
+    {
+        this.building = target;
+        GeneratePanel();
+        TogglePanel();
+    }
+
+    private void DestroyBuilding()
+    {
+        building.DeleteBuilding();
+        TogglePanel();
+    }
+	
 	public void setFont(){
 		Text text = destroyPanel.GetComponentInChildren<Text>();
 		text.text = "Are you sure you want to destroy this building?";
