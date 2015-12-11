@@ -6,18 +6,19 @@ using UnityEngine.UI;
  * building
  * Features include delete, drag, upgrade, and info
  */
-public class UpgradePanel : BuildingOptionPanel{
+public class UpgradePanel : GamePanel{
 
 	public static UpgradePanel upgradePanel;
-	public Button[] buttons; 
+	public Button[] buttons;
+    public Building building;
 
 	override public void Start(){
-		buttons = RetrieveButtonList ("Buttons");
 		GeneratePanel ();
 	}
 
 	override public void GeneratePanel(){
-		FindAndModifyUIElement ("Select Resources", buttons, ()=> UpgradeBuilding());
+        buttons = RetrieveButtonList("Buttons");
+        FindAndModifyUIElement ("Select Resources", buttons, ()=> UpgradeBuilding());
 		FindAndModifyUIElement ("Select Wooly Beans", buttons, ()=> Debug.Log("upgrade with wooly beans"));
 		FindAndModifyUIElement ("Exit", buttons, ()=> upgradePanel.TogglePanel());
 	}

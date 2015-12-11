@@ -13,12 +13,12 @@ public class DestroyPanel : GamePanel {
 	public Building building;
 	
 	override public void Start(){
-		buttons = RetrieveButtonList ("Buttons");
 		GeneratePanel ();
 	}
 
 	override public void GeneratePanel(){
-		FindAndModifyUIElement ("Yes", buttons, ()=> DestroyBuilding());
+        buttons = RetrieveButtonList("Buttons");
+        FindAndModifyUIElement ("Yes", buttons, ()=> DestroyBuilding());
 		FindAndModifyUIElement ("No", buttons, ()=> TogglePanel());
 	}
 
