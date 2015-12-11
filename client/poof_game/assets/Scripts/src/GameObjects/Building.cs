@@ -116,6 +116,8 @@ public abstract class Building : MonoBehaviour {
         // Otherwise, fail to purchase building
         else
         {
+            //Not enough minerals
+
             return false;
         }
     }
