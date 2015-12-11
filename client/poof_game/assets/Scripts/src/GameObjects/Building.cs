@@ -231,7 +231,18 @@ public abstract class Building : MonoBehaviour {
         }
         else
         {
-            Instantiate(upgrade);
+            Tile temp = null;
+            foreach(Tile t in TileScript.grid.tiles)
+            {
+                if (t.building != null && t.building.Equals(this))
+                {
+                    temp = t;
+                }
+            }
+
+            Instantiate(upgrade, 
+                        new Vector3(temp.transform.position.x, temp.transform.position.y - .25f, 1),
+                        Quaternion.identity);
             SaveState.state.earth = SaveState.state.earth - this.earthCost;
             SaveState.state.water = SaveState.state.water - this.waterCost;
             SaveState.state.air = SaveState.state.air - this.airCost;
