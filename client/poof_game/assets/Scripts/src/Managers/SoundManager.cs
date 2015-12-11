@@ -74,7 +74,6 @@ public class SoundManager : Manager {
 		effectDict = new Dictionary<string, AudioClip> ();
 		foreach (AudioClip clip in soundEffects) 
 		{
-			Debug.Log(string.Format("clip's name is: {0}", clip.name));
 			effectDict.Add(clip.name, clip);
 		}
         masterVolume = 1f;
