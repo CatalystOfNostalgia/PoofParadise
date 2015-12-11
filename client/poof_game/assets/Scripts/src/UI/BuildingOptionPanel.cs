@@ -35,18 +35,6 @@ public class BuildingOptionPanel : GamePanel {
 		FindAndModifyUIElement("Info Button", buttons, ()=> Debug.Log("Info button is pressed"));
 	}
 
-	/**
-     * A helper method that finds the building
-     */
-	public Building getNewBuilding(ResourceBuilding[] list, string find){
-		for (int i=0; i<=list.Length; i++) {
-			if(list[i].name == find){
-				return list[i];
-			}
-		}
-		return null;
-	}
-
     /**
      * Sets the building reference for this panel
      */

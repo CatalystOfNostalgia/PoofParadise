@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Diagnostics;
 
 /**
  * The Headquarters Building extends Buidling
@@ -15,9 +16,20 @@ public class HeadQuarterBuilding : Building {
     /**
      * Overrides the delete building call for headquarters
      */
-    public override void DeleteBuilding()
+    public override bool DeleteBuilding()
     {
-        Destroy(this.gameObject);
+        // Used stack trace to determine who called this method
+        if (new StackTrace().GetFrame(1).GetMethod().Name == "UpgradeBuilding")
+        {
+            UnityEngine.Debug.Log("Upgrade called this");
+            Destroy(this.gameObject);
+            return true;
+        }
+        // If we didn't call upgrade, we shouldn't delete this
+        else
+        {
+            return false;
+        }
     }
 
     /**
@@ -48,9 +60,13 @@ public class HeadQuarterBuilding : Building {
     /**
      * Overrides the upgrade building feature of headquarters
      */
-    public override void UpgradeBuilding()
+    public override bool UpgradeBuilding()
     {
-        base.UpgradeBuilding();
-        SaveState.state.hqLevel++;
+        bool test = base.UpgradeBuilding();
+        if (test)
+        {
+            SaveState.state.hqLevel++;
+        }
+        return test;
     }
 }

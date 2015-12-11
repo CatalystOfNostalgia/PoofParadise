@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
 
 /**
  * Building serves as an abstract MonoBehavior which 
@@ -40,7 +39,9 @@ public abstract class Building : MonoBehaviour {
     public Canvas options { get; set; }
 	private Animator animator;
 
-    // Use this for initialization
+    /**
+     * Use this for initialization
+     */
     protected virtual void Awake()
     {
         Vector3 pos = new Vector3(transform.position.x + .7f, transform.position.y + 1, transform.position.z);
@@ -58,12 +59,18 @@ public abstract class Building : MonoBehaviour {
 		animator = this.GetComponent<Animator>();
     }
 
-	public void constructionAnimation(){
+    /**
+     * TODO: Add description
+     */
+	public void ConstructionAnimation(){
 		animator.SetInteger("Construction", 1);
-		Invoke("constructionFinish", 5f);
+		Invoke("ConstructionFinish", 2.5f);
 	}
 
-	public void constructionFinish(){
+    /**
+     * TODO: Add description
+     */
+	public void ConstructionFinish(){
 		animator.SetInteger("Construction", 0);
 	}
 
@@ -73,7 +80,6 @@ public abstract class Building : MonoBehaviour {
     public bool PayForBuilding()
     {
 
-        Debug.Log("paying for a building");
         // Pulls the cost of this building from Building Information Manager
         DecorationBuildingInformation dbi;
         ResourceBuildingInformation rbi;
@@ -166,7 +172,7 @@ public abstract class Building : MonoBehaviour {
     /**
      * Serves as the function for deleting this building from the game
      */
-    public virtual void DeleteBuilding()
+    public virtual bool DeleteBuilding()
     {
         this.GetComponent<BoxCollider2D>().enabled = true;
         bool remove = false;
@@ -176,10 +182,12 @@ public abstract class Building : MonoBehaviour {
         if (remove)
         {
             Destroy(this.gameObject);
+            return true;
         }
         else
         {
             Debug.LogError(string.Format("[Building] Unable to locate {0} at {1} in the building dictionary", this.name, key));
+            return false;
         }
     }
 
@@ -204,7 +212,7 @@ public abstract class Building : MonoBehaviour {
     /**
      * Upgrades building to level 2 resource building 
      */
-    public virtual void UpgradeBuilding(){
+    public virtual bool UpgradeBuilding(){
         Building upgrade = null;
         string newName = this.name.Replace("Lvl 1(Clone)", "Lvl 2");
         foreach (Building b in PrefabManager.prefabManager.buildings)
@@ -219,15 +227,28 @@ public abstract class Building : MonoBehaviour {
         if (upgrade == null)
         {
             Debug.LogError(string.Format("{0} does not exist", newName));
+            return false;
         }
         else
         {
-            Instantiate(upgrade);
+            Tile temp = null;
+            foreach(Tile t in TileScript.grid.tiles)
+            {
+                if (t.building != null && t.building.Equals(this))
+                {
+                    temp = t;
+                }
+            }
+
+            Instantiate(upgrade, 
+                        new Vector3(temp.transform.position.x, temp.transform.position.y - .25f, 1),
+                        Quaternion.identity);
             SaveState.state.earth = SaveState.state.earth - this.earthCost;
             SaveState.state.water = SaveState.state.water - this.waterCost;
             SaveState.state.air = SaveState.state.air - this.airCost;
             SaveState.state.fire = SaveState.state.fire - this.fireCost;
             this.DeleteBuilding();
+            return true;
         }
     }
 

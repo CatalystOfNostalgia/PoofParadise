@@ -59,7 +59,6 @@ public class PrefabManager : Manager {
         panels = Resources.LoadAll("Prefabs/UI/Panels", typeof(CanvasRenderer)).Cast<CanvasRenderer>().ToArray();
 		canvas = (Canvas)Resources.Load("Prefabs/UI/Canvas", typeof(Canvas));
 		buildingOptionCanvas = (Canvas)Resources.Load ("Prefabs/UI/local Panels/Building Option Canvas", typeof(Canvas));
-		buildingInfo = (Image)Resources.Load ("Prefabs/UI/local Panels/Building Info", typeof(Image));
     }
 
     /**
@@ -85,8 +84,8 @@ public class PrefabManager : Manager {
             DecorationBuildingInformation info;
             if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(b.name,out info))
             {
+                Debug.Log("setting " + b.name + " to id: " + info.ID);
                 b.ID = info.ID;
-                Debug.Log("set " + b.name + " to id: " + b.ID);
                 (b as DecorativeBuilding).poofGenerationRate = info.PoofAttractionRate;
             }
         }
@@ -119,6 +118,34 @@ public class PrefabManager : Manager {
         Destroy(obj);
 
         return ret;
+    }
+
+    /**
+     * returns the appropriate resource building given the ID
+     */
+    public ResourceBuilding getResourceBuilding(int ID) {
+
+        foreach (ResourceBuilding b in resourceBuildings) {
+            if (b.ID == ID) {
+                return b;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * returns the appropriate decorative building given the ID
+     */
+    public DecorativeBuilding getDecorativeBuilding(int ID) {
+
+        foreach (DecorativeBuilding b in decorativeBuildings) {
+            if (b.ID == ID) {
+                return b;
+            }
+        }
+
+        return null;
     }
 
     /**

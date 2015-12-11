@@ -33,7 +33,7 @@ public class BuildingManager : Manager {
      */
     override public void Start()
     {
-
+        
         if (buildingManager == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -87,7 +87,7 @@ public class BuildingManager : Manager {
 
                 if (newBuilding != null) {
 					if(created){
-						newBuilding.constructionAnimation ();
+						newBuilding.ConstructionAnimation ();
 					}
 
                     // Sets the new building's parent to our convenience object
