@@ -29,6 +29,7 @@ public class ResourceIncrementer : GamePanel
 
         sliders = RetrieveSliderList("Sliders");
         counters = GetComponentsInChildren<Text>();
+        GeneratePanel();
 	}
 
     /**
@@ -37,7 +38,17 @@ public class ResourceIncrementer : GamePanel
      */
     public override void GeneratePanel()
     {
-        throw new NotImplementedException();
+
+        int pass;
+
+        pass = SaveState.state.fire;
+        ManageSlider(0, ref pass, SaveState.state.maxFire, GetSliderByName("Fire Slider"));
+        pass = SaveState.state.water;
+        ManageSlider(0, ref pass, SaveState.state.maxWater, GetSliderByName("Water Slider"));
+        pass = SaveState.state.earth;
+        ManageSlider(0, ref pass, SaveState.state.maxEarth, GetSliderByName("Earth Slider"));
+        pass = SaveState.state.air;
+        ManageSlider(0, ref pass, SaveState.state.maxAir, GetSliderByName("Wind Slider"));
     }
 
     /**
@@ -131,7 +142,7 @@ public class ResourceIncrementer : GamePanel
                 SaveState.state.earth = dummy;
 			    break;
 		    default:
-			    Debug.Log("ResourceIncrementer: Illegal resource type");
+			    Debug.LogError("ResourceIncrementer: Illegal resource type");
                 pay = false;
 			    break;
 		}

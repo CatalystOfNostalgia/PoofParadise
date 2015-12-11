@@ -246,6 +246,8 @@ public class SaveState : Manager {
 
 		jsonPlayerData += "}";
 
+        Debug.Log(jsonPlayerData);
+
 		return jsonPlayerData;
 		
 	}
