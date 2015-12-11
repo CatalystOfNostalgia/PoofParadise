@@ -198,6 +198,7 @@ public class BuildingPanel : GamePanel {
     {
         return (int)(screen * rate);
     }
+
     public void OnGUI()
     {
         switch (activePanel)
