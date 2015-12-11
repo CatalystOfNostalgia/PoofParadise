@@ -92,16 +92,16 @@ public class BuildingManager : Manager {
 
                 // Sets the new building's parent to our convenience object
                 newBuilding.transform.SetParent(buildings.transform);
-
+                alreadyPlacedDownBuildings.Add(prefab.name);
 
                 // TODO this feels pretty iffy
                 if ( !isTileTaken(tile.index)) {
 
                     SaveState.state.addBuilding(tile.index, newBuilding);
-
+                    
                     if (prefab.GetComponent<ResidenceBuilding>() == null)
                     {   
-                        alreadyPlacedDownBuildings.Add(prefab.name);
+                        
                     }
 
                 }
