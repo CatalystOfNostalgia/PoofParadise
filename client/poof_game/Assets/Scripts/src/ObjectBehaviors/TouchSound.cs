@@ -15,6 +15,8 @@ public class TouchSound : MonoBehaviour {
     void OnMouseDown()
     {
         SoundManager.soundManager.playSoundEffect("poof1");
+        CircleCollider2D collider = GetComponent<CircleCollider2D>();
+        collider.radius = .25f;
     }
 
     /**
