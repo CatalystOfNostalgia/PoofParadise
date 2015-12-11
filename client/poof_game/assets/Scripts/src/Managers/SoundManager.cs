@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using System;
+using System.Linq;
 
 /**
  * A manager that deals with music
@@ -13,6 +15,10 @@ public class SoundManager : Manager {
     // Fields
 	public Dictionary<string, AudioSource> playDict{ get; set;}
 	public AudioSource[] playlist { get; set;}
+	public AudioClip[] soundEffects {get; set;}
+	public Dictionary<string, AudioClip> effectDict {get;set;}
+	private AudioSource soundEffectSource;
+
 	public bool[] preferredPlaylist { get; set; }
 	public AudioSource currentSong { get; set;}
 	private bool currentSongPlayed;
@@ -36,7 +42,6 @@ public class SoundManager : Manager {
      */
     override public void Start()
     {
-
         // Converts SoundManager into a singleton
         if (soundManager == null)
         {
@@ -52,6 +57,10 @@ public class SoundManager : Manager {
 
         //in the future, load user's music preference
         playlist = getAvailableMusic();
+		soundEffects = getAvailableEffects ();
+		soundEffectSource = gameObject.AddComponent (typeof(AudioSource)) as AudioSource;
+
+
         preferredPlaylist = new bool[playlist.Length];
         for (int i = 0; i < preferredPlaylist.Length; i++)
         {
@@ -62,6 +71,12 @@ public class SoundManager : Manager {
         {
             playDict.Add(music.name, music);
         }
+		effectDict = new Dictionary<string, AudioClip> ();
+		foreach (AudioClip clip in soundEffects) 
+		{
+			Debug.Log(string.Format("clip's name is: {0}", clip.name));
+			effectDict.Add(clip.name, clip);
+		}
         masterVolume = 1f;
         musicVolume = 1f;
         soundVolume = 1f;
@@ -78,6 +93,10 @@ public class SoundManager : Manager {
      */
     public AudioSource[] getAvailableMusic(){
 		return this.GetComponentsInChildren<AudioSource> ();
+	}
+
+	public AudioClip[] getAvailableEffects(){
+		return Resources.LoadAll ("Sound/Effects", typeof(AudioClip)).Cast<AudioClip> ().ToArray ();
 	}
 
     /**
@@ -180,7 +199,22 @@ public class SoundManager : Manager {
 		}
 		return -1;
 	}
-	
+
+	public void playSoundEffect (string name){
+		AudioClip clip;
+		if (effectDict.TryGetValue (name, out clip)) {
+			soundEffectSource.PlayOneShot(clip, soundVolume * masterVolume);
+		}
+	}
+
+	public void playConstruction (){
+		playSoundEffect("EarthBuildingTruncated");
+	}
+
+	public void playButtonHigh (){
+		playSoundEffect ("button_high");
+	}
+
 	/**
      * Update is called once per frame
      */
@@ -193,6 +227,7 @@ public class SoundManager : Manager {
 			return;
 		}
 		currentSong.volume = masterVolume * musicVolume;
+
 		if (!currentSong.isPlaying) {
 			//didn't start the song yet
 			if (!currentSongPlayed){
