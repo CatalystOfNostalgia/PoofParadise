@@ -8,6 +8,7 @@ public class Toast : GamePanel {
     public Texture2D backPanel;
     public string message;
     private bool isActive;
+    private int seconds;
 
     public override void Start()
     {
@@ -39,6 +40,13 @@ public class Toast : GamePanel {
     {
         this.message = message;
         isActive = true;
+        this.seconds = 5;
+    }
+    
+    public void makeToast (string message, int seconds)
+    {
+        makeToast(message);
+        this.seconds = seconds;
     }
 
     private void endMessage()
@@ -48,7 +56,8 @@ public class Toast : GamePanel {
 
     IEnumerator wait5()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(seconds);
+        endMessage();
     }
 
     public override void GeneratePanel()
