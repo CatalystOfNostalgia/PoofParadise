@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class Toast : MonoBehaviour {
+public class Toast : GamePanel {
 
     public static Toast toast;
     public Texture2D backPanel;
     public string message;
     private bool isActive;
 
-    void Start()
+    public override void Start()
     {
         isActive = true;
         Debug.Log("lonely toast");
@@ -20,6 +21,7 @@ public class Toast : MonoBehaviour {
         {
             return;
         }
+        GUILayout.Label("HELLLLOOOOO");
         int x = Screen.width / 2;
         int y = Screen.height / 2;
         GUI.BeginGroup(new Rect(x, y, 200, 100));
@@ -28,8 +30,9 @@ public class Toast : MonoBehaviour {
         GUI.Label(new Rect(x, y, 200, 100), message);
         GUI.EndGroup();
         GUI.EndGroup();
+        Debug.Log("Toast made");
         StartCoroutine(wait5());
-        endMessage();
+        //endMessage();
     }
 
     public void makeToast (string message)
@@ -46,5 +49,10 @@ public class Toast : MonoBehaviour {
     IEnumerator wait5()
     {
         yield return new WaitForSeconds(5);
+    }
+
+    public override void GeneratePanel()
+    {
+        throw new NotImplementedException();
     }
 }

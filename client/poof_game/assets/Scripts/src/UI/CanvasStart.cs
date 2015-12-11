@@ -79,12 +79,23 @@ public class CanvasStart : MonoBehaviour {
         }
 
         GameObject shopPanel = this.transform.Find("Shop Panel(Clone)").gameObject;
-        if(ShopPanel.shopPanel == null)
+        if (ShopPanel.shopPanel == null)
         {
             DontDestroyOnLoad(shopPanel);
             ShopPanel.shopPanel = shopPanel.GetComponent<ShopPanel>();
         }
         else if (ShopPanel.shopPanel != shopPanel)
+        {
+            Destroy(this);
+        }
+
+        GameObject toast = this.transform.Find("Toast(Clone)").gameObject;
+        if (Toast.toast == null)
+        {
+            DontDestroyOnLoad(toast);
+            Toast.toast = toast.GetComponent<Toast>();
+        }
+        else if (Toast.toast != toast)
         {
             Destroy(this);
         }
