@@ -13,6 +13,8 @@ GameObject:
   - 114: {fileID: 11422954}
   - 114: {fileID: 11468364}
   - 114: {fileID: 11429940}
+  - 114: {fileID: 11408480}
+  - 58: {fileID: 5843774}
   m_Layer: 0
   m_Name: Animated_Poof
   m_TagString: Untagged
@@ -32,6 +34,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!58 &5843774
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128394}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: -.200000003}
+  serializedVersion: 2
+  m_Radius: .200000003
 --- !u!95 &9517734
 Animator:
   serializedVersion: 3
@@ -49,6 +64,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11408480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a3b26fd0da3714c8768094b5e92cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11422954
 MonoBehaviour:
   m_ObjectHideFlags: 1

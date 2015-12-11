@@ -13,6 +13,8 @@ GameObject:
   - 114: {fileID: 11438294}
   - 114: {fileID: 11402724}
   - 95: {fileID: 9521884}
+  - 114: {fileID: 11477640}
+  - 58: {fileID: 5890354}
   m_Layer: 0
   m_Name: Animated_Water
   m_TagString: Poof
@@ -32,6 +34,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!58 &5890354
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124744}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: .375
 --- !u!95 &9521884
 Animator:
   serializedVersion: 3
@@ -84,6 +99,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+--- !u!114 &11477640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a3b26fd0da3714c8768094b5e92cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21271614
 SpriteRenderer:
   m_ObjectHideFlags: 1

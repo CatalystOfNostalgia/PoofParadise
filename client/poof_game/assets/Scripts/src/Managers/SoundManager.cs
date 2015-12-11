@@ -214,10 +214,109 @@ public class SoundManager : Manager {
 		playSoundEffect ("button_high");
 	}
 
-	/**
+    public void playFireSound()
+    {
+        int rand = UnityEngine.Random.Range(0, 3);
+        Debug.Log("[SoundManager] RNG generated: " + rand);
+        switch (rand)
+        {
+            case 0:
+                playSoundEffect("fire1");
+                break;
+            case 1:
+                playSoundEffect("fire2");
+                break;
+            case 2:
+                playSoundEffect("fire3");
+                break;
+            default:
+                Debug.Log("[SoundManager] RNG generated: " + rand);
+                break;
+        }
+    }
+
+    public void playWaterSound()
+    {
+        int rand = UnityEngine.Random.Range(0, 3);
+        Debug.Log("[SoundManager] RNG generated: " + rand);
+        switch (rand)
+        {
+            case 0:
+                playSoundEffect("water1");
+                break;
+            case 1:
+                playSoundEffect("water2");
+                break;
+            case 2:
+                playSoundEffect("water3");
+                break;
+            default:
+                Debug.Log("[SoundManager] RNG generated: " + rand);
+                break;
+        }
+    }
+
+    public void playAirSound()
+    {
+        int rand = UnityEngine.Random.Range(0, 2);
+        Debug.Log("[SoundManager] RNG generated: " + rand);
+        switch (rand)
+        {
+            case 0:
+                playSoundEffect("air1");
+                break;
+            case 1:
+                playSoundEffect("air2");
+                break;
+            default:
+                Debug.Log("[SoundManager] RNG generated: " + rand);
+                break;
+        }
+    }
+
+    public void playEarthSound()
+    {
+        int rand = UnityEngine.Random.Range(0, 3);
+        Debug.Log("[SoundManager] RNG generated: " + rand);
+        switch (rand)
+        {
+            case 0:
+                playSoundEffect("earth1");
+                break;
+            case 1:
+                playSoundEffect("earth2");
+                break;
+            case 2:
+                playSoundEffect("earth3");
+                break;
+            default:
+                Debug.Log("[SoundManager] RNG generated: " + rand);
+                break;
+        }
+    }
+
+    public void playPoofSound()
+    {
+        int rand = UnityEngine.Random.Range(0, 2);
+        Debug.Log("[SoundManager] RNG generated: " + rand);
+        switch (rand)
+        {
+            case 0:
+                playSoundEffect("poof1");
+                break;
+            case 1:
+                playSoundEffect("poof2");
+                break;
+            default:
+                Debug.Log("[SoundManager] RNG generated: " + rand);
+                break;
+        }
+    }
+
+    /**
      * Update is called once per frame
      */
-	void Update () {
+    void Update () {
 		if (allSongsDisabled) {
 			currentSong = null;
 			return;
