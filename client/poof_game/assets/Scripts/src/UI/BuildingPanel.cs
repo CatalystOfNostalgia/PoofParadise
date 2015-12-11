@@ -20,6 +20,9 @@ public class BuildingPanel : GamePanel {
     private int[,] buildingCostsResource;
     private int[,] buildingCostsDecorative;
     private Texture2D[] icons;
+    private int buildingCostResourceCount;
+    private int buildingCostDecorativeCount;
+
 
     /**
      * Generates references based on children
@@ -81,6 +84,8 @@ public class BuildingPanel : GamePanel {
         buildingCostsResource = new int[4, 4];
         buildingCostsDecorative = new int[4, 4];
         icons = Resources.LoadAll("Image/Icon", typeof(Texture2D)).Cast<Texture2D>().ToArray();//sort this shit to fire, water, air, earth
+        buildingCostResourceCount = 0;
+        buildingCostDecorativeCount = 0;
 
         // Clear out arrays
         resourceButtons = null;
@@ -160,6 +165,7 @@ public class BuildingPanel : GamePanel {
             buildingCostsResource[index,1] = rbi.WaterCost;
             buildingCostsResource[index,2] = rbi.AirCost;
             buildingCostsResource[index,3] = rbi.EarthCost;
+            buildingCostResourceCount++;
         }
         else if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(b.name, out dbi))
         {
@@ -167,6 +173,7 @@ public class BuildingPanel : GamePanel {
             buildingCostsDecorative[index, 1] = dbi.WaterCost;
             buildingCostsDecorative[index, 2] = dbi.AirCost;
             buildingCostsDecorative[index, 3] = dbi.EarthCost;
+            buildingCostDecorativeCount++;
         }
         textCost.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
         textCost.color = Color.black;
@@ -196,13 +203,13 @@ public class BuildingPanel : GamePanel {
         switch (activePanel)
         {
             case panel.RESOURCE:
-                for (int i = 0; i < buildingCostsResource.GetLength(0); i++)
+                for (int i = 0; i < buildingCostsResource.GetLength(0) && i<buildingCostResourceCount; i++)
                 {
                     drawCost(i, buildingCostsResource);
                 }
                 break;
             case panel.DECORATIVE:
-                for (int i = 0; i < buildingCostsDecorative.GetLength(0); i++)
+                for (int i = 0; i < buildingCostsDecorative.GetLength(0) && i<buildingCostDecorativeCount; i++)
                 {
                     drawCost(i, buildingCostsDecorative);
                 }
