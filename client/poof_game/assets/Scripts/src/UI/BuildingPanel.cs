@@ -15,12 +15,14 @@ public class BuildingPanel : GamePanel {
     private Button[] decorativeButtons;
 
     private enum panel : int { DECORATIVE, RESOURCE };
-    private panel activePanel; 
-		
-	/**
+    private panel activePanel;
+    private int[,] buildingCostsResource;
+    private int[,] buildingCostsDecorative;
+
+    /**
      * Generates references based on children
      */
-	override public void Start()
+    override public void Start()
 	{
 		if (buildingPanel == null) {
 			DontDestroyOnLoad(gameObject);
@@ -29,6 +31,8 @@ public class BuildingPanel : GamePanel {
 		else if (buildingPanel != this) {
 			Destroy(gameObject);
 		}
+        buildingCostsResource = new int[4,4];
+        buildingCostsDecorative = new int[4, 4];
         activePanel = panel.DECORATIVE;
         SwitchPanels();
 	}
@@ -111,7 +115,7 @@ public class BuildingPanel : GamePanel {
         // If we are adding buttons to the decorative building panel
         for (int i = 0; i < buildings.Length; i++)
         {
-            Button b = MakeButton(path, go[i].transform.position, buildings[i]);
+            Button b = MakeButton(path, go[i].transform.position, buildings[i], i);
             //b.transform.SetParent(go[i].transform);
             list.Add(b);
         }
@@ -121,7 +125,7 @@ public class BuildingPanel : GamePanel {
     /**
      * Generates a button
      */
-    public Button MakeButton(string path, Vector3 position, Building b)
+    public Button MakeButton(string path, Vector3 position, Building b, int index)
     {
         // Build new game object and attach components
         GameObject go = new GameObject();
@@ -130,28 +134,36 @@ public class BuildingPanel : GamePanel {
         ButtonDragScript bds = go.AddComponent<ButtonDragScript>();
 
         // Attach a text object to the button
-		Image buildingInfo = Instantiate (PrefabManager.prefabManager.buildingInfo);
-		buildingInfo.transform.SetParent (go.transform);
-		buildingInfo.rectTransform.localPosition = new Vector3 (0,40,0);
+        Image buildingInfo = Instantiate(PrefabManager.prefabManager.buildingInfo);
+        buildingInfo.transform.SetParent(go.transform);
+        buildingInfo.rectTransform.localPosition = new Vector3(0, 40, 0);
 
-		Text text = buildingInfo.GetComponentInChildren<Text> ();
+        Text text = buildingInfo.GetComponentInChildren<Text>();
         text.text = b.name;
         text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
         text.color = Color.black;
 
         // Attach a cost object to the object
-		buildingInfo = Instantiate (PrefabManager.prefabManager.buildingInfo);
-		buildingInfo.transform.SetParent (go.transform);
-		buildingInfo.rectTransform.localPosition = new Vector3 (0,-40,0);
-		Text textCost = buildingInfo.GetComponentInChildren<Text> ();
+        buildingInfo = Instantiate(PrefabManager.prefabManager.buildingInfo);
+        buildingInfo.transform.SetParent(go.transform);
+        buildingInfo.rectTransform.localPosition = new Vector3(0, -40, 0);
+        Text textCost = buildingInfo.GetComponentInChildren<Text>();
         ResourceBuildingInformation rbi;
         DecorationBuildingInformation dbi;
         if (SaveState.state.buildingInformationManager.ResourceBuildingInformationDict.TryGetValue(b.name, out rbi))
         {
+            buildingCostsResource[index,0] = rbi.FireCost;
+            buildingCostsResource[index,1] = rbi.WaterCost;
+            buildingCostsResource[index,2] = rbi.AirCost;
+            buildingCostsResource[index,3] = rbi.EarthCost;
             textCost.text = rbi.FireCost + "F," + rbi.WaterCost + "W," + rbi.AirCost + "A," + rbi.EarthCost + "E";
         }
         else if (SaveState.state.buildingInformationManager.DecorationBuildingInformationDict.TryGetValue(b.name, out dbi))
         {
+            buildingCostsDecorative[index, 0] = dbi.FireCost;
+            buildingCostsDecorative[index, 1] = dbi.FireCost;
+            buildingCostsDecorative[index, 2] = dbi.FireCost;
+            buildingCostsDecorative[index, 3] = dbi.FireCost;
             textCost.text = dbi.FireCost + "F," + dbi.WaterCost + "W," + dbi.AirCost + "A," + dbi.EarthCost + "E";
         }
         textCost.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
@@ -172,7 +184,14 @@ public class BuildingPanel : GamePanel {
         bds.building = b;
         return button;
     }
+    
+    public void OnGUI()
+    {
+        GUILayout.Label("100");
 
+        GUILayout.Label("200");
+
+    }
     /**
      * Dynamically creates buttons
      * path - supplies the path the the parent for the buttons
