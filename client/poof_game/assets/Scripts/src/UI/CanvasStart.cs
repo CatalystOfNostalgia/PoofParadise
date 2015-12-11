@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 /**
@@ -77,7 +77,41 @@ public class CanvasStart : MonoBehaviour {
         {
             Destroy(this);
         }
-
+		
+		GameObject upgradePanel = this.transform.Find("Upgrade Panel(Clone)").gameObject;
+		if (upgradePanel == null)
+		{
+			Debug.LogError("[CanvasStart] Upgrade Panel is null");
+			return;
+		}
+		
+		if (UpgradePanel.upgradePanel == null)
+		{
+			DontDestroyOnLoad(modelPanel);
+			UpgradePanel.upgradePanel = upgradePanel.GetComponent<UpgradePanel>();
+		}
+		
+		else if (UpgradePanel.upgradePanel != upgradePanel)
+		{
+			Destroy(this);
+		}
+		GameObject destroyPanel = this.transform.Find("Destroy Panel(Clone)").gameObject;
+		if (destroyPanel == null)
+		{
+			Debug.LogError("[CanvasStart] Upgrade Panel is null");
+			return;
+		}
+		
+		if (DestroyPanel.destroyPanel == null)
+		{
+			DontDestroyOnLoad(modelPanel);
+			DestroyPanel.destroyPanel = destroyPanel.GetComponent<DestroyPanel>();
+		}
+		
+		else if (DestroyPanel.destroyPanel != destroyPanel)
+		{
+			Destroy(this);
+		}
         GameObject shopPanel = this.transform.Find("Shop Panel(Clone)").gameObject;
         if (ShopPanel.shopPanel == null)
         {

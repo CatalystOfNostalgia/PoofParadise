@@ -178,6 +178,7 @@ public abstract class Building : MonoBehaviour {
      */
     public virtual bool DeleteBuilding()
     {
+		DestroyPanel.destroyPanel.gameObject.SetActive (false);
         this.GetComponent<BoxCollider2D>().enabled = true;
         bool remove = false;
         Tuple key = GetTupleFromGrid();
@@ -217,6 +218,7 @@ public abstract class Building : MonoBehaviour {
      * Upgrades building to level 2 resource building 
      */
     public virtual bool UpgradeBuilding(){
+		UpgradePanel.upgradePanel.gameObject.SetActive (false);
         Building upgrade = null;
         string newName = this.name.Replace("Lvl 1(Clone)", "Lvl 2");
         foreach (Building b in PrefabManager.prefabManager.buildings)
@@ -244,14 +246,17 @@ public abstract class Building : MonoBehaviour {
                 }
             }
 
-            Instantiate(upgrade, 
+            Building upgraded = (Building)Instantiate(upgrade, 
                         new Vector3(temp.transform.position.x, temp.transform.position.y - .25f, 1),
                         Quaternion.identity);
+            upgraded.transform.parent = BuildingManager.buildingManager.Buildings.transform;
             SaveState.state.earth = SaveState.state.earth - this.earthCost;
             SaveState.state.water = SaveState.state.water - this.waterCost;
             SaveState.state.air = SaveState.state.air - this.airCost;
             SaveState.state.fire = SaveState.state.fire - this.fireCost;
             this.DeleteBuilding();
+            BuildingManager.buildingManager.alreadyPlacedDownBuildings.Add(BuildingPanel.SubstringClonedBuilding(upgraded.name));
+            BuildingPanel.buildingPanel.GeneratePanel();
             return true;
         }
     }

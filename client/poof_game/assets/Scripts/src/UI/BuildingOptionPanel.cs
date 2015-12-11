@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 /**
@@ -6,11 +6,11 @@ using UnityEngine.UI;
  * building
  * Features include delete, drag, upgrade, and info
  */
-public class BuildingOptionPanel : GamePanel {
+public class BuildingOptionPanel : GamePanel{
 
 	// Move, upgrade, remove, info
 	private Button[] buttons;
-    private Building building;
+    public Building building;
 
 	// TODO Make the menu set inactive when you press outside
 
@@ -18,6 +18,7 @@ public class BuildingOptionPanel : GamePanel {
      * Overrides the start functionality 
      * provided by GamePanel
      */
+
 	override public void Start () {
 		buttons = RetrieveButtonList ("Buttons");
         SetBuilding();
@@ -30,16 +31,17 @@ public class BuildingOptionPanel : GamePanel {
      */
 	override public void GeneratePanel(){
         FindAndModifyUIElement("Move Button", buttons, () => { building.MoveBuilding();});
-		FindAndModifyUIElement("Upgrade Button", buttons, ()=> building.UpgradeBuilding ());
-		FindAndModifyUIElement("Remove Button", buttons, ()=> building.DeleteBuilding());
+		FindAndModifyUIElement("Upgrade Button", buttons, ()=> UpgradePanel.upgradePanel.TogglePanel());
+		FindAndModifyUIElement("Remove Button", buttons, ()=> DestroyPanel.destroyPanel.TogglePanel());
 		FindAndModifyUIElement("Info Button", buttons, ()=> Debug.Log("Info button is pressed"));
-	}
-
+	}	
     /**
      * Sets the building reference for this panel
      */
     private void SetBuilding()
     {
         building = this.transform.GetComponentInParent<Building>();
+		UpgradePanel.upgradePanel.getBuilding (building);
+		DestroyPanel.destroyPanel.getBuilding (building);
     }
 }
