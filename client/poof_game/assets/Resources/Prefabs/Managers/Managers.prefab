@@ -470,11 +470,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb83522a571b084991b1ddd7851fe74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePrefab: {fileID: 186158, guid: 9395e506fc68b334293441f7ccd37f48, type: 2}
-  waterPrefab: {fileID: 124744, guid: 527cf3f7100408e4e991c75904bc7251, type: 2}
-  airPrefab: {fileID: 100902, guid: 3776ec6194f591344881b572fcdd8229, type: 2}
-  earthPrefab: {fileID: 199760, guid: 54cae649993b4954b8caa8beb6ae4506, type: 2}
-  poofPrefab: {fileID: 128394, guid: 8d8ae364ba01e14448e129a195262345, type: 2}
+  firePrefab: {fileID: 186158, guid: e68f2d3b23e7a7b40b29d22ea7d0a15e, type: 2}
+  waterPrefab: {fileID: 124744, guid: 5628b9b278792ab448f9ce67edf0b987, type: 2}
+  airPrefab: {fileID: 100902, guid: 19ac1bb18fdecaa48b62046f99eaf0eb, type: 2}
+  earthPrefab: {fileID: 199760, guid: 7ccfc627d97916b43a2b89bf21eaa84b, type: 2}
+  poofPrefab: {fileID: 128394, guid: 52abf14832520704882553d1f7b7bb12, type: 2}
 --- !u!114 &11432182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -557,6 +557,10 @@ Prefab:
       propertyPath: m_TagString
       value: Grid
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: airPrefab
+      value: 
+      objectReference: {fileID: 100902, guid: 19ac1bb18fdecaa48b62046f99eaf0eb, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 153708}
