@@ -50,23 +50,21 @@ public class ResourceIncrementer : GamePanel
     {
 
         Debug.Log("initializing resource incrementor");
-        int pass;
 
-        pass = SaveState.state.fire;
-        ManageSlider(0, ref pass, SaveState.state.maxFire, GetSliderByName("Fire Slider"));
-        GetTextByName("FireCount").text = "" + pass;
-        pass = SaveState.state.water;
+        GetSliderByName("Fire Slider").maxValue = 200;
+        GetSliderByName("Water Slider").maxValue = 200;
+        GetSliderByName("Earth Slider").maxValue = 200;
+        GetSliderByName("Wind Slider").maxValue = 200;
 
-        ManageSlider(0, ref pass, SaveState.state.maxWater, GetSliderByName("Water Slider"));
-        GetTextByName("WaterCount").text = "" + pass;
+        GetSliderByName("Fire Slider").value = SaveState.state.fire;
+        GetSliderByName("Water Slider").value = SaveState.state.water;
+        GetSliderByName("Earth Slider").value = SaveState.state.earth;
+        GetSliderByName("Wind Slider").value = SaveState.state.air;
 
-        pass = SaveState.state.earth;
-        ManageSlider(0, ref pass, SaveState.state.maxEarth, GetSliderByName("Earth Slider"));
-        GetTextByName("EarthCount").text = "" + pass;
-
-        pass = SaveState.state.air;
-        ManageSlider(0, ref pass, SaveState.state.maxAir, GetSliderByName("Wind Slider"));
-        GetTextByName("AirCount").text = "" + pass;
+        GetTextByName("FireCount").text = "" + SaveState.state.fire;
+        GetTextByName("WaterCount").text = "" + SaveState.state.fire;
+        GetTextByName("EarthCount").text = "" + SaveState.state.earth;
+        GetTextByName("AirCount").text = "" + SaveState.state.air;
     }
 
     /**
