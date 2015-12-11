@@ -13,6 +13,8 @@ GameObject:
   - 114: {fileID: 11408484}
   - 114: {fileID: 11402572}
   - 95: {fileID: 9536536}
+  - 58: {fileID: 5811144}
+  - 114: {fileID: 11473404}
   m_Layer: 0
   m_Name: Animated_Air
   m_TagString: Poof
@@ -32,6 +34,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!58 &5811144
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100902}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: .375
 --- !u!95 &9536536
 Animator:
   serializedVersion: 3
@@ -84,6 +99,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: .00999999978
+--- !u!114 &11473404
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a3b26fd0da3714c8768094b5e92cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21229966
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -141,6 +167,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: movementSpeed
       value: .00999999978
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
