@@ -200,7 +200,6 @@ public class BuildingPanel : GamePanel {
             RectTransform trans = gameObject.GetComponent<RectTransform>();
             int x = (int)trans.position.x;
             int y = (int)trans.position.y;
-            //GUILayout.BeginArea(new Rect(x, calculateScreenProportion(.95,Screen.height), 300, 60));
             GUILayout.BeginArea(new Rect(calculateScreenProportion(.296, Screen.width)+ calculateScreenProportion(i, 200)
                 , Screen.height - 30, 225, 60));
             GUILayout.BeginHorizontal();
@@ -218,23 +217,6 @@ public class BuildingPanel : GamePanel {
             
             GUILayout.EndHorizontal();
             GUILayout.EndArea();
-            
-            /*
-            GUILayout.BeginHorizontal();
-            int textWidth = 30;
-            GUILayout.Label("" + buildingCostsDecorative[i, 0], GUILayout.MaxWidth(textWidth));
-            GUILayout.Label("" + buildingCostsDecorative[i, 1], GUILayout.MaxWidth(textWidth));
-            GUILayout.Label("" + buildingCostsDecorative[i, 2], GUILayout.MaxWidth(textWidth));
-            GUILayout.Label("" + buildingCostsDecorative[i, 3], GUILayout.MaxWidth(textWidth));
-            GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal();
-            int iconLength = 30;
-            GUILayout.Label(icons[0], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
-            GUILayout.Label(icons[1], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
-            GUILayout.Label(icons[2], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
-            GUILayout.Label(icons[3], GUILayout.Width(iconLength), GUILayout.Height(iconLength));
-            GUILayout.EndHorizontal();
-            GUILayout.EndArea();*/
         }
 
     }
