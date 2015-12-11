@@ -5,34 +5,33 @@ public class TouchSound : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
-	}
 
-    /**
- * A method that works with
- * the collider of this object
- */
-    void OnMouseDown()
-    {
-        SoundManager.soundManager.playSoundEffect("poof1");
         CircleCollider2D collider = GetComponent<CircleCollider2D>();
         collider.radius = .25f;
     }
-
-    /**
-     * A method that works with
-     * the collider of this object
-     */
-    void OnMouseEnter()
+    
+    void OnMouseDown()
     {
-    }
-
-    /**
-     * A method that works with
-     * the collider of this object
-     */
-    private void OnMouseExit()
-    {
-
+        switch (gameObject.name)
+        {
+            case "Animated_Fire(Clone)":
+                SoundManager.soundManager.playFireSound();
+                break;
+            case "Animated_Water(Clone)":
+                SoundManager.soundManager.playWaterSound();
+                break;
+            case "Animated_Earth(Clone)":
+                SoundManager.soundManager.playEarthSound();
+                break;
+            case "Animated_Air(Clone)":
+                SoundManager.soundManager.playAirSound();
+                break;
+            case "Animated_Poof(Clone)":
+                SoundManager.soundManager.playPoofSound();
+                break;
+            default:
+                Debug.Log("[TouchSound] Illegal Character in the Character Nest");
+                break;
+        }
     }
 }
